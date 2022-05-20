@@ -4,6 +4,7 @@ const cors = require('cors')
 require('./connection')
 
 var app = express()
+
 var port = process.env.PORT
 
 // middlewares
@@ -18,7 +19,8 @@ app.get('/names', (req, res) => {
 })
 
 // routes
-app.use('/product', require('./routes/Product.routes') )
+app.use('/product', require('./routes/product.routes') )
+app.use('/auth', require('./routes/auth.routes') )
 
 
 app.listen(port)

@@ -1,10 +1,9 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
+import { MONGO_URL } from './config';
 
-const uri = process.env.MONGO_URL
-
-mongoose.connect(uri, {
+mongoose.connect(MONGO_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 })
-    .then((db) => console.log(`Database is connected`))
+    .then((db) => console.log('Database is connected'))
     .catch((err) => console.log(err));

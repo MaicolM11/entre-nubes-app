@@ -1,9 +1,11 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 
+import ROLES from './Role'
+
 const userSchema = mongoose.Schema({
    
-    username: {
+    fullname: {
       type: String,
       unique: true,
     },
@@ -20,8 +22,8 @@ const userSchema = mongoose.Schema({
 
     rol: {
       type: String,
-      enum : ['SALESMAN','ADMIN'],
-      default: 'SALESMAN'
+      enum : Object.keys(ROLES),
+      default: ROLES.SALESMAN
     },
  
     cc: String,
