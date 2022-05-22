@@ -3,9 +3,9 @@ import './App.css';
 function App() {
 
   function getData() {
-    fetch('/names')
+    fetch('/msg')
       .then( response => response.json())
-      .then((data) => console.log(data))
+      .then((data) => alert(data.msg))
       .catch(() => alert('Ha ocurrido un error '))
   }
 

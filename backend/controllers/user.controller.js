@@ -10,11 +10,12 @@ export const createUser = async (req, res) => {
         cc, address, phone
     });
 
-    return await newUser.save();
+    await newUser.save();
+    res.status(201);
 }
 
 
-export const findUser = async (req, res) => {
+export const findUserAndComparePassword = async (req, res) => {
     
     const foundUser = await User.findOne({email: req.body.email}) 
     
@@ -31,4 +32,16 @@ export const findUser = async (req, res) => {
     }
     
     return foundUser;    
+}
+
+export const searchUser = (req, res) => {
+
+}
+
+export const deleteOne = (req, res) => {
+
+}
+
+export const getAll = (req, res) => {
+
 }
