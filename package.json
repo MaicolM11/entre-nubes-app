@@ -21,7 +21,7 @@
   },
   "scripts": {
     "server": "nodemon -r dotenv/config backend/index.js --exec babel-node",
-    "jest": "jest --runInBand ./backend/test",
+    "jest": "jest --runInBand ./backend/test  --setupFiles dotenv/config ",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
