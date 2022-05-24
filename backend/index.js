@@ -22,6 +22,6 @@ app.get('/msg', (req, res) => res.json({ msg: "API works"}))
 app.use('/product', require('./routes/product.routes') )
 app.use('/auth', require('./routes/auth.routes') )
 app.use('/salesman', require('./routes/user.routes') )
-
+app.use('/category', require('./routes/category.routes') )
 
 app.listen(port, () => console.log('Server is running here http://localhost:' + port))

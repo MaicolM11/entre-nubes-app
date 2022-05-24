@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 import  Product  from "../../models/Product";
-import { setUp, dropDatabase } from "../../connection";
+import  Category  from "../../models/Category";
+import { setUp, dropCollections } from "../../connection";
 
 
 setUp()
@@ -14,7 +15,13 @@ const product = {
     stock: 10
 };
 
+beforeAll(async () => {
+  await setUp();
+});
 
+afterEach(async () => {
+  await dropCollections();
+});
 
 
 describe("Product model", () => {
@@ -28,7 +35,13 @@ describe("Product model", () => {
         expect(savedProduct.sale_price).toBe(newProduct.sale_price);
         expect(savedProduct.presentation).toBe(newProduct.presentation);
         expect(savedProduct.stock).toBe(newProduct.stock);
-  },30000);
+  });
 
+  it.only("create & save category", async () => {
+    const newCategory = new Category({name: "cerveza"});
+    const savedCategory = await newCategory.save();
+// Object Id should be defined when successfully saved to MongoDB.
+    expect(savedCategory.name).toBe(newCategory.name);
+});
   
 });
