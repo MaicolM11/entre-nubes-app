@@ -5,6 +5,7 @@ export const getAll = async (req, res) => {
     res.status(200).json(result); 
 }
 
+
 export const createCategory =async (req, res)=>{
     const {name} = req.body
     const newCategory = new Category({
@@ -15,9 +16,9 @@ export const createCategory =async (req, res)=>{
 }
 
 export const editCategory =async (req, res)=>{
-    const {name} = req.params.name
-    Category.findOneAndUpdate({name : name},{
-        $set : req.body.name
+    const {id} = req.params
+    await Category.findByIdAndUpdate({_id: id},{
+        $set : {name : req.body.name} 
     })
     res.sendStatus(200)
 }
