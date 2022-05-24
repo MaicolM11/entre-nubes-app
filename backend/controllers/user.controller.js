@@ -35,11 +35,13 @@ export const findUserAndComparePassword = async (req, res) => {
 }
 
 export const searchUser = (req, res) => {
-
+    
 }
 
-export const deleteOne = (req, res) => {
-
+export const deleteOne = async (req, res) => {
+    const {id} = req.params
+     await User.findByIdAndDelete(id)
+    res.sendStatus(200) 
 }
 
 export const getAll = (req, res) => {

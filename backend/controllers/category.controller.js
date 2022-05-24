@@ -1,11 +1,11 @@
 import Category from '../models/Category'
 
-export const getAll = (req, res) => {
+export const getAll = async (req, res) => {
     const result = await Category.find();   
     res.status(200).json(result); 
 }
 
-export const createCategory = (req, res)=>{
+export const createCategory =async (req, res)=>{
     const {name} = req.body
     const newCategory = new Category({
         name
@@ -14,7 +14,7 @@ export const createCategory = (req, res)=>{
     res.sendStatus(200)
 }
 
-export const editCategory = (req, res)=>{
+export const editCategory =async (req, res)=>{
     const {name} = req.params.name
     Category.findOneAndUpdate({name : name},{
         $set : req.body.name
@@ -22,7 +22,7 @@ export const editCategory = (req, res)=>{
     res.sendStatus(200)
 }
 
-export const deleteCategory = (req, res)=>{
+export const deleteCategory =async (req, res)=>{
     const {name} = req.params.name
     await Category.deleteOne({ name: name });
     res.sendStatus(200)
