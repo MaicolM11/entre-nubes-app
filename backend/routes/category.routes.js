@@ -32,8 +32,9 @@ router.get('/', controller.getAll);
  *                  schema:
  *                      type : object
  *                      $ref: '#/components/schemas/Category'
- *      response:
+ *      responses:
  *          200:
+ *              description : new categoty created!!
  */
 router.post('/', controller.createCategory);
 router.put('/:id', controller.editCategory)
