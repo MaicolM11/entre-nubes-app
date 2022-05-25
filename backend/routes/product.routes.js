@@ -11,7 +11,7 @@ const controller = require('../controllers/product.controller')
  *          200:
  *              description: get all products!
  *              content:
- *                  aplication/json:
+ *                  application/json:
  *                      schema:
  *                          type : array
  *                          items:
@@ -30,7 +30,7 @@ router.get('/', controller.getAll);
  *      requestBody:
  *          required: true
  *          content:
- *              aplication/json:
+ *              application/json:
  *                  schema:
  *                      $ref: '#/components/schemas/Product'
  *      responses:
@@ -41,10 +41,80 @@ router.get('/', controller.getAll);
  */
 router.post('/', controller.create);
 
-
+/**
+ * @swagger
+ * /product/{id}:
+ *  put:
+ *      sumary : update product
+ *      tags : [Product]
+ *      parameters:
+ *          - in : path
+ *            name: id
+ *            schema:
+ *              type: string
+ *            required: true
+ *            description : product id
+ *      requestBody:
+ *          required: true
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      $ref: '#/components/schemas/Product'
+ *      responses:
+ *          200:
+ *              description : product update sucesfull
+ *          404:
+ *              description:  product not found
+ */
 router.put('/:id', controller.edit)
+
+/**
+ * @swagger
+ * /product/{id}:
+ *  delete:
+ *      sumary : delete product
+ *      tags : [Product]
+ *      parameters:
+ *          - in : path
+ *            name: id
+ *            schema:
+ *              type: string
+ *            required: true
+ *            description : product id
+ *      responses:
+ *          200:
+ *              description : product eliminated
+ */
 router.delete('/:id', controller.deleteOne)
 
+/**
+ * @swagger
+ * /product/{id}/stock:
+ *  put:
+ *      sumary : add stock to product
+ *      tags : [Product]
+ *      parameters:
+ *          - in : path
+ *            name: id
+ *            schema:
+ *              type: string
+ *            required: true
+ *            description : product id
+ *      requestBody:
+ *          required: true
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      type: object
+ *                      properties:
+ *                          increment:
+ *                              type: integer
+ *      responses:
+ *          200:
+ *              description : product stock update sucesfull
+ *          404:
+ *              description:  product not found
+ */
 router.put('/:id/stock', controller.updateStock);
 
 module.exports = router;

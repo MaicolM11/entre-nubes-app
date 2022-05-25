@@ -11,7 +11,7 @@ const controller = require('../controllers/category.controller')
  *          200:
  *              description : all categories!!
  *              content:
- *                  aplication/json:
+ *                  application/json:
  *                      schema:
  *                          type : array
  *                          items:
@@ -28,7 +28,7 @@ router.get('/', controller.getAll);
  *      requestBody:
  *          required: true
  *          content:
- *              aplication/json:
+ *              application/json:
  *                  schema:
  *                      type : object
  *                      $ref: '#/components/schemas/Category'
@@ -54,7 +54,7 @@ router.post('/', controller.createCategory);
  *      requestBody:
  *          required: true
  *          content:
- *              aplication/json:
+ *              application/json:
  *                  schema:
  *                      type : object
  *                      $ref: '#/components/schemas/Category'

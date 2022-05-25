@@ -2,9 +2,9 @@ import User from '../models/User'
 
 export const createUser = async (req, res) => {
 
-    const data = { fullname, email, password, cc, address, phone } = req.body;
-    data.password = await User.encryptPass(data.password);
+    const { password, ...data } = req.body;
 
+    data.password = await User.encryptPass(password);
     const newUser = new User(data);
 
     newUser.save()
