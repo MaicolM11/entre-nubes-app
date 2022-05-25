@@ -1,21 +1,6 @@
 const router = require("express").Router();
 const controller = require('../controllers/category.controller')
 
-
-/**
- * @swagger
- *components:
- *  schemas:
- *      Category:
- *          type: object
- *          properties:
- *              name : 
- *                  type: string
- *          example: 
- *              name : Bebidas
- *              
- */
-
 /**
  * @swagger
  * /category:

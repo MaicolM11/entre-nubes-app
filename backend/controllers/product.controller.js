@@ -1,40 +1,43 @@
 import Product from "../models/Product"
 
-export const getAll = async (req, res) => {
-    const result = await Product.find();   
-    res.status(200).json(result); 
+export const getAll = (req, res) => {
+    Product.find()
+        .then(data => res.status(200).json(data))  
+        .catch(error => res.status(400).json({message: error.message}));
 }
 
-export const create = async (req, res) => {
-    const { brand, category, buy_price, sale_price, presentation, stock } = req.body;
-    
-    const newProduct = new Product({
-        brand, category, buy_price, sale_price, 
-        presentation, stock
-    });
+export const create = (req, res) => {
+    console.log(req.body);
+    const data = { brand, category, buy_price, sale_price, presentation, stock, img_url } = req.body;
+    const newProduct = new Product(data);
 
-    await newProduct.save();
-    res.sendStatus(200)
+    newProduct.save()
+        .then(doc => res.status(201).json(doc))
+        .catch(error => res.status(400).json({message: error.message}))
 }
 
-export const edit = (req, res)=>{
-    const id = req.params.id;
-    res.sendStatus(201)
+export const edit = (req, res) => {
+    const { id } = req.params;
+    const data = { brand, category, buy_price, sale_price, presentation, stock, img_url } = req.body;  
+    Product.findByIdAndUpdate(id, data)
+        .then(doc => res.status(201).json(doc))
+        .catch(error => res.status(400).json({message: error.message}))
 }
 
-export const deleteOne = async (req, res)=>{
-    const id = req.params.id;
-    await Product.findByIdAndDelete(id).exec();
-    res.sendStatus(200);
+export const deleteOne = (req, res)=>{
+    const {id} = req.params;
+    Product.findByIdAndDelete(id)
+        .then(doc => res.sendStatus(200))
+        .catch(error => res.status(400).json({message: error.message}));
 }
 
-export const updateStock = async (req, res) => {
-    await updateStockToProduct(req.params.id, req.body.increment);
-    res.sendStatus(200);
+export const updateStock = (req, res) => {
+    updateStockToProduct(req.params.id, req.body.increment)
+        .then(doc => res.status(200).json(doc))
+        .catch(error => res.status(400).json({message: error.message}))
 }
 
-// increment | decrement
-export const updateStockToProduct = async (id, value) => {
-   await Product.findByIdAndUpdate(id, { $inc: { 'stock': value } } )
-                .exec();
+// increment | decrement . Promise
+export const updateStockToProduct = (id, value) => {
+   return Product.findByIdAndUpdate(id, { $inc: { 'stock': value } } )              
 }

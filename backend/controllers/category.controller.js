@@ -5,8 +5,8 @@ export const getAll = async (req, res) => {
     res.status(200).json(result); 
 }
 
-
-export const createCategory =async (req, res)=>{
+export const createCategory = async (req, res)=>{
+    console.log(req);
     const {name} = req.body
     const newCategory = new Category({
         name
