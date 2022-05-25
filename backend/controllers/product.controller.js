@@ -7,7 +7,6 @@ export const getAll = (req, res) => {
 }
 
 export const create = (req, res) => {
-    console.log(req.body);
     const data = { brand, category, buy_price, sale_price, presentation, stock, img_url } = req.body;
     const newProduct = new Product(data);
 

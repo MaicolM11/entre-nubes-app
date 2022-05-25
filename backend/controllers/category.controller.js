@@ -6,7 +6,6 @@ export const getAll = async (req, res) => {
 }
 
 export const createCategory = async (req, res)=>{
-    console.log(req);
     const {name} = req.body
     const newCategory = new Category({
         name
