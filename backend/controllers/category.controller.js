@@ -23,7 +23,7 @@ export const editCategory =async (req, res)=>{
 }
 
 export const deleteCategory =async (req, res)=>{
-    const {name} = req.params.name
-    await Category.deleteOne({ name: name });
+    const {id} = req.params
+    await Category.findByIdAndDelete({_id:id});
     res.sendStatus(200)
 }
