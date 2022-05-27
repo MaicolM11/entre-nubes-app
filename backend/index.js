@@ -1,12 +1,12 @@
 const express = require('express')
 const morgan = require('morgan')
 const cors = require('cors')
-import { connectDB } from './connection'
+import { connectDB } from './database'
 import { SWAGGER_SERVE, SWAGGER_SETUP } from './middlewares/swagger.config'
 import { createAdmin, PORT } from './config'
 
 connectDB()
-createAdmin()
+// createAdmin()
 
 var app = express()
 

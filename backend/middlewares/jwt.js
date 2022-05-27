@@ -4,8 +4,7 @@ import User from '../models/User';
 
 export const verifyToken = async (req, res, next) => {
   
-    const token = req.headers['x-access-token']
-
+    const token = req.headers.authorization.replace('Bearer ', '')
     if (!token) return res.status(403).json({message: 'No token provided'})
     const decoded = jwt.verify(token, SECRET)
     req.userId = decoded.id;

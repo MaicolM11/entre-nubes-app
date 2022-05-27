@@ -12,7 +12,7 @@ export const createUser = async (req, res) => {
         .catch(error => res.status(400).json({ message: error.message }))
 }
 
-export const deleteOne = async (req, res) => {
+export const deleteOne = (req, res) => {
     const { id } = req.params;
     User.findByIdAndDelete(id)
         .then(doc => res.sendStatus(200))

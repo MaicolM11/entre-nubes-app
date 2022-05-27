@@ -1,6 +1,8 @@
 const router = require("express").Router();
 const controller = require('../controllers/product.controller')
 
+import {verifyToken } from './../middlewares/jwt'
+
 /**
  * @swagger
  * /product:
@@ -33,13 +35,15 @@ router.get('/', controller.getAll);
  *              application/json:
  *                  schema:
  *                      $ref: '#/components/schemas/Product'
+ *      security:
+ *	        - jwt: []
  *      responses:
  *          200:
  *              description : new product created!
  *          400:
  *              description: error to create product
  */
-router.post('/', controller.create);
+router.post('/', [verifyToken], controller.create);
 
 /**
  * @swagger
