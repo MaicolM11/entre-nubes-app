@@ -1,12 +1,10 @@
 import React from 'react';
 import "./Button.css";
 
-const Button = ({ icon, text, color, handleOnClick }) => {
+const Button = ({ text, color, handleOnClick }) => {
   return (
-    <button className="button" style={{backgroundColor: color}} onClick={handleOnClick}>
-      <img src={icon} alt="img-button" className="icon-container"></img>
+    <button className="button-test" style={{backgroundColor: color}} onClick={handleOnClick}>
       <label className="text-container">{text}</label>
-      
     </button>
   );
 };

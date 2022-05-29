@@ -1,11 +1,17 @@
 import React from 'react';
+import "./Login.css"
 import LoginButton from '../../components/Button/Button';
 
 const login = () => {
+
+  const handleTest = () => {
+    console.log("Ok");
+  };
+
   return (
-    <div>
+    <div className="login">
       <h1>Login</h1>
-      <LoginButton icon="" text="Iniciar Sesion" color="#4674F2" null/>
+      <LoginButton text="Iniciar Sesion" color="#4674F2" handleOnClick={handleTest}/>
     </div>
   );
 };
