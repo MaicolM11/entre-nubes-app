@@ -92,6 +92,8 @@ button{
     height: 35px;
 
     border-radius: 25px;
+    outline:none;
+    border:0;
 
     font-family: 'Roboto';
     font-style: normal;
