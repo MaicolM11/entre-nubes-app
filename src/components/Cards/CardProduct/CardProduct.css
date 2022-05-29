@@ -1,0 +1,50 @@
+.Card-Product{
+    border-color: #aaaaaa;
+    border-width: 2px;
+    border-style: solid;
+    width: 15rem;
+    border-radius: 2rem;
+}
+
+h1,h2,p,h3{
+    margin-left: 1rem;
+    font-family: 'Roboto';
+    font-style: normal;
+
+    display: flex;
+    align-items: center;
+
+    color: #262626;
+
+    mix-blend-mode: normal;
+    flex: none;
+    flex-grow: 0;
+}
+
+h1{
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 26px;
+    order: 0;
+}
+
+h2{
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 19px;
+    order: 0;
+}
+
+p{
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 21px;
+    order: 3;
+}
+
+h3{
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 21px;
+    order: 5;
+}
