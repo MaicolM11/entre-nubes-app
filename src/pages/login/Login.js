@@ -48,7 +48,7 @@ const Login = () => {
         placeholder="Contraseña"
         onChange={onChangeData} />
 
-      <LoginButton text="Iniciar Sesion" color="#4674F2" handleOnClick={sendData} />
+      <LoginButton text="Iniciar Sesion" color="#4674F2" width={405} handleOnClick={sendData} />
     </div>
   );
 };

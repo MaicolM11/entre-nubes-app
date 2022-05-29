@@ -2,8 +2,32 @@
     border-color: #aaaaaa;
     border-width: 2px;
     border-style: solid;
-    width: 15rem;
+    width: 18rem;
     border-radius: 2rem;
+
+    
+}
+
+.category-cont{
+    align-items: center;
+    display: flex;  
+    justify-content: center;
+
+    border-color: #aaaaaa;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 0.3rem;
+   
+    width: 4rem; 
+    height: 1.3rem;
+    margin-left: 1rem;
+
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 14px;
+    color: #4674F2;
 }
 
 h1,h2,p,h3{
@@ -47,4 +71,68 @@ h3{
     font-size: 14px;
     line-height: 21px;
     order: 5;
+}
+
+
+.buttons{
+    display: grid;
+    grid-template-columns: auto auto auto;
+    column-gap: 0.5rem;
+    margin-bottom: 1rem;
+    margin-right: 0.3rem;
+    margin-left: 0.5rem;
+}
+
+button{
+    align-items: center;
+    display: flex;  
+    justify-content: center;
+
+    width: 80px;
+    height: 35px;
+
+    border-radius: 25px;
+
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+
+    text-transform: capitalize;
+
+    color: #FFFFFF;
+}
+
+.units{
+    background-color: #4674F2;
+}
+
+.edit{
+    background-color: #9363E4;
+}
+
+.delete{
+    background-color: #FF4343;
+}
+
+.units:hover{
+    background-color: #6F92F2;
+}
+
+.edit:hover{
+    background-color: #A986E4;
+}
+
+.delete:hover{
+    background-color: #FF6565;
+}
+
+
+img{
+    width: 8rem;
+    height: 8rem;
+
+    display: block;
+    margin: auto;
 }
