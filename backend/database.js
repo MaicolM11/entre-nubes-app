@@ -1,8 +1,8 @@
 import mongoose from 'mongoose';
 import { MONGO_URL } from './config';
 
-export const connectDB = async () => {
-    await mongoose.connect(MONGO_URL, {
+export const connectDB = async (URL = MONGO_URL) => {
+    await mongoose.connect(URL, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
     })
@@ -16,3 +16,7 @@ export const dropCollections = async () => {
             await collection.deleteMany();
         }
 };
+
+export const disconnectDB = async () => {
+    await mongoose.connection.close();
+}

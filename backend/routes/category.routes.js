@@ -1,9 +1,12 @@
 const router = require("express").Router();
 const controller = require('../controllers/category.controller')
 
+import { isAdmin } from '../middlewares/checkRole'
+import { verifyToken } from './../middlewares/jwt'
+
 /**
  * @swagger
- * /category:
+ * /api/category:
  *  get:
  *      sumary : get all categories
  *      tags : [Category]   
@@ -17,11 +20,11 @@ const controller = require('../controllers/category.controller')
  *                          items:
  *                              $ref: '#/components/schemas/Category'
  */
-router.get('/', controller.getAll);
+router.get('/', [verifyToken], controller.getAll);
 
 /**
  * @swagger
- * /category:
+ * /api/category:
  *  post:
  *      sumary : create a new category
  *      tags : [Category]
@@ -36,11 +39,11 @@ router.get('/', controller.getAll);
  *          200:
  *              description : new categoty created!!
  */
-router.post('/', controller.createCategory);
+router.post('/', [verifyToken, isAdmin], controller.createCategory);
 
 /**
  * @swagger
- * /category/{id}:
+ * /api/category/{id}:
  *  put:
  *      sumary : update category
  *      tags : [Category]
@@ -65,11 +68,11 @@ router.post('/', controller.createCategory);
  *              description:  category not found
  *                  
  */
-router.put('/:id', controller.editCategory)
+router.put('/:id', [verifyToken, isAdmin], controller.editCategory)
 
 /**
  * @swagger
- * /category/{id}:
+ * /api/category/{id}:
  *  delete:
  *      sumary : delete category
  *      tags : [Category]
@@ -87,6 +90,6 @@ router.put('/:id', controller.editCategory)
  *              description:  category not found
  *                  
  */
-router.delete('/:id', controller.deleteCategory)
+router.delete('/:id', [verifyToken, isAdmin] ,controller.deleteCategory)
 
 module.exports = router;

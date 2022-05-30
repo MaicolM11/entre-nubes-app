@@ -1,11 +1,12 @@
 const router = require("express").Router();
 const controller = require('../controllers/product.controller')
 
-import {verifyToken } from './../middlewares/jwt'
+import { isAdmin } from '../middlewares/checkRole'
+import { verifyToken } from './../middlewares/jwt'
 
 /**
  * @swagger
- * /product:
+ * /api/product:
  *  get:
  *      sumary : get all products
  *      tags : [Product]   
@@ -25,7 +26,7 @@ router.get('/', controller.getAll);
 
 /**
  * @swagger
- * /product:
+ * /api/product:
  *  post:
  *      sumary : create a new product
  *      tags : [Product]
@@ -35,19 +36,19 @@ router.get('/', controller.getAll);
  *              application/json:
  *                  schema:
  *                      $ref: '#/components/schemas/Product'
- *      security:
- *	        - jwt: []
  *      responses:
  *          200:
  *              description : new product created!
  *          400:
  *              description: error to create product
+ *      security:
+ *	        - jwt: []
  */
-router.post('/', [verifyToken], controller.create);
+router.post('/', [verifyToken, isAdmin], controller.create);
 
 /**
  * @swagger
- * /product/{id}:
+ * /api/product/{id}:
  *  put:
  *      sumary : update product
  *      tags : [Product]
@@ -69,12 +70,14 @@ router.post('/', [verifyToken], controller.create);
  *              description : product update sucesfull
  *          404:
  *              description:  product not found
+ *      security:
+ *	        - jwt: []
  */
-router.put('/:id', controller.edit)
+router.put('/:id', [verifyToken, isAdmin], controller.edit)
 
 /**
  * @swagger
- * /product/{id}:
+ * /api/product/{id}:
  *  delete:
  *      sumary : delete product
  *      tags : [Product]
@@ -88,12 +91,14 @@ router.put('/:id', controller.edit)
  *      responses:
  *          200:
  *              description : product eliminated
+ *      security:
+ *	        - jwt: []
  */
-router.delete('/:id', controller.deleteOne)
+router.delete('/:id', [verifyToken, isAdmin], controller.deleteOne)
 
 /**
  * @swagger
- * /product/{id}/stock:
+ * /api/product/{id}/stock:
  *  put:
  *      sumary : add stock to product
  *      tags : [Product]
@@ -118,7 +123,9 @@ router.delete('/:id', controller.deleteOne)
  *              description : product stock update sucesfull
  *          404:
  *              description:  product not found
+ *      security:
+ *	        - jwt: []
  */
-router.put('/:id/stock', controller.updateStock);
+router.put('/:id/stock', [verifyToken, isAdmin], controller.updateStock);
 
 module.exports = router;

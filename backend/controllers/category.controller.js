@@ -10,8 +10,8 @@ export const createCategory = async (req, res)=>{
     const newCategory = new Category({
         name
     });
-    await newCategory.save();
-    res.sendStatus(200)
+    const categorySaved = await newCategory.save();
+    res.status(201).json(categorySaved)
 }
 
 export const editCategory =async (req, res)=>{
