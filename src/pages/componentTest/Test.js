@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import CardProduct from '../../components/Cards/CardProduct/CardProduct';
 import ModalMessage from '../../components/ModalMessage/ModalMessage';
+import AppProductModal from '../../components/AppProductModal/AppProductModal'
 
 const test = () => {
 
@@ -24,6 +25,8 @@ const test = () => {
 
       {modalOpen && <ModalMessage text="Producto agregado correctamente!" setOpenModal={setModalOpen}/>}
       
+      <AppProductModal product = 'Aguila' actualUnits = {2}/>
+    
     </div>
   );
 };
