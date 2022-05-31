@@ -3,8 +3,9 @@
     /*flex-direction: row;*/
     justify-content: center;
     align-items: center;
+    position: relative  ;
    /* padding: 0px 25px;
-   /* position: absolute;*/
+   
     /*height: 45px;
     /*left: calc(50% - 405px/2);
     top: calc(50% - 45px/2 - 32.5px);*/

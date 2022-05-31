@@ -1,0 +1,38 @@
+.modalContainer{
+    border-color: #aaaaaa;
+    border-width: 2px;
+    border-style: solid;
+    width: 18rem;
+    border-radius: 2rem;
+
+}
+
+h1{
+    width: 253px;
+    height: 69px;
+
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 23px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+    color: #262626;
+
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+}
+
+.footer{
+    display: flex;
+    align-items: center;
+    align-content: center;
+    text-align: center;
+}
