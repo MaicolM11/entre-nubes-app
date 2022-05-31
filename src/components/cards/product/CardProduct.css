@@ -3,9 +3,37 @@
     border-width: 2px;
     border-style: solid;
     width: 18rem;
-    border-radius: 2rem;
+    border-radius: 2rem;   
+}
 
-    
+.name{
+    margin-left: 1rem;
+}
+
+.unit-Price{
+    margin-left: 1rem;
+    width: 209px;
+    height: 19px;
+
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 19px;
+    /* identical to box height */
+
+    display: flex;
+    align-items: center;
+
+    color: #262626;
+
+    mix-blend-mode: normal;
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 1;
+    flex-grow: 0;
 }
 
 .category-cont{
@@ -21,6 +49,7 @@
     width: 4rem; 
     height: 1.3rem;
     margin-left: 1rem;
+    margin-right: 1rem;
 
     font-family: 'Roboto';
     font-style: normal;
@@ -30,49 +59,40 @@
     color: #4674F2;
 }
 
-h1,h2,p,h3{
-    margin-left: 1rem;
+.descriptionTarget{
+    margin: 1rem;
+
+
     font-family: 'Roboto';
     font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 21px;
 
+
+    color: #262626;
+}
+
+.footer-text{
+    margin-left: 1rem;
+ 
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+ 
     display: flex;
     align-items: center;
 
     color: #262626;
 
     mix-blend-mode: normal;
+
+    color: #262626;
+
     flex: none;
-    flex-grow: 0;
+    order: 4;
 }
-
-h1{
-    font-weight: 700;
-    font-size: 22px;
-    line-height: 26px;
-    order: 0;
-}
-
-h2{
-    font-weight: 700;
-    font-size: 16px;
-    line-height: 19px;
-    order: 0;
-}
-
-p{
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 21px;
-    order: 3;
-}
-
-h3{
-    font-weight: 700;
-    font-size: 14px;
-    line-height: 21px;
-    order: 5;
-}
-
 
 .buttons{
     display: grid;
@@ -82,54 +102,6 @@ h3{
     margin-right: 0.3rem;
     margin-left: 0.5rem;
 }
-
-button{
-    align-items: center;
-    display: flex;  
-    justify-content: center;
-
-    width: 80px;
-    height: 35px;
-
-    border-radius: 25px;
-    outline:none;
-    border:0;
-
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 16px;
-
-    text-transform: capitalize;
-
-    color: #FFFFFF;
-}
-
-.units{
-    background-color: #4674F2;
-}
-
-.edit{
-    background-color: #9363E4;
-}
-
-.delete{
-    background-color: #FF4343;
-}
-
-.units:hover{
-    background-color: #6F92F2;
-}
-
-.edit:hover{
-    background-color: #A986E4;
-}
-
-.delete:hover{
-    background-color: #FF6565;
-}
-
 
 img{
     width: 8rem;

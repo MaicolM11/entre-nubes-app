@@ -12,6 +12,10 @@ const theme = {
   delete: {
     default: "#FF4343",
     hover: "#FF6565"
+  },
+  edit: {
+    default: "#9363E4",
+    hover: "#A986E4"
   }
 };
 
@@ -25,6 +29,10 @@ const size = {
 
   small: {
     width: "150px"
+  },
+
+  miniSmall: {
+    width: "80px"
   }
 };
 
@@ -37,6 +45,8 @@ export const Button = styled.button`
   font-weight: 500;
   font-size: 16px;
   cursor: pointer;
+  border-radius: 2rem;
+  border:none;
   transition: 0.3s;
   &:hover{
     background-color: ${props => theme[props.theme].hover};

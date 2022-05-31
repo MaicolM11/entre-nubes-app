@@ -5,7 +5,7 @@ import AppProductModal from '../../components/modals/add-product-stock/AddProduc
 import CategoryTarget from '../../components/cards/category/CategoryTarget';
 import DeleteModal from '../../components/modals/delete/DeleteModal';
 
-const test = () => {
+const Test = () => {
 
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -16,25 +16,14 @@ const test = () => {
   const click = () => setModalOpen ((o)=> !o)
 
   return (
-    <div >
+    <div className='test'>
       <h1>Tets</h1>
       <CardProduct url ={url} name="Aguila" price={123} 
       category = "Cerveza"
       description={des} units={10} 
       unitsSale={7}/>
-      <p></p>
-      <button style={{backgroundColor: '#4674F2'}} onClick={click}> Mostrar modal </button>
-      <p></p>
-      {modalOpen && <ModalMessage text="Producto agregado correctamente!" setOpenModal={setModalOpen}/>}
-      <p></p>
-      <AppProductModal product = 'Aguila' actualUnits = {2}/>
-      <p></p>
-      <CategoryTarget categoryName='Cerveza'/>
-      <p></p>
-      <DeleteModal title='Desea eliminar esta categoria?'
-       btnName='Eliminar Categoria'/>
     </div>
   );
 };
 
-export default test;
+export default Test;
