@@ -4,7 +4,7 @@ import './CategoryTarget.css'
 const CategoryTarget = ({categoryName}) =>{
     return(
         <div className="contentTargetCategory">
-            <h1>{categoryName}</h1>
+            <label className="labelText">{categoryName}</label>
             <button>edit</button>
             <button>delete</button>
         </div>

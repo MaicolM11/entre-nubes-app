@@ -6,7 +6,7 @@ import './AppProductModal.css'
 
 const AppProductModal = ({product,actualUnits}) =>{
     return(
-        <div className="content">
+        <div className="contentAddProduct">
             <h1>Producto : {product}</h1>
             <h2>Unidades actuales: {actualUnits}</h2>
             <Input 

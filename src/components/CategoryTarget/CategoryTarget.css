@@ -11,9 +11,11 @@
     border-radius: 2rem;
 }
 
-h1{
+.labelText{
     width: 177.5px;
     height: 24.42px;
+
+    margin: 1rem;
 
     font-family: 'Roboto';
     font-style: normal;
@@ -24,7 +26,6 @@ h1{
     align-items: center;
 
     color: #2C2C2C;
-
 
     flex: none;
     order: 0;
