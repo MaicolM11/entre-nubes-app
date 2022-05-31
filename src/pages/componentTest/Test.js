@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import CardProduct from '../../components/Cards/CardProduct/CardProduct';
 import ModalMessage from '../../components/ModalMessage/ModalMessage';
 import AppProductModal from '../../components/AppProductModal/AppProductModal'
+import CategoryTarget from '../../components/CategoryTarget/CategoryTarget';
 
 const test = () => {
 
@@ -27,6 +28,7 @@ const test = () => {
       
       <AppProductModal product = 'Aguila' actualUnits = {2}/>
     
+      <CategoryTarget categoryName='Aguila'/>
     </div>
   );
 };

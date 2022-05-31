@@ -1,0 +1,37 @@
+.contentTargetCategory{
+    display: flex;
+    align-items: center;
+    align-content: center;  
+    text-align: center;
+
+    border-color: #aaaaaa;
+    border-width: 2px;
+    border-style: solid;
+    width: 33rem;
+    border-radius: 2rem;
+}
+
+h1{
+    width: 177.5px;
+    height: 24.42px;
+
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 28px;
+    display: flex;
+    align-items: center;
+
+    color: #2C2C2C;
+
+
+    flex: none;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 1;
+}
+
+button{
+    color: black;
+}
