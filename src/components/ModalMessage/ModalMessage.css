@@ -2,7 +2,7 @@
     border-color: #aaaaaa;
     border-width: 2px;
     border-style: solid;
-    width: 18rem;
+    width: 25rem;
     border-radius: 2rem;
 
 }
@@ -30,9 +30,17 @@ h1{
     flex-grow: 0;
 }
 
+.title{
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
 .footer{
     display: flex;
     align-items: center;
     align-content: center;
-    text-align: center;
+    justify-content: center;
+    margin-top: 3rem;
+    margin-bottom: 2rem;
 }

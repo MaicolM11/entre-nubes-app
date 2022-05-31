@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import CardProduct from '../../components/Cards/CardProduct/CardProduct';
 import ModalMessage from '../../components/ModalMessage/ModalMessage';
-import AppProductModal from '../../components/AppProductModal/AppProductModal'
+import AppProductModal from '../../components/AddProductModal/AddProductModal'
 import CategoryTarget from '../../components/CategoryTarget/CategoryTarget';
 import DeleteModal from '../../components/DeleteModal/DeleteModal';
 
