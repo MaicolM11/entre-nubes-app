@@ -18,10 +18,10 @@ const Test = () => {
   return (
     <div className='test'>
       <h1>Tets</h1>
-      <CardProduct url ={url} name="Aguila" price={123} 
+      {/* <CardProduct url ={url} name="Aguila" price={123} 
       category = "Cerveza"
       description={des} units={10} 
-      unitsSale={7}/>
+      unitsSale={7}/> */}
       <DeleteModal  title='Este componente funciona?' btnName='Eliminar componente' />
     </div>
   );
