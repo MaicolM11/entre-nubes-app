@@ -1,5 +1,6 @@
 import React from "react";
-import TextInput from "../../inputs/text/TextInput";
+import TextInput from "../../inputs/TextInput";
+
 import { Button } from "../../buttons/button/Button";
 
 import './AddProductStockModal.css';

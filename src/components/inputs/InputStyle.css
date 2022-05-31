@@ -5,12 +5,11 @@
     gap: 10px;
     border: 1px solid var(--border-color);
     border-radius: 25px;
-    padding: 0 25px;
     align-items: center;
     background: var(--secondary-color);
 }
 
 .img {
-    width: 30px;
-    height: 30px;
+    width: 24px;
+    height: 24px;
 }

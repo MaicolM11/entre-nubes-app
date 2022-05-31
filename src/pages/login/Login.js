@@ -5,8 +5,8 @@ import Logo from '../../assets/images/entre-nubes-logo.png'
 import User from '../../assets/icons/user.svg';
 
 import { Button } from '../../components/buttons/button/Button';
-import TextInput from '../../components/inputs/text/TextInput';
-import PasswordInput from "../../components/inputs/password/PasswordInput";
+import TextInput from '../../components/inputs/TextInput';
+import PasswordInput from "../../components/inputs/PasswordInput";
 
 import { reqLogin } from '../../services/auth';
 import { useState } from 'react';
