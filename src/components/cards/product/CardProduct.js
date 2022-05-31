@@ -17,7 +17,7 @@ const CardProduct = ({ url, name, price, category, description, units, unitsSale
                 <h3 className="footer-text">Unidades: {units}</h3>
                 <h3 className="footer-text">Unidades en venta: {unitsSale}</h3>
                 <div className="buttons">
-                    <Button theme="option" size="miniSmall" >
+                    <Button theme="option" size="miniSmall"  >
                         Unidades
                     </Button>
                     <Button theme="edit" size="miniSmall">

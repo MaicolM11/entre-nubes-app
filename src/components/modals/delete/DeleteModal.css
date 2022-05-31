@@ -1,4 +1,7 @@
+
 .contentDeleteModal{
+    
+    background-color: white;
     border-color: #aaaaaa;
     border-width: 2px;
     border-style: solid;
@@ -43,6 +46,11 @@
     margin-top: 1rem;
     margin-bottom: 1rem;
     margin-left: 3rem;   
+}
+
+.cancelDeleteModal:hover{
+    color: #4674F2;
+    border-color: #4674F2;
 }
 
 .cancelDeleteModal{
