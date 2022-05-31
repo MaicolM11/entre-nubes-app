@@ -61,20 +61,11 @@ const Login = () => {
             icon={User}
             placeholder="Usuario"
             onChange={onChangeData} />
-      <PasswordInput placeholder="Contraseña" onChange={onChangeData} />
+          <PasswordInput placeholder="Contraseña" onChange={onChangeData} />
           <Button theme="option" size="normal" onClick={sendData}>Iniciar Sesión</Button>
         </div>
       </div>
     </div>
-    /*<div className="login">
-      
-      <Input
-        type="password"
-        name="password"
-        placeholder="Contraseña"
-        onChange={onChangeData} />
-      
-    </div>*/
   );
 };
 

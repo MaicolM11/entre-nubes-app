@@ -27,7 +27,7 @@ const PasswordInput = ({ placeholder, onChange }) => {
       />
       <Input
         type="password"
-        name="user-password"
+        name="password"
         placeholder={placeholder}
         onChange={onChange} />
     </div>

@@ -4,32 +4,32 @@ const bcrypt = require("bcryptjs");
 import ROLES from './Role'
 
 const userSchema = mongoose.Schema({
-   
-    fullname: {
-      type: String,
-      unique: true,
-    },
 
-    email: {
-      type: String,
-      unique: true,
-    },
-
-    password: {
-      type: String,
-      required: true,
-    },
-
-    rol: {
-      type: String,
-      enum : Object.keys(ROLES),
-      default: ROLES.SALESMAN
-    },
- 
-    cc: String,
-    address: String,
-    phone: String
+  fullname: {
+    type: String,
+    unique: true,
   },
+
+  email: {
+    type: String,
+    unique: true,
+  },
+
+  password: {
+    type: String,
+    required: true,
+  },
+
+  rol: {
+    type: String,
+    enum: Object.keys(ROLES),
+    default: ROLES.SALESMAN
+  },
+
+  cc: String,
+  address: String,
+  phone: String
+},
   {
     timestamps: false,
     versionKey: false,
