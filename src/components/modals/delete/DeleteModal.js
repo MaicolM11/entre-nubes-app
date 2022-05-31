@@ -1,9 +1,9 @@
 import React from "react";
-import Button from "../Button/Button";
+import { Button } from "../../buttons/button/Button";
 import './DeleteModal.css'
 
-const DeleteModal = ({title, btnName}) =>{
-    return(
+const DeleteModal = ({ title, btnName }) => {
+    return (
         <div className="contentDeleteModal">
             <div className="contentTitleDeleteModal">
                 <label className="deleteCategory"> {title}</label>
@@ -11,15 +11,12 @@ const DeleteModal = ({title, btnName}) =>{
 
             <div className="ButonsDeleteModal">
                 <button className="cancelDeleteModal">
-                 Cancelar
+                    Cancelar
                 </button>
-                <Button
-                text={btnName} color='#FF4343' 
-                width={175} height={45} 
-                />
+                <Button theme="delete" size="medium" onClick={sendData}>{btnName}</Button>
             </div>
         </div>
-        
+
     )
 }
 

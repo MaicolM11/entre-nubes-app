@@ -1,7 +1,7 @@
 import React from "react";
 import './ModalMessage.css';
 
-import { Button } from "../Button/Button";
+import { Button } from "../../buttons/button/Button";
 
 const ModalMessage = ({ text, setOpenModal }) => {
 

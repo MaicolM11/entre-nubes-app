@@ -13,7 +13,7 @@ const theme = {
     default: "#FF4343",
     hover: "#FF6565"
   }
-}
+};
 
 const size = {
   normal: {
@@ -26,7 +26,7 @@ const size = {
   small: {
     width: "150px"
   }
-}
+};
 
 export const Button = styled.button`
   width: ${props => size[props.size].width};
@@ -34,7 +34,7 @@ export const Button = styled.button`
   background-color: ${props => theme[props.theme].default};
   font-family: var(--roboto);
   color: white;
-  font-weight: bold;
+  font-weight: 500;
   font-size: 16px;
   cursor: pointer;
   transition: 0.3s;

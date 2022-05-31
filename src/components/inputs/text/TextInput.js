@@ -1,5 +1,5 @@
 import React from 'react';
-import "./Input.css";
+import "./TextInput.css";
 
 import styled from 'styled-components';
 

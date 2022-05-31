@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
-import CardProduct from '../../components/Cards/CardProduct/CardProduct';
-import ModalMessage from '../../components/ModalMessage/ModalMessage';
-import AppProductModal from '../../components/AddProductModal/AddProductModal'
-import CategoryTarget from '../../components/CategoryTarget/CategoryTarget';
-import DeleteModal from '../../components/DeleteModal/DeleteModal';
+import CardProduct from '../../components/cards/product/CardProduct';
+import ModalMessage from '../../components/modals/message/ModalMessage';
+import AppProductModal from '../../components/modals/add-product-stock/AddProductStockModal'
+import CategoryTarget from '../../components/cards/category/CategoryTarget';
+import DeleteModal from '../../components/modals/delete/DeleteModal';
 
 const test = () => {
 

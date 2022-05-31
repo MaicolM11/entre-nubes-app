@@ -1,12 +1,12 @@
 import React from "react";
 import './CardProduct.css'
 
-const CardProduct = ({url, name, price,category, description, units, unitsSale}) =>{
+const CardProduct = ({ url, name, price, category, description, units, unitsSale }) => {
 
-    return(
+    return (
         <div className="Card-Product">
             <div className="ImgContainer">
-            <img src= {url} alt="X"></img>
+                <img src={url} alt="X"></img>
             </div>
             <h1>{name}</h1>
             <h2>Precio por Unidad : $ {price}</h2>
@@ -19,7 +19,7 @@ const CardProduct = ({url, name, price,category, description, units, unitsSale})
                     Unidades
                 </button>
                 <button className="edit">
-                   Editar
+                    Editar
                 </button>
                 <button className="delete">
                     Eliminar

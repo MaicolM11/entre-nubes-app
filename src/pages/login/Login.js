@@ -4,8 +4,9 @@ import "./Login.css";
 import Logo from '../../assets/images/entre-nubes-logo.png'
 import Lock from '../../assets/icons/user.svg';
 
-import { Button } from '../../components/Button/Button';
-import TextInput from '../../components/input/Input';
+import { Button } from '../../components/buttons/button/Button';
+import TextInput from '../../components/inputs/text/TextInput';
+import PasswordInput from "../../components/inputs/password/PasswordInput";
 
 import { login } from '../../services/auth';
 import { useState } from 'react';
@@ -51,9 +52,9 @@ const Login = () => {
       </div>
       <div className='right-area'>
         <div className='data'>
-          <span className='login-title'>
+          <h1 className='login-title'>
             Inicio de Sesión
-          </span>
+          </h1>
           <TextInput
             type="text"
             name="email"
@@ -65,6 +66,7 @@ const Login = () => {
       </div>
     </div>
     /*<div className="login">
+    <PasswordInput placeholder="Contraseña" onChange={onChangeData} />
       
       <Input
         type="password"

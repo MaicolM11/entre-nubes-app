@@ -1,6 +1,6 @@
-.contentAddProduct{
+.contentAddProduct {
     align-items: center;
-    align-content: center;  
+    align-content: center;
     display: block;
     text-align: center;
 
@@ -11,9 +11,10 @@
     border-radius: 2rem;
 }
 
-h1,h2{
+h1,
+h2 {
 
-    font-family: 'Roboto';
+    font-family: var(--roboto);
     font-style: normal;
     font-weight: 700;
 
@@ -24,7 +25,7 @@ h1,h2{
     flex-grow: 0;
 }
 
-h1{
+h1 {
     width: 209px;
     height: 28px;
 
@@ -34,7 +35,7 @@ h1{
 
 }
 
-h2{
+h2 {
     width: 169px;
     height: 20px;
 
@@ -46,16 +47,16 @@ h2{
 
 }
 
-.inputUnits{
+.inputUnits {
     display: flex;
     justify-content: center;
-    margin-top : 1rem;
+    margin-top: 1rem;
     margin-bottom: 1rem;
 }
 
-.buttonUnits{
+.buttonUnits {
     display: flex;
     justify-content: center;
-    margin-top : 1rem;
+    margin-top: 1rem;
     margin-bottom: 1rem;
 }
