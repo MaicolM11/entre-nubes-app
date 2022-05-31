@@ -1,11 +1,14 @@
 import React from 'react';
-import { useState } from 'react';
-import "./Login.css"
+import "./Login.css";
 
-import LoginButton from '../../components/Button/Button';
-import Input from '../../components/input/Input';
+import Logo from '../../assets/images/entre-nubes-logo.png'
+import Lock from '../../assets/icons/user.svg';
+
+import { Button } from '../../components/Button/Button';
+import TextInput from '../../components/input/Input';
 
 import { login } from '../../services/auth';
+import { useState } from 'react';
 
 const Login = () => {
 
@@ -36,20 +39,40 @@ const Login = () => {
   };
 
   return (
-    <div className="login">
-      <Input
-        type="text"
-        name="email"
-        placeholder="Usuario"
-        onChange={onChangeData} />
+    <div className='login'>
+      <div className='left-area'>
+        <div className='logo-container'>
+          <img
+            src={Logo}
+            alt="entre-nubes"
+            className="logo"
+          />
+        </div>
+      </div>
+      <div className='right-area'>
+        <div className='data'>
+          <span className='login-title'>
+            Inicio de Sesión
+          </span>
+          <TextInput
+            type="text"
+            name="email"
+            icon={Lock}
+            placeholder="Usuario"
+            onChange={onChangeData} />
+          <Button theme="option" size="normal" onClick={sendData}>Iniciar Sesión</Button>
+        </div>
+      </div>
+    </div>
+    /*<div className="login">
+      
       <Input
         type="password"
         name="password"
         placeholder="Contraseña"
         onChange={onChangeData} />
-
-      <LoginButton text="Iniciar Sesion" color="#4674F2" width={405} handleOnClick={sendData} />
-    </div>
+      
+    </div>*/
   );
 };
 
