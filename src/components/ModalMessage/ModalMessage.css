@@ -1,13 +1,12 @@
-.modalContainer{
+.modalContainer {
     border-color: #aaaaaa;
     border-width: 2px;
     border-style: solid;
     width: 25rem;
     border-radius: 2rem;
-
 }
 
-h1{
+h1 {
     width: 253px;
     height: 69px;
 
@@ -22,7 +21,6 @@ h1{
 
     color: #262626;
 
-
     /* Inside auto layout */
 
     flex: none;
@@ -30,13 +28,13 @@ h1{
     flex-grow: 0;
 }
 
-.title{
+.title {
     display: flex;
     justify-content: center;
     margin-top: 2rem;
 }
 
-.footer{
+.footer {
     display: flex;
     align-items: center;
     align-content: center;
