@@ -13,7 +13,7 @@ const DeleteModal = ({ title, btnName }) => {
                 <button className="cancelDeleteModal">
                     Cancelar
                 </button>
-                <Button theme="delete" size="medium" onClick={sendData}>{btnName}</Button>
+                <Button theme="delete" size="medium" >{btnName}</Button>
             </div>
         </div>
 

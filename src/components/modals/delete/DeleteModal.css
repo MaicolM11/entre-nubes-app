@@ -45,6 +45,11 @@
     margin-left: 3rem;   
 }
 
+.cancelDeleteModal:hover{
+    color: #4674F2;
+    border-color: #4674F2;
+}
+
 .cancelDeleteModal{
     box-sizing: border-box;
 

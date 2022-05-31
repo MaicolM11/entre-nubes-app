@@ -22,6 +22,7 @@ const Test = () => {
       category = "Cerveza"
       description={des} units={10} 
       unitsSale={7}/>
+      <DeleteModal  title='Este componente funciona?' btnName='Eliminar componente' />
     </div>
   );
 };
