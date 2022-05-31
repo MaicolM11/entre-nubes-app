@@ -2,13 +2,13 @@ import React from 'react';
 import "./Login.css";
 
 import Logo from '../../assets/images/entre-nubes-logo.png'
-import Lock from '../../assets/icons/user.svg';
+import User from '../../assets/icons/user.svg';
 
 import { Button } from '../../components/buttons/button/Button';
 import TextInput from '../../components/inputs/text/TextInput';
 import PasswordInput from "../../components/inputs/password/PasswordInput";
 
-import { login } from '../../services/auth';
+import { reqLogin } from '../../services/auth';
 import { useState } from 'react';
 
 const Login = () => {
@@ -19,7 +19,7 @@ const Login = () => {
   });
 
   const sendData = () => {
-    login(user.email, user.password)
+    reqLogin(user.email, user.password)
       .then(async res => {
         let data = await res.json();
         if (res.ok) {
@@ -58,15 +58,15 @@ const Login = () => {
           <TextInput
             type="text"
             name="email"
-            icon={Lock}
+            icon={User}
             placeholder="Usuario"
             onChange={onChangeData} />
+      <PasswordInput placeholder="Contraseña" onChange={onChangeData} />
           <Button theme="option" size="normal" onClick={sendData}>Iniciar Sesión</Button>
         </div>
       </div>
     </div>
     /*<div className="login">
-    <PasswordInput placeholder="Contraseña" onChange={onChangeData} />
       
       <Input
         type="password"

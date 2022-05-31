@@ -1,4 +1,4 @@
-export const login = (username, password) => {
+export const reqLogin = (username, password) => {
     const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
