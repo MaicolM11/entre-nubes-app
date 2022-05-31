@@ -17,23 +17,20 @@ const theme = {
 
 const size = {
   normal: {
-    width: "405px",
-    height: "45px"
+    width: "405px"
   },
   medium: {
-    width: "185px",
-    height: "45px"
+    width: "185px"
   },
 
   small: {
-    width: "150px",
-    height: "45px"
+    width: "150px"
   }
 }
 
 export const Button = styled.button`
   width: ${props => size[props.size].width};
-  height: ${props => size[props.size].height};
+  height: 45px;
   background-color: ${props => theme[props.theme].default};
   font-family: var(--roboto);
   color: white;

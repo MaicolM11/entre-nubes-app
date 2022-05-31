@@ -1,0 +1,61 @@
+.contentAddProduct{
+    align-items: center;
+    align-content: center;  
+    display: block;
+    text-align: center;
+
+    border-color: #aaaaaa;
+    border-width: 2px;
+    border-style: solid;
+    width: 31wrem;
+    border-radius: 2rem;
+}
+
+h1,h2{
+
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+
+    color: #262626;
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+h1{
+    width: 209px;
+    height: 28px;
+
+    font-size: 24px;
+    line-height: 28px;
+    font-feature-settings: 'liga' off;
+
+}
+
+h2{
+    width: 169px;
+    height: 20px;
+
+    font-size: 18px;
+    line-height: 20px;
+
+    display: flex;
+    align-items: center;
+
+}
+
+.inputUnits{
+    display: flex;
+    justify-content: center;
+    margin-top : 1rem;
+    margin-bottom: 1rem;
+}
+
+.buttonUnits{
+    display: flex;
+    justify-content: center;
+    margin-top : 1rem;
+    margin-bottom: 1rem;
+}
