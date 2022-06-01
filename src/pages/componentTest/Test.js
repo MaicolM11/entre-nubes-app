@@ -4,6 +4,7 @@ import ModalMessage from '../../components/modals/message/ModalMessage';
 import AppProductModal from '../../components/modals/add-product-stock/AddProductStockModal'
 import CategoryTarget from '../../components/cards/category/CategoryTarget';
 import DeleteModal from '../../components/modals/delete/DeleteModal';
+import  HeaderProducts from '../../components/headers/headerProducts/HeaderProducts'
 
 const Test = () => {
 
@@ -18,11 +19,12 @@ const Test = () => {
   return (
     <div className='test'>
       <h1>Tets</h1>
-      {/* <CardProduct url ={url} name="Aguila" price={123} 
-      category = "Cerveza"
-      description={des} units={10} 
-      unitsSale={7}/> */}
-      <DeleteModal  title='Este componente funciona?' btnName='Eliminar componente' />
+      <HeaderProducts/>
+      <CardProduct
+      url = {url} name="Aguila" price={2500} 
+      category="cerveza" description ={des} 
+      units={20} unitsSale = {15}
+      />
     </div>
   );
 };
