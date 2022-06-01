@@ -1,56 +1,90 @@
-.add-producto-container{
+.create-product-container {
+    display: flex;
+    flex-direction: column;
+    width: 795px;
     background-color: white;
-    width: 50%;
-    height: 80%;
-    border-radius: 1.3rem;
+    border-radius: 16px;
 }
 
-.inputs{
+.modal-title-container {
     display: flex;
-    margin-top: 3rem;
-}
-
-.inputs-container{
-    display: grid;
-    row-gap: repeat(auto,7);
-    gap: 1rem;
-    width: 57%;
-    margin-left: 3rem;
-    margin-right: 3rem;
-}
-
-.image-product{
-    width: 43%;
-    margin-left: 3rem;
-    border-radius: 2rem;
-}
-
-.button-create{
-    margin-top: 3rem;
-    margin-left: 41.5%;
-}
-
-.add-title{
-    border-right: solid 1px var(--border-color);
-    margin-top: 2rem;
-    margin-left: 2rem;
-
-    font-family: var(--roboto);
-    font-style: normal;
-    font-weight: 700;
-    font-size: 28px;
-    line-height: 33px;
-    /* identical to box height */
-
-    display: flex;
+    width: 100%;
+    height: 28px;
+    padding: 35px 0;
     align-items: center;
-    text-transform: capitalize;
+}
 
+.add-title-modal {
+    width: 100%;
+    font-family: var(--roboto);
+    font-weight: bold;
+    font-size: 24px;
     color: var(--text-color);
+    margin-left: 35px;
+}
 
-    /* Inside auto layout */
+.close-image-container {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    margin-right: 35px;
+}
 
-    flex: none;
-    order: 0;
-    flex-grow: 0;
+.close-img {
+    width: 24px;
+    height: 24px;
+}
+
+.modal-center-container {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 35px;
+}
+
+.components-modal {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    width: 725px;
+}
+
+.img-modal-area {
+    display: flex;
+    width: 100%;
+}
+
+.product-image-modal {
+    display: flex;
+    width: 285px;
+    height: 410px;
+    margin-right: 35px;
+    border: solid 1px var(--border-color);
+    border-radius: 16px;
+}
+
+.data-modal-area {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    width: 100%;
+}
+
+.text-area-container {
+    display: flex;
+    flex-direction: column;
+    height: 125px;
+    gap: 10px;
+}
+
+.description-title {
+    font-family: var(--roboto);
+    font-weight: bold;
+    font-size: 16px;
+    color: var(--text-color);
+}
+
+.description-area {
+    height: 100px;
+    border-color: var(--border-color);
+    border-radius: 8px;
 }
