@@ -19,7 +19,6 @@ const Test = () => {
   return (
     <div className='test'>
       <h1>Tets</h1>
-      <HeaderProducts/>
       <CardProduct
       url = {url} name="Aguila" price={2500} 
       category="cerveza" description ={des} 

@@ -12,6 +12,7 @@ const TextInput = ({ type, name, icon, placeholder, onChange }) => {
         className="img"
       />
       <Input
+        size='normal'
         type={type}
         name={name}
         placeholder={placeholder}

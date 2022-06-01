@@ -5,22 +5,18 @@ import { Input } from './InputStyle';
 
 import Lock from '../../assets/icons/lock.svg';
 
-const PasswordInput = ({ placeholder, onChange }) => {
+const SearchInput = ({ placeholder, onChange }) => {
   return (
     <div className='input'>
-      <img
-        src={Lock}
-        alt="icon"
-        className="img"
-      />
+      <button>()-</button>
       <Input
-        size="normal"
-        type="password"
-        name="password"
+        size= 'medium'
+        type="text"
+        name="search"
         placeholder={placeholder}
         onChange={onChange} />
     </div>
   );
 };
 
-export default PasswordInput;
+export default SearchInput;

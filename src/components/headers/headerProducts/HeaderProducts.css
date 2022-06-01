@@ -3,6 +3,10 @@
     border-bottom:solid  2px gray;
 }
 
+.searchProduct{
+    display: flex;
+}
+
 .title{
 
     border-right:solid  2px gray;
@@ -60,4 +64,26 @@
     gap: 5.5rem;
     margin-top: 2.5rem;
     margin-left: 3rem;
+}
+
+.selectCategory{
+    width: 18rem;
+    border-radius: 2rem;
+
+    margin-right: 2rem;
+
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+
+    color: #8F8F8F;
+    border-color: #8F8F8F;
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 1;
+    flex-grow: 0;
 }
