@@ -15,7 +15,10 @@ const Homepage = () => {
     return (
         <div className='homepage-container'>
             <AdminMenu />
-            <CreateProduct/>
+            <CreateProduct
+            title="Agregar producto"
+            nameButton="Agregar producto"
+            />
             <div className='pages-container'>
                 <Routes>
                     <Route path="orders" element={<Orders />} />

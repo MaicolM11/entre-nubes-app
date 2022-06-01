@@ -21,6 +21,13 @@
 
 .image-product{
     width: 43%;
+    margin-left: 3rem;
+    border-radius: 2rem;
+}
+
+.button-create{
+    margin-top: 3rem;
+    margin-left: 41.5%;
 }
 
 .add-title{
