@@ -22,7 +22,7 @@ const HeaderProducts = () => {
                 </select>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default HeaderProducts
+export default HeaderProducts;
