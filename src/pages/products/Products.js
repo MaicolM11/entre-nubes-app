@@ -1,17 +1,18 @@
 import React from "react";
+import './Products.css';
+
+import AdminMenu from "../../components/menus/admin/Menu";
 import HeaderProducts from "../../components/headers/headerProducts/HeaderProducts";
-import './Products.css'
 
-const Products = ()=>{
-    return(
+const Products = () => {
+    return (
         <div className="productContent">
-            <div className="menuProduct">
-            </div>
-            <div className="headerProduct">
-            <HeaderProducts/>
-            </div>
+            <AdminMenu />
         </div>
-    )
-}
+    );
+    /*<div className="headerProduct">
+        <HeaderProducts />
+    </div>*/
+};
 
-export default Products
+export default Products;

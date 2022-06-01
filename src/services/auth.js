@@ -8,4 +8,4 @@ export const reqLogin = (username, password) => {
         })
     };
     return fetch('/auth/login', requestOptions);
-}
+};
