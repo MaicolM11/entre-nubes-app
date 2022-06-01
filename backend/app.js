@@ -14,7 +14,6 @@ app.use(cors());
 
 
 // routes
-
 app.get('/msg', (req, res) => res.json({ msg: "API works" })) // test
 app.use('/api-doc', SWAGGER_SERVE, SWAGGER_SETUP);
 app.use('/auth', require('./routes/auth.routes'))

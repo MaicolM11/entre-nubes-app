@@ -21,8 +21,39 @@ import { verifyToken } from './../middlewares/jwt'
  *                              $ref: '#/components/schemas/Product'
  *          400: 
  *              description: Error to get all products
+ *      security:
+ *	        - jwt: []
  */
-router.get('/', controller.getAll);
+router.get('/',[verifyToken], controller.getAll);
+
+/**
+ * @swagger
+ * /api/product/{id}:
+ *  get:
+ *      sumary : get product by id
+ *      tags : [Product]   
+ *      parameters:
+ *          - in : path
+ *            name: id
+ *            schema:
+ *              type: string
+ *            required: true
+ *            description : product id
+ *      responses:
+ *          200:
+ *              description: get all products!
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          $ref: '#/components/schemas/Product'
+ *          400: 
+ *              description: Error to get product
+ *          404: 
+ *              description: Product not found
+ *      security:
+ *	        - jwt: []
+ */
+router.get('/:id', [verifyToken], controller.getById);
 
 /**
  * @swagger

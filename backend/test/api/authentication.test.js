@@ -1,6 +1,6 @@
 import { admin, login } from './config'
 
-describe.skip('Login', () => {
+describe('Login', () => {
 
     it('Correct credentials', async () => {
         const response = await login(admin);

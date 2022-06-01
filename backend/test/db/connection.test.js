@@ -4,7 +4,7 @@ const url = process.env.MONGO_URL_TEST
 
 afterEach(async() => await disconnectDB())
 
-describe.skip("Database", ()=> {
+describe("Database", ()=> {
 
     it("Correct url", async() => {
         expect(connectDB(url)).resolves.not.toThrow()

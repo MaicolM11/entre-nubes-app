@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "nodemon -r dotenv/config index.js --exec babel-node",
-    "test": "jest --runInBand test  --setupFiles dotenv/config "
+    "test": "jest --verbose --runInBand test  --setupFiles dotenv/config "
   },
   "dependencies": {
     "cors": "^2.8.5",
