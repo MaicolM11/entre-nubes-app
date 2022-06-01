@@ -9,11 +9,13 @@ import Reports from '../reports/Reports';
 import Products from '../products/Products';
 import Employees from '../employees/Employees';
 import Boliranas from '../boliranas/Boliranas';
+import CreateProduct from '../../components/modals/create-product/CreateProduct';
 
 const Homepage = () => {
     return (
         <div className='homepage-container'>
             <AdminMenu />
+            <CreateProduct/>
             <div className='pages-container'>
                 <Routes>
                     <Route path="orders" element={<Orders />} />

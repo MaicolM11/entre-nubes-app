@@ -1,0 +1,49 @@
+.add-producto-container{
+    background-color: white;
+    width: 50%;
+    height: 80%;
+    border-radius: 1.3rem;
+}
+
+.inputs{
+    display: flex;
+    margin-top: 3rem;
+}
+
+.inputs-container{
+    display: grid;
+    row-gap: repeat(auto,7);
+    gap: 1rem;
+    width: 57%;
+    margin-left: 3rem;
+    margin-right: 3rem;
+}
+
+.image-product{
+    width: 43%;
+}
+
+.add-title{
+    border-right: solid 1px var(--border-color);
+    margin-top: 2rem;
+    margin-left: 2rem;
+
+    font-family: var(--roboto);
+    font-style: normal;
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 33px;
+    /* identical to box height */
+
+    display: flex;
+    align-items: center;
+    text-transform: capitalize;
+
+    color: var(--text-color);
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}

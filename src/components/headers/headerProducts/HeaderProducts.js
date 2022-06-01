@@ -1,7 +1,7 @@
 import React from "react";
 import './HeaderProducts.css'
 import { Button } from '../../buttons/button/Button'
-import TextInput from "../../inputs/TextInput";
+import Select from '../../select/Select'
 import SearchInput from "../../inputs/SearchInput";
 
 const HeaderProducts = () => {
@@ -17,9 +17,8 @@ const HeaderProducts = () => {
                 <div className="searchProduct">
                     <SearchInput placeholder='Buscar' />
                 </div>
-                <select className="selectCategory">
-                    <option value="" selected disabled hidden>Categoría</option>
-                </select>
+                <Select size = "medium"/>
+                
             </div>
         </div>
     );

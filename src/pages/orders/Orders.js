@@ -4,7 +4,7 @@ import "./Orders.css";
 const Orders = () => {
     return (
         <div className='orders-container'>
-            <h1>Pedidos</h1>
+            <h1>pedidos</h1>
         </div>
     );
 };
