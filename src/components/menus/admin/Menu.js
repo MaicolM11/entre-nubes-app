@@ -6,21 +6,36 @@ import { Link } from 'react-router-dom';
 
 const MenuPages = [
     {
-        title: "Orders",
-        path: "/homepage/orders",
+        title: "Pedidos",
+        path: "orders",
         icon: "",
     },
     {
-        title: "Products",
-        path: "/homepage/products",
+        title: "Reportes",
+        path: "reports",
+        icon: "",
+    },
+    {
+        title: "Productos",
+        path: "products",
+        icon: "",
+    },
+    {
+        title: "Colaboradores",
+        path: "employees",
+        icon: "",
+    },
+    {
+        title: "Boliranas",
+        path: "boliranas",
         icon: "",
     }
 ]
 
 const Menu = () => {
     return (
-        <div className='admin-menu'>
-            <div className='admin-menu-container'>
+        <div className='admin-menu-container'>
+            <div className='admin-menu-components'>
                 <div className='logo-menu-container'>
                     <img
                         src={Logo}
@@ -29,7 +44,6 @@ const Menu = () => {
                     />
                 </div>
                 <div className='separator-menu' />
-
                 <div className='buttons-menu-container'>
                     {Object.values(MenuPages).map((button, i) => (
                         <button key={i}>
@@ -39,6 +53,7 @@ const Menu = () => {
                         </button>
                     ))}
                 </div>
+                <div className='separator-menu' />
             </div>
         </div>
     );
