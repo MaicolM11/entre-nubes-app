@@ -6,12 +6,17 @@ import { Button } from "../../buttons/button/Button";
 import './AddProductStockModal.css';
 
 
-const AppProductModal = ({ product, actualUnits, icon, onChangeData }) => {
+const AddProductStockModal = ({ product, actualUnits, icon, onChangeData, sendData }) => {
     return (
         <div className="modal-container">
             <div className="contentAddProduct">
-                <h1>Producto : {product}</h1>
-                <h2>Unidades actuales: {actualUnits}</h2>
+            <div className="exit-modal-content">
+                <button className="exit-modal-stock">X</button>
+            </div>
+                <div className="content-info">
+                    <h1 className="name-product">Producto : {product}</h1>
+                    <h2 className="units-product">Unidades actuales: {actualUnits}</h2>
+                </div>
                 <div className="inputUnits">
                     <TextInput
                         type="text"
@@ -30,4 +35,4 @@ const AppProductModal = ({ product, actualUnits, icon, onChangeData }) => {
     );
 };
 
-export default AppProductModal
+export default AddProductStockModal

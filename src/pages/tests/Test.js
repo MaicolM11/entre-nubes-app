@@ -1,10 +1,6 @@
 import React, {useState} from 'react';
-import CardProduct from '../../components/cards/product/CardProduct';
-import ModalMessage from '../../components/modals/message/ModalMessage';
-import AppProductModal from '../../components/modals/add-product-stock/AddProductStockModal'
-import CategoryTarget from '../../components/cards/category/CategoryTarget';
-import DeleteModal from '../../components/modals/delete/DeleteModal';
-import  HeaderProducts from '../../components/headers/headerProducts/HeaderProducts'
+
+import AddProductStockModal from '../../components/modals/add-product-stock/AddProductStockModal';
 
 const Test = () => {
 
@@ -19,10 +15,8 @@ const Test = () => {
   return (
     <div className='test'>
       <h1>Tets</h1>
-      <CardProduct
-      url = {url} name="Aguila" price={2500} 
-      category="cerveza" description ={des} 
-      units={20} unitsSale = {15}
+      <AddProductStockModal
+      product="Aguila"
       />
     </div>
   );
