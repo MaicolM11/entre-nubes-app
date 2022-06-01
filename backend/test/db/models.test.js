@@ -16,7 +16,7 @@ beforeAll(async () => await connectDB());
 afterAll(async () => await dropCollections());
 
 
-describe.skip("Database models", () => {
+describe("Database models", () => {
 
 
   it("create category", async () => {

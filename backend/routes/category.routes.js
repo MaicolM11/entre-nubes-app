@@ -19,6 +19,8 @@ import { verifyToken } from './../middlewares/jwt'
  *                          type : array
  *                          items:
  *                              $ref: '#/components/schemas/Category'
+ *      security:
+ *	        - jwt: []
  */
 router.get('/', [verifyToken], controller.getAll);
 
@@ -38,8 +40,10 @@ router.get('/', [verifyToken], controller.getAll);
  *      responses:
  *          200:
  *              description : new categoty created!!
+ *      security:
+ *	        - jwt: []
  */
-router.post('/', [verifyToken, isAdmin], controller.createCategory);
+router.post('/', [verifyToken, isAdmin], controller.create);
 
 /**
  * @swagger
@@ -66,9 +70,10 @@ router.post('/', [verifyToken, isAdmin], controller.createCategory);
  *              description : category update sucesfull
  *          404:
  *              description:  category not found
- *                  
+ *      security:
+ *	        - jwt: []
  */
-router.put('/:id', [verifyToken, isAdmin], controller.editCategory)
+router.put('/:id', [verifyToken, isAdmin], controller.edit)
 
 /**
  * @swagger
@@ -88,8 +93,9 @@ router.put('/:id', [verifyToken, isAdmin], controller.editCategory)
  *              description : category eliminated
  *          404:
  *              description:  category not found
- *                  
+ *      security:
+ *	        - jwt: []
  */
-router.delete('/:id', [verifyToken, isAdmin] ,controller.deleteCategory)
+router.delete('/:id', [verifyToken, isAdmin] ,controller.deleteOne)
 
 module.exports = router;
