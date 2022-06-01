@@ -1,13 +1,10 @@
-.productContent{
+.productContent {
     display: flex;
+    margin: 0;
+    padding: 0;
+    width: 100%;
 }
 
-.menuProduct{
-    width: 18%;
-    height: 100vh;
-    background-color: black;
-}
-
-.headerProduct{
+.headerProduct {
     width: 82%;
 }

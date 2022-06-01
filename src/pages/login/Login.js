@@ -1,7 +1,7 @@
 import React from 'react';
 import "./Login.css";
 
-import Logo from '../../assets/images/entre-nubes-logo.png'
+import Logo from '../../assets/images/entre-nubes-logo.png';
 import User from '../../assets/icons/user.svg';
 
 import { Button } from '../../components/buttons/button/Button';
