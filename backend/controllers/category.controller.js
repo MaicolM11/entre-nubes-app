@@ -1,4 +1,5 @@
-import Category from '../models/Category'
+import Category from '../models/Category';
+import { categoryValidator } from './validations.controller';
 
 export const getAll = async (req, res) => {
     Category.find()
@@ -6,17 +7,26 @@ export const getAll = async (req, res) => {
         .catch(error => res.status(400).json({ message: error.message }));
 }
 
-export const create = async (req, res)=> {
-    const newCategory = new Category(req.body);
+export const create = async (req, res) => {
+    const data = categoryValidator(req.body, res);
+
+    if (!data) return;
+
+    const newCategory = new Category(data);
 
     newCategory.save()
         .then(doc => res.status(201).json(doc))
         .catch(error => res.status(400).json({ message: error.message }))
 }
 
-export const edit = async (req, res)=>{
+export const edit = async (req, res) => {
     const { id } = req.params;
-    Category.findByIdAndUpdate(id, req.body, {new: true} )
+
+    const data = categoryValidator(req.body, res);
+
+    if (!data) return;
+
+    Category.findByIdAndUpdate(id, data, { new: true })
         .then(doc => {
             if (!doc) res.status(404).json({ message: 'Category not found' })
             else res.status(201).json(doc)
@@ -24,7 +34,7 @@ export const edit = async (req, res)=>{
         .catch(error => res.status(400).json({ message: error.message }))
 }
 
-export const deleteOne =async (req, res)=>{
+export const deleteOne = async (req, res) => {
     const { id } = req.params;
     Category.findByIdAndDelete(id)
         .then(doc => res.sendStatus(200))
