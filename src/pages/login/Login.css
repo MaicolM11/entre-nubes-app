@@ -13,19 +13,25 @@
     justify-content: center;
 }
 
-.data {
+.center-area {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    
+    gap: 35px;
+
+}
+
+.options-area {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
 }
 
 .login-title {
     font-family: var(--roboto);
     font-size: 24px;
     font-weight: bold;
-    text-align: center;
     color: var(--text-color);
 }
 

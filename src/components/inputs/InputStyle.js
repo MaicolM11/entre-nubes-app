@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const size = {
   normal: {
-    width: "405px"
+    width: "315px"
   },
   medium: {
     width: "16rem"

@@ -51,18 +51,18 @@ const Login = () => {
         </div>
       </div>
       <div className='right-area'>
-        <div className='data'>
-          <h1 className='login-title'>
-            Inicio de Sesión
-          </h1>
-          <TextInput
-            type="text"
-            name="email"
-            icon={User}
-            placeholder="Usuario"
-            onChange={onChangeData} />
-          <PasswordInput placeholder="Contraseña" onChange={onChangeData} />
-          <Button theme="option" size="normal" onClick={sendData}>Iniciar Sesión</Button>
+        <div className='center-area'>
+          <label className='login-title'>Inicio de Sesión</label>
+          <div className='options-area'>
+            <TextInput
+              type="text"
+              name="email"
+              icon={User}
+              placeholder="Usuario"
+              onChange={onChangeData} />
+            <PasswordInput placeholder="Contraseña" onChange={onChangeData} />
+            <Button theme="option" size="normal" onClick={sendData}>Iniciar Sesión</Button>
+          </div>
         </div>
       </div>
     </div>

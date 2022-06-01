@@ -2,13 +2,21 @@
     display: flex;
     height: 45px;
     gap: 10px;
+    padding: 0 25px;
+    background: var(--secondary-color);
     border: 1px solid var(--border-color);
     border-radius: 25px;
-    align-items: center;
-    background: var(--secondary-color);
 }
 
 .img {
     width: 24px;
     height: 24px;
+}
+
+.input:hover {
+    border-color: var(--brand-color);
+}
+
+.input:focus-within {
+    border-color: var(--highlighted-color);
 }

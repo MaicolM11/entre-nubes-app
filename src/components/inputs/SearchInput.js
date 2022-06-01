@@ -10,7 +10,7 @@ const SearchInput = ({ placeholder, onChange }) => {
     <div className='input'>
       <button>()-</button>
       <Input
-        size= 'medium'
+        size='medium'
         type="text"
         name="search"
         placeholder={placeholder}
