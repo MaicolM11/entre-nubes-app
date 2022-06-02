@@ -42,13 +42,11 @@ const Login = () => {
   return (
     <div className='login'>
       <div className='left-area'>
-        <div className='logo-container'>
-          <img
-            src={Logo}
-            alt="entre-nubes"
-            className="logo"
-          />
-        </div>
+        <img
+          src={Logo}
+          alt="entre-nubes"
+          className="logo"
+        />
       </div>
       <div className='right-area'>
         <div className='center-area'>

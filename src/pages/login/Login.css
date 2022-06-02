@@ -43,11 +43,6 @@
     justify-content: center;
 }
 
-.logo-container {
-    display: block;
-    width: 100%;
-}
-
 .logo {
     min-width: 400px;
     min-height: 225px;
