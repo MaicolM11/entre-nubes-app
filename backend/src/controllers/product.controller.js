@@ -1,4 +1,5 @@
-import Product from "../models/Product"
+import Product from "../models/Product";
+import { productValidator } from "./validations.controller";
 
 export const getAll = (req, res) => {
     Product.find().populate('category')
@@ -7,14 +8,21 @@ export const getAll = (req, res) => {
 }
 
 export const getById = (req, res) => {
-    let {id} = req.params;
+    let { id } = req.params;
     Product.findById(id)
         .then(data => res.status(200).json(data))
         .catch(error => res.status(400).json({ message: error.message }));
 }
 
 export const create = (req, res) => {
-    const newProduct = new Product(req.body);
+    const data = productValidator(req.body);
+
+    if (!data) {
+        res.status(422).json({ message: 'Invalid argument exception' })
+        return;
+    }
+    
+    const newProduct = new Product(data);
 
     newProduct.save()
         .then(doc => res.status(201).json(doc))
@@ -23,7 +31,15 @@ export const create = (req, res) => {
 
 export const edit = (req, res) => {
     const { id } = req.params;
-    Product.findByIdAndUpdate(id, req.body, { new: true })
+    
+    const data = productValidator(req.body);
+
+    if (!data) {
+        res.status(422).json({ message: 'Invalid argument exception' })
+        return;
+    }
+
+    Product.findByIdAndUpdate(id, data, { new: true })
         .then(doc => {
             if (!doc) res.status(404).json({ message: 'Product not found' })
             else res.status(201).json(doc)

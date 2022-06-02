@@ -19,7 +19,7 @@ app.use('/api-doc', SWAGGER_SERVE, SWAGGER_SETUP);
 app.use('/auth', require('./routes/auth.routes'))
 
 app.use('/api/product', require('./routes/product.routes'))
-app.use('/api/salesman', require('./routes/user.routes'))
+app.use('/api/user', require('./routes/user.routes'))
 app.use('/api/category', require('./routes/category.routes'))
 
 export default app;

@@ -10,7 +10,10 @@ export const getAll = async (req, res) => {
 export const create = async (req, res) => {
     const data = categoryValidator(req.body, res);
 
-    if (!data) return;
+    if (!data) {
+        res.status(422).json({ message: 'Invalid argument exception' })
+        return;
+    }
 
     const newCategory = new Category(data);
 
@@ -24,7 +27,10 @@ export const edit = async (req, res) => {
 
     const data = categoryValidator(req.body, res);
 
-    if (!data) return;
+    if (!data) {
+        res.status(422).json({ message: 'Invalid argument exception' })
+        return;
+    }
 
     Category.findByIdAndUpdate(id, data, { new: true })
         .then(doc => {

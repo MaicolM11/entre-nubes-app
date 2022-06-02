@@ -48,3 +48,13 @@ export const findUserAndComparePassword = async (req, res) => {
 export const searchUser = (req, res) => {
 
 }
+
+export const getInfo = (req, res) => {
+    const { userId } = req;
+    User.findById(userId)
+        .then(doc => {
+            if (doc) res.status(200).json(doc)
+            else res.sendStatus(404);
+        })
+        .catch(err => res.status(400).json({ message: err.message }))
+}
