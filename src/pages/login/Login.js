@@ -11,7 +11,10 @@ import PasswordInput from "../../components/inputs/PasswordInput";
 import { reqLogin } from '../../services/auth';
 import { useState } from 'react';
 
+import { useNavigate } from 'react-router-dom';
+
 const Login = () => {
+  const navigate = useNavigate();
 
   const [user, setUser] = useState({
     email: '',
@@ -24,10 +27,16 @@ const Login = () => {
         let data = await res.json();
         if (res.ok) {
           localStorage.setItem("token", data.token)
+          redirectByRol(data.rol);
+        } else {
+          alert(data.message)
         }
-        console.log(res.status); // 404 - 401 - 200
       })
   };
+  const redirectByRol = rol => {
+    if(rol === "ADMIN") navigate('/homepage')
+    else if (rol === "SALESMAN") navigate('/salesman')
+  }
 
   const onChangeData = (e) => {
     const { name, value } = e.target;
