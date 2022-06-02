@@ -1,4 +1,4 @@
-import { admin, login } from './config'
+import { admin, login } from '../config'
 
 describe('Login', () => {
 

@@ -1,4 +1,4 @@
-import { connectDB, disconnectDB } from "../../database";
+import { connectDB, disconnectDB } from "../../src/database";
 
 const url = process.env.MONGO_URL_TEST
 
@@ -11,7 +11,7 @@ describe("Database", ()=> {
     })
 
     it("Incorrect url", async() => {
-        expect(connectDB("")).rejects.toThrow()
+        expect(connectDB("bad url")).rejects.toThrow()
     })   
 
 })

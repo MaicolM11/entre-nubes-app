@@ -1,5 +1,5 @@
 import { admin, salesman, API, 
-        login } from './config'
+        login } from '../config'
         
 let category = { name: "cerveza" };
 const CATEGORY_URL = '/api/category/';
