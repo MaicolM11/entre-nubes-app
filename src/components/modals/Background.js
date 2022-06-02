@@ -1,4 +1,6 @@
-.modal-container {
+import styled from "styled-components";
+
+export const Background = styled.div`
     display: flex;
     width: 100%;
     height: 100%;
@@ -9,4 +11,4 @@
     right: 0px;
     background-color: rgba(0, 0, 0, 0.7);
     z-index: 100;
-}
+`;

@@ -1,6 +1,7 @@
 import React from "react";
 import './ModalCreateProduct.css';
-import '../../../styles/ModalStyle.css';
+
+import { Background } from "../Background";
 
 import { useRef, useEffect, useCallback } from "react";
 import { useSpring, animated } from "react-spring";
@@ -49,7 +50,7 @@ export const ModalCreateProduct = ({ modalData, openModal, setOpenModal }) => {
 
     return <>
         {openModal ?
-            (<div ref={modalRef} onClick={closeModal} className="modal-container">
+            (<Background ref={modalRef} onClick={closeModal}>
                 <animated.div style={animation}>
                     <div className="create-product-container">
                         <div className="modal-title-container">
@@ -93,6 +94,6 @@ export const ModalCreateProduct = ({ modalData, openModal, setOpenModal }) => {
                         </div>
                     </div>
                 </animated.div>
-            </div>) : null}
+            </Background>) : null}
     </>
 };

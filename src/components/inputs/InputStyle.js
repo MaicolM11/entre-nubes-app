@@ -11,6 +11,7 @@ const size = {
 
 export const Input = styled.input`
   width: ${props => size[props.size].width};
+  height: 40px;
   border: none;
   outline: none;
   font-size: 16px;
