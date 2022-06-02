@@ -34,13 +34,13 @@ const App = () => {
     <BrowserRouter>
       <Routes>
         <Route exact path="/" element={<Login />} />
-        <Route path="/admin-homepage/*" element = {
+        <Route path="/admin/*" element = {
             <AdminProtectedRoute>
               <AdminHomepage />
             </AdminProtectedRoute>
           } 
         />
-        <Route path="/salesman-homepage/*" element= { 
+        <Route path="/salesman/*" element= { 
             <SalesmanProtectedRoute>
               <SalesmanHomepage />
             </SalesmanProtectedRoute>
