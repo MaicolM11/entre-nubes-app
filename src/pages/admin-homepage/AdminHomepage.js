@@ -1,5 +1,5 @@
 import React from 'react';
-import "./Homepage.css";
+import "./AdminHomepage.css";
 
 import { Routes, Route } from 'react-router-dom';
 
@@ -10,7 +10,7 @@ import Products from '../products/Products';
 import Employees from '../employees/Employees';
 import Boliranas from '../boliranas/Boliranas';
 
-const Homepage = () => {
+const AdminHomepage = () => {
     return (
         <div className='homepage-container'>
             <AdminMenu />
@@ -27,4 +27,4 @@ const Homepage = () => {
     );
 };
 
-export default Homepage;
+export default AdminHomepage;
