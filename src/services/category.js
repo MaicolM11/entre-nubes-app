@@ -12,7 +12,7 @@ export const createCategory = (name) => {
     const requestOptions = {
         method: 'POST',
         headers: { 'authorization': getToken() },
-        body: { name: name }
+        body: JSON.stringify({ 'name': name })
     };
     return fetch(BASE_URL, requestOptions);
 }

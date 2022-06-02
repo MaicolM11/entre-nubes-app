@@ -1,5 +1,5 @@
 import { admin, salesman, API, 
-    login } from './config'
+    login } from '../config'
     
 let product = {
     brand: "AGUILA",

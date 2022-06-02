@@ -15,6 +15,23 @@ const createAdmin = async () => {
         })
         admin.save().then(doc => console.log('Admin has been created!'))
     }
+    createSalesman()
+}
+
+const createSalesman = async () => {
+    let admin = await User.findOne({ email: "salesman@gmail.com" })
+    if (!admin) {
+        admin = new User({
+            fullname: 'Juanito',
+            email: 'salesman@gmail.com',
+            password: await User.encryptPass('123'),
+            cc: '6891201',
+            address: 'Cra 4 N 100',
+            phone: '7621 2171 213',
+            rol: Role.SALESMAN
+        })
+        admin.save().then(doc => console.log('salesman has been created!'))
+    }
 }
 
 module.exports = {

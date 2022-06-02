@@ -1,6 +1,6 @@
-import Product from "../../models/Product";
-import Category from "../../models/Category";
-import { connectDB, dropCollections } from "../../database";
+import Product from "../../src/models/Product";
+import Category from "../../src/models/Category";
+import { connectDB, dropCollections } from "../../src/database";
 
 const product = {
   brand: "Aguila",
@@ -11,7 +11,7 @@ const product = {
   stock: 10
 };
 
-beforeAll(async () => await connectDB());
+beforeAll(async () => await connectDB(process.env.MONGO_URL_TEST));
 
 afterAll(async () => await dropCollections());
 

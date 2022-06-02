@@ -8,6 +8,10 @@ export const login = async (req, res) => {
         const token = jwt.sign({ id: foundUser._id }, SECRET, {
             expiresIn: EXPIRES_IN
         })
-        res.status(200).json({ token: token, rol: foundUser.rol });
+        res.status(200).json({ 
+            token: token, 
+            rol: foundUser.rol, 
+            fullname: foundUser.fullname 
+        });
     }
 }
