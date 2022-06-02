@@ -1,5 +1,6 @@
-const BASE_URL = '/api/category';
 import { getToken } from './token'
+
+const BASE_URL = '/api/category';
 
 export const getAllCategories = () => {
     const requestOptions = {

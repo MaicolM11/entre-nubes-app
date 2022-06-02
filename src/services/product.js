@@ -1,5 +1,6 @@
-const BASE_URL = '/api/product';
 import { getToken } from './token'
+
+const BASE_URL = '/api/product';
 
 export const getAllProducts = () => {
     const requestOptions = { 

@@ -34,7 +34,7 @@ const Login = () => {
       })
   };
   const redirectByRol = rol => {
-    if(rol === "ADMIN") navigate('/homepage')
+    if(rol === "ADMIN") navigate('/admin')
     else if (rol === "SALESMAN") navigate('/salesman')
   }
 
