@@ -12,9 +12,9 @@ import Boliranas from '../boliranas/Boliranas';
 
 const AdminHomepage = () => {
     return (
-        <div className='homepage-container'>
+        <div className='admin-homepage-container'>
             <AdminMenu />
-            <div className='pages-container'>
+            <div className='admin-pages-container'>
                 <Routes>
                     <Route path="orders" element={<Orders />} />
                     <Route path="reports" element={<Reports />} />
