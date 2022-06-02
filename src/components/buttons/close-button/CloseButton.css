@@ -1,0 +1,15 @@
+.close-button {
+    display: flex;
+    width: 24px;
+    height: 24px;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    cursor: pointer;
+    background-color: white;
+}
+
+.close-image {
+    width: 24px;
+    height: 24px;
+}
