@@ -4,7 +4,8 @@ const BASE_URL = '/api/category';
 
 export const getAllCategories = () => {
     const requestOptions = {
-        headers: { 'authorization': getToken() }
+        method: 'GET',
+        headers: {'Content-Type': 'application/json', 'authorization': getToken() }
     };
     return fetch(BASE_URL, requestOptions);
 }

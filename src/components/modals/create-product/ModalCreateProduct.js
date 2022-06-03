@@ -4,6 +4,7 @@ import './ModalCreateProduct.css';
 import { Background } from "../Background";
 
 import {reqProduct} from '../../../services/product'
+import {getAllCategories} from '../../../services/category'
 
 import { useRef, useEffect, useCallback } from "react";
 import { useSpring, animated } from "react-spring";
@@ -22,6 +23,17 @@ const regularExpressions ={
 }
 
 export const ModalCreateProduct = ({ modalData, openModal, setOpenModal }) => {
+    const [categories, setCategories] = useState({})
+
+    useEffect(()=>{
+        getAllCategories().then(
+           async res =>{
+                setCategories(await res.json())
+           }
+       )  
+    })
+
+    
     const modalRef = useRef();
 
     const animation = useSpring({
@@ -73,14 +85,12 @@ export const ModalCreateProduct = ({ modalData, openModal, setOpenModal }) => {
           .then(async res => {
             let data = await res.json();
             if (res.ok) {
-              localStorage.setItem("token", data.token)
+
             } else {
               alert(data.message)
             }
           })
       };
-
-    
 
       const onChangeData = (e) => {
         const { name, value } = e.target;
@@ -89,8 +99,7 @@ export const ModalCreateProduct = ({ modalData, openModal, setOpenModal }) => {
             ...inputs,
             [name]: value,
           };
-        });
-        
+        });   
       };
 
     return <>
@@ -117,14 +126,7 @@ export const ModalCreateProduct = ({ modalData, openModal, setOpenModal }) => {
                                         placeholder='Nombre del producto'
                                         onChange={onChangeData} 
                                         />
-                                        <TextInput
-                                        type='text'
-                                        name='category'
-                                        icon={Wine}
-                                        placeholder='Categoria'
-                                        onChange={onChangeData} 
-                                        />
-                                    {/* <Select size="normal" /> */}
+                                    <Select size="normal" name="category" categories={categories} onChange={onChangeData} />
                                     <TextInput
                                         type='text'
                                         name='buy_price'

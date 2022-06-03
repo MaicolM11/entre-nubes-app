@@ -2,19 +2,19 @@ import React from "react";
 import './Select.css'
 import { SelectStyle } from "./SelectStyle";
 
-const Select = ({ size, categories }) => {
+const Select = ({ size, name, categories, onChange }) => {
 
     return (
         <div>
-            <select defaultValue="">
-                <option value="" disabled>
-                    Choose a salutation ...
-                </option>
-                <option value="1">62992de70d687c298fc1daeb</option>
-                <option value="2">Mrs</option>
-                <option value="3">Ms</option>
-                <option value="4">Miss</option>
-                <option value="5">Dr</option>
+            <select defaultValue="Categorias" name={name} 
+                    onChange={onChange}>
+                {categories.map((category,i)=>{
+                    return(
+                        <option key={i} value={category._id} >
+                               {category.name} 
+                        </option>
+                    )
+                })}
             </select>
         </div>
     )
