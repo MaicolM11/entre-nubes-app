@@ -24,28 +24,31 @@ const size = {
 };
 
 const Button = styled.button`
-  width: ${props => size[props.size].width};
-  height: 45px;
-  background-color: ${props => theme[props.theme].default};
-  font-family: var(--roboto);
-  color: white;
-  font-weight: 500;
-  font-size: 16px;
-  cursor: pointer;
-  border-radius: 2rem;
-  border:none;
-  transition: 0.3s;
-  &:hover{
-    background-color: ${props => theme[props.theme].hover};
-  }
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: ${props => size[props.size].width};
+    height: 45px;
+    background-color: ${props => theme[props.theme].default};
+    font-family: var(--roboto);
+    color: white;
+    font-weight: 500;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 2rem;
+    border:none;
+    transition: 0.3s;
+    &:hover{
+        background-color: ${props => theme[props.theme].hover};
+    }
 `;
 
 const IconButton = ({ icon, text, theme, size, handleOnClick }) => {
     return (
         <Button theme={theme} size={size} onClick={handleOnClick}>
-            <div className='button-icon-container'>
-                <img src={icon} alt="img-button" className="icon-container"></img>
-                {text}
+            <div className='icon-button-container'>
+                <img src={icon} alt="img-button" className="icon-button-container"></img>
+                <span className='icon-button-text'>{text}</span>
             </div>
         </Button>
     );

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import './Products.css';
 
-import {getAllCategories} from '../../services/category'
+import { getAllCategories } from '../../services/category'
 import { getAllProducts } from "../../services/product";
 
 import AdminHeader from "../../components/headers/admin-header/AdminHeader";
@@ -30,35 +30,35 @@ const Products = () => {
     const [categories, setCategories] = useState({})
     const [apiProducts, setApiProducts] = useState([])
 
-    const getCategories = () =>{
-         getAllCategories().then(
+    const getCategories = () => {
+        getAllCategories().then(
             async res => {
                 setCategories(await res.json());
-              }
-         )
-    }
-
-    const getApiProductos = () =>{
-        getAllProducts().then(
-           async res => {
-               let data = setApiProducts(await res.json());
             }
         )
-   }
+    }
 
-    useEffect(()=>{
+    const getApiProductos = () => {
+        getAllProducts().then(
+            async res => {
+                let data = setApiProducts(await res.json());
+            }
+        )
+    }
+
+    useEffect(() => {
         getCategories()
         getApiProductos()
-    },[])
+    }, [])
 
     return (
         <div className="products-container">
-            <ModalCreateProduct 
-            modalData="Agregar Producto" 
-            openModal={openModalCreateProduct} 
-            setOpenModal={setOpenModalCreateProduct}
-            categories={categories}
-            setCategories={setCategories} 
+            <ModalCreateProduct
+                modalData="Agregar Producto"
+                openModal={openModalCreateProduct}
+                setOpenModal={setOpenModalCreateProduct}
+                categories={categories}
+                setCategories={setCategories}
             />
             <ModalCategories openModal={openModalCategories} setOpenModal={setOpenModalCategories} />
             <AdminHeader pageTitle="Productos" pageDescription="Información de los productos registrados" />
@@ -70,7 +70,7 @@ const Products = () => {
                     </div>
                 </div>
                 <div className="product-cards-container">
-                    <ShowProducts products={apiProducts}/>
+                    <ShowProducts products={apiProducts} />
                 </div>
             </div>
         </div>
