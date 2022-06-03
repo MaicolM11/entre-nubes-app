@@ -4,7 +4,6 @@ import './ModalCreateProduct.css';
 import { Background } from "../Background";
 
 import {reqProduct} from '../../../services/product'
-import {getAllCategories} from '../../../services/category'
 
 import { useRef, useEffect, useCallback } from "react";
 import { useSpring, animated } from "react-spring";
@@ -22,17 +21,7 @@ const regularExpressions ={
     valideNumber: /^[0-9]+$/
 }
 
-export const ModalCreateProduct = ({ modalData, openModal, setOpenModal }) => {
-    const [categories, setCategories] = useState({})
-
-    useEffect(()=>{
-        getAllCategories().then(
-           async res =>{
-                setCategories(await res.json())
-           }
-       )  
-    })
-
+export const ModalCreateProduct = ({ modalData, openModal, setOpenModal, categories, setCategories }) => {
     
     const modalRef = useRef();
 
@@ -104,6 +93,7 @@ export const ModalCreateProduct = ({ modalData, openModal, setOpenModal }) => {
 
     return <>
         {openModal ?
+            
             (<Background ref={modalRef} onClick={closeModal}>
                 <animated.div style={animation}>
                     <div className="create-product-container">
