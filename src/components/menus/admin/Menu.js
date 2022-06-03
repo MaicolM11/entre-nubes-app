@@ -1,8 +1,12 @@
 import React from 'react';
 import "./Menu.css";
 
-import Logo from '../../../assets/images/logo-250-140.png';
 import { Link } from 'react-router-dom';
+
+import MenuButton from '../../buttons/menu-button/MenuButton';
+
+import Logo from '../../../assets/images/logo-250-140.png';
+import BasketShopping from "../../../assets/icons/basket-shopping-white.svg";
 
 const MenuPages = [
     {
@@ -45,6 +49,7 @@ const Menu = () => {
                 </div>
                 <div className='separator-menu' />
                 <div className='buttons-menu-container'>
+                    <MenuButton icon={BasketShopping} text="Pedidos" />
                     {Object.values(MenuPages).map((button, i) => (
                         <button key={i}>
                             <Link to={button.path}>

@@ -1,0 +1,30 @@
+.menu-button-container {
+    display: flex;
+    min-width: 230px;
+    align-items: center;
+    padding: 10px 15px;
+    gap: 25px;
+    border-style: solid;
+    border-width: 0 5px 0 0;
+    border-right-color: var(--highlighted-color);
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+    background-color: var(--brand-color);
+}
+
+.menu-button-icon-container {
+    display: flex;
+    width: 30px;
+    height: 30px;
+}
+
+.menu-button-icon {
+    width: 27px;
+    height: 24px;
+}
+
+.menu-button-text {
+    font-weight: bold;
+    font-size: 20px;
+    color: var(--secondary-color);
+}
