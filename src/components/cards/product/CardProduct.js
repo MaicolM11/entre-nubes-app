@@ -14,7 +14,7 @@ presentation, units }) => {
             <div className="category-cont">{category}</div>
             <h2 className="unit-Price">Precio por Unidad : $ {price_buy}</h2>
                 <h3 className="footer-text">Precio de venta : {price_sale}</h3>
-                <p className="descriptionTarget">{presentation}</p>
+                <h3 className="footer-text">Presentación: {presentation}</h3>
                 <h3 className="footer-text">Unidades: {units}</h3>
                 <div className="buttons">
                     <Button theme="option" size="miniSmall"  >

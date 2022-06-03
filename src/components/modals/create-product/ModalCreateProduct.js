@@ -21,7 +21,7 @@ const regularExpressions ={
     valideNumber: /^[0-9]+$/
 }
 
-export const ModalCreateProduct = ({ modalData, openModal, setOpenModal, categories, setCategories }) => {
+export const ModalCreateProduct = ({ modalData, openModal, setOpenModal, categories, update }) => {
     
     const modalRef = useRef();
 

@@ -1,10 +1,11 @@
 import React from "react";
 
 import CardProduct from "../cards/product/CardProduct";
+import './ShowProducts.css'
 
 const ShowProducts = ({products}) =>{
     return(
-        <div>
+        <div className="panel-show-products">
             {!(products.length===0)?
             products.map((product)=>{
                 return (
@@ -13,7 +14,7 @@ const ShowProducts = ({products}) =>{
                     name={product.brand}
                     price_buy={product.buy_price}
                     price_sale={product.sale_price}
-                    // category={product.category}
+                    category={product.category.name}
                     presentation={product.presentation}
                     units={product.stock} 
                     />

@@ -41,7 +41,7 @@ const Products = () => {
     const getApiProductos = () => {
         getAllProducts().then(
             async res => {
-                let data = setApiProducts(await res.json());
+                setApiProducts(await res.json());
             }
         )
     }
@@ -58,9 +58,9 @@ const Products = () => {
                 openModal={openModalCreateProduct}
                 setOpenModal={setOpenModalCreateProduct}
                 categories={categories}
-                setCategories={setCategories}
+                update={getApiProductos}
             />
-            <ModalCategories openModal={openModalCategories} setOpenModal={setOpenModalCategories} />
+            <ModalCategories openModal={openModalCategories} setOpenModal={setOpenModalCategories}  />
             <AdminHeader pageTitle="Productos" pageDescription="Información de los productos registrados" />
             <div className="products-center-container">
                 <div className="products-options-container">
