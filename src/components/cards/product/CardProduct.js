@@ -1,5 +1,7 @@
 import React from "react";
 import { Button } from "../../buttons/button/Button";
+import defaultImageProduct from '../../../assets/images/defaultImageProduct.png'
+
 import './CardProduct.css'
 
 const CardProduct = ({ url,name,price_buy,price_sale,category,
@@ -8,7 +10,7 @@ presentation, units }) => {
     return (
         <div className="Card-Product">
             <div className="ImgContainer">
-                <img src={url} alt="X"></img>
+                <img src={defaultImageProduct} alt={defaultImageProduct}></img>
             </div>
             <h1 className="name">{name}</h1>
             <div className="category-cont">{category}</div>
