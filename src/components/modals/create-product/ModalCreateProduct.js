@@ -1,7 +1,9 @@
-import React from "react";
+import React,{useState} from "react";
 import './ModalCreateProduct.css';
 
 import { Background } from "../Background";
+
+import {reqProduct} from '../../../services/product'
 
 import { useRef, useEffect, useCallback } from "react";
 import { useSpring, animated } from "react-spring";
@@ -15,8 +17,11 @@ import Wine from '../../../assets/icons/wine-bottle.svg';
 import Money from '../../../assets/icons/money.svg';
 import Circle from '../../../assets/icons/circle.svg';
 
-export const ModalCreateProduct = ({ modalData, openModal, setOpenModal }) => {
+const regularExpressions ={
+    valideNumber: /^[0-9]+$/
+}
 
+export const ModalCreateProduct = ({ modalData, openModal, setOpenModal }) => {
     const modalRef = useRef();
 
     const animation = useSpring({
@@ -48,6 +53,46 @@ export const ModalCreateProduct = ({ modalData, openModal, setOpenModal }) => {
         return () => document.removeEventListener("keydown", keyPress);
     }, [keyPress]);
 
+
+    // Agregar al inventario
+
+    const [product, setProduct] = useState({
+        brand: '',
+        category: '',
+        buy_price:0,
+        sale_price:0,
+        presentation: '',
+        stock: 0,
+        img_url:'x'
+      });
+
+      const sendData = () => {
+        reqProduct(product.brand,product.category,product.buy_price,
+            product.sale_price,product.presentation,product.stock,
+            product.img_url)
+          .then(async res => {
+            let data = await res.json();
+            if (res.ok) {
+              localStorage.setItem("token", data.token)
+            } else {
+              alert(data.message)
+            }
+          })
+      };
+
+    
+
+      const onChangeData = (e) => {
+        const { name, value } = e.target;
+        setProduct((inputs) => {
+          return {
+            ...inputs,
+            [name]: value,
+          };
+        });
+        
+      };
+
     return <>
         {openModal ?
             (<Background ref={modalRef} onClick={closeModal}>
@@ -67,26 +112,56 @@ export const ModalCreateProduct = ({ modalData, openModal, setOpenModal }) => {
                                 <div className="data-modal-area">
                                     <TextInput
                                         type='text'
-                                        name='add-product'
+                                        name='brand'
                                         icon={Wine}
-                                        placeholder='Nombre del producto' />
-                                    <Select size="normal" />
+                                        placeholder='Nombre del producto'
+                                        onChange={onChangeData} 
+                                        />
+                                        <TextInput
+                                        type='text'
+                                        name='category'
+                                        icon={Wine}
+                                        placeholder='Categoria'
+                                        onChange={onChangeData} 
+                                        />
+                                    {/* <Select size="normal" /> */}
                                     <TextInput
                                         type='text'
-                                        name='price-product'
+                                        name='buy_price'
                                         icon={Money}
-                                        placeholder='Precio por unidad' />
+                                        placeholder='Precio por unidad' 
+                                        onChange={onChangeData}
+                                        />
                                     <TextInput
                                         type='text'
-                                        name='units-product'
+                                        name='sale_price'
+                                        icon={Money}
+                                        placeholder='Precio de venta' 
+                                        onChange={onChangeData}
+                                        />
+                                    
+                                    <TextInput
+                                        type='text'
+                                        name='presentation'
                                         icon={Circle}
-                                        placeholder='Unidades de venta' />
-                                    <div className="text-area-container">
+                                        placeholder='Presentación' 
+                                        onChange={onChangeData}
+                                        />
+                                        
+                                    <TextInput
+                                        type='text'
+                                        name='stock'
+                                        icon={Circle}
+                                        placeholder='Unidades de venta'
+                                        onChange={onChangeData}
+                                        />
+                                        
+                                    {/* <div className="text-area-container">
                                         <label className="description-title">Descripción del Producto</label>
                                         <textarea className="description-area" />
-                                    </div>
+                                    </div> */}
                                     <Button
-                                        theme="ok" size="normal">
+                                        theme="ok" size="normal" onClick={sendData}>
                                         {modalData}
                                     </Button>
                                 </div>

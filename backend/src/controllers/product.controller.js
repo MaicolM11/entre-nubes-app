@@ -16,7 +16,7 @@ export const getById = (req, res) => {
 
 export const create = (req, res) => {
     const data = productValidator(req.body);
-
+    console.log(data)
     if (!data) {
         res.status(422).json({ message: 'Invalid argument exception' })
         return;

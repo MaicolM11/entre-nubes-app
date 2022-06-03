@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled,{css} from 'styled-components';
 
 const size = {
   normal: {
@@ -19,4 +19,4 @@ export const Input = styled.input`
   color: var(--text-color);
   font-family: var(--roboto);
   &::placeholder{color: var(--text-placeholder-color)};
-`;
+  `;

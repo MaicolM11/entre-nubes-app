@@ -17,6 +17,6 @@ const productSchema = mongoose.Schema(
         timestamps: false,
         versionKey: false,
     }
-);
+    );
 
 export default mongoose.model("Product", productSchema);

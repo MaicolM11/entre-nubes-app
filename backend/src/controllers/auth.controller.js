@@ -3,6 +3,7 @@ import { findUserAndComparePassword } from "./user.controller"
 import * as jwt from 'jsonwebtoken'
 
 export const login = async (req, res) => {
+    console.log(req.body.email)
     let foundUser = await findUserAndComparePassword(req, res);
     if (foundUser) {
         const token = jwt.sign({ id: foundUser._id }, SECRET, {
