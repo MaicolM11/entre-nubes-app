@@ -29,7 +29,6 @@ const Products = () => {
 
     const [categories, setCategories] = useState({})
     const [apiProducts, setApiProducts] = useState([])
-    const [apiCategories, setApiCategories] = useState([])
 
     const getCategories = () => {
         getAllCategories().then(
@@ -47,19 +46,11 @@ const Products = () => {
         )
     }
 
-    const getApiCategories = () => {
-        getAllCategories().then(
-            async res => {
-                setApiCategories(await res.json());
-            }
-        )
-    }
 
 
     useEffect(() => {
         getCategories()
         getApiProductos()
-        getApiCategories()
     }, [])
 
     //create category
@@ -74,7 +65,7 @@ const Products = () => {
                 categories={categories}
                 update={getApiProductos}
             />
-            <ModalCategories openModal={openModalCategories} setOpenModal={setOpenModalCategories} categories={apiCategories} />
+            <ModalCategories openModal={openModalCategories} setOpenModal={setOpenModalCategories} categories={categories} update={getCategories} />
             <AdminHeader pageTitle="Productos" pageDescription="Información de los productos registrados" />
             <div className="products-center-container">
                 <div className="products-options-container">

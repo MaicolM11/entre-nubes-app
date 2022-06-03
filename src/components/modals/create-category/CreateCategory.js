@@ -14,7 +14,7 @@ import TextInput from "../../../components/inputs/TextInput";
 import Category from "../../../assets/icons/category-black.svg";
 import { Button } from '../../buttons/button/Button';
 
-const CreateCategory = ({ openModal, setOpenModal, onchange }) => {
+const CreateCategory = ({ openModal, setOpenModal, update }) => {
     const modalRef = useRef();
 
     const animation = useSpring({
@@ -57,7 +57,7 @@ const CreateCategory = ({ openModal, setOpenModal, onchange }) => {
             .then(async res => {
                 let data = await res.json();
                 if (res.ok) {
-                    // update()
+                    update()
                     closeButtonModal();
                 } else {
                     alert(data.message)

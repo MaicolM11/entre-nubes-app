@@ -2,7 +2,7 @@ import React from 'react';
 import "./ModalCategories.css";
 
 import { useState, useRef, useEffect, useCallback } from "react";
-import { useSpring, animated } from "react-spring";
+import { useSpring, animated, update } from "react-spring";
 
 import { Background } from '../Background';
 
@@ -12,7 +12,7 @@ import { Button } from '../../../components/buttons/button/Button';
 import CreateCategory from "../../../components/modals/create-category/CreateCategory";
 import CategoryTarget from '../../cards/category/CategoryTarget';
 
-export const ModalCategories = ({ openModal, setOpenModal, categories }) => {
+export const ModalCategories = ({ openModal, setOpenModal, categories, update }) => {
 
     const [openModalCreateCategory, setOpenModalCreateCategory] = useState(false);
 
@@ -58,6 +58,7 @@ export const ModalCategories = ({ openModal, setOpenModal, categories }) => {
                     <CreateCategory
                         openModal={openModalCreateCategory}
                         setOpenModal={setOpenModalCreateCategory}
+                        update = {update}
                     />
                     <div className='categories-container'>
                         <div className='categories-title-container'>
