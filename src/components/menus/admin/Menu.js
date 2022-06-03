@@ -5,8 +5,10 @@ import { Link } from 'react-router-dom';
 
 import MenuButton from '../../buttons/menu-button/MenuButton';
 
-import Logo from '../../../assets/images/logo-250-140.png';
-import BasketShopping from "../../../assets/icons/basket-shopping-white.svg";
+import EntreNubesLogo from '../../../assets/images/logo-250-140.png';
+
+import { ReactComponent as BasketShopping } from '../../../assets/icons/basket-shopping-white.svg';
+
 
 const MenuPages = [
     {
@@ -42,20 +44,17 @@ const Menu = () => {
             <div className='admin-menu-components'>
                 <div className='logo-menu-container'>
                     <img
-                        src={Logo}
-                        alt="entre-nubes"
+                        src={EntreNubesLogo}
+                        alt="entre-nubes-logo"
                         className="logo-menu"
                     />
                 </div>
                 <div className='separator-menu' />
                 <div className='buttons-menu-container'>
-                    <MenuButton icon={BasketShopping} text="Pedidos" />
                     {Object.values(MenuPages).map((button, i) => (
-                        <button key={i}>
-                            <Link to={button.path}>
-                                <span>{button.title}</span>
-                            </Link>
-                        </button>
+                        <Link to={button.path}>
+                            <MenuButton key={i} icon={<BasketShopping />} text={button.title} />
+                        </Link>
                     ))}
                 </div>
                 <div className='separator-menu' />

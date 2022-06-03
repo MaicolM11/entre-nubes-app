@@ -74,7 +74,7 @@ const Products = () => {
                 categories={categories}
                 update={getApiProductos}
             />
-            <ModalCategories openModal={openModalCategories} setOpenModal={setOpenModalCategories} categories={apiCategories}  />
+            <ModalCategories openModal={openModalCategories} setOpenModal={setOpenModalCategories} categories={apiCategories} />
             <AdminHeader pageTitle="Productos" pageDescription="Información de los productos registrados" />
             <div className="products-center-container">
                 <div className="products-options-container">

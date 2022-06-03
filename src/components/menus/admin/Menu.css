@@ -5,7 +5,8 @@
     justify-content: center;
     align-items: center;
     padding: 25px;
-    background-color: pink;
+    border-right: solid 1px var(--border-color);
+    background-color: var(--secondary-color);
 }
 
 .admin-menu-components {
@@ -34,4 +35,5 @@
 .buttons-menu-container {
     display: grid;
     width: 230px;
+    gap: 25px;
 }

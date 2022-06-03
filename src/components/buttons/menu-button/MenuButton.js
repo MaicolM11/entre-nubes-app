@@ -5,7 +5,7 @@ const MenuButton = ({ icon, text }) => {
     return (
         <button className='menu-button-container'>
             <div className='menu-button-icon-container'>
-                <img src={icon} alt="icon" className="menu-button-icon"></img>
+                {icon}
             </div>
             <span className='menu-button-text'>{text}</span>
         </button>
