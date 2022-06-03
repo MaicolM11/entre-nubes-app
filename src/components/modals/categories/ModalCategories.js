@@ -1,7 +1,7 @@
 import React from 'react';
 import "./ModalCategories.css";
 
-import { useRef, useEffect, useCallback } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { useSpring, animated } from "react-spring";
 
 import { Background } from '../Background';
@@ -9,7 +9,15 @@ import { Background } from '../Background';
 import CloseButton from "../../buttons/close-button/CloseButton";
 import { Button } from '../../../components/buttons/button/Button';
 
+import CreateCategory from "../../../components/modals/create-category/CreateCategory";
+
 export const ModalCategories = ({ openModal, setOpenModal }) => {
+
+    const [openModalCreateCategory, setOpenModalCreateCategory] = useState(false);
+
+    const modalCreateCategory = () => {
+        setOpenModalCreateCategory(prev => !prev);
+    }
 
     const modalRef = useRef();
 
@@ -46,6 +54,10 @@ export const ModalCategories = ({ openModal, setOpenModal }) => {
         (<Background ref={modalRef} onClick={closeModal}>
             <animated.div style={animation}>
                 <div className='modal-categories-container'>
+                    <CreateCategory
+                        openModal={openModalCreateCategory}
+                        setOpenModal={setOpenModalCreateCategory}
+                    />
                     <div className='categories-container'>
                         <div className='categories-title-container'>
                             <label className="categories-title-modal">Categorías</label>
@@ -55,8 +67,8 @@ export const ModalCategories = ({ openModal, setOpenModal }) => {
                         </div>
                         <div className='categories-center-container'>
                             <div className='category-cards-container'></div>
-                            <div className='create-category-container'>
-                                <Button theme="ok" size="normal">Agregar Categoría</Button>
+                            <div className='create-category-options-container'>
+                                <Button theme="ok" size="normal" onClick={modalCreateCategory}>Agregar Categoría</Button>
                             </div>
                         </div>
                     </div>
