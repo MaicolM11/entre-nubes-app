@@ -10,8 +10,9 @@ import CloseButton from "../../buttons/close-button/CloseButton";
 import { Button } from '../../../components/buttons/button/Button';
 
 import CreateCategory from "../../../components/modals/create-category/CreateCategory";
+import CategoryTarget from '../../cards/category/CategoryTarget';
 
-export const ModalCategories = ({ openModal, setOpenModal }) => {
+export const ModalCategories = ({ openModal, setOpenModal, categories }) => {
 
     const [openModalCreateCategory, setOpenModalCreateCategory] = useState(false);
 
@@ -66,7 +67,16 @@ export const ModalCategories = ({ openModal, setOpenModal }) => {
                             </div>
                         </div>
                         <div className='categories-center-container'>
-                            <div className='category-cards-container'></div>
+                            <div className='category-cards-container'>
+                                {categories.map((category,i)=>{
+                                    return(
+                                        <CategoryTarget
+                                        categoryId = {category._id}
+                                        categoryName={category.name}
+                                    />
+                                    )
+                                })}
+                            </div>
                             <div className='create-category-options-container'>
                                 <Button theme="ok" size="normal" onClick={modalCreateCategory}>Agregar Categoría</Button>
                             </div>

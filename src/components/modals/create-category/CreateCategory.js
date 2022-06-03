@@ -1,18 +1,20 @@
 import React from 'react';
 import "./CreateCategory.css";
 
-import { useRef, useEffect, useCallback } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { useSpring, animated } from "react-spring";
 
 import { Background } from '../Background';
 
 import CloseButton from "../../buttons/close-button/CloseButton";
 
+import { createCategory } from '../../../services/category';
+
 import TextInput from "../../../components/inputs/TextInput";
 import Category from "../../../assets/icons/category-black.svg";
 import { Button } from '../../buttons/button/Button';
 
-const CreateCategory = ({ openModal, setOpenModal, modalCreateCategory, onchange }) => {
+const CreateCategory = ({ openModal, setOpenModal,  onchange }) => {
     const modalRef = useRef();
 
     const animation = useSpring({
@@ -44,6 +46,37 @@ const CreateCategory = ({ openModal, setOpenModal, modalCreateCategory, onchange
         return () => document.removeEventListener("keydown", keyPress);
     }, [keyPress]);
 
+    //createCategory
+
+    const [category, setCategory] = useState({
+        name: ''
+      });
+
+      const createAndAddCategory = () => {
+        createCategory(category.name)
+          .then(async res => {
+            let data = await res.json();
+            if (res.ok) {
+                // update()
+                closeModal()
+            } else {
+              alert(data.message)
+            }
+          })
+      };
+
+      const onChangeData = (e) => {
+        const { name, value } = e.target;
+        console.log(e.target.name + '' + e.target.value)
+        setCategory((inputs) => {
+            console.log(inputs)
+          return {
+            ...inputs,
+            [name]: value,
+          };
+        });   
+      };
+
     return <>{openModal ?
         (<Background ref={modalRef} onClick={closeModal}>
             <animated.div style={animation}>
@@ -56,12 +89,12 @@ const CreateCategory = ({ openModal, setOpenModal, modalCreateCategory, onchange
                     </div>
                     <TextInput
                         type='text'
-                        name='category'
+                        name='name'
                         icon={Category}
                         placeholder='Nombre de categoría'
-                        onChange={onchange}
+                        onChange={onChangeData}
                     />
-                    <Button theme="ok" size="normal" onClick={modalCreateCategory}>Agregar Categoría</Button>
+                    <Button theme="ok" size="normal" onClick={createAndAddCategory}>Agregar Categoría</Button>
                 </div>
             </animated.div>
         </Background>) : null}</>;

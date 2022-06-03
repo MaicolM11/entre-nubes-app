@@ -7,9 +7,10 @@ const ShowProducts = ({products}) =>{
     return(
         <div className="panel-show-products">
             {!(products.length===0)?
-            products.map((product)=>{
+            products.map((product,id)=>{
                 return (
                     <CardProduct
+                    id = {product._id}
                     url={product.img_url}
                     name={product.brand}
                     price_buy={product.buy_price}

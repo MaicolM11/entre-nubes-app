@@ -23,6 +23,5 @@ export const reqProduct = (brand,category,buy_price,sale_price,presentation,stoc
                                 'img_url': img_url
     })
     };
-    console.log(requestOptions.body)
     return fetch(BASE_URL, requestOptions);
 }
