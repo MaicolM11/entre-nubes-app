@@ -10,6 +10,7 @@ const ShowProducts = ({products}) =>{
             products.map((product,id)=>{
                 return (
                     <CardProduct
+                    key={id}
                     id = {product._id}
                     url={product.img_url}
                     name={product.brand}

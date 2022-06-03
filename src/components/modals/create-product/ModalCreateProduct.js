@@ -74,8 +74,8 @@ export const ModalCreateProduct = ({ modalData, openModal, setOpenModal, categor
           .then(async res => {
             let data = await res.json();
             if (res.ok) {
-                update()
-                closeModal()
+                update();
+                closeButtonModal();
             } else {
               alert(data.message)
             }

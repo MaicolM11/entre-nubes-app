@@ -1,38 +1,23 @@
-.contentTargetCategory{
+.category-card-container {
     display: flex;
     align-items: center;
-    align-content: center;  
-    text-align: center;
-
-    border-color: #aaaaaa;
-    border-width: 2px;
-    border-style: solid;
-    width: 33rem;
-    border-radius: 1rem;
+    padding: 15px 25px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background: var(--secondary-color);
 }
 
-.labelText{
-    width: 177.5px;
-    height: 24.42px;
-
-    margin: 1rem;
-
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 700;
+.category-name {
+    font-family: var(--roboto);
+    font-weight: bold;
     font-size: 24px;
-    line-height: 28px;
-    display: flex;
-    align-items: center;
-
-    color: #2C2C2C;
-
-    flex: none;
-    order: 0;
-    align-self: stretch;
-    flex-grow: 1;
+    color: var(--text-color);
+    white-space: nowrap;
 }
 
-button{
-    color: black;
+.category-card-buttons {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    gap: 25px;
 }

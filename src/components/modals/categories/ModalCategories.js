@@ -68,12 +68,13 @@ export const ModalCategories = ({ openModal, setOpenModal, categories }) => {
                         </div>
                         <div className='categories-center-container'>
                             <div className='category-cards-container'>
-                                {categories.map((category,i)=>{
-                                    return(
+                                {categories.map((category, i) => {
+                                    return (
                                         <CategoryTarget
-                                        categoryId = {category._id}
-                                        categoryName={category.name}
-                                    />
+                                            key={i}
+                                            categoryId={category._id}
+                                            categoryName={category.name}
+                                        />
                                     )
                                 })}
                             </div>

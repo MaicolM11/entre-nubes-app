@@ -14,7 +14,7 @@ import TextInput from "../../../components/inputs/TextInput";
 import Category from "../../../assets/icons/category-black.svg";
 import { Button } from '../../buttons/button/Button';
 
-const CreateCategory = ({ openModal, setOpenModal,  onchange }) => {
+const CreateCategory = ({ openModal, setOpenModal, onchange }) => {
     const modalRef = useRef();
 
     const animation = useSpring({
@@ -50,32 +50,30 @@ const CreateCategory = ({ openModal, setOpenModal,  onchange }) => {
 
     const [category, setCategory] = useState({
         name: ''
-      });
+    });
 
-      const createAndAddCategory = () => {
+    const createAndAddCategory = () => {
         createCategory(category.name)
-          .then(async res => {
-            let data = await res.json();
-            if (res.ok) {
-                // update()
-                closeModal()
-            } else {
-              alert(data.message)
-            }
-          })
-      };
+            .then(async res => {
+                let data = await res.json();
+                if (res.ok) {
+                    // update()
+                    closeButtonModal();
+                } else {
+                    alert(data.message)
+                }
+            })
+    };
 
-      const onChangeData = (e) => {
+    const onChangeData = (e) => {
         const { name, value } = e.target;
-        console.log(e.target.name + '' + e.target.value)
         setCategory((inputs) => {
-            console.log(inputs)
-          return {
-            ...inputs,
-            [name]: value,
-          };
-        });   
-      };
+            return {
+                ...inputs,
+                [name]: value,
+            };
+        });
+    };
 
     return <>{openModal ?
         (<Background ref={modalRef} onClick={closeModal}>
