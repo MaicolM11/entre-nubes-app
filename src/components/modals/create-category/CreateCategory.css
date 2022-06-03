@@ -1,0 +1,6 @@
+.create-category-container {
+    display: flex;
+    width: 475px;
+    height: 238px;
+    background-color: aqua;
+}
