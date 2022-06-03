@@ -28,7 +28,7 @@ const Products = () => {
     }
 
     const [categories, setCategories] = useState({})
-    const [apiProducts, setApiProducts] = useState({})
+    const [apiProducts, setApiProducts] = useState([])
 
     const getCategories = () =>{
          getAllCategories().then(
@@ -41,7 +41,7 @@ const Products = () => {
     const getApiProductos = () =>{
         getAllProducts().then(
            async res => {
-               setApiProducts(await res.json());
+               let data = setApiProducts(await res.json());
             }
         )
    }
