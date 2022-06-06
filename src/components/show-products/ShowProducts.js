@@ -22,7 +22,7 @@ const ShowProducts = ({products}) =>{
                     />
                 )
             })
-            : <h1>empty</h1>
+            : null
             }
         </div>
     )
