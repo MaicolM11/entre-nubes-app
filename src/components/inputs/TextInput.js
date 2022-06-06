@@ -1,22 +1,19 @@
-import React from 'react';
+import React from "react";
 import "./InputStyle.css";
 
-import { Input } from './InputStyle';
+import { InputStyle } from "./InputStyle";
 
 const TextInput = ({ type, name, icon, placeholder, onChange }) => {
   return (
-    <div className='input'>
-      <img
-        src={icon}
-        alt="icon"
-        className="img"
-      />
-      <Input
-        size='normal'
+    <div className="input">
+      <img src={icon} alt="icon" className="input-icon" />
+      <InputStyle
+        size="normal"
         type={type}
         name={name}
         placeholder={placeholder}
-        onChange={onChange} />
+        onChange={onChange}
+      />
     </div>
   );
 };

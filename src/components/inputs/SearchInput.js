@@ -1,20 +1,19 @@
-import React from 'react';
+import React from "react";
 import "./InputStyle.css";
 
-import { Input } from './InputStyle';
-
-import Lock from '../../assets/icons/lock.svg';
+import { InputStyle } from "./InputStyle";
 
 const SearchInput = ({ placeholder, onChange }) => {
   return (
-    <div className='input'>
-      <button>()-</button>
-      <Input
-        size='medium'
+    <div className="input">
+      <button>Buscar</button>
+      <InputStyle
+        size="medium"
         type="text"
         name="search"
         placeholder={placeholder}
-        onChange={onChange} />
+        onChange={onChange}
+      />
     </div>
   );
 };
