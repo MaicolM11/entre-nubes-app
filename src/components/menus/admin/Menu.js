@@ -50,9 +50,8 @@ const Menu = () => {
         <div className="separator-menu" />
         <div className="buttons-menu-container">
           {Object.values(MenuPages).map((button, i) => (
-            <Link to={button.path}>
+            <Link key={i} to={button.path}>
               <MenuButton
-                key={i}
                 icon={<BasketShopping fill="red" />}
                 text={button.title}
               />
