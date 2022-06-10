@@ -40,6 +40,10 @@ router.get('/', [verifyToken], controller.getAll);
  *      responses:
  *          200:
  *              description : new categoty created!!
+ *          400: 
+ *              description: Error to created category
+ *          422:
+ *              description: Invalid argument exception
  *      security:
  *	        - jwt: []
  */
@@ -67,9 +71,13 @@ router.post('/', [verifyToken, isAdmin], controller.create);
  *                      $ref: '#/components/schemas/Category'
  *      responses:
  *          200:
- *              description : category update sucesfull
+ *              description: category update sucesfull
+ *          400:
+ *              description: error to update catedory 
  *          404:
  *              description:  category not found
+ *          422:
+ *              description: Invalid argument exception
  *      security:
  *	        - jwt: []
  */

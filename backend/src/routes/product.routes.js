@@ -4,6 +4,7 @@ const controller = require('../controllers/product.controller')
 import { isAdmin } from '../middlewares/checkRole'
 import { verifyToken } from './../middlewares/jwt'
 
+
 /**
  * @swagger
  * /api/product:
@@ -25,6 +26,35 @@ import { verifyToken } from './../middlewares/jwt'
  *	        - jwt: []
  */
 router.get('/',[verifyToken], controller.getAll);
+
+/**
+ * @swagger
+ * /api/product/search:
+ *  get:
+ *      sumary : search product
+ *      tags : [Product]   
+ *      parameters:
+ *          - in : query
+ *            name: params
+ *            schema:
+ *              type: object
+ *              additionalProperties: true
+ *            description : params to search
+ *      responses:
+ *          200:
+ *              description: get products!
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          type : array
+ *                          items:
+ *                              $ref: '#/components/schemas/Product'
+ *          400: 
+ *              description: Error to get products
+ *      security:
+ *	        - jwt: []
+ */
+ router.get('/search', controller.searchProduct);
 
 /**
  * @swagger
@@ -68,10 +98,12 @@ router.get('/:id', [verifyToken], controller.getById);
  *                  schema:
  *                      $ref: '#/components/schemas/Product'
  *      responses:
- *          200:
+ *          201:
  *              description : new product created!
  *          400:
  *              description: error to create product
+ *          422:
+ *              description: Invalid argument exception
  *      security:
  *	        - jwt: []
  */
@@ -101,6 +133,8 @@ router.post('/', [verifyToken, isAdmin], controller.create);
  *              description : product update sucesfull
  *          404:
  *              description:  product not found
+ *          422:
+ *              description: Invalid argument exception
  *      security:
  *	        - jwt: []
  */
@@ -158,5 +192,6 @@ router.delete('/:id', [verifyToken, isAdmin], controller.deleteOne)
  *	        - jwt: []
  */
 router.put('/:id/stock', [verifyToken, isAdmin], controller.updateStock);
+
 
 module.exports = router;

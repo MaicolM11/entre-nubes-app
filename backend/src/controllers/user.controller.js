@@ -1,10 +1,18 @@
 import User from '../models/User'
+import { userValidator } from '../utils/validation.util';
+import { userFilter } from '../utils/filter.util';
 
 export const createUser = async (req, res) => {
 
-    const { password, ...data } = req.body;
+    const data = userValidator(req.body);
 
-    data.password = await User.encryptPass(password);
+    if (!data) {
+        res.status(422).json({ message: 'Invalid argument exception' })
+        return;
+    }
+
+    data.password = await User.encryptPass(data.password);
+    
     const newUser = new User(data);
 
     newUser.save()
@@ -20,9 +28,26 @@ export const deleteOne = (req, res) => {
 }
 
 export const getAll = (req, res) => {
-    User.find()
+    User.find({}, {password: 0})
         .then(data => res.status(200).json(data))
         .catch(error => res.status(400).json({ message: error.message }));
+}
+
+export const searchUser = (req, res) => {
+    const query = userFilter(req.query);
+    User.find(query, { password: 0 })
+        .then(data => res.status(200).json(data))
+        .catch(err => res.status(400).json({ message: err.message}));
+}
+
+export const getInfo = (req, res) => {
+    const { userId } = req;
+    User.findById(userId, { password: 0 } )
+        .then(doc => {
+            if (doc) res.status(200).json(doc)
+            else res.sendStatus(404);
+        })
+        .catch(err => res.status(400).json({ message: err.message }))
 }
 
 export const findUserAndComparePassword = async (req, res) => {
@@ -42,19 +67,4 @@ export const findUserAndComparePassword = async (req, res) => {
     }
 
     return foundUser;
-}
-
-// dinamic filter
-export const searchUser = (req, res) => {
-
-}
-
-export const getInfo = (req, res) => {
-    const { userId } = req;
-    User.findById(userId)
-        .then(doc => {
-            if (doc) res.status(200).json(doc)
-            else res.sendStatus(404);
-        })
-        .catch(err => res.status(400).json({ message: err.message }))
 }

@@ -26,7 +26,7 @@ export const productValidator = (data) => {
     if(validateNumber(stock))
         product.stock = stock;
     
-    if(Object.keys(product).length > 0) 
+    if(Object.keys(product).length > 0 ) 
         return product;
 }
 
@@ -37,11 +37,40 @@ export const categoryValidator = (data) => {
     }
 }
 
-const validateString = (value) => {
+export const userValidator = (data) => {
+    let user = {};
+    const { fullname, email, password, cc, address, phone, rol } = data;
+
+    if (validateString(fullname)) 
+        user.fullname = fullname;
+    
+    if (validateString(email))
+        user.email = email;
+    
+    if(validateString(password))
+        user.password = password;
+
+    if(validateString(cc))
+        user.cc = cc;
+    
+    if(validateString(address))
+        user.address = address;
+
+    if(validateString(phone))
+        user.phone = phone;
+
+    if(validateString(rol))
+        user.rol = rol;
+
+    if(Object.keys(user).length > 0 && user.password) 
+        return user;
+}
+
+export const validateString = (value) => {
     return value && 
         typeof value === 'string' && value.trim() !== '';
 }
 
-const validateNumber = (value) => {
+export const validateNumber = (value) => {
     return (value || value === 0) && typeof value === 'number';
 }

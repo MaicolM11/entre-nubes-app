@@ -15,20 +15,20 @@ const swaggerSpec = {
         components: {
             schemas: {
                 
-                Category: {
-                    type: "object",
-                    properties: {
-                        name: { type: "string" }
-                    },
-                    example: { name: "Bebidas" }
-                },
-
                 Login: {
                     type: "object",
                     properties: {
                         email: { type: "string" },
                         password: { type: "string" }
                     }
+                },
+
+                Category: {
+                    type: "object",
+                    properties: {
+                        name: { type: "string" }
+                    },
+                    example: { name: "Bebidas" }
                 },
 
                 Product: {
@@ -41,6 +41,19 @@ const swaggerSpec = {
                         presentation: { type: "string" },
                         stock: { type: "integer" },
                         img_url: { type: "string" },
+                    }
+                },
+
+                User : {
+                    type: "object",
+                    properties: {
+                        fullname: { type : "string" },
+                        email: { type : "string" },
+                        password: { type : "string" },
+                        cc: { type : "string" },
+                        address: { type : "string" },
+                        phone: { type : "string" },
+                        rol: { type: "string" }
                     }
                 }
             },

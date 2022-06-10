@@ -1,5 +1,6 @@
 import Product from "../models/Product";
-import { productValidator } from "./validations.controller";
+import { productValidator } from "../utils/validation.util";
+import { productFilter } from "../utils/filter.util";
 
 export const getAll = (req, res) => {
     Product.find().populate('category')
@@ -16,7 +17,7 @@ export const getById = (req, res) => {
 
 export const create = (req, res) => {
     const data = productValidator(req.body);
-    console.log(data)
+    
     if (!data) {
         res.status(422).json({ message: 'Invalid argument exception' })
         return;
@@ -66,4 +67,11 @@ export const updateStock = (req, res) => {
 // increment | decrement . Promise
 export const updateStockToProduct = (id, value) => {
     return Product.findByIdAndUpdate(id, { $inc: { 'stock': value } }, { new: true })
+}
+
+export const searchProduct = (req, res) => {
+    const query = productFilter(req.query);
+    Product.find(query)
+        .then(data => res.status(200).json(data))
+        .catch(err => res.status(400).json({ message: err.message}));
 }

@@ -1,5 +1,6 @@
 import Category from '../models/Category';
-import { categoryValidator } from './validations.controller';
+
+import { categoryValidator } from '../utils/validation.util';
 
 export const getAll = async (req, res) => {
     Category.find()
