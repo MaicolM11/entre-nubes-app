@@ -16,8 +16,7 @@ beforeAll(async () => await connectDB(process.env.MONGO_URL_TEST));
 afterAll(async () => await dropCollections());
 
 
-describe("Database models", () => {
-
+describe.skip("Database models", () => {
 
   it("create category", async () => {
     const newCategory = new Category({ name: "cerveza" });

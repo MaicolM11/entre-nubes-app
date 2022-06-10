@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 
-import ROLES from './Role'
+import { ROLES } from './Enums'
 
 const userSchema = mongoose.Schema({
 
@@ -12,7 +12,7 @@ const userSchema = mongoose.Schema({
   email: {
     type: String,
     unique: true,
-    require: true
+    required: true
   },
 
   password: {

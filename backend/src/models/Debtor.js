@@ -7,7 +7,7 @@ const debtorSchema = mongoose.Schema(
         phone: String,
         debts: [{
             type: mongoose.Schema.Types.ObjectId,
-            ref: "Sale",
+            ref: "Bill",
         }]
     },
     {

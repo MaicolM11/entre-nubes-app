@@ -1,1 +1,0 @@
-export default {SALESMAN: 'SALESMAN', ADMIN: 'ADMIN'};

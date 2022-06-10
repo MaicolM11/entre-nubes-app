@@ -7,13 +7,14 @@ const saleSchema = mongoose.Schema(
             ref: "Product",
         },
         quantity: Number,
-        profit: Number,
-        status: {
-            type: String,
-            enum : ['DUE', 'PAID', 'CREDIT'],
-            default: 'DUE'
+        buy_price: {
+            type: Number,
+            required: true
         },
-        locationID: String // MESA 1, 
+        sale_price:  {
+            type: Number,
+            required: true
+        }
     },
     {
         timestamps: false,

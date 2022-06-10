@@ -1,17 +1,17 @@
 import User from "./models/User"
-import Role from "./models/Role"
+import {ROLES} from "./models/Enums"
 
 const createAdmin = async () => {
-    let admin = await User.findOne({ rol: Role.ADMIN })
+    let admin = await User.findOne({ rol: ROLES.ADMIN })
     if (!admin) {
         admin = new User({
-            fullname: 'Pedro Perez',
-            email: 'pedro.perez@gmail.com',
-            password: await User.encryptPass('pedro123'),
+            fullname: 'admin',
+            email: 'admin@gmail.com',
+            password: await User.encryptPass('1234'),
             cc: '6891201',
             address: 'Cra 4 N 100',
             phone: '7621 2171 213',
-            rol: Role.ADMIN
+            rol: ROLES.ADMIN
         })
         admin.save().then(doc => console.log('Admin has been created!'))
     }
@@ -22,13 +22,13 @@ const createSalesman = async () => {
     let admin = await User.findOne({ email: "salesman@gmail.com" })
     if (!admin) {
         admin = new User({
-            fullname: 'Juanito',
+            fullname: 'salesman',
             email: 'salesman@gmail.com',
-            password: await User.encryptPass('123'),
+            password: await User.encryptPass('1234'),
             cc: '6891201',
             address: 'Cra 4 N 100',
             phone: '7621 2171 213',
-            rol: Role.SALESMAN
+            rol: ROLES.SALESMAN
         })
         admin.save().then(doc => console.log('salesman has been created!'))
     }

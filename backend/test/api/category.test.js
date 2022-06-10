@@ -4,7 +4,7 @@ import { admin, salesman, API,
 let category = { name: "cerveza" };
 const CATEGORY_URL = '/api/category/';
 
-describe('Category api', () => {
+describe.skip('Category api', () => {
 
     it('GET all without token', async () => {
         const response = await API.get(CATEGORY_URL).send();

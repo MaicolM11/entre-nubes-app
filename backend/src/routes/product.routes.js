@@ -54,7 +54,7 @@ router.get('/',[verifyToken], controller.getAll);
  *      security:
  *	        - jwt: []
  */
- router.get('/search', controller.searchProduct);
+router.get('/search', [verifyToken], controller.searchProduct);
 
 /**
  * @swagger

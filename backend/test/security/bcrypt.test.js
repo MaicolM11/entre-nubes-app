@@ -2,7 +2,7 @@ import User from '../../src/models/User'
 
 let pass;
 
-describe('Encryption', ()=> {
+describe.skip('Encryption', ()=> {
 
     it('Invalid format encryption', async () => {
         const password = 1234;

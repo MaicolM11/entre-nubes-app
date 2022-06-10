@@ -1,11 +1,11 @@
 import { connectDB, dropCollections} from '../src/database'
 import User from '../src/models/User'
 import app from '../src/app'
-import Role from '../src/models/Role'
+import {ROLES} from '../src/models/Enums'
 
 import request from 'supertest'
 
-export const admin = { fullname: 'admin', email: 'admin@gmail.com', password: '1234', rol: Role.ADMIN };
+export const admin = { fullname: 'admin', email: 'admin@gmail.com', password: '1234', rol: ROLES.ADMIN };
 export const salesman = { email: 'salesman@gmail.com', password: '1234' };
 
 export const createUser = async (data) => {
