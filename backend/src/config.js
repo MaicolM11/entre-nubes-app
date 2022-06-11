@@ -38,6 +38,6 @@ module.exports = {
     SECRET: process.env.SECRET,
     MONGO_URL: process.env.MONGO_URL,
     EXPIRES_IN: process.env.EXPIRES_IN,
-    PORT: process.env.S_PORT,
+    PORT: process.env.PORT,
     createAdmin
 }
