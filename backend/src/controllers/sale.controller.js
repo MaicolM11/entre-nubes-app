@@ -1,20 +1,15 @@
-import Sale from '../models/Sale';
+import { updateStockToProduct } from './product.controller';
 
-// create sales and return id
-export const createSalesAndGetIds = async  (sales) => {
-    let sales_ids = [];
-
-    for (let sale in sales) {
-        let newSale = await createSale(sale);
-        sales_ids.push(newSale._id)
+// update sales
+export const findProductsAndUpdate = async (sales) => {
+    for (let sale of sales) {
+        await updateSale(sale);
     }
-
-    return sales_ids;
 }
 
-// sale { prod_id, quantity, buy_price, sale_price }
-export const createSale = async (sale) => {
-    const newSale = new Sale(sale);
-    const saveSale = await newSale.save();
-    return saveSale;
+// sale { product, quantity }
+export const updateSale = async (sale) => {
+    const product = await updateStockToProduct(sale.product, -sale.quantity)
+    sale.buy_price = product.buy_price;
+    sale.sale_price = product.sale_price;
 }
