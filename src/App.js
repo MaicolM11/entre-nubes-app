@@ -1,11 +1,10 @@
 import React from "react";
 import "./App.css";
-
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import Login from "./pages/login/Login";
 import AdminHomepage from "./pages/admin-homepage/AdminHomepage";
-import SalesmanHomepage from "./pages/salesman-homepage/SalesmanHomepage";
+//import SalesmanHomepage from "./pages/salesman-homepage/SalesmanHomepage";
 
 import { getMyInfo } from "./services/user";
 
@@ -33,7 +32,7 @@ const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route exact path="/" element={<Login />} />
+        <Route path="/" element={<Login />} />
         <Route
           path="/admin/*"
           element={
@@ -42,6 +41,15 @@ const App = () => {
             </AdminProtectedRoute>
           }
         />
+      </Routes>
+    </BrowserRouter>
+  );
+};
+
+export default App;
+
+/*
+
         <Route
           path="/salesman/*"
           element={
@@ -50,9 +58,4 @@ const App = () => {
             </SalesmanProtectedRoute>
           }
         />
-      </Routes>
-    </BrowserRouter>
-  );
-};
-
-export default App;
+*/

@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useMemo } from "react";
+import { useState, useEffect } from "react";
 
 const useForm = (callback, validate) => {
   const [values, setValues] = useState({
@@ -10,26 +10,11 @@ const useForm = (callback, validate) => {
     stock: 0,
   });
 
-  
-  //const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErros] = useState({});
-  
+
   const handleSubmit = (e) => {
     e.preventDefault();
-
     setErros(validate(values));
-
-    /*if (!Object.keys(errors).length) {
-      callback();
-    }*/
-
-    /*if (!Object.keys(errors).length === 0) {
-      callback();
-    }*/
-   // getCallback();
-    console.log("Llega al form");
-    
-    //setIsSubmitting(true);
   };
 
   const handleChange = (e) => {

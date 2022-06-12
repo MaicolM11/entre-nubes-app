@@ -1,0 +1,27 @@
+.default-exit-link {
+  display: flex;
+  min-width: 230px;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--secondary-color);
+  border: none;
+  color: var(--brand-color);
+  font-size: 20px;
+  font-weight: bold;
+  font-family: var(--roboto);
+  white-space: nowrap;
+  text-decoration: none;
+  cursor: pointer;
+  transition: 0.2s;
+
+  path {
+    fill: var(--brand-color);
+  }
+}
+
+.default-exit-link:hover {
+  color: var(--highlighted-color);
+  path {
+    fill: var(--highlighted-color);
+  }
+}

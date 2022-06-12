@@ -66,9 +66,6 @@ export const ModalCreateProduct = ({
   }, [keyPress]);
 
   // Agregar al inventario
-
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
   const submitForm = () => {
     if (openModal) {
       console.log(values);

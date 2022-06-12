@@ -7,13 +7,15 @@
   /*Colors*/
   --brand-color: #2c2c2c;
   --secondary-color: #ffffff;
-  --text-color: #262626;
-  --text-placeholder-color: #8f8f8f;
-  --border-color: #c7c7c7;
   --highlighted-color: #4674f2;
   --highlighted-hover-color: #6f92f2;
+  --border-color: #c7c7c7;
+  --text-color: #262626;
+  --placeholder-color: #8f8f8f;
   --ok-color: #2ce74a;
   --ok-hover-color: #4fef68;
+  --edit-color: #ff8d33;
+  --edit-hover-color: #ffa258;
   --delete-color: #ff4343;
   --delete-hover-color: #ff6565;
 }

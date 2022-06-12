@@ -1,25 +1,44 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Login.css";
-
-import Logo from "../../assets/images/entre-nubes-logo.png";
-import User from "../../assets/icons/user.svg";
-
-import { Button } from "../../components/buttons/button/Button";
-import TextInput from "../../components/inputs/TextInput";
-import PasswordInput from "../../components/inputs/PasswordInput";
-
+import { isFocusable } from "@testing-library/user-event/dist/utils";
 import { reqLogin } from "../../services/auth";
-import { useState } from "react";
-
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { colors } from "../../components/styles/colors";
+import Logo from "../../assets/images/entre-nubes-logo-399w-226h.png";
+import DataInput from "../../components/inputs/DataInput";
+import PasswordInput from "../../components/inputs/PasswordInput";
+import Button from "../../components/buttons/Button";
+import { ReactComponent as LockIcon } from "../../assets/icons/lock.svg";
+import { ReactComponent as UserIcon } from "../../assets/icons/user.svg";
 
 const Login = () => {
   const navigate = useNavigate();
+
+  const [dataIconColor, setDataIconColor] = useState(false);
+  const [passwordIconColor, setPasswordIconColor] = useState(false);
+
+  const userIconColor = dataIconColor ? colors.highlighted : colors.brand;
+  const lockIconColor = passwordIconColor ? colors.highlighted : colors.brand;
 
   const [user, setUser] = useState({
     email: "",
     password: "",
   });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setUser((values) => {
+      return {
+        ...values,
+        [name]: value,
+      };
+    });
+  };
+
+  const redirectByRol = (rol) => {
+    if (rol === "ADMIN") navigate("/admin");
+    else if (rol === "SALESMAN") navigate("/salesman");
+  };
 
   const submitUser = () => {
     reqLogin(user.email, user.password).then(async (res) => {
@@ -33,41 +52,43 @@ const Login = () => {
     });
   };
 
-  const redirectByRol = (rol) => {
-    if (rol === "ADMIN") navigate("/admin");
-    else if (rol === "SALESMAN") navigate("/salesman");
-  };
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setUser((values) => {
-      return {
-        ...values,
-        [name]: value,
-      };
-    });
-  };
-
   return (
-    <div className="login">
-      <div className="left-area">
-        <img src={Logo} alt="entre-nubes" className="logo" />
+    <div className="login-container">
+      <div className="login-left-container">
+        <img src={Logo} alt="entre-nubes-logo" className="login-logo" />
       </div>
-      <div className="right-area">
-        <div className="center-area">
+      <div className="login-right-container">
+        <div className="login-data-container">
           <label className="login-title">Inicio de Sesión</label>
-          <div className="form-area">
-            <TextInput
-              type="text"
-              name="email"
-              icon={User}
+          <div className="login-options-container">
+            <DataInput
+              width="normalInput"
+              icon={<UserIcon stroke={userIconColor} />}
               placeholder="Usuario"
+              type="text"
+              iconColor={dataIconColor}
+              setIconColor={setDataIconColor}
               onChange={handleChange}
             />
-            <PasswordInput placeholder="Contraseña" onChange={handleChange} />
-            <Button theme="option" size="normal" onClick={submitUser}>
-              Iniciar Sesión
-            </Button>
+            <PasswordInput
+              width="normalInput"
+              icon={<LockIcon fill={lockIconColor} />}
+              placeholder="Contraseña"
+              iconColor={passwordIconColor}
+              setIconColor={setPasswordIconColor}
+              onChange={handleChange}
+            />
+            <Button
+              width="normalButton"
+              theme="highlighted"
+              text="Iniciar Sesión"
+              onClick={submitUser}
+            />
+            <Link to="/recover-password" style={{ textDecoration: "none" }}>
+              <span className="forgotten-password-span-container">
+                ¿Olvido su contraseña?
+              </span>
+            </Link>
           </div>
         </div>
       </div>

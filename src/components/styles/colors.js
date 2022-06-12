@@ -1,0 +1,15 @@
+export const colors = {
+  brand: "#2c2c2c",
+  secondary: "#ffffff",
+  highlighted: "#4674f2",
+  highlightedHover: "#6f92f2",
+  border: "#c7c7c7",
+  text: "#262626",
+  placeholder: "#8f8f8f",
+  ok: "#2ce74a",
+  okHover: "#4fef68",
+  edit: "#ff8d33",
+  editHover: "#ffa258",
+  delete: "#ff4343",
+  deleteHover: "#ff6565",
+};

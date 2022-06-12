@@ -1,22 +1,57 @@
-import React from "react";
-import "./InputStyle.css";
+import React, { useRef, useState } from "react";
+import { colors } from "../styles/colors";
+import { ReactComponent as Eye } from "../../assets/icons/eye.svg";
+import { ReactComponent as EyeOff } from "../../assets/icons/eye-off.svg";
+import {
+  InputContainer,
+  InputCenterContainer,
+  IconContainer,
+  InputValueContainer,
+  ShowPasswordButton,
+} from "../styles/style-components";
 
-import { InputStyle } from "./InputStyle";
+const PasswordInput = ({
+  width,
+  icon,
+  placeholder,
+  iconColor,
+  setIconColor,
+  onChange,
+}) => {
+  const ref = useRef(null);
+  const [showPassword, setShowPassword] = useState(false);
+  const color = iconColor ? colors.highlighted : colors.placeholder;
 
-import Lock from "../../assets/icons/lock.svg";
+  const handleShowPassword = () => {
+    ref.current.focus();
+    setShowPassword(!showPassword);
+  };
 
-const PasswordInput = ({ placeholder, onChange }) => {
+  const handleChangeIconColor = () => {
+    setIconColor(!iconColor);
+  };
+
   return (
-    <div className="input">
-      <img src={Lock} alt="icon" className="input-icon" />
-      <InputStyle
-        size="normal"
-        type="password"
-        name="password"
-        placeholder={placeholder}
-        onChange={onChange}
-      />
-    </div>
+    <InputContainer widthSize={width}>
+      <InputCenterContainer>
+        <IconContainer>{icon}</IconContainer>
+        <InputValueContainer
+          ref={ref}
+          placeholder={placeholder}
+          type={showPassword ? "text" : "password"}
+          onFocus={() => handleChangeIconColor()}
+          onBlur={() => handleChangeIconColor()}
+          onChange={onChange}
+        />
+        <ShowPasswordButton onClick={handleShowPassword}>
+          {showPassword ? (
+            <EyeOff fill={color} stroke={color} />
+          ) : (
+            <Eye stroke={color} />
+          )}
+        </ShowPasswordButton>
+      </InputCenterContainer>
+    </InputContainer>
   );
 };
 

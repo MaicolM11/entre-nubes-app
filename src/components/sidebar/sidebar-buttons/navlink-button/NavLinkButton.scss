@@ -1,0 +1,52 @@
+.default-navlink {
+  display: flex;
+  min-width: 230px;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--secondary-color);
+  border: none;
+  color: var(--brand-color);
+  font-size: 20px;
+  font-weight: bold;
+  font-family: var(--roboto);
+  white-space: nowrap;
+  text-decoration: none;
+  cursor: pointer;
+  transition: 0.2s;
+
+  path {
+    fill: var(--brand-color);
+  }
+}
+
+.default-navlink:hover {
+  color: var(--highlighted-color);
+  path {
+    fill: var(--highlighted-color);
+  }
+}
+
+.default-navlink[aria-current] {
+  display: flex;
+  min-width: 230px;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--brand-color);
+  border-style: solid;
+  border-width: 0 5px 0 0;
+  border-right-color: var(--highlighted-color);
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  color: var(--secondary-color);
+  font-size: 20px;
+  font-weight: bold;
+  font-family: var(--roboto);
+  white-space: nowrap;
+  text-decoration: none;
+  cursor: pointer;
+  transition: 0.2s;
+
+  path {
+    fill: var(--secondary-color);
+  }
+}
