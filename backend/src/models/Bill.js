@@ -20,7 +20,16 @@ const billSchema = mongoose.Schema(
             default: BILL_STATES.DUE
         },
 
-        description: String
+        description: String,
+        
+        total: Number,
+
+        subtotal: Number,
+
+        salesman: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User",
+        }
 
     },
     {
@@ -29,4 +38,6 @@ const billSchema = mongoose.Schema(
     }
 );
 
-export default mongoose.model("Bill", billSchema);
+export const BillRecord = mongoose.model("bills", billSchema);
+
+export default mongoose.model("last_bills", billSchema);

@@ -74,3 +74,8 @@ export const validateString = (value) => {
 export const validateNumber = (value) => {
     return (value || value === 0) && typeof value === 'number';
 }
+
+export const validateBill = (value) => {
+    return value; 
+    // TODO: validate
+}

@@ -22,3 +22,14 @@ export const isAdmin = async (req, res, next) => {
 
     res.status(401).json({ message: 'Admin rol is required' })
 }   
+
+export const hasAnyRol = async (req, res, next) => {
+    const user = await User.findById(req.userId)
+
+    if(user.rol == ROLES.SALESMAN || user.rol == ROLES.ADMIN) {
+        next()
+        return;
+    }
+
+    res.status(401).json({ message: 'Salesman or Admin rol is required' })
+}
