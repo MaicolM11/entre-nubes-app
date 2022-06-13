@@ -11,6 +11,7 @@ import {
 } from "../styles/style-components";
 
 const PasswordInput = ({
+  data,
   width,
   icon,
   placeholder,
@@ -36,6 +37,7 @@ const PasswordInput = ({
       <InputCenterContainer>
         <IconContainer>{icon}</IconContainer>
         <InputValueContainer
+          name={data}
           ref={ref}
           placeholder={placeholder}
           type={showPassword ? "text" : "password"}

@@ -7,6 +7,7 @@ import {
 } from "../styles/style-components";
 
 const DataInput = ({
+  data,
   width,
   icon,
   placeholder,
@@ -24,6 +25,7 @@ const DataInput = ({
       <InputCenterContainer>
         <IconContainer>{icon}</IconContainer>
         <InputValueContainer
+          name={data}
           placeholder={placeholder}
           type={type}
           onFocus={() => handleChangeIconColor()}
