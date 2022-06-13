@@ -9,12 +9,17 @@ const billSchema = mongoose.Schema(
                 type: mongoose.Schema.Types.ObjectId,
                 ref: "Product",
             },
-            quantity: Number,
+            quantity: {
+                type: Number,
+                required: true
+            },
             buy_price: {
                 type: Number,
+                required: true
             },
             sale_price:  {
                 type: Number,
+                required: true
             }
         }],
 
