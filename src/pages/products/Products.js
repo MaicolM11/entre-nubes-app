@@ -1,20 +1,17 @@
 import React, { useState, useEffect } from "react";
-import "./Products.css";
-
 import { getAllCategories } from "../../services/category";
 import { getAllProducts } from "../../services/product";
-
+import "./Products.css";
 import Header from "../../components/header/Header";
 import NotificationButton from "../../components/header/NotificationButton";
+import Button from "../../components/buttons/Button";
+import ProductCard from "../../components/cards/ProductCard";
+import { ReactComponent as Add } from "../../assets/icons/add.svg";
+import { ReactComponent as Category } from "../../assets/icons/category.svg";
 
-import AdminHeader from "../../components/headers/admin-header/AdminHeader";
-import IconButton from "../../components/buttons/icon-button/IconButton";
-import AddWhite from "../../assets/icons/add-white.svg";
-import Category from "../../assets/icons/category-white.svg";
-
-import { ModalCreateProduct } from "../../components/modals/create-product/ModalCreateProduct";
-import { ModalCategories } from "../../components/modals/categories/ModalCategories";
-import ShowProducts from "../../components/show-products/ShowProducts";
+// import { ModalCreateProduct } from "../../components/modals/create-product/ModalCreateProduct";
+// import { ModalCategories } from "../../components/modals/categories/ModalCategories";
+// import ShowProducts from "../../components/show-products/ShowProducts";
 
 const Products = () => {
   const [openModalCreateProduct, setOpenModalCreateProduct] = useState(false);
@@ -29,7 +26,7 @@ const Products = () => {
   };
 
   const [categories, setCategories] = useState({});
-  const [apiProducts, setApiProducts] = useState([]);
+  const [products, setProducts] = useState([]);
 
   const getCategories = () => {
     getAllCategories().then(async (res) => {
@@ -37,18 +34,16 @@ const Products = () => {
     });
   };
 
-  const getApiProductos = () => {
+  const getProductos = () => {
     getAllProducts().then(async (res) => {
-      setApiProducts(await res.json());
+      setProducts(await res.json());
     });
   };
 
-    useEffect(() => {
-      getCategories();
-      getApiProductos();
-    }, []);
-
-  //create category
+  useEffect(() => {
+    getCategories();
+    getProductos();
+  }, []);
 
   return (
     <div className="products-container">
@@ -57,7 +52,33 @@ const Products = () => {
         description="Información de los productos registrados"
         component={<NotificationButton />}
       />
-      <div className="products-container">
+      <div className="products-options-container">
+        <div className="products-options-center-container">
+          <div className="product-option-buttons-container">
+            <Button
+              width="mediumButton"
+              theme="ok"
+              icon={<Add fill="white" />}
+              text="Agregar Producto"
+            />
+            <Button
+              width="mediumButton"
+              theme="highlighted"
+              icon={<Category fill="white" />}
+              text="Categorías"
+            />
+          </div>
+          <div className="product-option-filter-container"></div>
+        </div>
+      </div>
+      <div className="product-cards-container">
+        <div className="product-cards-center-container">
+          {Object.values(products).map((product, i) => {
+            <ProductCard key={i} name={product.brand} />;
+          })}
+        </div>
+      </div>
+      {/* <div className="products-container">
         <ModalCreateProduct
             modalData="Agregar Producto"
             openModal={openModalCreateProduct}
@@ -78,9 +99,8 @@ const Products = () => {
                 <ShowProducts products={apiProducts} />
             </div>
         </div>
+    </div> */}
     </div>
-    </div>
-    
   );
 };
 
