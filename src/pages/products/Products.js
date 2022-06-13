@@ -11,7 +11,6 @@ import { ReactComponent as Category } from "../../assets/icons/category.svg";
 
 // import { ModalCreateProduct } from "../../components/modals/create-product/ModalCreateProduct";
 // import { ModalCategories } from "../../components/modals/categories/ModalCategories";
-// import ShowProducts from "../../components/show-products/ShowProducts";
 
 const Products = () => {
   const [openModalCreateProduct, setOpenModalCreateProduct] = useState(false);
@@ -71,9 +70,7 @@ const Products = () => {
           <div className="product-option-filter-container"></div>
         </div>
       </div>
-      <div className="product-cards-container">
-        <ProductCardsContainer products={products} />
-      </div>
+      <ProductCardsContainer products={products} />
       {/* <div className="products-container">
         <ModalCreateProduct
             modalData="Agregar Producto"

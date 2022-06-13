@@ -13,6 +13,9 @@ const ProductCardContainer = styled.div`
   background-color: ${colors.secondary};
   border: 1px solid ${colors.border};
   border-radius: 25px;
+  &:hover {
+    border-color: ${colors.highlighted};
+  }
 `;
 
 const ProductCardCenterContainer = styled.div`
