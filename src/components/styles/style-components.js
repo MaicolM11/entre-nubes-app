@@ -1,12 +1,21 @@
 import styled from "styled-components";
 import { colors } from "./colors";
 
-const widthSize = {
+const size = {
   normalButton: {
     width: "405px",
+    height: "45px",
+    fontSize: "16px",
   },
   mediumButton: {
     width: "187px",
+    height: "45px",
+    fontSize: "16px",
+  },
+  smallButton: {
+    width: "80px",
+    height: "35px",
+    fontSize: "14px",
   },
   normalInput: {
     width: "403px",
@@ -22,27 +31,27 @@ const theme = {
     default: colors.ok,
     hover: colors.okHover,
   },
-  delete: {
-    default: colors.delete,
-    hover: colors.deleteHover,
-  },
   edit: {
     default: colors.edit,
     hover: colors.editHover,
+  },
+  delete: {
+    default: colors.delete,
+    hover: colors.deleteHover,
   },
 };
 
 export const ButtonContainer = styled.button`
   display: flex;
-  width: ${(props) => widthSize[props.widthSize].width};
-  height: 45px;
+  width: ${(props) => size[props.size].width};
+  height: ${(props) => size[props.size].height};
   align-items: center;
   justify-content: center;
   gap: 5px;
   background-color: ${(props) => theme[props.theme].default};
   color: white;
-  font-size: 16px;
-  font-weight: 500;
+  font-size: ${(props) => size[props.size].fontSize};
+  font-weight: bold;
   font-family: var(--roboto);
   white-space: nowrap;
   border-radius: 25px;
@@ -56,7 +65,7 @@ export const ButtonContainer = styled.button`
 
 export const InputContainer = styled.div`
   display: flex;
-  width: ${(props) => widthSize[props.widthSize].width};
+  width: ${(props) => size[props.size].width};
   height: 43px;
   background-color: ${colors.secondary};
   border: 1px solid ${colors.border};

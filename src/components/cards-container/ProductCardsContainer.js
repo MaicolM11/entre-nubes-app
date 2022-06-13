@@ -17,8 +17,16 @@ const CardContainer = styled.div`
 const ProductCardsContainer = ({ products }) => {
   return (
     <CardContainer>
-      {Object.values(products).map((product, i) => (
-        <ProductCard key={i} name={product.brand} />
+      {Object.values(products).map((product) => (
+        <ProductCard
+          key={product._id}
+          name={product.brand}
+          category={product.category.name}
+          unitPrice={product.buy_price}
+          salePrice={product.sale_price}
+          presentation={product.presentation}
+          stock={product.stock}
+        />
       ))}
     </CardContainer>
   );

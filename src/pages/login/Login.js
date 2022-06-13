@@ -81,7 +81,7 @@ const Login = () => {
               onChange={handleChange}
             />
             <Button
-              width="normalButton"
+              size="normalButton"
               theme="highlighted"
               text="Iniciar Sesión"
               onClick={submitUser}

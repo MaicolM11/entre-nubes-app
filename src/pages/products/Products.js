@@ -56,13 +56,13 @@ const Products = () => {
         <div className="products-options-center-container">
           <div className="product-option-buttons-container">
             <Button
-              width="mediumButton"
+              size="mediumButton"
               theme="ok"
               icon={<Add fill="white" />}
               text="Agregar Producto"
             />
             <Button
-              width="mediumButton"
+              size="mediumButton"
               theme="highlighted"
               icon={<Category fill="white" />}
               text="Categorías"
