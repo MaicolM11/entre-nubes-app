@@ -102,8 +102,6 @@ router.get('/:id', [verifyToken], controller.getById);
  *              description : new product created!
  *          400:
  *              description: error to create product
- *          422:
- *              description: Invalid argument exception
  *      security:
  *	        - jwt: []
  */
@@ -133,8 +131,6 @@ router.post('/', [verifyToken, isAdmin], controller.create);
  *              description : product update sucesfull
  *          404:
  *              description:  product not found
- *          422:
- *              description: Invalid argument exception
  *      security:
  *	        - jwt: []
  */

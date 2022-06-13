@@ -1,7 +1,5 @@
 import Category from '../models/Category';
 
-import { categoryValidator } from '../utils/validation.util';
-
 export const getAll = async (req, res) => {
     Category.find()
         .then(data => res.status(200).json(data))
@@ -9,12 +7,7 @@ export const getAll = async (req, res) => {
 }
 
 export const create = async (req, res) => {
-    const data = categoryValidator(req.body, res);
-
-    if (!data) {
-        res.status(422).json({ message: 'Invalid argument exception' })
-        return;
-    }
+    const data = req.body;
 
     const newCategory = new Category(data);
 
@@ -26,14 +19,7 @@ export const create = async (req, res) => {
 export const edit = async (req, res) => {
     const { id } = req.params;
 
-    const data = categoryValidator(req.body, res);
-
-    if (!data) {
-        res.status(422).json({ message: 'Invalid argument exception' })
-        return;
-    }
-
-    Category.findByIdAndUpdate(id, data, { new: true })
+    Category.findByIdAndUpdate(id, req.body, { new: true })
         .then(doc => {
             if (!doc) res.status(404).json({ message: 'Category not found' })
             else res.status(201).json(doc)

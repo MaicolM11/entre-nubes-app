@@ -1,15 +1,9 @@
 import User from '../models/User'
-import { userValidator } from '../utils/validation.util';
 import { userFilter } from '../utils/filter.util';
 
 export const createUser = async (req, res) => {
 
-    const data = userValidator(req.body);
-
-    if (!data) {
-        res.status(422).json({ message: 'Invalid argument exception' })
-        return;
-    }
+    const data = req.body;
 
     data.password = await User.encryptPass(data.password);
     

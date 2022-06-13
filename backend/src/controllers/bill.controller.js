@@ -1,16 +1,10 @@
 import Bill from "../models/Bill";
-import { validateBill } from "../utils/validation.util";
 import { findProductsAndUpdate } from "./sale.controller";
 
 export const createBill = async (req, res) => {
-    req.body.salesman = req.userId;
     
-    const data = validateBill(req.body);
-
-    if (!data) {
-        res.status(422).json({ message: 'Invalid argument exception' })
-        return;
-    }
+    const data = req.body;
+    data.salesman = req.userId;
     
     await findProductsAndUpdate(data.sales)
     await calculateTotalAndSubtotal(data)
@@ -35,12 +29,32 @@ export const getAllLastBills = (req, res) => {
         .catch(error => res.status(400).json({ message: error.message }));
 }
 
+export const appendProductsToBill = async (req, res) => {
+
+    const { id } = req.params;
+    const newSales = req.body;
+    
+    const foundBill = await Bill.findById(id);
+    
+    await findProductsAndUpdate(newSales);
+    Array.prototype.push.apply(foundBill.sales, newSales)
+    
+    await calculateTotalAndSubtotal(foundBill)
+    
+    foundBill.save()
+        .then(doc => res.status(201).json(doc))
+        .catch(error => res.status(400).json({ message: error.message }))
+}
+
 const calculateTotalAndSubtotal = async (bill) => {
     let total = 0, subtotal = 0; 
+    
     for await (let sale of bill.sales) {
         total += sale.quantity * sale.sale_price;
         subtotal += sale.quantity * sale.buy_price;
     }
+    
     bill.total = total;
     bill.subtotal = subtotal;
 }
+

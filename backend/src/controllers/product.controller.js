@@ -1,5 +1,4 @@
 import Product from "../models/Product";
-import { productValidator } from "../utils/validation.util";
 import { productFilter } from "../utils/filter.util";
 
 export const getAll = (req, res) => {
@@ -15,15 +14,9 @@ export const getById = (req, res) => {
         .catch(error => res.status(400).json({ message: error.message }));
 }
 
-export const create = (req, res) => {
-    const data = productValidator(req.body);
-    
-    if (!data) {
-        res.status(422).json({ message: 'Invalid argument exception' })
-        return;
-    }
-    
-    const newProduct = new Product(data);
+export const create = (req, res) => {   
+
+    const newProduct = new Product(req.body);
 
     newProduct.save()
         .then(doc => res.status(201).json(doc))
@@ -32,15 +25,8 @@ export const create = (req, res) => {
 
 export const edit = (req, res) => {
     const { id } = req.params;
-    
-    const data = productValidator(req.body);
 
-    if (!data) {
-        res.status(422).json({ message: 'Invalid argument exception' })
-        return;
-    }
-
-    Product.findByIdAndUpdate(id, data, { new: true })
+    Product.findByIdAndUpdate(id, req.body, { new: true })
         .then(doc => {
             if (!doc) res.status(404).json({ message: 'Product not found' })
             else res.status(201).json(doc)

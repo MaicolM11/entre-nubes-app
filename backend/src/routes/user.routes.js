@@ -21,8 +21,6 @@ import { verifyToken } from './../middlewares/jwt'
  *              description : new user created!
  *          400:
  *              description: error to create user
- *          422:
- *              description: Invalid argument exception
  *      security:
  *	        - jwt: []
  */
