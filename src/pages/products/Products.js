@@ -5,7 +5,7 @@ import "./Products.css";
 import Header from "../../components/header/Header";
 import NotificationButton from "../../components/header/NotificationButton";
 import Button from "../../components/buttons/Button";
-import ProductCard from "../../components/cards/ProductCard";
+import ProductCardsContainer from "../../components/cards-container/ProductCardsContainer";
 import { ReactComponent as Add } from "../../assets/icons/add.svg";
 import { ReactComponent as Category } from "../../assets/icons/category.svg";
 
@@ -72,11 +72,7 @@ const Products = () => {
         </div>
       </div>
       <div className="product-cards-container">
-        <div className="product-cards-center-container">
-          {Object.values(products).map((product, i) => {
-            <ProductCard key={i} name={product.brand} />;
-          })}
-        </div>
+        <ProductCardsContainer products={products} />
       </div>
       {/* <div className="products-container">
         <ModalCreateProduct
