@@ -6,8 +6,8 @@ const createAdmin = async () => {
     if (!admin) {
         admin = new User({
             fullname: 'admin',
-            email: 'admin@gmail.com',
-            password: await User.encryptPass('1234'),
+            email: 'pedro.perez@gmail.com',
+            password: await User.encryptPass('pedro123'),
             cc: '6891201',
             address: 'Cra 4 N 100',
             phone: '7621 2171 213',

@@ -7,15 +7,14 @@ import { getAllProducts } from "../../services/product";
 import Header from "../../components/header/Header";
 import NotificationButton from "../../components/header/NotificationButton";
 
-// import AdminHeader from "../../components/headers/admin-header/AdminHeader";
-// import IconButton from "../../components/buttons/icon-button/IconButton";
-// import AddWhite from "../../assets/icons/add-white.svg";
-// import Category from "../../assets/icons/category-white.svg";
-// import CardProduct from "../../components/cards/product/CardProduct";
+import AdminHeader from "../../components/headers/admin-header/AdminHeader";
+import IconButton from "../../components/buttons/icon-button/IconButton";
+import AddWhite from "../../assets/icons/add-white.svg";
+import Category from "../../assets/icons/category-white.svg";
 
-// import { ModalCreateProduct } from "../../components/modals/create-product/ModalCreateProduct";
-// import { ModalCategories } from "../../components/modals/categories/ModalCategories";
-// import ShowProducts from "../../components/show-products/ShowProducts";
+import { ModalCreateProduct } from "../../components/modals/create-product/ModalCreateProduct";
+import { ModalCategories } from "../../components/modals/categories/ModalCategories";
+import ShowProducts from "../../components/show-products/ShowProducts";
 
 const Products = () => {
   const [openModalCreateProduct, setOpenModalCreateProduct] = useState(false);
@@ -44,10 +43,10 @@ const Products = () => {
     });
   };
 
-  //   useEffect(() => {
-  //     getCategories();
-  //     getApiProductos();
-  //   }, []);
+    useEffect(() => {
+      getCategories();
+      getApiProductos();
+    }, []);
 
   //create category
 
@@ -58,29 +57,30 @@ const Products = () => {
         description="Información de los productos registrados"
         component={<NotificationButton />}
       />
+      <div className="products-container">
+        <ModalCreateProduct
+            modalData="Agregar Producto"
+            openModal={openModalCreateProduct}
+            setOpenModal={setOpenModalCreateProduct}
+            categories={categories}
+            update={getApiProductos}
+        />
+        <ModalCategories openModal={openModalCategories} setOpenModal={setOpenModalCategories} categories={categories} update={getCategories} />
+        <AdminHeader pageTitle="Productos" pageDescription="Información de los productos registrados" />
+        <div className="products-center-container">
+            <div className="products-options-container">
+                <div className="product-option-buttons-container">
+                    <IconButton icon={AddWhite} text="Agregar Producto" theme="ok" size="medium" handleOnClick={modalCreateProductState} />
+                    <IconButton icon={Category} text="Categorías" theme="option" size="medium" handleOnClick={modalCategoriesState} />
+                </div>
+            </div>
+            <div className="product-cards-container">
+                <ShowProducts products={apiProducts} />
+            </div>
+        </div>
     </div>
-    // <div className="products-container">
-    //     <ModalCreateProduct
-    //         modalData="Agregar Producto"
-    //         openModal={openModalCreateProduct}
-    //         setOpenModal={setOpenModalCreateProduct}
-    //         categories={categories}
-    //         update={getApiProductos}
-    //     />
-    //     <ModalCategories openModal={openModalCategories} setOpenModal={setOpenModalCategories} categories={categories} update={getCategories} />
-    //     <AdminHeader pageTitle="Productos" pageDescription="Información de los productos registrados" />
-    //     <div className="products-center-container">
-    //         <div className="products-options-container">
-    //             <div className="product-option-buttons-container">
-    //                 <IconButton icon={AddWhite} text="Agregar Producto" theme="ok" size="medium" handleOnClick={modalCreateProductState} />
-    //                 <IconButton icon={Category} text="Categorías" theme="option" size="medium" handleOnClick={modalCategoriesState} />
-    //             </div>
-    //         </div>
-    //         <div className="product-cards-container">
-    //             <ShowProducts products={apiProducts} />
-    //         </div>
-    //     </div>
-    // </div>
+    </div>
+    
   );
 };
 
