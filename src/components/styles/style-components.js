@@ -5,6 +5,9 @@ const widthSize = {
   normalButton: {
     width: "405px",
   },
+  mediumButton: {
+    width: "187px",
+  },
   normalInput: {
     width: "403px",
   },
