@@ -32,7 +32,7 @@ router.post("/", [verifyToken, hasAnyRol], controller.createBill);
  * @swagger
  * /api/bill/append/{id}:
  *  put:
- *      sumary : create a new bill
+ *      sumary : append sales to bill
  *      tags : [Bill]
  *      parameters:
  *          - in : path

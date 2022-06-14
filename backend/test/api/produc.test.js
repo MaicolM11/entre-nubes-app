@@ -1,5 +1,5 @@
 import { admin, salesman, API, 
-    login } from '../config'
+    login, PRODUCT_URL, CATEGORY_URL } from '../config'
     
 let product = {
     brand: "AGUILA",
@@ -12,10 +12,6 @@ let product = {
 let category = {
     name : "CERVEZA"
 }
-
-const PRODUCT_URL = '/api/product/';
-const CATEGORY_URL = '/api/category/';
-
 
 describe.skip('Product api', () => {
 

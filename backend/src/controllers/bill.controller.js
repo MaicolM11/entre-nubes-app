@@ -13,6 +13,7 @@ export const createBill = async (req, res) => {
 
     newBill.save()
         .then(doc => res.status(201).json(doc))
+        .then(() => emitLastBills())
         .catch(error => res.status(400).json({ message: error.message }))
 }
 
@@ -43,6 +44,7 @@ export const appendProductsToBill = async (req, res) => {
     
     foundBill.save()
         .then(doc => res.status(201).json(doc))
+        .then(() => emitLastBills())
         .catch(error => res.status(400).json({ message: error.message }))
 }
 
@@ -60,7 +62,5 @@ const calculateTotalAndSubtotal = async (bill) => {
 
 export const emitLastBills = (socket = global.sockets) => {
     Bill.find()
-        .then(data => socket.emit('sales', data))
-    console.log("eneh");
-    
+        .then(data => socket.emit('sales', data));    
 }

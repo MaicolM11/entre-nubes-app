@@ -6,7 +6,7 @@ import {ROLES} from '../src/models/Enums'
 import request from 'supertest'
 
 export const admin = { fullname: 'admin', email: 'admin@gmail.com', password: '1234', rol: ROLES.ADMIN };
-export const salesman = { email: 'salesman@gmail.com', password: '1234' };
+export const salesman = { fullname: 'salesman',email: 'salesman@gmail.com', password: '1234' };
 
 export const createUser = async (data) => {
     let user = {...data}
@@ -25,7 +25,11 @@ afterAll(async () => await dropCollections());
 
 export const API = request(app);
 
-
 export const login = async (credentials) => {
     return await API.post('/auth/login').send(credentials);
 }
+
+export const PRODUCT_URL = '/api/product/';
+export const CATEGORY_URL = '/api/category/';
+export const BILL_URL = '/api/bill/';
+export const USER_URL = '/api/user/';

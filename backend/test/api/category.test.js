@@ -1,8 +1,7 @@
 import { admin, salesman, API, 
-        login } from '../config'
+        login, CATEGORY_URL } from '../config'
         
 let category = { name: "cerveza" };
-const CATEGORY_URL = '/api/category/';
 
 describe.skip('Category api', () => {
 

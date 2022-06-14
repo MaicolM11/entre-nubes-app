@@ -2,15 +2,18 @@ import { SWAGGER_SERVE, SWAGGER_SETUP } from './middlewares/swagger.config'
 import { verifyTokenToSocket } from './middlewares/jwt'
 import { emitLastBills } from './controllers/bill.controller';
 
+import { createServer } from "http";
+import { Server } from "socket.io";
+
 const express = require('express')
 const morgan = require('morgan')
 const cors = require('cors')
 
 const app = express()
-const http = require('http').createServer(app);
-const io = require('socket.io')(http);
+const http = createServer(app);
+const io = new Server(http, {});
 
-global.sockets = io.sockets
+global.sockets = io.sockets;
 
 // middlewares
 app.use(morgan(':method :url - :referrer :status :response-time ms'));
@@ -20,10 +23,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use(cors());
 io.use(verifyTokenToSocket)
 
-io.sockets.on('connection', socket => {
-    emitLastBills(socket)
-    socket.emit('sales', "hisklasma")
-});
+io.sockets.on('connection', emitLastBills);
 
 app.use('/auth', require('./routes/auth.routes'))
 app.use('/api/product', require('./routes/product.routes'))
