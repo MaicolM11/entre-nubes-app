@@ -14,5 +14,17 @@ export const verifyToken = async (req, res, next) => {
     } catch (err) {
         res.status(400).json({ message: err.message })
     }
+}
 
+export const verifyTokenToSocket = (socket, next) => {
+    if (socket.handshake.query.token) {
+        const token = socket.handshake.query.token.replace('Bearer ', '')
+        jwt.verify(token, SECRET, (err, decoded) => {
+            if (!err) {                
+                socket.decoded = decoded;
+                next();
+            }
+        });
+    }
+    next(new Error('Authentication error'));
 }

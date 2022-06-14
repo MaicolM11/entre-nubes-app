@@ -58,3 +58,9 @@ const calculateTotalAndSubtotal = async (bill) => {
     bill.subtotal = subtotal;
 }
 
+export const emitLastBills = (socket = global.sockets) => {
+    Bill.find()
+        .then(data => socket.emit('sales', data))
+    console.log("eneh");
+    
+}
