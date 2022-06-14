@@ -88,6 +88,7 @@ const ProductOptionButtons = styled.div`
 `;
 
 const ProductCard = ({
+  id,
   image,
   name,
   category,
@@ -95,6 +96,9 @@ const ProductCard = ({
   salePrice,
   presentation,
   stock,
+  onClickStock,
+  onClickEdit,
+  onClickDelete,
 }) => {
   return (
     <ProductCardContainer>
@@ -119,22 +123,25 @@ const ProductCard = ({
           </ProductData>
           <ProductOptionButtons>
             <Button
+              key={id}
               size="smallButton"
               theme="highlighted"
               text="Unidades"
-              // onClick={submitUser}
+              onClick={onClickStock}
             />
             <Button
+              key={id}
               size="smallButton"
               theme="edit"
               text="Editar"
-              // onClick={submitUser}
+              onClick={onClickEdit}
             />
             <Button
+              key={id}
               size="smallButton"
               theme="delete"
               text="Eliminar"
-              // onClick={submitUser}
+              onClick={onClickDelete}
             />
           </ProductOptionButtons>
         </ProductInfoContainer>

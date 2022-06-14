@@ -12,7 +12,7 @@ import {
 
 const PasswordInput = ({
   data,
-  width,
+  size,
   icon,
   placeholder,
   iconColor,
@@ -33,7 +33,7 @@ const PasswordInput = ({
   };
 
   return (
-    <InputContainer widthSize={width}>
+    <InputContainer size={size}>
       <InputCenterContainer>
         <IconContainer>{icon}</IconContainer>
         <InputValueContainer

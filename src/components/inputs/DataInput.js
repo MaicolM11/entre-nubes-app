@@ -8,7 +8,7 @@ import {
 
 const DataInput = ({
   data,
-  width,
+  size,
   icon,
   placeholder,
   type,
@@ -21,7 +21,7 @@ const DataInput = ({
   };
 
   return (
-    <InputContainer widthSize={width}>
+    <InputContainer size={size}>
       <InputCenterContainer>
         <IconContainer>{icon}</IconContainer>
         <InputValueContainer

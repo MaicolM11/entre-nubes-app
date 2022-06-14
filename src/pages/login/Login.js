@@ -63,7 +63,7 @@ const Login = () => {
           <div className="login-options-container">
             <DataInput
               data="email"
-              width="normalInput"
+              size="normalInput"
               icon={<UserIcon stroke={userIconColor} />}
               placeholder="Usuario"
               type="text"
@@ -73,7 +73,7 @@ const Login = () => {
             />
             <PasswordInput
               data="password"
-              width="normalInput"
+              size="normalInput"
               icon={<LockIcon fill={lockIconColor} />}
               placeholder="Contraseña"
               iconColor={passwordIconColor}
