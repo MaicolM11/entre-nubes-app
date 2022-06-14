@@ -2,17 +2,23 @@ import React, { useState, useEffect } from "react";
 import { getAllCategories } from "../../services/category";
 import { getAllProducts } from "../../services/product";
 import "./Products.css";
+import { colors } from "../../components/styles/colors";
 import Header from "../../components/header/Header";
 import NotificationButton from "../../components/header/NotificationButton";
 import Button from "../../components/buttons/Button";
 import ProductCardsContainer from "../../components/cards-container/ProductCardsContainer";
+import DataInput from "../../components/inputs/DataInput";
 import { ReactComponent as Add } from "../../assets/icons/add.svg";
 import { ReactComponent as Category } from "../../assets/icons/category.svg";
+import { ReactComponent as Search } from "../../assets/icons/search.svg";
 
 // import { ModalCreateProduct } from "../../components/modals/create-product/ModalCreateProduct";
 // import { ModalCategories } from "../../components/modals/categories/ModalCategories";
 
 const Products = () => {
+  const [dataIconColor, setDataIconColor] = useState(false);
+  const userIconColor = dataIconColor ? colors.highlighted : colors.brand;
+
   const [openModalCreateProduct, setOpenModalCreateProduct] = useState(false);
   const [openModalCategories, setOpenModalCategories] = useState(false);
 
@@ -37,6 +43,10 @@ const Products = () => {
     getAllProducts().then(async (res) => {
       setProducts(await res.json());
     });
+  };
+
+  const handleChangeSearch = () => {
+    console.log("Search data...");
   };
 
   useEffect(() => {
@@ -67,7 +77,18 @@ const Products = () => {
               text="Categorías"
             />
           </div>
-          <div className="product-option-filter-container"></div>
+          <div className="product-option-filter-container">
+            <DataInput
+              data="search"
+              size="mediumInput"
+              icon={<Search stroke={userIconColor} />}
+              placeholder="Buscar"
+              type="text"
+              iconColor={dataIconColor}
+              setIconColor={setDataIconColor}
+              onChange={handleChangeSearch}
+            />
+          </div>
         </div>
       </div>
       <ProductCardsContainer products={products} />

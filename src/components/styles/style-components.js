@@ -20,6 +20,9 @@ const size = {
   normalInput: {
     width: "403px",
   },
+  mediumInput: {
+    width: "248px",
+  },
 };
 
 const theme = {
