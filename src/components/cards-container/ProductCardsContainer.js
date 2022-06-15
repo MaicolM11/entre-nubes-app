@@ -5,7 +5,7 @@ import ProductCard from "../cards/ProductCard";
 const CardsContainer = styled.div`
   display: grid;
   grid-row-gap: 25px;
-  grid-column-gap: 45px;
+  grid-column-gap: 48px;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   padding: 0 0 15px 25px;
   overflow-y: auto;

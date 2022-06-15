@@ -8,6 +8,7 @@ import NotificationButton from "../../components/header/NotificationButton";
 import Button from "../../components/buttons/Button";
 import ProductCardsContainer from "../../components/cards-container/ProductCardsContainer";
 import DataInput from "../../components/inputs/DataInput";
+import SelectCategory from "../../components/select/SelectCategory";
 import { ReactComponent as Add } from "../../assets/icons/add.svg";
 import { ReactComponent as Category } from "../../assets/icons/category.svg";
 import { ReactComponent as Search } from "../../assets/icons/search.svg";
@@ -16,8 +17,16 @@ import { ReactComponent as Search } from "../../assets/icons/search.svg";
 // import { ModalCategories } from "../../components/modals/categories/ModalCategories";
 
 const Products = () => {
-  const [dataIconColor, setDataIconColor] = useState(false);
-  const userIconColor = dataIconColor ? colors.highlighted : colors.brand;
+  const [searchIconColor, setSearchIconColor] = useState(false);
+  const [selectIconColor, setSelectIconColor] = useState(false);
+  const searchDefaultIconColor = searchIconColor
+    ? colors.highlighted
+    : colors.brand;
+  const selectDefaultIconColor = selectIconColor
+    ? colors.highlighted
+    : colors.brand;
+
+  const [selected, setSelected] = useState("Categoría");
 
   const [openModalCreateProduct, setOpenModalCreateProduct] = useState(false);
   const [openModalCategories, setOpenModalCategories] = useState(false);
@@ -45,14 +54,16 @@ const Products = () => {
     });
   };
 
-  const handleChangeSearch = () => {
-    console.log("Search data...");
+  const handleSearch = (e) => {
+    const { name, value } = e.target;
+    console.log(`${name}: ${value}`);
   };
 
   useEffect(() => {
     getCategories();
     getProductos();
-  }, []);
+    console.log(selected);
+  }, [selected]);
 
   return (
     <div className="products-container">
@@ -81,12 +92,18 @@ const Products = () => {
             <DataInput
               data="search"
               size="mediumInput"
-              icon={<Search stroke={userIconColor} />}
+              icon={<Search stroke={searchDefaultIconColor} />}
               placeholder="Buscar"
               type="text"
-              iconColor={dataIconColor}
-              setIconColor={setDataIconColor}
-              onChange={handleChangeSearch}
+              iconColor={searchIconColor}
+              setIconColor={setSearchIconColor}
+              onChange={handleSearch}
+            />
+            <SelectCategory
+              titleOptions="Categorías"
+              options={categories}
+              selected={selected}
+              setSelected={setSelected}
             />
           </div>
         </div>

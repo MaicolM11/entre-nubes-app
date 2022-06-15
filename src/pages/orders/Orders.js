@@ -3,6 +3,8 @@ import "./Orders.css";
 import Header from "../../components/header/Header";
 import NotificationButton from "../../components/header/NotificationButton";
 
+import SelectCategory from "../../components/select/SelectCategory";
+
 const Orders = () => {
   return (
     <div className="orders-container">
