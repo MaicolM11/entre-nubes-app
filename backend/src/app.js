@@ -21,9 +21,8 @@ app.use(express.static('public'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
 app.use(cors());
-io.use(verifyTokenToSocket)
 
-io.sockets.on('connection', emitLastBills);
+io.use(verifyTokenToSocket).on('connection', emitLastBills);
 
 app.use('/auth', require('./routes/auth.routes'))
 app.use('/api/product', require('./routes/product.routes'))
