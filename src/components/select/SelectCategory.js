@@ -10,7 +10,7 @@ const SelectContainer = styled.div`
   flex-direction: column;
   width: 250px;
   align-items: center;
-  gap: 15px;
+  gap: 10px;
   color: ${colors.brand};
   font-size: 16px;
   font-weight: bold;
@@ -24,8 +24,10 @@ export const SelectValueContainer = styled.div`
   width: 100%;
   min-height: 43px;
   background-color: ${colors.secondary};
-  border: 1px solid ${colors.border};
+  border: 1px solid
+    ${(props) => (props.isActive ? colors.highlighted : colors.border)};
   border-radius: 25px;
+  color: ${(props) => (props.isActive ? colors.highlighted : colors.brand)};
   cursor: pointer;
   &:hover {
     path {
@@ -39,13 +41,18 @@ const SelectOptionsContainer = styled.div`
   width: 100%;
   top: 100%;
   left: 0;
+  padding-bottom: 25px;
   background-color: ${colors.secondary};
   border: 1px solid ${colors.border};
   border-radius: 25px;
 `;
 
 const SelectTitleOptions = styled.div`
-  padding: 24px;
+  display: flex;
+  height: 34px;
+  align-items: flex-end;
+  padding-left: 25px;
+  margin-bottom: 25px;
   color: ${colors.placeholder};
   font-size: 16px;
   font-weight: bold;
@@ -54,7 +61,10 @@ const SelectTitleOptions = styled.div`
 `;
 
 const SelectOption = styled.div`
-  padding: 24px;
+  display: flex;
+  height: 50px;
+  align-items: center;
+  padding-left: 25px;
   color: ${colors.text};
   font-size: 16px;
   font-weight: bold;
@@ -66,8 +76,6 @@ const SelectOption = styled.div`
     background-color: ${colors.highlighted};
     color: ${colors.secondary};
   }
-  /* border-bottom-left-radius: 25px;
-  border-bottom-right-radius: 25px; */
 `;
 
 export const SelectIconContainer = styled.div`
@@ -77,7 +85,7 @@ export const SelectIconContainer = styled.div`
   min-width: 24px;
   min-height: 24px;
   path {
-    fill: ${colors.brand};
+    fill: ${(props) => (props.isActive ? colors.highlighted : colors.brand)};
   }
 `;
 
@@ -87,7 +95,7 @@ const SelectCaretDownContainer = styled.div`
   height: 24px;
   justify-content: flex-end;
   path {
-    fill: ${colors.brand};
+    fill: ${(props) => (props.isActive ? colors.highlighted : colors.brand)};
   }
 `;
 
@@ -100,13 +108,16 @@ const SelectCategory = ({ titleOptions, options, selected, setSelected }) => {
 
   return (
     <SelectContainer>
-      <SelectValueContainer onClick={() => setIsActive(!isActive)}>
+      <SelectValueContainer
+        isActive={isActive}
+        onClick={() => setIsActive(!isActive)}
+      >
         <InputCenterContainer>
-          <SelectIconContainer>
+          <SelectIconContainer isActive={isActive}>
             <Category />
           </SelectIconContainer>
           <DefaultValue>{selected}</DefaultValue>
-          <SelectCaretDownContainer>
+          <SelectCaretDownContainer isActive={isActive}>
             <CaretDown />
           </SelectCaretDownContainer>
         </InputCenterContainer>
