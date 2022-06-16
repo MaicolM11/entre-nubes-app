@@ -62,22 +62,18 @@ const Login = () => {
           <label className="login-title">Inicio de Sesión</label>
           <div className="login-options-container">
             <DataInput
-              data="email"
+              name="email"
               size="normalInput"
-              icon={<UserIcon stroke={userIconColor} />}
+              icon={<UserIcon />}
               placeholder="Usuario"
               type="text"
-              iconColor={dataIconColor}
-              setIconColor={setDataIconColor}
               onChange={handleChange}
             />
             <PasswordInput
-              data="password"
+              name="password"
               size="normalInput"
-              icon={<LockIcon fill={lockIconColor} />}
+              icon={<LockIcon />}
               placeholder="Contraseña"
-              iconColor={passwordIconColor}
-              setIconColor={setPasswordIconColor}
               onChange={handleChange}
             />
             <Button

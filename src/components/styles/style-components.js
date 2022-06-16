@@ -75,6 +75,15 @@ export const InputContainer = styled.div`
   border-radius: 25px;
   :focus-within {
     border-color: ${colors.highlighted};
+    path {
+      fill: ${colors.highlighted};
+      /* stroke: ${colors.highlighted}; */
+    }
+  }
+
+  path {
+    fill: ${colors.brand};
+    /* stroke: ${colors.brand}; */
   }
 `;
 
@@ -106,6 +115,19 @@ export const InputValueContainer = styled.input`
   &::placeholder {
     color: ${colors.placeholder};
   }
+`;
+
+export const ModalBackground = styled.div`
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  right: 0px;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 100;
 `;
 
 export const ShowPasswordButton = styled.div`

@@ -5,10 +5,19 @@ import { InputCenterContainer } from "../styles/style-components";
 import { ReactComponent as Category } from "../../assets/icons/category.svg";
 import { ReactComponent as CaretDown } from "../../assets/icons/caret-down.svg";
 
+const size = {
+  normalSelect: {
+    width: "405px",
+  },
+  mediumSelect: {
+    width: "250px",
+  },
+};
+
 const SelectContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 250px;
+  width: ${(props) => size[props.size].width};
   align-items: center;
   gap: 10px;
   color: ${colors.brand};
@@ -16,7 +25,7 @@ const SelectContainer = styled.div`
   font-weight: bold;
   font-family: var(--roboto);
   user-select: none;
-  z-index: 100;
+  z-index: 90;
 `;
 
 export const SelectValueContainer = styled.div`
@@ -103,11 +112,17 @@ const DefaultValue = styled.span`
   width: 100%;
 `;
 
-const SelectCategory = ({ titleOptions, options, selected, setSelected }) => {
+const SelectCategory = ({
+  size,
+  titleOptions,
+  options,
+  selected,
+  setSelected,
+}) => {
   const [isActive, setIsActive] = useState(false);
 
   return (
-    <SelectContainer>
+    <SelectContainer size={size}>
       <SelectValueContainer
         isActive={isActive}
         onClick={() => setIsActive(!isActive)}

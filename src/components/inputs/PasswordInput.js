@@ -1,5 +1,4 @@
 import React, { useRef, useState } from "react";
-import { colors } from "../styles/colors";
 import { ReactComponent as Eye } from "../../assets/icons/eye.svg";
 import { ReactComponent as EyeOff } from "../../assets/icons/eye-off.svg";
 import {
@@ -10,26 +9,13 @@ import {
   ShowPasswordButton,
 } from "../styles/style-components";
 
-const PasswordInput = ({
-  data,
-  size,
-  icon,
-  placeholder,
-  iconColor,
-  setIconColor,
-  onChange,
-}) => {
+const PasswordInput = ({ size, icon, name, placeholder, onChange }) => {
   const ref = useRef(null);
   const [showPassword, setShowPassword] = useState(false);
-  const color = iconColor ? colors.highlighted : colors.placeholder;
 
   const handleShowPassword = () => {
     ref.current.focus();
     setShowPassword(!showPassword);
-  };
-
-  const handleChangeIconColor = () => {
-    setIconColor(!iconColor);
   };
 
   return (
@@ -37,20 +23,14 @@ const PasswordInput = ({
       <InputCenterContainer>
         <IconContainer>{icon}</IconContainer>
         <InputValueContainer
-          name={data}
+          name={name}
           ref={ref}
           placeholder={placeholder}
           type={showPassword ? "text" : "password"}
-          onFocus={() => handleChangeIconColor()}
-          onBlur={() => handleChangeIconColor()}
           onChange={onChange}
         />
         <ShowPasswordButton onClick={handleShowPassword}>
-          {showPassword ? (
-            <EyeOff fill={color} stroke={color} />
-          ) : (
-            <Eye stroke={color} />
-          )}
+          {showPassword ? <EyeOff /> : <Eye />}
         </ShowPasswordButton>
       </InputCenterContainer>
     </InputContainer>

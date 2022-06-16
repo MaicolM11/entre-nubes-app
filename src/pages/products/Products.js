@@ -13,19 +13,12 @@ import { ReactComponent as Add } from "../../assets/icons/add.svg";
 import { ReactComponent as Category } from "../../assets/icons/category.svg";
 import { ReactComponent as Search } from "../../assets/icons/search.svg";
 
+import ProductModal from "../../components/modals/ProductModal";
+
 // import { ModalCreateProduct } from "../../components/modals/create-product/ModalCreateProduct";
 // import { ModalCategories } from "../../components/modals/categories/ModalCategories";
 
 const Products = () => {
-  const [searchIconColor, setSearchIconColor] = useState(false);
-  const [selectIconColor, setSelectIconColor] = useState(false);
-  const searchDefaultIconColor = searchIconColor
-    ? colors.highlighted
-    : colors.brand;
-  const selectDefaultIconColor = selectIconColor
-    ? colors.highlighted
-    : colors.brand;
-
   const [selected, setSelected] = useState("Categoría");
 
   const [openModalCreateProduct, setOpenModalCreateProduct] = useState(false);
@@ -67,6 +60,7 @@ const Products = () => {
 
   return (
     <div className="products-container">
+      <ProductModal />
       <Header
         title="Productos"
         description="Información de los productos registrados"
@@ -90,16 +84,15 @@ const Products = () => {
           </div>
           <div className="product-option-filter-container">
             <DataInput
-              data="search"
+              name="search"
               size="mediumInput"
-              icon={<Search stroke={searchDefaultIconColor} />}
+              icon={<Search />}
               placeholder="Buscar"
               type="text"
-              iconColor={searchIconColor}
-              setIconColor={setSearchIconColor}
               onChange={handleSearch}
             />
             <SelectCategory
+              size="mediumSelect"
               titleOptions="Categorías"
               options={categories}
               selected={selected}

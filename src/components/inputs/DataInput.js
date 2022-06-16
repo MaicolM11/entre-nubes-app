@@ -6,30 +6,15 @@ import {
   InputValueContainer,
 } from "../styles/style-components";
 
-const DataInput = ({
-  data,
-  size,
-  icon,
-  placeholder,
-  type,
-  iconColor,
-  setIconColor,
-  onChange,
-}) => {
-  const handleChangeIconColor = () => {
-    setIconColor(!iconColor);
-  };
-
+const DataInput = ({ size, icon, name, placeholder, type, onChange }) => {
   return (
     <InputContainer size={size}>
       <InputCenterContainer>
         <IconContainer>{icon}</IconContainer>
         <InputValueContainer
-          name={data}
+          name={name}
           placeholder={placeholder}
           type={type}
-          onFocus={() => handleChangeIconColor()}
-          onBlur={() => handleChangeIconColor()}
           onChange={onChange}
         />
       </InputCenterContainer>
