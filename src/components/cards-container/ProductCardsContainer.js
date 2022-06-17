@@ -11,7 +11,7 @@ const CardsContainer = styled.div`
   overflow-y: auto;
 `;
 
-const ProductCardsContainer = ({ products }) => {
+const ProductCardsContainer = ({ products, onClickStock,onClickEdit,onClickDelete }) => {
   return (
     <CardsContainer>
       {Object.values(products).map((product, i) => (
@@ -24,6 +24,9 @@ const ProductCardsContainer = ({ products }) => {
           salePrice={product.sale_price}
           presentation={product.presentation}
           stock={product.stock}
+          onClickStock = {onClickStock}
+          onClickEdit = {onClickEdit}
+          onClickDelete = {onClickDelete}
         />
       ))}
     </CardsContainer>

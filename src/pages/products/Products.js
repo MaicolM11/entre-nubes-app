@@ -58,9 +58,22 @@ const Products = () => {
     console.log(selected);
   }, [selected]);
 
+
+  // botones 
+
+  const onClickStock = () =>{
+
+  }
+  const onClickEdit = () =>{
+
+  }
+  const onClickDelete= () =>{
+
+  }
+
   return (
     <div className="products-container">
-      <ProductModal />
+      {/* <ProductModal/> */}
       <Header
         title="Productos"
         description="Información de los productos registrados"
@@ -101,7 +114,12 @@ const Products = () => {
           </div>
         </div>
       </div>
-      <ProductCardsContainer products={products} />
+      <ProductCardsContainer 
+      products={products} 
+      onClickStock = {onClickStock()}
+      onClickEdit = {onClickEdit()}
+      onClickDelete = {onClickDelete()}
+      />
       {/* <div className="products-container">
         <ModalCreateProduct
             modalData="Agregar Producto"
