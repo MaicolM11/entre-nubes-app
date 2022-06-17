@@ -61,6 +61,19 @@ const Products = () => {
     console.log(selected);
   }, [selected]);
 
+
+  // botones 
+
+  const onClickStock = () =>{
+
+  }
+  const onClickEdit = () =>{
+
+  }
+  const onClickDelete= () =>{
+
+  }
+
   return (
     <div className="products-container">
       <ProductModal
