@@ -49,8 +49,8 @@ const SideBarButtonsContainer = styled.div`
 const SideBarOptionsContainer = styled.div`
   display: flex;
   flex-direction: column;
+  min-height: 350px;
   align-items: center;
-  justify-content: center;
   gap: 25px;
 `;
 
