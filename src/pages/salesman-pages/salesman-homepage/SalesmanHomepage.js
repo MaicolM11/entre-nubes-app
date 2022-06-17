@@ -1,9 +1,15 @@
 import React from "react";
 import "./SalesmanHomepage.css";
 import { Routes, Route } from "react-router-dom";
-import { SalesmanLinks } from "../../routes/Links";
+import { SalesmanLinks } from "../../../routes/Links";
 
-import Sidebar from "../../components/sidebar/Sidebar";
+//Components
+import Sidebar from "../../../components/sidebar/Sidebar";
+
+//Pages
+import Orders from "../orders/Orders";
+import Guarantors from "../guarantors/Guarantors";
+import Boliranas from "../boliranas/Boliranas";
 
 const SalesmanHomepage = () => {
   return (
@@ -11,9 +17,9 @@ const SalesmanHomepage = () => {
       <Sidebar links={SalesmanLinks} />
       <div className="salesman-pages-container">
         <Routes>
-          {/* <Route path="orders" element={<Orders />} />
+          <Route path="orders" element={<Orders />} />
           <Route path="guarantors" element={<Guarantors />} />
-          <Route path="boliranas" element={<Boliranas />} /> */}
+          <Route path="boliranas" element={<Boliranas />} />
         </Routes>
       </div>
     </div>

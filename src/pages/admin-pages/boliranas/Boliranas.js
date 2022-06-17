@@ -1,11 +1,11 @@
 import React from "react";
 import "./Boliranas.css";
-import Header from "../../components/header/Header";
-import NotificationButton from "../../components/header/NotificationButton";
+import Header from "../../../components/header/Header";
+import NotificationButton from "../../../components/header/NotificationButton";
 
 const Boliranas = () => {
   return (
-    <div className="boliranas-container">
+    <div className="admin-boliranas-container">
       <Header
         title="Boliranas"
         description="Información de las Boliranas"

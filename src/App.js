@@ -3,8 +3,8 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import "./App.css";
 
 import Login from "./pages/login/Login";
-import AdminHomepage from "./pages/admin-homepage/AdminHomepage";
-import SalesmanHomepage from "./pages/salesman-homepage/SalesmanHomepage";
+import AdminHomepage from "./pages/admin-pages/admin-homepage/AdminHomepage";
+import SalesmanHomepage from "./pages/salesman-pages/salesman-homepage/SalesmanHomepage";
 
 import { getMyInfo } from "./services/user";
 

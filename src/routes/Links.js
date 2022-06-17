@@ -22,9 +22,9 @@ export const AdminLinks = [
     text: "Productos",
   },
   {
-    path: "/admin/employees",
+    path: "/admin/salesmans",
     icon: <Users />,
-    text: "Colaboradores",
+    text: "Vendedores",
   },
   {
     path: "/admin/boliranas",

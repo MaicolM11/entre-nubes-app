@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from "react";
-import { getAllCategories } from "../../services/category";
-import { getAllProducts } from "../../services/product";
+import { getAllCategories } from "../../../services/category";
+import { getAllProducts } from "../../../services/product";
 import "./Products.css";
-import { colors } from "../../components/styles/colors";
-import Header from "../../components/header/Header";
-import NotificationButton from "../../components/header/NotificationButton";
-import Button from "../../components/buttons/Button";
-import ProductCardsContainer from "../../components/cards-container/ProductCardsContainer";
-import DataInput from "../../components/inputs/DataInput";
-import SelectCategory from "../../components/select/SelectCategory";
-import { ReactComponent as Add } from "../../assets/icons/add.svg";
-import { ReactComponent as Category } from "../../assets/icons/category.svg";
-import { ReactComponent as Search } from "../../assets/icons/search.svg";
+import { colors } from "../../../components/styles/colors";
 
-import ProductModal from "../../components/modals/ProductModal";
+//Components
+import Header from "../../../components/header/Header";
+import NotificationButton from "../../../components/header/NotificationButton";
+import ProductModal from "../../../components/modals/ProductModal";
+import ProductCardsContainer from "../../../components/cards-container/ProductCardsContainer";
+import Button from "../../../components/buttons/Button";
+import DataInput from "../../../components/inputs/DataInput";
+import SelectCategory from "../../../components/select/SelectCategory";
+import { ReactComponent as Add } from "../../../assets/icons/add.svg";
+import { ReactComponent as Category } from "../../../assets/icons/category.svg";
+import { ReactComponent as Search } from "../../../assets/icons/search.svg";
 
 // import { ModalCategories } from "../../components/modals/categories/ModalCategories";
 
@@ -68,7 +69,7 @@ const Products = () => {
   const onClickDelete = () => {};
 
   return (
-    <div className="products-container">
+    <div className="admin-products-container">
       <ProductModal
         isOpen={isOpenAddProductModal}
         setIsOpen={setIsOpenAddProductModal}
@@ -86,9 +87,9 @@ const Products = () => {
         description="Información de los productos registrados"
         component={<NotificationButton />}
       />
-      <div className="products-options-container">
-        <div className="products-options-center-container">
-          <div className="product-option-buttons-container">
+      <div className="admin-products-options-container">
+        <div className="admin-products-options-center-container">
+          <div className="admin-product-option-buttons-container">
             <Button
               size="mediumButton"
               theme="ok"

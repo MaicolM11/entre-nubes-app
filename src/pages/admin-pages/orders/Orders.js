@@ -1,13 +1,13 @@
 import React from "react";
 import "./Orders.css";
-import Header from "../../components/header/Header";
-import NotificationButton from "../../components/header/NotificationButton";
+import Header from "../../../components/header/Header";
+import NotificationButton from "../../../components/header/NotificationButton";
 
-import SelectCategory from "../../components/select/SelectCategory";
+import SelectCategory from "../../../components/select/SelectCategory";
 
 const Orders = () => {
   return (
-    <div className="orders-container">
+    <div className="admin-orders-container">
       <Header
         title="Pedidos"
         description="Información de los pedidos realizados por los clientes"
