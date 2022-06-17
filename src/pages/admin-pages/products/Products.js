@@ -104,7 +104,7 @@ const Products = () => {
               text="Categorías"
             />
           </div>
-          <div className="product-option-filter-container">
+          <div className="admin-product-option-filter-container">
             <DataInput
               name="search"
               size="mediumInput"
