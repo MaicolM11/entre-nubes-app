@@ -67,6 +67,7 @@ export const ModalCreateProduct = ({
 
   // Agregar al inventario
   const submitForm = () => {
+    console.log(openModal)
     if (openModal) {
       console.log(values);
       console.log("Datos enviados.");
@@ -164,7 +165,7 @@ export const ModalCreateProduct = ({
                       onChange={handleChange}
                     />
                     {errors.stock && <p>{errors.stock}</p>}
-                    <Button theme="ok" size="normal" onClick={handleSubmit}>
+                    <Button  size="normal" theme="ok" onClick={handleSubmit}>
                       {modalData}
                     </Button>
                   </div>

@@ -13,8 +13,10 @@ const useForm = (callback, validate) => {
   const [errors, setErros] = useState({});
 
   const handleSubmit = (e) => {
+    console.log('bootn')
     e.preventDefault();
     setErros(validate(values));
+    
   };
 
   const handleChange = (e) => {
