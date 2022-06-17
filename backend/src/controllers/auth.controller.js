@@ -1,4 +1,4 @@
-import { SECRET, EXPIRES_IN } from "../config";
+import { SECRET, EXPIRES_IN } from "../configs/env.config";
 import { findUserAndComparePassword } from "./user.controller"
 import * as jwt from 'jsonwebtoken'
 

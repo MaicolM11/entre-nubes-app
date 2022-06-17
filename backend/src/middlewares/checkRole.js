@@ -1,10 +1,8 @@
-import User from "../models/User";
 import { ROLES } from "../models/Enums";
 
 export const isSalesman = async (req, res, next) => {
-    const user = await User.findById(req.userId)
-
-    if(user.rol == ROLES.SALESMAN) {
+   
+    if(req.user.rol == ROLES.SALESMAN) {
         next()
         return;
     }
@@ -13,9 +11,8 @@ export const isSalesman = async (req, res, next) => {
 }
 
 export const isAdmin = async (req, res, next) => {
-    const user = await User.findById(req.userId)
 
-    if(user.rol == ROLES.ADMIN ) {
+    if(req.user.rol == ROLES.ADMIN ) {
         next()
         return;
     }
@@ -24,9 +21,8 @@ export const isAdmin = async (req, res, next) => {
 }   
 
 export const hasAnyRol = async (req, res, next) => {
-    const user = await User.findById(req.userId)
 
-    if(user.rol == ROLES.SALESMAN || user.rol == ROLES.ADMIN) {
+    if(req.user.rol == ROLES.SALESMAN || user.rol == ROLES.ADMIN) {
         next()
         return;
     }

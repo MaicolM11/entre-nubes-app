@@ -35,8 +35,8 @@ export const searchUser = (req, res) => {
 }
 
 export const getInfo = (req, res) => {
-    const { userId } = req;
-    User.findById(userId, { password: 0 } )
+    const { _id } = req.user;
+    User.findById(_id, { password: 0 } )
         .then(doc => {
             if (doc) res.status(200).json(doc)
             else res.sendStatus(404);
@@ -50,14 +50,14 @@ export const findUserAndComparePassword = async (req, res) => {
 
     if (!foundUser) {
         res.status(404).json({ message: 'User not found' })
-        return false;
+        return;
     }
 
     const matchPass = await User.comparePass(req.body.password, foundUser.password)
 
     if (!matchPass) {
         res.status(401).json({ message: 'Invalid Password' })
-        return false;
+        return;
     }
 
     return foundUser;
