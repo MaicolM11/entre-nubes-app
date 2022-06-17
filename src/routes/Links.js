@@ -3,6 +3,7 @@ import { ReactComponent as BarChart } from "../assets/icons/bar-chart.svg";
 import { ReactComponent as WineBottle } from "../assets/icons/wine-bottle.svg";
 import { ReactComponent as Users } from "../assets/icons/users.svg";
 import { ReactComponent as Frog } from "../assets/icons/frog.svg";
+import { ReactComponent as MoneyBillWave } from "../assets/icons/money-bill-wave.svg";
 
 export const AdminLinks = [
   {
@@ -27,6 +28,24 @@ export const AdminLinks = [
   },
   {
     path: "/admin/boliranas",
+    icon: <Frog />,
+    text: "Boliranas",
+  },
+];
+
+export const SalesmanLinks = [
+  {
+    path: "/salesman/orders",
+    icon: <BasketShopping />,
+    text: "Pedidos",
+  },
+  {
+    path: "/salesman/guarantors",
+    icon: <MoneyBillWave />,
+    text: "Fiadores",
+  },
+  {
+    path: "/salesman/boliranas",
     icon: <Frog />,
     text: "Boliranas",
   },
