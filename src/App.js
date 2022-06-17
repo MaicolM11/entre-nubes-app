@@ -1,10 +1,10 @@
 import React from "react";
-import "./App.css";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import "./App.css";
 
 import Login from "./pages/login/Login";
 import AdminHomepage from "./pages/admin-homepage/AdminHomepage";
-//import SalesmanHomepage from "./pages/salesman-homepage/SalesmanHomepage";
+import SalesmanHomepage from "./pages/salesman-homepage/SalesmanHomepage";
 
 import { getMyInfo } from "./services/user";
 
@@ -20,11 +20,9 @@ const SalesmanProtectedRoute = ({ children }) => {
 
 const AdminProtectedRoute = ({ children }) => {
   let user = true;
-
   if (!user) {
     return <Navigate to="/" replace />;
   }
-
   return children;
 };
 
@@ -41,15 +39,6 @@ const App = () => {
             </AdminProtectedRoute>
           }
         />
-      </Routes>
-    </BrowserRouter>
-  );
-};
-
-export default App;
-
-/*
-
         <Route
           path="/salesman/*"
           element={
@@ -58,4 +47,9 @@ export default App;
             </SalesmanProtectedRoute>
           }
         />
-*/
+      </Routes>
+    </BrowserRouter>
+  );
+};
+
+export default App;
