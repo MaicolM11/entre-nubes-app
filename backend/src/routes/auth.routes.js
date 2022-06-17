@@ -17,7 +17,7 @@ const controller = require('../controllers/auth.controller')
  *      requestBody:
  *          required: true
  *          content:
- *              application/x-www-form-urlencoded :
+ *              application/json:
  *                  schema:
  *                      type : object
  *                      $ref: '#/components/schemas/Login'

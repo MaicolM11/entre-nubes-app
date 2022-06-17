@@ -1,13 +1,12 @@
-import { SWAGGER_SERVE, SWAGGER_SETUP } from './middlewares/swagger.config'
-import { verifyTokenToSocket } from './middlewares/jwt'
+import { SWAGGER_SERVE, SWAGGER_SETUP } from './configs/swagger.config';
+import { verifyTokenToSocket } from './middlewares/jwt';
 import { emitLastBills } from './controllers/bill.controller';
 
 import { createServer } from "http";
 import { Server } from "socket.io";
-
-const express = require('express')
-const morgan = require('morgan')
-const cors = require('cors')
+import express from 'express';
+import morgan from 'morgan';
+import cors from 'cors'
 
 const app = express()
 const http = createServer(app);

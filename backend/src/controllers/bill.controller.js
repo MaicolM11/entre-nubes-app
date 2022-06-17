@@ -4,7 +4,7 @@ import { findProductsAndUpdate } from "./sale.controller";
 export const createBill = async (req, res) => {
     
     const data = req.body;
-    data.salesman = req.userId;
+    data.salesman = req.user._id;
     
     await findProductsAndUpdate(data.sales)
     await calculateTotalAndSubtotal(data)
@@ -19,7 +19,7 @@ export const createBill = async (req, res) => {
 
 // get all my lastbills
 export const getMyLastBills = (req, res) => {
-    Bill.find({ salesman: req.userId })
+    Bill.find({ salesman: req.user._id })
         .then(data => res.status(200).json(data))
         .catch(error => res.status(400).json({ message: error.message }));
 }
