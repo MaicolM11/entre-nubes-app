@@ -31,7 +31,7 @@ export const deleteProduct = (id) =>{
 
 export const updateUnits = (id,units) =>{
   const requestOptions = {
-    method: "DELETE",
+    method: "PUT",
     headers: { "Content-Type": "application/json", authorization: getToken() },
     body: JSON.stringify(
       {
