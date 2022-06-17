@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { getAllCategories } from "../../services/category";
 import styled from "styled-components";
 import { colors } from "../styles/colors";
@@ -97,9 +97,11 @@ const SelectContainer = styled.div`
   height: 45px;
 `;
 
-const ProductModal = () => {
+const ProductModal = ({ isOpen, setIsOpen, info, buttonTheme }) => {
   const [categories, setCategories] = useState({});
   const [selected, setSelected] = useState("Categoría");
+
+  const ref = useRef();
 
   const getCategories = () => {
     getAllCategories().then(async (res) => {
@@ -112,57 +114,72 @@ const ProductModal = () => {
     console.log(selected);
   }, [selected]);
 
+  const closeModal = (e) => {
+    if (ref.current === e.target) {
+      setIsOpen(false);
+    }
+  };
+
+  const handleSetIsOpen = () => {
+    setIsOpen((isOpen) => !isOpen);
+  };
+
   return (
-    <ModalBackground>
-      <ProductModalContainer>
-        <ModalTitleContainer>
-          <ModalTitleCenterContainer>
-            <ModalTitle>Agregar Producto</ModalTitle>
-            <CloseButton />
-          </ModalTitleCenterContainer>
-        </ModalTitleContainer>
-        <ProductModalFormContainer>
-          <ProductModalFormCenterContainer>
-            <ProductModalImageContainer />
-            <ProductModalFormOptionContainer>
-              <DataInput
-                name="name"
-                size="normalInput"
-                icon={<WineBottle stroke={colors.brand} />}
-                placeholder="Nombre del producto"
-                type="text"
-                // onChange={handleChange}
-              />
-              <SelectContainer>
-                <SelectCategory
-                  size="normalSelect"
-                  titleOptions="Categorías"
-                  options={categories}
-                  selected={selected}
-                  setSelected={setSelected}
-                />
-              </SelectContainer>
-              {Object.values(InputData).map((input) => (
-                <DataInput
-                  name={input.name}
-                  size="normalInput"
-                  icon={input.icon}
-                  placeholder={input.placeholder}
-                  type="text"
-                  // onChange={handleChange}
-                />
-              ))}
-              <Button
-                size="normalButton"
-                theme="ok"
-                text="Agregar Producto"
-                // onClick={submitUser}
-              />
-            </ProductModalFormOptionContainer>
-          </ProductModalFormCenterContainer>
-        </ProductModalFormContainer>
-      </ProductModalContainer>
-    </ModalBackground>
+    <>
+      {isOpen && (
+        <ModalBackground ref={ref} onClick={closeModal}>
+          <ProductModalContainer>
+            <ModalTitleContainer>
+              <ModalTitleCenterContainer>
+                <ModalTitle>{info}</ModalTitle>
+                <CloseButton onClick={handleSetIsOpen} />
+              </ModalTitleCenterContainer>
+            </ModalTitleContainer>
+            <ProductModalFormContainer>
+              <ProductModalFormCenterContainer>
+                <ProductModalImageContainer />
+                <ProductModalFormOptionContainer>
+                  <DataInput
+                    name="name"
+                    size="normalInput"
+                    icon={<WineBottle stroke={colors.brand} />}
+                    placeholder="Nombre del producto"
+                    type="text"
+                    // onChange={handleChange}
+                  />
+                  <SelectContainer>
+                    <SelectCategory
+                      size="normalSelect"
+                      titleOptions="Categorías"
+                      options={categories}
+                      selected={selected}
+                      setSelected={setSelected}
+                    />
+                  </SelectContainer>
+                  {Object.values(InputData).map((input, i) => (
+                    <DataInput
+                      key={i}
+                      name={input.name}
+                      size="normalInput"
+                      icon={input.icon}
+                      placeholder={input.placeholder}
+                      type="text"
+                      // onChange={handleChange}
+                    />
+                  ))}
+                  <Button
+                    size="normalButton"
+                    theme={buttonTheme}
+                    text={info}
+                    // onClick={submitUser}
+                  />
+                </ProductModalFormOptionContainer>
+              </ProductModalFormCenterContainer>
+            </ProductModalFormContainer>
+          </ProductModalContainer>
+        </ModalBackground>
+      )}
+    </>
   );
 };
 

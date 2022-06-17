@@ -15,25 +15,28 @@ import { ReactComponent as Search } from "../../assets/icons/search.svg";
 
 import ProductModal from "../../components/modals/ProductModal";
 
-// import { ModalCreateProduct } from "../../components/modals/create-product/ModalCreateProduct";
 // import { ModalCategories } from "../../components/modals/categories/ModalCategories";
 
 const Products = () => {
-  const [selected, setSelected] = useState("Categoría");
-
-  const [openModalCreateProduct, setOpenModalCreateProduct] = useState(false);
-  const [openModalCategories, setOpenModalCategories] = useState(false);
-
-  const modalCreateProductState = () => {
-    setOpenModalCreateProduct((prev) => !prev);
-  };
-
-  const modalCategoriesState = () => {
-    setOpenModalCategories((prev) => !prev);
-  };
-
   const [categories, setCategories] = useState({});
   const [products, setProducts] = useState([]);
+  const [selected, setSelected] = useState("Categoría");
+
+  const [isOpenAddProductModal, setIsOpenAddProductModal] = useState(false);
+  const [isOpenEditProductModal, setIsOpenEditProductModal] = useState(false);
+  // const [openModalCategories, setOpenModalCategories] = useState(false);
+
+  const openAddProductModal = () => {
+    setIsOpenAddProductModal((isOpen) => !isOpen);
+  };
+
+  const openEditProductModal = () => {
+    setIsOpenEditProductModal((isOpen) => !isOpen);
+  };
+
+  // const modalCategoriesState = () => {
+  //   setOpenModalCategories((prev) => !prev);
+  // };
 
   const getCategories = () => {
     getAllCategories().then(async (res) => {
@@ -60,7 +63,18 @@ const Products = () => {
 
   return (
     <div className="products-container">
-      <ProductModal />
+      <ProductModal
+        isOpen={isOpenAddProductModal}
+        setIsOpen={setIsOpenAddProductModal}
+        info="Agregar Producto"
+        buttonTheme="ok"
+      />
+      <ProductModal
+        isOpen={isOpenEditProductModal}
+        setIsOpen={setIsOpenEditProductModal}
+        info="Editar Producto"
+        buttonTheme="highlighted"
+      />
       <Header
         title="Productos"
         description="Información de los productos registrados"
@@ -74,6 +88,7 @@ const Products = () => {
               theme="ok"
               icon={<Add fill="white" />}
               text="Agregar Producto"
+              onClick={openAddProductModal}
             />
             <Button
               size="mediumButton"
@@ -101,29 +116,10 @@ const Products = () => {
           </div>
         </div>
       </div>
-      <ProductCardsContainer products={products} />
-      {/* <div className="products-container">
-        <ModalCreateProduct
-            modalData="Agregar Producto"
-            openModal={openModalCreateProduct}
-            setOpenModal={setOpenModalCreateProduct}
-            categories={categories}
-            update={getApiProductos}
-        />
-        <ModalCategories openModal={openModalCategories} setOpenModal={setOpenModalCategories} categories={categories} update={getCategories} />
-        <AdminHeader pageTitle="Productos" pageDescription="Información de los productos registrados" />
-        <div className="products-center-container">
-            <div className="products-options-container">
-                <div className="product-option-buttons-container">
-                    <IconButton icon={AddWhite} text="Agregar Producto" theme="ok" size="medium" handleOnClick={modalCreateProductState} />
-                    <IconButton icon={Category} text="Categorías" theme="option" size="medium" handleOnClick={modalCategoriesState} />
-                </div>
-            </div>
-            <div className="product-cards-container">
-                <ShowProducts products={apiProducts} />
-            </div>
-        </div>
-    </div> */}
+      <ProductCardsContainer
+        products={products}
+        openEditProductModal={openEditProductModal}
+      />
     </div>
   );
 };
