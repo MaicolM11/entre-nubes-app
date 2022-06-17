@@ -16,6 +16,22 @@ export const createCategory = (name) => {
         headers: {'Content-Type': 'application/json', 'authorization': getToken() },
         body: JSON.stringify({ 'name': name })
     };
-    console.log(requestOptions.body)
     return fetch(BASE_URL, requestOptions);
+}
+
+export const editCategory = (id,name) => {
+    const requestOptions = {
+        method: 'PUT',
+        headers: {'Content-Type': 'application/json', 'authorization': getToken() },
+        body: JSON.stringify({ 'name': name })
+    };
+    return fetch(BASE_URL+`/${id}`, requestOptions);
+}
+
+export const deleteCategory =(id) =>{
+    const requestOptions = {
+        method: 'DELETE',
+        headers: {'Content-Type': 'application/json', 'authorization': getToken() },
+    };
+    return fetch(BASE_URL+`/${id}`,requestOptions)
 }
