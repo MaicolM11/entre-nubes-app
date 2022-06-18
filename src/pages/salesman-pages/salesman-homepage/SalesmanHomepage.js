@@ -17,7 +17,10 @@ const SalesmanHomepage = () => {
       <Sidebar links={SalesmanLinks} />
       <div className="salesman-pages-container">
         <Routes>
-          <Route path="orders" element={<Orders />} />
+          <Route
+            path="orders"
+            element={<Orders salesmanName="Nombre Vendedor" />}
+          />
           <Route path="guarantors" element={<Guarantors />} />
           <Route path="boliranas" element={<Boliranas />} />
         </Routes>

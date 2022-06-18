@@ -8,8 +8,8 @@ export const colors = {
   placeholder: "#8f8f8f",
   ok: "#2ce74a",
   okHover: "#4fef68",
-  edit: "#ff8d33",
-  editHover: "#ffa258",
+  edit: "#ff9112",
+  editHover: "#ffb45c",
   delete: "#ff4343",
   deleteHover: "#ff6565",
 };

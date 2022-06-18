@@ -77,13 +77,11 @@ export const InputContainer = styled.div`
     border-color: ${colors.highlighted};
     path {
       fill: ${colors.highlighted};
-      /* stroke: ${colors.highlighted}; */
     }
   }
 
   path {
     fill: ${colors.brand};
-    /* stroke: ${colors.brand}; */
   }
 `;
 
