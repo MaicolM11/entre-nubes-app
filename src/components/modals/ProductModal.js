@@ -97,7 +97,7 @@ const SelectContainer = styled.div`
   height: 45px;
 `;
 
-const ProductModal = ({ isOpen, setIsOpen, info, buttonTheme }) => {
+const ProductModal = ({ isOpen, setIsOpen,id, info, buttonTheme, handleChange, submitProduct}) => {
   const [categories, setCategories] = useState({});
   const [selected, setSelected] = useState("Categoría");
 
@@ -123,6 +123,30 @@ const ProductModal = ({ isOpen, setIsOpen, info, buttonTheme }) => {
   const handleSetIsOpen = () => {
     setIsOpen((isOpen) => !isOpen);
   };
+
+
+  //send data
+
+  const sendData = () => {
+    reqProduct(
+      values.brand,
+      values.category,
+      values.buy_price,
+      values.sale_price,
+      values.presentation,
+      values.stock,
+      values.img_url
+    ).then(async (res) => {
+      let data = await res.json();
+      if (res.ok) {
+        // update();
+        closeButtonModal();
+      } else {
+        alert(data.message);
+      }
+    });
+  };
+
 
   return (
     <>
@@ -164,14 +188,14 @@ const ProductModal = ({ isOpen, setIsOpen, info, buttonTheme }) => {
                       icon={input.icon}
                       placeholder={input.placeholder}
                       type="text"
-                      // onChange={handleChange}
+                      onChange={handleChange}
                     />
                   ))}
                   <Button
                     size="normalButton"
                     theme={buttonTheme}
                     text={info}
-                    // onClick={submitUser}
+                    onClick={submitProduct}
                   />
                 </ProductModalFormOptionContainer>
               </ProductModalFormCenterContainer>

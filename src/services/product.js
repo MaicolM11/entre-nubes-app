@@ -11,6 +11,7 @@ export const getAllProducts = () => {
 };
 
 
+// este funciona 
 export const getByIdProducts = (id) => {
   const requestOptions = {
     method: "GET",
@@ -19,6 +20,7 @@ export const getByIdProducts = (id) => {
   return fetch(BASE_URL+`/${id}`, requestOptions);
 };
 
+//funciona tambien siuuuu
 export const deleteProduct = (id) =>{
   const requestOptions = {
     method: "DELETE",
@@ -28,7 +30,7 @@ export const deleteProduct = (id) =>{
   return fetch(BASE_URL+`/${id}`, requestOptions);
 }
 
-
+//funciona tambien 
 export const updateUnits = (id,units) =>{
   const requestOptions = {
     method: "PUT",
@@ -42,7 +44,7 @@ export const updateUnits = (id,units) =>{
   return fetch(BASE_URL+`/${id}/stock`, requestOptions);
 }
 
-//SIN PROBAR
+//funciona
 export const editProduct = (
   id,
   brand,
