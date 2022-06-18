@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import OrderCard from "../cards/OrderCard";
 
 const CardsContainer = styled.div`
   width: 100%;
@@ -7,7 +8,11 @@ const CardsContainer = styled.div`
   background-color: darkgray;
 `;
 const OrderCardsContainer = () => {
-  return <CardsContainer></CardsContainer>;
+  return (
+    <CardsContainer>
+      <OrderCard />
+    </CardsContainer>
+  );
 };
 
 export default OrderCardsContainer;

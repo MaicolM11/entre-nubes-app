@@ -12,6 +12,11 @@ const size = {
     height: "45px",
     fontSize: "16px",
   },
+  mediumSmallButton: {
+    width: "152px",
+    height: "45px",
+    fontSize: "16px",
+  },
   smallButton: {
     width: "80px",
     height: "35px",
