@@ -4,7 +4,7 @@ import { colors } from "../styles/colors";
 
 const StateContainer = styled.div`
   display: flex;
-  width: 152px;
+  width: 100%;
   height: 36px;
   align-items: center;
   justify-content: center;

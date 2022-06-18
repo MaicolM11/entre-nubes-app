@@ -9,17 +9,10 @@ import OrderCardsContainer from "../../../components/cards-container/OrderCardsC
 
 import { ReactComponent as Add } from "../../../assets/icons/add.svg";
 
-const OrdersContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 100vh;
-`;
-
 const AddOrdersContainer = styled.div`
   display: flex;
   width: 100%;
-  height: 95px;
+  min-height: 95px;
   align-items: center;
   padding-left: 25px;
 `;
@@ -32,18 +25,16 @@ const Orders = ({ salesmanName }) => {
         description="Información de los pedidos realizados por mesa"
         component={<SalesmanData salesmanName={salesmanName} />}
       />
-      <OrdersContainer>
-        <AddOrdersContainer>
-          <Button
-            size="mediumButton"
-            theme="ok"
-            icon={<Add fill="white" />}
-            text="Agregar Pedido"
-            // onClick={submitUser}
-          />
-        </AddOrdersContainer>
-        <OrderCardsContainer />
-      </OrdersContainer>
+      <AddOrdersContainer>
+        <Button
+          size="mediumButton"
+          theme="ok"
+          icon={<Add fill="white" />}
+          text="Agregar Pedido"
+          // onClick={submitUser}
+        />
+      </AddOrdersContainer>
+      <OrderCardsContainer />
     </div>
   );
 };
