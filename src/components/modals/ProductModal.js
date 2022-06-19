@@ -13,28 +13,8 @@ import { ReactComponent as Box } from "../../assets/icons/box.svg";
 import { ReactComponent as Circle } from "../../assets/icons/circle.svg";
 import Button from "../buttons/Button";
 
-const InputData = [
-  {
-    name: "unitPrice",
-    icon: <AttachMoney />,
-    placeholder: "Precio por unidad",
-  },
-  {
-    name: "salePrice",
-    icon: <SackDollar />,
-    placeholder: "Precio de venta",
-  },
-  {
-    name: "presentation",
-    icon: <Box />,
-    placeholder: "Presentación",
-  },
-  {
-    name: "stock",
-    icon: <Circle />,
-    placeholder: "Unidades de venta",
-  },
-];
+import validateInfo from "../../validateInfo";
+import useForm from "../../useForm";
 
 const ProductModalContainer = styled.div`
   display: flex;
@@ -88,7 +68,7 @@ const ProductModalImageContainer = styled.div`
 const ProductModalFormOptionContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 25px;
+  gap: 10px;
 `;
 
 const SelectContainer = styled.div`
@@ -97,9 +77,42 @@ const SelectContainer = styled.div`
   height: 45px;
 `;
 
-const ProductModal = ({ isOpen, setIsOpen,id, info, buttonTheme, handleChange, submitProduct}) => {
+const ErrorMessageContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 5px;
+`;
+
+const ErrorMessageSpace = styled.label`
+  width: 100%;
+  height: 10px;
+`;
+
+const ErrorMessage = styled.label`
+  display: flex;
+  width: 100%;
+  height: 10px;
+  align-items: center;
+  color: ${colors.delete};
+  font-size: 12px;
+  font-weight: 500;
+  font-family: var(--roboto);
+  white-space: nowrap;
+`;
+
+const ProductModal = ({ isOpen, setIsOpen, id, info, buttonTheme }) => {
+  const submitForm = () => {
+    console.log("Click");
+    if (isOpen) {
+      console.log(values);
+      console.log("Datos enviados.");
+    }
+  };
+
+  const category = "Categoría";
   const [categories, setCategories] = useState({});
-  const [selected, setSelected] = useState("Categoría");
+  const [selectedCategory, setSelectedCategory] = useState(category);
 
   const ref = useRef();
 
@@ -111,8 +124,7 @@ const ProductModal = ({ isOpen, setIsOpen,id, info, buttonTheme, handleChange, s
 
   useEffect(() => {
     getCategories();
-    console.log(selected);
-  }, [selected]);
+  }, []);
 
   const closeModal = (e) => {
     if (ref.current === e.target) {
@@ -123,7 +135,6 @@ const ProductModal = ({ isOpen, setIsOpen,id, info, buttonTheme, handleChange, s
   const handleSetIsOpen = () => {
     setIsOpen((isOpen) => !isOpen);
   };
-
 
   //send data
 
@@ -147,6 +158,11 @@ const ProductModal = ({ isOpen, setIsOpen,id, info, buttonTheme, handleChange, s
     });
   };
 
+  const { handleChange, values, handleSubmit, errors } = useForm(
+    submitForm,
+    validateInfo,
+    selectedCategory
+  );
 
   return (
     <>
@@ -163,39 +179,103 @@ const ProductModal = ({ isOpen, setIsOpen,id, info, buttonTheme, handleChange, s
               <ProductModalFormCenterContainer>
                 <ProductModalImageContainer />
                 <ProductModalFormOptionContainer>
-                  <DataInput
-                    name="name"
-                    size="normalInput"
-                    icon={<WineBottle stroke={colors.brand} />}
-                    placeholder="Nombre del producto"
-                    type="text"
-                    // onChange={handleChange}
-                  />
-                  <SelectContainer>
-                    <SelectCategory
-                      size="normalSelect"
-                      titleOptions="Categorías"
-                      options={categories}
-                      selected={selected}
-                      setSelected={setSelected}
-                    />
-                  </SelectContainer>
-                  {Object.values(InputData).map((input, i) => (
+                  <ErrorMessageContainer>
                     <DataInput
-                      key={i}
-                      name={input.name}
+                      name="brand"
                       size="normalInput"
-                      icon={input.icon}
-                      placeholder={input.placeholder}
+                      icon={<WineBottle stroke={colors.brand} />}
+                      placeholder="Nombre del producto"
                       type="text"
                       onChange={handleChange}
                     />
-                  ))}
+                    {errors.brand ? (
+                      <ErrorMessage>{errors.brand}</ErrorMessage>
+                    ) : (
+                      <ErrorMessageSpace />
+                    )}
+                  </ErrorMessageContainer>
+                  <ErrorMessageContainer>
+                    <SelectContainer>
+                      <SelectCategory
+                        name="category"
+                        size="normalSelect"
+                        titleOptions="Categorías"
+                        options={categories}
+                        selectedCategory={selectedCategory}
+                        setSelectedCategory={setSelectedCategory}
+                      />
+                    </SelectContainer>
+                    {selectedCategory === category ? (
+                      <ErrorMessage>{errors.category}</ErrorMessage>
+                    ) : (
+                      <ErrorMessageSpace />
+                    )}
+                  </ErrorMessageContainer>
+                  <ErrorMessageContainer>
+                    <DataInput
+                      name="unitPrice"
+                      size="normalInput"
+                      icon={<AttachMoney stroke={colors.brand} />}
+                      placeholder="Precio por unidad"
+                      type="text"
+                      onChange={handleChange}
+                    />
+                    {errors.unitPrice ? (
+                      <ErrorMessage>{errors.unitPrice}</ErrorMessage>
+                    ) : (
+                      <ErrorMessageSpace />
+                    )}
+                  </ErrorMessageContainer>
+                  <ErrorMessageContainer>
+                    <DataInput
+                      name="salePrice"
+                      size="normalInput"
+                      icon={<SackDollar stroke={colors.brand} />}
+                      placeholder="Precio de venta"
+                      type="text"
+                      onChange={handleChange}
+                    />
+                    {errors.salePrice ? (
+                      <ErrorMessage>{errors.salePrice}</ErrorMessage>
+                    ) : (
+                      <ErrorMessageSpace />
+                    )}
+                  </ErrorMessageContainer>
+                  <ErrorMessageContainer>
+                    <DataInput
+                      name="presentation"
+                      size="normalInput"
+                      icon={<Box stroke={colors.brand} />}
+                      placeholder="Presentación"
+                      type="text"
+                      onChange={handleChange}
+                    />
+                    {errors.presentation ? (
+                      <ErrorMessage>{errors.presentation}</ErrorMessage>
+                    ) : (
+                      <ErrorMessageSpace />
+                    )}
+                  </ErrorMessageContainer>
+                  <ErrorMessageContainer>
+                    <DataInput
+                      name="stock"
+                      size="normalInput"
+                      icon={<Circle stroke={colors.brand} />}
+                      placeholder="Unidades de venta"
+                      type="text"
+                      onChange={handleChange}
+                    />
+                    {errors.stock ? (
+                      <ErrorMessage>{errors.stock}</ErrorMessage>
+                    ) : (
+                      <ErrorMessageSpace />
+                    )}
+                  </ErrorMessageContainer>
                   <Button
                     size="normalButton"
                     theme={buttonTheme}
                     text={info}
-                    onClick={submitProduct}
+                    onClick={handleSubmit}
                   />
                 </ProductModalFormOptionContainer>
               </ProductModalFormCenterContainer>

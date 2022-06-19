@@ -116,8 +116,8 @@ const SelectCategory = ({
   size,
   titleOptions,
   options,
-  selected,
-  setSelected,
+  selectedCategory,
+  setSelectedCategory,
 }) => {
   const [isActive, setIsActive] = useState(false);
 
@@ -131,7 +131,7 @@ const SelectCategory = ({
           <SelectIconContainer isActive={isActive}>
             <Category />
           </SelectIconContainer>
-          <DefaultValue>{selected}</DefaultValue>
+          <DefaultValue>{selectedCategory}</DefaultValue>
           <SelectCaretDownContainer isActive={isActive}>
             <CaretDown />
           </SelectCaretDownContainer>
@@ -144,7 +144,7 @@ const SelectCategory = ({
             <SelectOption
               key={option._id}
               onClick={() => {
-                setSelected(option.name);
+                setSelectedCategory(option.name);
                 setIsActive(false);
               }}
             >

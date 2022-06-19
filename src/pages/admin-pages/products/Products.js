@@ -59,8 +59,7 @@ const Products = () => {
   useEffect(() => {
     getCategories();
     getProductos();
-    console.log(selected);
-  }, [selected]);
+  }, []);
 
   // botones
 

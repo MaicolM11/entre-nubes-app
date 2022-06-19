@@ -1,23 +1,16 @@
 import { useState, useEffect } from "react";
 
-const useForm = (callback, validate) => {
+const useForm = (callback, validate, selectedCategory) => {
   const [values, setValues] = useState({
     brand: "",
     category: "",
-    buy_price: 0,
-    sale_price: 0,
+    unitPrice: "",
+    salePrice: "",
     presentation: "",
-    stock: 0,
+    stock: "",
   });
 
   const [errors, setErros] = useState({});
-
-  const handleSubmit = (e) => {
-    console.log('bootn')
-    e.preventDefault();
-    setErros(validate(values));
-    
-  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -27,6 +20,12 @@ const useForm = (callback, validate) => {
         [name]: value,
       };
     });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    values.category = selectedCategory;
+    setErros(validate(values));
   };
 
   useEffect(() => {

@@ -5,16 +5,16 @@ export default function validateInfo(values) {
     errors.brand = "Espacio requerido";
   }
 
-  if (!values.category) {
+  if (values.category === "Categoría") {
     errors.category = "Espacio requerido";
   }
 
-  if (!values.buy_price) {
-    errors.buy_price = "Espacio requerido";
+  if (!values.unitPrice) {
+    errors.unitPrice = "Espacio requerido";
   }
 
-  if (!values.sale_price) {
-    errors.sale_price = "Espacio requerido";
+  if (!values.salePrice) {
+    errors.salePrice = "Espacio requerido";
   }
 
   if (!values.presentation) {
