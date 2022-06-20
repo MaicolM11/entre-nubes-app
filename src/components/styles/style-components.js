@@ -73,6 +73,7 @@ export const ButtonContainer = styled.button`
 
 export const InputContainer = styled.div`
   display: flex;
+  gap: 5px;
   width: ${(props) => size[props.size].width};
   height: 43px;
   background-color: ${colors.secondary};
@@ -117,6 +118,11 @@ export const InputValueContainer = styled.input`
   font-family: var(--roboto);
   &::placeholder {
     color: ${colors.placeholder};
+  }
+  &::invalid{
+    span{
+      color: red;
+    }
   }
 `;
 

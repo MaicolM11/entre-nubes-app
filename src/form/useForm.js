@@ -1,20 +1,20 @@
 import { useState, useEffect } from "react";
 
 const useForm = (callback, validate, selectedCategory) => {
-  const [values, setValues] = useState({
+  const [productValues, setProductValues] = useState({
     brand: "",
     category: "",
-    unitPrice: "",
-    salePrice: "",
+    unitPrice: 0,
+    salePrice: 0,
     presentation: "",
-    stock: "",
+    stock: 0,
   });
 
   const [errors, setErros] = useState({});
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setValues((values) => {
+    setProductValues((values) => {
       return {
         ...values,
         [name]: value,
@@ -24,8 +24,17 @@ const useForm = (callback, validate, selectedCategory) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    values.category = selectedCategory;
-    setErros(validate(values));
+    productValues.category = selectedCategory;
+    setErros(validate(productValues));
+  };
+
+  const clearValues = () => {
+    productValues.brand = "";
+    productValues.unitPrice = 0;
+    productValues.salePrice = 0;
+    productValues.presentation = "";
+    productValues.stock = 0;
+    setErros(0);
   };
 
   useEffect(() => {
@@ -34,7 +43,13 @@ const useForm = (callback, validate, selectedCategory) => {
     }
   }, [errors]);
 
-  return { handleChange, values, handleSubmit, errors };
+  return {
+    handleChange,
+    values: productValues,
+    handleSubmit,
+    errors,
+    clearValues,
+  };
 };
 
 export default useForm;

@@ -6,15 +6,15 @@ import {
   InputValueContainer,
 } from "../styles/style-components";
 
-const DataInput = ({ size, icon, name, placeholder, type, onChange }) => {
+const DataInput = ({ size, icon, type, name, placeholder, onChange }) => {
   return (
     <InputContainer size={size}>
       <InputCenterContainer>
         <IconContainer>{icon}</IconContainer>
         <InputValueContainer
+          type={type}
           name={name}
           placeholder={placeholder}
-          type={type}
           onChange={onChange}
         />
       </InputCenterContainer>

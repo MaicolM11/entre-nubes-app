@@ -1,20 +1,22 @@
 import React, { useState, useEffect, useRef } from "react";
 import { getAllCategories } from "../../services/category";
+
 import styled from "styled-components";
 import { colors } from "../styles/colors";
 import { ModalBackground } from "../styles/style-components";
+
 import CloseButton from "../buttons/CloseButton";
 import DataInput from "../inputs/DataInput";
 import SelectCategory from "../select/SelectCategory";
+import Button from "../buttons/Button";
 import { ReactComponent as WineBottle } from "../../assets/icons/wine-bottle.svg";
 import { ReactComponent as AttachMoney } from "../../assets/icons/attach-money.svg";
 import { ReactComponent as SackDollar } from "../../assets/icons/sack-dollar.svg";
 import { ReactComponent as Box } from "../../assets/icons/box.svg";
 import { ReactComponent as Circle } from "../../assets/icons/circle.svg";
-import Button from "../buttons/Button";
 
-import validateInfo from "../../validateInfo";
-import useForm from "../../useForm";
+import { productValidation } from "../../errors/validate";
+import useForm from "../../form/useForm";
 
 const ProductModalContainer = styled.div`
   display: flex;
@@ -102,19 +104,24 @@ const ErrorMessage = styled.label`
 `;
 
 const ProductModal = ({ isOpen, setIsOpen, id, info, buttonTheme }) => {
-  const submitForm = () => {
-    console.log("Click");
+  const category = "Categoría";
+  const [selectedCategory, setSelectedCategory] = useState(category);
+  const [categories, setCategories] = useState({});
+
+  const ref = useRef();
+
+  const submitProduct = () => {
     if (isOpen) {
       console.log(values);
       console.log("Datos enviados.");
     }
   };
 
-  const category = "Categoría";
-  const [categories, setCategories] = useState({});
-  const [selectedCategory, setSelectedCategory] = useState(category);
-
-  const ref = useRef();
+  const { handleChange, values, handleSubmit, errors, clearValues } = useForm(
+    submitProduct,
+    productValidation,
+    selectedCategory
+  );
 
   const getCategories = () => {
     getAllCategories().then(async (res) => {
@@ -122,31 +129,31 @@ const ProductModal = ({ isOpen, setIsOpen, id, info, buttonTheme }) => {
     });
   };
 
-  useEffect(() => {
-    getCategories();
-  }, []);
+  const clearModalInputs = () => {
+    clearValues();
+    setSelectedCategory(category);
+  };
 
   const closeModal = (e) => {
     if (ref.current === e.target) {
+      clearModalInputs();
       setIsOpen(false);
     }
   };
 
   const handleSetIsOpen = () => {
+    clearModalInputs();
     setIsOpen((isOpen) => !isOpen);
   };
-
-  //send data
 
   const sendData = () => {
     reqProduct(
       values.brand,
       values.category,
-      values.buy_price,
-      values.sale_price,
+      values.unitPrice,
+      values.salePrice,
       values.presentation,
-      values.stock,
-      values.img_url
+      values.stock
     ).then(async (res) => {
       let data = await res.json();
       if (res.ok) {
@@ -158,11 +165,9 @@ const ProductModal = ({ isOpen, setIsOpen, id, info, buttonTheme }) => {
     });
   };
 
-  const { handleChange, values, handleSubmit, errors } = useForm(
-    submitForm,
-    validateInfo,
-    selectedCategory
-  );
+  useEffect(() => {
+    getCategories();
+  }, []);
 
   return (
     <>
@@ -181,11 +186,11 @@ const ProductModal = ({ isOpen, setIsOpen, id, info, buttonTheme }) => {
                 <ProductModalFormOptionContainer>
                   <ErrorMessageContainer>
                     <DataInput
-                      name="brand"
                       size="normalInput"
                       icon={<WineBottle stroke={colors.brand} />}
-                      placeholder="Nombre del producto"
                       type="text"
+                      name="brand"
+                      placeholder="Nombre del producto"
                       onChange={handleChange}
                     />
                     {errors.brand ? (
@@ -197,8 +202,8 @@ const ProductModal = ({ isOpen, setIsOpen, id, info, buttonTheme }) => {
                   <ErrorMessageContainer>
                     <SelectContainer>
                       <SelectCategory
-                        name="category"
                         size="normalSelect"
+                        name="category"
                         titleOptions="Categorías"
                         options={categories}
                         selectedCategory={selectedCategory}
@@ -213,11 +218,11 @@ const ProductModal = ({ isOpen, setIsOpen, id, info, buttonTheme }) => {
                   </ErrorMessageContainer>
                   <ErrorMessageContainer>
                     <DataInput
-                      name="unitPrice"
                       size="normalInput"
                       icon={<AttachMoney stroke={colors.brand} />}
-                      placeholder="Precio por unidad"
                       type="text"
+                      name="unitPrice"
+                      placeholder="Precio por unidad"
                       onChange={handleChange}
                     />
                     {errors.unitPrice ? (
@@ -228,11 +233,11 @@ const ProductModal = ({ isOpen, setIsOpen, id, info, buttonTheme }) => {
                   </ErrorMessageContainer>
                   <ErrorMessageContainer>
                     <DataInput
-                      name="salePrice"
                       size="normalInput"
                       icon={<SackDollar stroke={colors.brand} />}
-                      placeholder="Precio de venta"
                       type="text"
+                      name="salePrice"
+                      placeholder="Precio de venta"
                       onChange={handleChange}
                     />
                     {errors.salePrice ? (
@@ -243,11 +248,11 @@ const ProductModal = ({ isOpen, setIsOpen, id, info, buttonTheme }) => {
                   </ErrorMessageContainer>
                   <ErrorMessageContainer>
                     <DataInput
-                      name="presentation"
                       size="normalInput"
                       icon={<Box stroke={colors.brand} />}
-                      placeholder="Presentación"
                       type="text"
+                      name="presentation"
+                      placeholder="Presentación"
                       onChange={handleChange}
                     />
                     {errors.presentation ? (
@@ -258,11 +263,11 @@ const ProductModal = ({ isOpen, setIsOpen, id, info, buttonTheme }) => {
                   </ErrorMessageContainer>
                   <ErrorMessageContainer>
                     <DataInput
-                      name="stock"
                       size="normalInput"
                       icon={<Circle stroke={colors.brand} />}
-                      placeholder="Unidades de venta"
                       type="text"
+                      name="stock"
+                      placeholder="Unidades de venta"
                       onChange={handleChange}
                     />
                     {errors.stock ? (
