@@ -47,7 +47,7 @@ module.exports = {
             CreateBill: {
                 type: "object",
                 properties: {
-                    description: { type: "string" },
+                    location: { type: "string" },
                     sales: {
                         type: "array",
                         items: {
@@ -75,7 +75,7 @@ module.exports = {
             Bill: {
                 type: "object",
                 properties: {
-                    description: { type: "string" },
+                    location: { type: "string" },
                     sales: {
                         type: "array",
                         items: {
