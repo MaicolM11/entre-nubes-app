@@ -118,6 +118,7 @@ const SelectCategory = ({
   options,
   selectedCategory,
   setSelectedCategory,
+  productCategory
 }) => {
   const [isActive, setIsActive] = useState(false);
 
@@ -131,7 +132,7 @@ const SelectCategory = ({
           <SelectIconContainer isActive={isActive}>
             <Category />
           </SelectIconContainer>
-          <DefaultValue>{selectedCategory}</DefaultValue>
+          <DefaultValue>{productCategory ? productCategory: selectedCategory}</DefaultValue>
           <SelectCaretDownContainer isActive={isActive}>
             <CaretDown />
           </SelectCaretDownContainer>

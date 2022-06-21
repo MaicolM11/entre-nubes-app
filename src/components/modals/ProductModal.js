@@ -207,7 +207,7 @@ const ProductModal = ({
                       type="text"
                       name="brand"
                       placeholder="Nombre del producto"
-                      defaultValue={product.brand}
+                      defaultValue={product ? product.brand : ""}
                       onChange={handleChange}
                     />
                     {errors.brand ? (
@@ -225,6 +225,9 @@ const ProductModal = ({
                         options={categories}
                         selectedCategory={selectedCategory}
                         setSelectedCategory={setSelectedCategory}
+                        productCategory={
+                          product ? product.category.name : selectedCategory
+                        }
                       />
                     </SelectContainer>
                     {selectedCategory === category ? (
@@ -240,7 +243,7 @@ const ProductModal = ({
                       type="text"
                       name="unitPrice"
                       placeholder="Precio por unidad"
-                      defaultValue={product.unitPrice}
+                      defaultValue={product ? product.buy_price : ""}
                       onChange={handleChange}
                     />
                     {errors.unitPrice ? (
@@ -256,7 +259,7 @@ const ProductModal = ({
                       type="text"
                       name="salePrice"
                       placeholder="Precio de venta"
-                      defaultValue={product.salePrice}
+                      defaultValue={product ? product.sale_price : ""}
                       onChange={handleChange}
                     />
                     {errors.salePrice ? (
@@ -272,7 +275,7 @@ const ProductModal = ({
                       type="text"
                       name="presentation"
                       placeholder="Presentación"
-                      defaultValue={product.presentation}
+                      defaultValue={product ? product.presentation : ""}
                       onChange={handleChange}
                     />
                     {errors.presentation ? (
@@ -288,7 +291,7 @@ const ProductModal = ({
                       type="text"
                       name="stock"
                       placeholder="Unidades de venta"
-                      defaultValue={product.stock}
+                      defaultValue={product ? product.stock : ""}
                       onChange={handleChange}
                     />
                     {errors.stock ? (
