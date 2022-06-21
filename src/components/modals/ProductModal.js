@@ -107,11 +107,11 @@ const ErrorMessage = styled.label`
 const ProductModal = ({
   isOpen,
   setIsOpen,
-  id,
   info,
   buttonTheme,
   updateProducts,
   isTheme,
+  product,
 }) => {
   const category = "Categoría";
   const [selectedCategory, setSelectedCategory] = useState(category);
@@ -121,9 +121,9 @@ const ProductModal = ({
 
   const submitProduct = () => {
     if (isOpen) {
-      console.log(values);
-      console.log("Datos enviados.");
-      sendData();
+      {
+        isTheme ? sendData() : editData();
+      }
     }
   };
 
@@ -177,6 +177,10 @@ const ProductModal = ({
     });
   };
 
+  const editData = () => {
+    console.log("Editando...");
+  };
+
   useEffect(() => {
     getCategories();
   }, []);
@@ -203,6 +207,7 @@ const ProductModal = ({
                       type="text"
                       name="brand"
                       placeholder="Nombre del producto"
+                      defaultValue={product.brand}
                       onChange={handleChange}
                     />
                     {errors.brand ? (
@@ -235,6 +240,7 @@ const ProductModal = ({
                       type="text"
                       name="unitPrice"
                       placeholder="Precio por unidad"
+                      defaultValue={product.unitPrice}
                       onChange={handleChange}
                     />
                     {errors.unitPrice ? (
@@ -250,6 +256,7 @@ const ProductModal = ({
                       type="text"
                       name="salePrice"
                       placeholder="Precio de venta"
+                      defaultValue={product.salePrice}
                       onChange={handleChange}
                     />
                     {errors.salePrice ? (
@@ -265,6 +272,7 @@ const ProductModal = ({
                       type="text"
                       name="presentation"
                       placeholder="Presentación"
+                      defaultValue={product.presentation}
                       onChange={handleChange}
                     />
                     {errors.presentation ? (
@@ -280,6 +288,7 @@ const ProductModal = ({
                       type="text"
                       name="stock"
                       placeholder="Unidades de venta"
+                      defaultValue={product.stock}
                       onChange={handleChange}
                     />
                     {errors.stock ? (

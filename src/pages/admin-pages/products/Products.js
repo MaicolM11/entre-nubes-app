@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Component } from "react";
 import { getAllCategories } from "../../../services/category";
 import { getAllProducts } from "../../../services/product";
 import "./Products.css";
@@ -29,10 +29,6 @@ const Products = () => {
 
   const openAddProductModal = () => {
     setIsOpenAddProductModal((isOpen) => !isOpen);
-  };
-
-  const openEditProductModal = () => {
-    setIsOpenEditProductModal((isOpen) => !isOpen);
   };
 
   // const modalCategoriesState = () => {
@@ -67,6 +63,13 @@ const Products = () => {
   // const onClickEdit = () => {};
   // const onClickDelete = () => {};
 
+  const [product, setProduct] = useState({});
+
+  const openEditProductModal = (product) => {
+    setIsOpenEditProductModal((isOpen) => !isOpen);
+    setProduct(product);
+  };
+
   return (
     <div className="admin-products-container">
       <ProductModal
@@ -77,12 +80,15 @@ const Products = () => {
         updateProducts={getProductos}
         isTheme={true}
       />
-      {/* <ProductModal
+      <ProductModal
         isOpen={isOpenEditProductModal}
         setIsOpen={setIsOpenEditProductModal}
         info="Editar Producto"
         buttonTheme="highlighted"
-      /> */}
+        updateProducts={getProductos}
+        isTheme={false}
+        product={product}
+      />
       <Header
         title="Productos"
         description="Información de los productos registrados"

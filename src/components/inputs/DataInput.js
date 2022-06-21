@@ -6,7 +6,15 @@ import {
   InputValueContainer,
 } from "../styles/style-components";
 
-const DataInput = ({ size, icon, type, name, placeholder, onChange }) => {
+const DataInput = ({
+  size,
+  icon,
+  type,
+  name,
+  placeholder,
+  defaultValue,
+  onChange,
+}) => {
   return (
     <InputContainer size={size}>
       <InputCenterContainer>
@@ -15,6 +23,7 @@ const DataInput = ({ size, icon, type, name, placeholder, onChange }) => {
           type={type}
           name={name}
           placeholder={placeholder}
+          defaultValue={defaultValue}
           onChange={onChange}
         />
       </InputCenterContainer>

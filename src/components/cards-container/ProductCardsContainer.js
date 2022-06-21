@@ -24,7 +24,7 @@ const ProductCardsContainer = ({ products, openEditProductModal }) => {
           salePrice={product.sale_price}
           presentation={product.presentation}
           stock={product.stock}
-          onClickEdit={openEditProductModal}
+          onClickEdit={() => openEditProductModal(product)}
         />
       ))}
     </CardsContainer>
