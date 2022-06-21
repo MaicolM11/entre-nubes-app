@@ -1,4 +1,4 @@
-import { getToken } from "./token";
+import { getToken } from "./storage";
 
 const BASE_URL = "/api/product";
 

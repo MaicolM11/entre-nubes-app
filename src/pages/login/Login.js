@@ -44,7 +44,9 @@ const Login = () => {
     reqLogin(user.email, user.password).then(async (res) => {
       let data = await res.json();
       if (res.ok) {
-        localStorage.setItem("token", data.token);
+        Object.entries(data).forEach(([key, value]) => {
+          localStorage.setItem(key, value)
+        });
         redirectByRol(data.rol);
       } else {
         alert(data.message);

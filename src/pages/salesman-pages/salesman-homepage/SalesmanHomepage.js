@@ -2,6 +2,7 @@ import React from "react";
 import "./SalesmanHomepage.css";
 import { Routes, Route } from "react-router-dom";
 import { SalesmanLinks } from "../../../routes/Links";
+import { getFullname } from "../../../services/storage";
 
 //Components
 import Sidebar from "../../../components/sidebar/Sidebar";
@@ -19,7 +20,7 @@ const SalesmanHomepage = () => {
         <Routes>
           <Route
             path="orders"
-            element={<Orders salesmanName="Nombre Vendedor" />}
+            element={<Orders salesmanName={getFullname()} />}
           />
           <Route path="guarantors" element={<Guarantors />} />
           <Route path="boliranas" element={<Boliranas />} />
