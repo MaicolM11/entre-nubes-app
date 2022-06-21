@@ -30,11 +30,11 @@ const billSchema = mongoose.Schema(
 
         status: {
             type: String,
-            enum: Object.keys(BILL_STATES),
+            enum: Object.values(BILL_STATES),
             default: BILL_STATES.DUE
         },
 
-        description: String,
+        location: String,
         
         total: Number,
 
