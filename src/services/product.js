@@ -10,39 +10,35 @@ export const getAllProducts = () => {
   return fetch(BASE_URL, requestOptions);
 };
 
-
-// este funciona 
+// este funciona
 export const getByIdProducts = (id) => {
   const requestOptions = {
     method: "GET",
     headers: { "Content-Type": "application/json", authorization: getToken() },
   };
-  return fetch(BASE_URL+`/${id}`, requestOptions);
+  return fetch(BASE_URL + `/${id}`, requestOptions);
 };
 
 //funciona tambien siuuuu
-export const deleteProduct = (id) =>{
+export const deleteProduct = (id) => {
   const requestOptions = {
     method: "DELETE",
     headers: { "Content-Type": "application/json", authorization: getToken() },
-
   };
-  return fetch(BASE_URL+`/${id}`, requestOptions);
-}
+  return fetch(BASE_URL + `/${id}`, requestOptions);
+};
 
-//funciona tambien 
-export const updateUnits = (id,units) =>{
+//funciona tambien
+export const updateUnits = (id, units) => {
   const requestOptions = {
     method: "PUT",
     headers: { "Content-Type": "application/json", authorization: getToken() },
-    body: JSON.stringify(
-      {
-        increment: units
-      }
-    )
+    body: JSON.stringify({
+      increment: units,
+    }),
   };
-  return fetch(BASE_URL+`/${id}/stock`, requestOptions);
-}
+  return fetch(BASE_URL + `/${id}/stock`, requestOptions);
+};
 
 //funciona
 export const editProduct = (
@@ -54,7 +50,7 @@ export const editProduct = (
   presentation,
   stock,
   img_url
-)=>{
+) => {
   const requestOptions = {
     method: "PUT",
     headers: { "Content-Type": "application/json", authorization: getToken() },
@@ -68,9 +64,8 @@ export const editProduct = (
       img_url: img_url,
     }),
   };
-  return fetch(BASE_URL+`/${id}`, requestOptions);
-}
-
+  return fetch(BASE_URL + `/${id}`, requestOptions);
+};
 
 export const reqProduct = (
   brand,

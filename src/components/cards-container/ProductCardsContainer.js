@@ -17,8 +17,8 @@ const ProductCardsContainer = ({ products, openEditProductModal }) => {
       {Object.values(products).map((product, i) => (
         <ProductCard
           key={i}
-          id={product.id}
-          name={product.brand}
+          id={product._id}
+          brand={product.brand}
           category={product.category.name}
           unitPrice={product.buy_price}
           salePrice={product.sale_price}

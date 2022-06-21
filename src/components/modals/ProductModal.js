@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { getAllCategories } from "../../services/category";
+import { reqProduct } from "../../services/product";
 
 import styled from "styled-components";
 import { colors } from "../styles/colors";
@@ -103,7 +104,15 @@ const ErrorMessage = styled.label`
   white-space: nowrap;
 `;
 
-const ProductModal = ({ isOpen, setIsOpen, id, info, buttonTheme }) => {
+const ProductModal = ({
+  isOpen,
+  setIsOpen,
+  id,
+  info,
+  buttonTheme,
+  updateProducts,
+  isTheme,
+}) => {
   const category = "Categoría";
   const [selectedCategory, setSelectedCategory] = useState(category);
   const [categories, setCategories] = useState({});
@@ -114,12 +123,14 @@ const ProductModal = ({ isOpen, setIsOpen, id, info, buttonTheme }) => {
     if (isOpen) {
       console.log(values);
       console.log("Datos enviados.");
+      sendData();
     }
   };
 
   const { handleChange, values, handleSubmit, errors, clearValues } = useForm(
     submitProduct,
     productValidation,
+    categories,
     selectedCategory
   );
 
@@ -153,12 +164,13 @@ const ProductModal = ({ isOpen, setIsOpen, id, info, buttonTheme }) => {
       values.unitPrice,
       values.salePrice,
       values.presentation,
-      values.stock
+      values.stock,
+      values.img_url
     ).then(async (res) => {
-      let data = await res.json();
+      const data = await res.json();
       if (res.ok) {
-        // update();
-        closeButtonModal();
+        handleSetIsOpen();
+        updateProducts();
       } else {
         alert(data.message);
       }

@@ -63,9 +63,9 @@ const Products = () => {
 
   // botones
 
-  const onClickStock = () => {};
-  const onClickEdit = () => {};
-  const onClickDelete = () => {};
+  // const onClickStock = () => {};
+  // const onClickEdit = () => {};
+  // const onClickDelete = () => {};
 
   return (
     <div className="admin-products-container">
@@ -74,13 +74,15 @@ const Products = () => {
         setIsOpen={setIsOpenAddProductModal}
         info="Agregar Producto"
         buttonTheme="ok"
+        updateProducts={getProductos}
+        isTheme={true}
       />
-      <ProductModal
+      {/* <ProductModal
         isOpen={isOpenEditProductModal}
         setIsOpen={setIsOpenEditProductModal}
         info="Editar Producto"
         buttonTheme="highlighted"
-      />
+      /> */}
       <Header
         title="Productos"
         description="Información de los productos registrados"

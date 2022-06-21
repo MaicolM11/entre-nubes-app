@@ -90,7 +90,7 @@ const ProductOptionButtons = styled.div`
 const ProductCard = ({
   id,
   image,
-  name,
+  brand,
   category,
   unitPrice,
   salePrice,
@@ -107,7 +107,7 @@ const ProductCard = ({
       </ProductImageContainer>
       <ProductCardCenterContainer>
         <ProductInfoContainer>
-          <ProductName>{name}</ProductName>
+          <ProductName>{brand}</ProductName>
           <ProductCategory>{category}</ProductCategory>
           <ProductData>
             Precio por Unidad: <DataSpan>${unitPrice}</DataSpan>
@@ -123,21 +123,21 @@ const ProductCard = ({
           </ProductData>
           <ProductOptionButtons>
             <Button
-              key={id}
+              // key={id}
               size="smallButton"
               theme="highlighted"
               text="Unidades"
               onClick={onClickStock}
             />
             <Button
-              key={id}
+              // key={id}
               size="smallButton"
               theme="edit"
               text="Editar"
               onClick={onClickEdit}
             />
             <Button
-              key={id}
+              // key={id}
               size="smallButton"
               theme="delete"
               text="Eliminar"

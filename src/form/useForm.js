@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const useForm = (callback, validate, selectedCategory) => {
+const useForm = (callback, validate, categories, selectedCategory) => {
   const [productValues, setProductValues] = useState({
     brand: "",
     category: "",
@@ -24,12 +24,17 @@ const useForm = (callback, validate, selectedCategory) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    productValues.category = selectedCategory;
+    categories.map((category) => {
+      if (category.name === selectedCategory) {
+        productValues.category = category._id;
+      }
+    });
     setErros(validate(productValues));
   };
 
   const clearValues = () => {
     productValues.brand = "";
+    productValues.category = "";
     productValues.unitPrice = 0;
     productValues.salePrice = 0;
     productValues.presentation = "";
