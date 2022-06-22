@@ -8,6 +8,7 @@ import { colors } from "../../../components/styles/colors";
 import Header from "../../../components/header/Header";
 import NotificationButton from "../../../components/header/NotificationButton";
 import ProductModal from "../../../components/modals/ProductModal";
+import DeleteModal from "../../../components/modals/DeleteModal";
 import ProductCardsContainer from "../../../components/cards-container/ProductCardsContainer";
 import Button from "../../../components/buttons/Button";
 import DataInput from "../../../components/inputs/DataInput";
@@ -25,6 +26,8 @@ const Products = () => {
 
   const [isOpenAddProductModal, setIsOpenAddProductModal] = useState(false);
   const [isOpenEditProductModal, setIsOpenEditProductModal] = useState(false);
+  const [isOpenDeleteProductModal, setIsOpenDeleteProductModal] =
+    useState(false);
   // const [openModalCategories, setOpenModalCategories] = useState(false);
 
   const openAddProductModal = () => {
@@ -57,16 +60,15 @@ const Products = () => {
     getProductos();
   }, []);
 
-  // botones
-
-  // const onClickStock = () => {};
-  // const onClickEdit = () => {};
-  // const onClickDelete = () => {};
-
   const [product, setProduct] = useState({});
 
   const openEditProductModal = (product) => {
     setIsOpenEditProductModal((isOpen) => !isOpen);
+    setProduct(product);
+  };
+
+  const openDeleteProductModal = (product) => {
+    setIsOpenDeleteProductModal((isOpen) => !isOpen);
     setProduct(product);
   };
 
@@ -88,6 +90,13 @@ const Products = () => {
         updateProducts={getProductos}
         isTheme={false}
         product={product}
+      />
+      <DeleteModal
+        isOpen={isOpenDeleteProductModal}
+        setIsOpen={setIsOpenDeleteProductModal}
+        message="¿Desea eliminar este producto?"
+        product={product}
+        updateProducts={getProductos}
       />
       <Header
         title="Productos"
@@ -133,6 +142,7 @@ const Products = () => {
       <ProductCardsContainer
         products={products}
         openEditProductModal={openEditProductModal}
+        openDeleteProductModal={openDeleteProductModal}
       />
     </div>
   );

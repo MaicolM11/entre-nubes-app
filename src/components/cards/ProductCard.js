@@ -3,7 +3,6 @@ import styled from "styled-components";
 import Button from "../buttons/Button";
 import { colors } from "../styles/colors";
 import { ReactComponent as EmptyProduct } from "../../assets/images/empty-product.svg";
-import { ButtonToolbar } from "reactstrap";
 
 const ProductCardContainer = styled.div`
   display: flex;

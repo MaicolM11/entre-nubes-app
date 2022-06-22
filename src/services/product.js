@@ -10,7 +10,6 @@ export const getAllProducts = () => {
   return fetch(BASE_URL, requestOptions);
 };
 
-// este funciona
 export const getByIdProducts = (id) => {
   const requestOptions = {
     method: "GET",
@@ -27,7 +26,6 @@ export const deleteProduct = (id) => {
   return fetch(BASE_URL + `/${id}`, requestOptions);
 };
 
-//funciona tambien
 export const updateUnits = (id, units) => {
   const requestOptions = {
     method: "PUT",

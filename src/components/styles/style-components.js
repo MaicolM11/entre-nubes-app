@@ -12,6 +12,11 @@ const size = {
     height: "45px",
     fontSize: "16px",
   },
+  mediumModalButton: {
+    width: "185px",
+    height: "45px",
+    fontSize: "16px",
+  },
   mediumSmallButton: {
     width: "152px",
     height: "45px",
@@ -21,6 +26,11 @@ const size = {
     width: "80px",
     height: "35px",
     fontSize: "14px",
+  },
+  mediumBorderButton: {
+    width: "185px",
+    height: "45px",
+    fontSize: "16px",
   },
   normalInput: {
     width: "403px",
@@ -68,6 +78,28 @@ export const ButtonContainer = styled.button`
   cursor: pointer;
   &:hover {
     background-color: ${(props) => theme[props.theme].hover};
+  }
+`;
+
+export const BorderButtonContainer = styled.button`
+  display: flex;
+  width: ${(props) => size[props.size].width};
+  height: ${(props) => size[props.size].height};
+  align-items: center;
+  justify-content: center;
+  background-color: ${colors.secondary};
+  color: ${colors.text};
+  font-size: ${(props) => size[props.size].fontSize};
+  font-weight: bold;
+  font-family: var(--roboto);
+  white-space: nowrap;
+  border-radius: 25px;
+  border: solid 1px ${colors.border};
+  transition: 0.2s;
+  cursor: pointer;
+  &:hover {
+    border-color: ${colors.highlighted};
+    color: ${colors.highlighted};
   }
 `;
 
@@ -119,8 +151,8 @@ export const InputValueContainer = styled.input`
   &::placeholder {
     color: ${colors.placeholder};
   }
-  &::invalid{
-    span{
+  &::invalid {
+    span {
       color: red;
     }
   }
@@ -137,6 +169,40 @@ export const ModalBackground = styled.div`
   right: 0px;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 100;
+`;
+
+export const ModalDeleteContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 565px;
+  height: 233px;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  background-color: ${colors.secondary};
+  border-radius: 16px;
+`;
+
+export const MessageDeleteContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 253px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 15px;
+`;
+export const MessageDeleteInfoContainer = styled.label`
+  font-size: 20px;
+  font-weight: bold;
+  font-family: var(--roboto);
+  color: ${colors.text};
+  text-align: center;
+`;
+
+export const ModalDeleteButtonsContainer = styled.div`
+  display: flex;
+  gap: 25px;
 `;
 
 export const ShowPasswordButton = styled.div`

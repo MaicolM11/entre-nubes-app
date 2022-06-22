@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { getAllCategories } from "../../services/category";
-import { reqProduct, editProduct, deleteProduct } from "../../services/product";
+import { reqProduct, editProduct } from "../../services/product";
 
 import styled from "styled-components";
 import { colors } from "../styles/colors";
@@ -23,7 +23,7 @@ const ProductModalContainer = styled.div`
   display: flex;
   width: 795px;
   flex-direction: column;
-  background-color: white;
+  background-color: ${colors.secondary};
   border-radius: 16px;
 `;
 
