@@ -19,7 +19,6 @@ export const getByIdProducts = (id) => {
   return fetch(BASE_URL + `/${id}`, requestOptions);
 };
 
-//funciona tambien siuuuu
 export const deleteProduct = (id) => {
   const requestOptions = {
     method: "DELETE",
@@ -40,7 +39,6 @@ export const updateUnits = (id, units) => {
   return fetch(BASE_URL + `/${id}/stock`, requestOptions);
 };
 
-//funciona
 export const editProduct = (
   id,
   brand,
@@ -92,19 +90,19 @@ export const reqProduct = (
   return fetch(BASE_URL, requestOptions);
 };
 
-
 export const filterProducts = (categoryId, brand) => {
-  
   const requestOptions = {
     method: "GET",
     headers: { "Content-Type": "application/json", authorization: getToken() },
   };
-  
-  const searchUrl = BASE_URL + '/search?' + new URLSearchParams({
-    category: categoryId,
-    brand: brand
-  }); 
-  
+
+  const searchUrl =
+    BASE_URL +
+    "/search?" +
+    new URLSearchParams({
+      category: categoryId,
+      brand: brand,
+    });
+
   return fetch(searchUrl, requestOptions);
 };
-

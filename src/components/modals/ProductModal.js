@@ -113,16 +113,6 @@ const ProductModal = ({
   isTheme,
   product,
 }) => {
-  const [productToUpdate, setProductToUpdate] = useState({
-    id: "",
-    brand: "",
-    category: "",
-    unitPrice: 0,
-    salePrice: 0,
-    presentation: "",
-    stock: 0,
-  });
-
   const category = "Categoría";
   const [selectedCategory, setSelectedCategory] = useState(category);
   const [categories, setCategories] = useState({});
@@ -131,17 +121,6 @@ const ProductModal = ({
 
   const submitProduct = () => {
     if (isOpen) {
-      // const newProduct = {
-      //   id: product._id,
-      //   brand: values.brand,
-      //   category: values.category,
-      //   unitPrice: values.unitPrice,
-      //   salePrice: values.salePrice,
-      //   presentation: values.presentation,
-      //   stock: values.stock,
-      // };
-
-      // setProductToUpdate(newProduct);
       {
         isTheme ? sendData() : editData();
       }
@@ -261,7 +240,9 @@ const ProductModal = ({
                         name="category"
                         titleOptions="Categorías"
                         categories={categories}
-                        // productCategory={product ? product.category.name : category}
+                        productCategory={
+                          product ? product.category.name : selectedCategory
+                        }
                         selectedCategory={selectedCategory}
                         setSelectedCategory={setSelectedCategory}
                       />
