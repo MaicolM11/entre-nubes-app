@@ -22,13 +22,8 @@ const DeleteModal = ({
 }) => {
   const handleDeleteProduct = () => {
     deleteProduct(product._id).then(async (res) => {
-      const data = await res.json();
-      if (res.ok) {
-        handleSetIsOpen();
-        updateProducts();
-      } else {
-        alert(data.message);
-      }
+      handleSetIsOpen();
+      updateProducts();
     });
   };
 
