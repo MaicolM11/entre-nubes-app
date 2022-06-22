@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import "./Salesmans.css";
 import Header from "../../../components/header/Header";
 import NotificationButton from "../../../components/header/NotificationButton";
@@ -6,17 +6,31 @@ import { ReactComponent as AddPerson } from "../../../assets/icons/person_add.sv
 import styled from "styled-components";
 import Button from "../../../components/buttons/Button";
 
-import SalesmancardsContainer from "../../../components/cards-container/SalesmanCardsContainer";
+import SalesmanCardsContainer from "../../../components/cards-container/SalesmanCardsContainer";
+
+import {getAllUsers } from "../../../services/user" 
 
 const AddSalesmanContainer = styled.div`
-  display: flex;
-  width: 100%;
-  min-height: 95px;
-  align-items: center;
-  padding-left: 25px;
+display: flex;
+width: 100%;
+min-height: 95px;
+align-items: center;
+padding-left: 25px;
 `;
 
 const Salesmans = () => {
+  const [salesmans, setSalesmans] = useState([]);
+  
+  useEffect(() => {
+    getSalesmans();
+  }, []);
+
+  const getSalesmans = () => {
+    getAllUsers().then(async (res) => {
+      setSalesmans(await res.json());
+    });
+  };
+
   return (
     <div className="admin-salesmans-container">
       <Header
@@ -33,7 +47,7 @@ const Salesmans = () => {
             // onClick={submitUser}
           />
       </AddSalesmanContainer>
-      <SalesmancardsContainer/>
+      <SalesmanCardsContainer salesmans={salesmans}/>
     </div>
   );
 };

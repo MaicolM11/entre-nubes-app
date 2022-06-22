@@ -10,24 +10,19 @@ const CardsContainer = styled.div`
   overflow-x: auto;
 `;
 
-const SalesmanCardsContainer = () => {
+const SalesmanCardsContainer = ({salesmans}) => {
   return (
     <CardsContainer>
-      <SalesmanCard
-        fullname="Pedro Ramirez"
-        email="pedro.jose@gmail.com"
-        cc="21903219"
-        phone="310030121"
-        address="Cra 0 # 12-12"
-      />
-
-      <SalesmanCard
-        fullname="Jose Lopez"
-        email="lopez.jose@gmail.com"
-        cc="21903219"
-        phone="310030121"
-        address="Cra 0 # 12-12"
-      />
+      {Object.values(salesmans).map((salesman, i) => (
+        <SalesmanCard
+          key={i}
+          id={salesman._id}
+          fullname={salesman.fullname}
+          email={salesman.email}
+          phone={salesman.phone}
+          address={salesman.address}
+        />
+      ))}
     </CardsContainer>
   );
 };
