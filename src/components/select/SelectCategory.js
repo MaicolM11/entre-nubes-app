@@ -115,10 +115,10 @@ const DefaultValue = styled.span`
 const SelectCategory = ({
   size,
   titleOptions,
-  options,
+  categories,
   selectedCategory,
   setSelectedCategory,
-  productCategory
+  productCategory,
 }) => {
   const [isActive, setIsActive] = useState(false);
 
@@ -132,7 +132,9 @@ const SelectCategory = ({
           <SelectIconContainer isActive={isActive}>
             <Category />
           </SelectIconContainer>
-          <DefaultValue>{productCategory ? productCategory: selectedCategory}</DefaultValue>
+          <DefaultValue>
+            {productCategory ? productCategory : selectedCategory}
+          </DefaultValue>
           <SelectCaretDownContainer isActive={isActive}>
             <CaretDown />
           </SelectCaretDownContainer>
@@ -141,15 +143,15 @@ const SelectCategory = ({
       {isActive && (
         <SelectOptionsContainer>
           <SelectTitleOptions>{titleOptions}</SelectTitleOptions>
-          {Object.values(options).map((option) => (
+          {Object.values(categories).map((category) => (
             <SelectOption
-              key={option._id}
+              key={category._id}
               onClick={() => {
-                setSelectedCategory(option.name);
+                setSelectedCategory(category.name);
                 setIsActive(false);
               }}
             >
-              {option.name}
+              {category.name}
             </SelectOption>
           ))}
         </SelectOptionsContainer>

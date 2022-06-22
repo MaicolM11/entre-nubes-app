@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { getAllCategories } from "../../services/category";
-import { reqProduct } from "../../services/product";
+import { reqProduct, editProduct } from "../../services/product";
 
 import styled from "styled-components";
 import { colors } from "../styles/colors";
@@ -23,7 +23,7 @@ const ProductModalContainer = styled.div`
   display: flex;
   width: 795px;
   flex-direction: column;
-  background-color: white;
+  background-color: ${colors.secondary};
   border-radius: 16px;
 `;
 
@@ -178,7 +178,24 @@ const ProductModal = ({
   };
 
   const editData = () => {
-    console.log("Editando...");
+    editProduct(
+      product._id,
+      values.brand,
+      values.category,
+      values.unitPrice,
+      values.salePrice,
+      values.presentation,
+      values.stock,
+      values.img_url
+    ).then(async (res) => {
+      const data = await res.json();
+      if (res.ok) {
+        handleSetIsOpen();
+        updateProducts();
+      } else {
+        alert(data.message);
+      }
+    });
   };
 
   useEffect(() => {
@@ -222,12 +239,12 @@ const ProductModal = ({
                         size="normalSelect"
                         name="category"
                         titleOptions="Categorías"
-                        options={categories}
-                        selectedCategory={selectedCategory}
-                        setSelectedCategory={setSelectedCategory}
+                        categories={categories}
                         productCategory={
                           product ? product.category.name : selectedCategory
                         }
+                        selectedCategory={selectedCategory}
+                        setSelectedCategory={setSelectedCategory}
                       />
                     </SelectContainer>
                     {selectedCategory === category ? (
