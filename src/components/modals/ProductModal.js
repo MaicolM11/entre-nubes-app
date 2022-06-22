@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { getAllCategories } from "../../services/category";
-import { reqProduct } from "../../services/product";
+import { reqProduct, editProduct, deleteProduct } from "../../services/product";
 
 import styled from "styled-components";
 import { colors } from "../styles/colors";
@@ -113,6 +113,16 @@ const ProductModal = ({
   isTheme,
   product,
 }) => {
+  const [productToUpdate, setProductToUpdate] = useState({
+    id: "",
+    brand: "",
+    category: "",
+    unitPrice: 0,
+    salePrice: 0,
+    presentation: "",
+    stock: 0,
+  });
+
   const category = "Categoría";
   const [selectedCategory, setSelectedCategory] = useState(category);
   const [categories, setCategories] = useState({});
@@ -121,6 +131,17 @@ const ProductModal = ({
 
   const submitProduct = () => {
     if (isOpen) {
+      // const newProduct = {
+      //   id: product._id,
+      //   brand: values.brand,
+      //   category: values.category,
+      //   unitPrice: values.unitPrice,
+      //   salePrice: values.salePrice,
+      //   presentation: values.presentation,
+      //   stock: values.stock,
+      // };
+
+      // setProductToUpdate(newProduct);
       {
         isTheme ? sendData() : editData();
       }
@@ -178,7 +199,24 @@ const ProductModal = ({
   };
 
   const editData = () => {
-    console.log("Editando...");
+    editProduct(
+      product._id,
+      values.brand,
+      values.category,
+      values.unitPrice,
+      values.salePrice,
+      values.presentation,
+      values.stock,
+      values.img_url
+    ).then(async (res) => {
+      const data = await res.json();
+      if (res.ok) {
+        handleSetIsOpen();
+        updateProducts();
+      } else {
+        alert(data.message);
+      }
+    });
   };
 
   useEffect(() => {
@@ -222,12 +260,10 @@ const ProductModal = ({
                         size="normalSelect"
                         name="category"
                         titleOptions="Categorías"
-                        options={categories}
+                        categories={categories}
+                        // productCategory={product ? product.category.name : category}
                         selectedCategory={selectedCategory}
                         setSelectedCategory={setSelectedCategory}
-                        productCategory={
-                          product ? product.category.name : selectedCategory
-                        }
                       />
                     </SelectContainer>
                     {selectedCategory === category ? (
