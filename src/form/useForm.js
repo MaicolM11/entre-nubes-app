@@ -10,11 +10,32 @@ const useForm = (callback, validate, categories, selectedCategory) => {
     stock: 0,
   });
 
+  const [salesmanValues, setSalesmanValues] = useState({
+    fullname : '',
+    cc: '',
+    phone: '',
+    email: '',
+    address: '',
+    password: '',
+    repeatPassWord: ''
+  })
+
+
   const [errors, setErros] = useState({});
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setProductValues((values) => {
+      return {
+        ...values,
+        [name]: value,
+      };
+    });
+  };
+
+  const handleChangeSalesman = (e) => {
+    const { name, value } = e.target;
+    setSalesmanValues((values) => {
       return {
         ...values,
         [name]: value,
@@ -29,6 +50,11 @@ const useForm = (callback, validate, categories, selectedCategory) => {
         productValues.category = category._id;
       }
     });
+    setErros(validate(productValues));
+  };
+
+  const handleSubmitSalesman = (e) => {
+    e.preventDefault();
     setErros(validate(productValues));
   };
 
@@ -51,6 +77,9 @@ const useForm = (callback, validate, categories, selectedCategory) => {
   return {
     handleChange,
     values: productValues,
+    handleChangeSalesman,
+    salesmanValues: salesmanValues,
+    handleSubmitSalesman,
     handleSubmit,
     errors,
     clearValues,

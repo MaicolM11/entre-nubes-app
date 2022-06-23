@@ -1,3 +1,5 @@
+import { toHaveErrorMessage } from "@testing-library/jest-dom/dist/matchers";
+
 export const productValidation = (values) => {
   const errors = {};
   const numberRegex = /^[0-9]*$/;
@@ -34,3 +36,45 @@ export const productValidation = (values) => {
 
   return errors;
 };
+
+export const salesmanValidation = () =>{
+  const errors = {};
+  const numberRegex = /^[0-9]*$/;
+  const emailRegex = /^[^@]+@[^@]+\.[a-zA-Z]{2,}$/
+
+    if(!values.fullName){
+        errors.fullName = 'Nombre completo requerido'
+    }
+
+    if(!values.cc){
+        errors.cc = ' Documento de identidad requerido'
+    }else if (!numberRegex.test(values.cc)){
+        errors.cc = 'El documento de identidad no puede contener letras'
+    }
+
+    if(!values.phone){
+        toHaveErrorMessage.phone = 'El numero de telefono es requerido'
+    }else if (!numberRegex.test(phone)){
+        errors.phone = 'El numero de telefono no puede contener letras'
+    }
+
+    if(!values.email){
+        errors.email = 'Direccion de correo requerida'
+    }else if (!emailRegex.test(values.email)){
+        errors.email= 'La entrada no es una direccion de correo valida'
+    }
+
+    if(!values.address){
+        errors.address = 'La direcion es requerida'
+    }
+
+    if(!values.password){
+        errors.password= "Contraseña requerida"
+    }
+
+    if(!values.repeatPassWord){
+        errors.repeatPassWord = 'Se debe confirmar contraseña'
+    }else if (!values.password==values.repeatPassWord){
+        errors.repeatPassWord = 'Las contraseñas no coinciden'
+    }
+}
