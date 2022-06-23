@@ -1,25 +1,21 @@
 import React from "react";
 import styled from "styled-components";
-import ProductCard from "../cards/ProductCard";
+import OrderProductCard from "../cards/OrderProductCard";
 
 const CardsContainer = styled.div`
   display: grid;
   grid-row-gap: 25px;
-  grid-column-gap: 48px;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  padding: 0 0 15px 25px;
+  grid-column-gap: 25px;
+  grid-template-columns: repeat(2, minmax(250px, 1fr));
+  overflow-x: hidden;
   overflow-y: auto;
 `;
 
-const ProductCardsContainer = ({
-  products,
-  openEditProductModal,
-  openDeleteProductModal,
-}) => {
+const OrderProductCardsContainer = ({ products, addProductOrder }) => {
   return (
     <CardsContainer>
       {Object.values(products).map((product, i) => (
-        <ProductCard
+        <OrderProductCard
           key={i}
           brand={product.brand}
           category={product.category.name}
@@ -27,12 +23,11 @@ const ProductCardsContainer = ({
           salePrice={product.sale_price}
           presentation={product.presentation}
           stock={product.stock}
-          onClickEdit={() => openEditProductModal(product)}
-          onClickDelete={() => openDeleteProductModal(product)}
+          onClickAddProductOrder={() => addProductOrder(product)}
         />
       ))}
     </CardsContainer>
   );
 };
 
-export default ProductCardsContainer;
+export default OrderProductCardsContainer;

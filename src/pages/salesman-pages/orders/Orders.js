@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { getAllProducts } from "../../../services/product";
 import styled from "styled-components";
-
 import "./Orders.css";
 import AnimatedModalContainer from "../../../components/modals/animation/AnimatedModalContainer";
 import Header from "../../../components/header/Header";
@@ -20,16 +20,32 @@ const AddOrdersContainer = styled.div`
 `;
 
 const Orders = ({ salesmanName }) => {
+  const [products, setProducts] = useState([]);
   const [isOpenCreateOrderModal, setIsOpenCreateOrderModal] = useState(false);
 
   const openCreateOrderModal = () => {
     setIsOpenCreateOrderModal((isOpen) => !isOpen);
   };
 
+  const getProductos = () => {
+    getAllProducts().then(async (res) => {
+      setProducts(await res.json());
+    });
+  };
+
+  useEffect(() => {
+    getProductos();
+  }, []);
+
   return (
     <div className="salesman-orders-container">
       <AnimatedModalContainer
-        modal={<CreateOrderModal handleCloseModal={openCreateOrderModal} />}
+        modal={
+          <CreateOrderModal
+            products={products}
+            handleCloseModal={openCreateOrderModal}
+          />
+        }
         isOpen={isOpenCreateOrderModal}
         setIsOpen={setIsOpenCreateOrderModal}
       />

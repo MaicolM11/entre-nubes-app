@@ -4,12 +4,13 @@ import { colors } from "../styles/colors";
 import { ModalTitle } from "../styles/style-components";
 import Button from "../buttons/Button";
 import BorderButton from "../buttons/BorderButton";
+import OrderProductCardsContainer from "../cards-container/OrderProductCardsContainer";
 
 const CreateOrderModalContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 1024px;
-  height: 630px;
+  width: 1205px;
+  height: 675px;
   background-color: ${colors.secondary};
   border-radius: 16px;
 `;
@@ -29,12 +30,10 @@ const ButtonsContainer = styled.div`
 const OrderOptionsContainer = styled.div`
   display: flex;
   width: 100%;
-  height: 535px;
 `;
 
 const ProductsContainer = styled.div`
   display: flex;
-  width: 575px;
 `;
 
 const ProductsCenterContainer = styled.div`
@@ -57,7 +56,7 @@ const ProductsFilterContainer = styled.div`
 const ProductsCardContainer = styled.div`
   display: flex;
   width: 100%;
-  height: 100vh;
+  height: 450px;
   background-color: red;
 `;
 
@@ -86,11 +85,11 @@ const OrderPlaceContainer = styled.div`
 const OrderTableContainer = styled.div`
   display: flex;
   width: 100%;
-  height: 100vh;
+  height: 450px;
   background-color: darkslateblue;
 `;
 
-const CreateOrderModal = ({ handleCloseModal }) => {
+const CreateOrderModal = ({ products, handleCloseModal }) => {
   return (
     <CreateOrderModalContainer>
       <CreateOrderModalTitleContainer>
@@ -113,7 +112,9 @@ const CreateOrderModal = ({ handleCloseModal }) => {
         <ProductsContainer>
           <ProductsCenterContainer>
             <ProductsFilterContainer></ProductsFilterContainer>
-            <ProductsCardContainer></ProductsCardContainer>
+            <ProductsCardContainer>
+              <OrderProductCardsContainer products={products} />
+            </ProductsCardContainer>
           </ProductsCenterContainer>
         </ProductsContainer>
         <OrdersContainer>

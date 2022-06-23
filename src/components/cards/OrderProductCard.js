@@ -1,13 +1,13 @@
 import React from "react";
 import styled from "styled-components";
-import Button from "../buttons/Button";
 import { colors } from "../styles/colors";
 import { ReactComponent as EmptyProduct } from "../../assets/images/empty-product.svg";
+import CirclePlusButton from "../buttons/CirclePlusButton";
 
 const ProductCardContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 300px;
+  width: 250px;
   align-items: center;
   justify-content: center;
   background-color: ${colors.secondary};
@@ -23,13 +23,14 @@ const ProductCardCenterContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: 25px 15px;
+  margin: 15px 25px;
 `;
 
 const ProductImageContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+  max-height: 150px;
   align-items: center;
   justify-content: center;
   border-bottom: solid 1px ${colors.border};
@@ -44,7 +45,7 @@ const ProductInfoContainer = styled.div`
 
 const ProductName = styled.label`
   color: ${colors.text};
-  font-size: 22px;
+  font-size: 20px;
   font-weight: bold;
   font-family: var(--roboto);
   white-space: nowrap;
@@ -52,7 +53,7 @@ const ProductName = styled.label`
 
 const ProductCategory = styled.div`
   display: flex;
-  max-width: 125px;
+  max-width: 100px;
   height: 25px;
   align-items: center;
   justify-content: center;
@@ -83,11 +84,11 @@ const DataSpan = styled.span`
 
 const ProductOptionButtons = styled.div`
   display: flex;
+  justify-content: center;
   width: 100%;
-  gap: 15px;
 `;
 
-const ProductCard = ({
+const OrderProductCard = ({
   image,
   brand,
   category,
@@ -95,9 +96,7 @@ const ProductCard = ({
   salePrice,
   presentation,
   stock,
-  onClickStock,
-  onClickEdit,
-  onClickDelete,
+  onClickAddProductOrder,
 }) => {
   return (
     <ProductCardContainer>
@@ -121,24 +120,7 @@ const ProductCard = ({
             Unidades de Venta: <DataSpan>{stock}</DataSpan>
           </ProductData>
           <ProductOptionButtons>
-            <Button
-              size="smallButton"
-              theme="highlighted"
-              text="Unidades"
-              onClick={onClickStock}
-            />
-            <Button
-              size="smallButton"
-              theme="edit"
-              text="Editar"
-              onClick={onClickEdit}
-            />
-            <Button
-              size="smallButton"
-              theme="delete"
-              text="Eliminar"
-              onClick={onClickDelete}
-            />
+            <CirclePlusButton onClick={onClickAddProductOrder} />
           </ProductOptionButtons>
         </ProductInfoContainer>
       </ProductCardCenterContainer>
@@ -146,4 +128,4 @@ const ProductCard = ({
   );
 };
 
-export default ProductCard;
+export default OrderProductCard;
