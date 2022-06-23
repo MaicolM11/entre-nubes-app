@@ -7,7 +7,7 @@ import styled from "styled-components";
 import Button from "../../../components/buttons/Button";
 
 import SalesmanCardsContainer from "../../../components/cards-container/SalesmanCardsContainer";
-
+import SalesmanModal from "../../../components/modals/SalesmanModal";
 import {getAllUsers } from "../../../services/user" 
 
 const AddSalesmanContainer = styled.div`
@@ -20,7 +20,13 @@ padding-left: 25px;
 
 const Salesmans = () => {
   const [salesmans, setSalesmans] = useState([]);
+
+  const [isOpenAddSalesmanModal, setIsOpenAddSalesmanModal] = useState(false);
   
+  const openAddSalesmanModal = () => {
+    setIsOpenAddSalesmanModal((isOpen) => !isOpen);
+  };
+
   useEffect(() => {
     getSalesmans();
   }, []);
@@ -33,6 +39,14 @@ const Salesmans = () => {
 
   return (
     <div className="admin-salesmans-container">
+      <SalesmanModal
+      isThem={true}
+      info='Agregar Vendedor'
+      buttonTheme='ok'
+      updateSalesman={getSalesmans}
+      isOpen={isOpenAddSalesmanModal}
+      setIsOpen={setIsOpenAddSalesmanModal}>
+      </SalesmanModal>
       <Header
         title="Vendedores"
         description="Información de los vendedores contratados"
@@ -44,7 +58,7 @@ const Salesmans = () => {
             theme="ok"
             icon={<AddPerson fill="white" />}
             text="Crear vendedor"
-            // onClick={submitUser}
+            onClick={openAddSalesmanModal}
           />
       </AddSalesmanContainer>
       <SalesmanCardsContainer salesmans={salesmans}/>

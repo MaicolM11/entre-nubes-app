@@ -68,6 +68,17 @@ const useForm = (callback, validate, categories, selectedCategory) => {
     setErros(0);
   };
 
+  const clearSalesmanValues= () =>{
+    salesmanValues.fullname = '',
+    salesmanValues.email= '',
+    salesmanValues.password= '',
+    salesmanValues.cc = '',
+    salesmanValues.address= '',
+    salesmanValues.phone= '',
+    salesmanValues.repeatPassWord = '',
+    setErros(0);
+  }
+
   useEffect(() => {
     if (!Object.keys(errors).length) {
       callback();
@@ -83,6 +94,7 @@ const useForm = (callback, validate, categories, selectedCategory) => {
     handleSubmit,
     errors,
     clearValues,
+    clearSalesmanValues
   };
 };
 
