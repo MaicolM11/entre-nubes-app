@@ -55,6 +55,31 @@ justify-content: center;
 white-space: nowrap;
 `;
 
+const EditButtonContainer = styled.div`
+  align-items: center;
+  transition: 0.2s;
+  cursor: pointer;
+
+  &:hover {
+    path {
+      fill: orange;
+    }
+  }
+`;
+
+const DeleteButtonContainer = styled.div`
+  align-items: center;
+  transition: 0.2s;
+  cursor: pointer;
+
+  &:hover {
+    path {
+      fill: red;
+    }
+  }
+`;
+
+
 const SalesmanCardButtonsContainer = styled.div`
   display: flex;
   flex-direction: row;
@@ -97,13 +122,13 @@ const SalesmanCard = ({id, fullname, email, cc, phone, address }) => {
             </DataWithIcon>
             <SalesmanCardButtonsContainer>
               
-              <IconContainer >
+              <EditButtonContainer >
                 <Edit/>
-              </IconContainer>
+              </EditButtonContainer>
 
-              <IconContainer>
+              <DeleteButtonContainer>
                 <Delete/>
-              </IconContainer>
+              </DeleteButtonContainer>
 
             </SalesmanCardButtonsContainer>
         </SalesmanCardDataContainer>
