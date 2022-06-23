@@ -11,10 +11,15 @@ import { ReactComponent as Alert } from "../../assets/icons/alert.svg";
 import BorderButton from "../buttons/BorderButton";
 import Button from "../buttons/Button";
 
-const DeleteModal = ({ message, product, updateProducts, handleSetIsOpen }) => {
+const DeleteModal = ({
+  message,
+  product,
+  updateProducts,
+  handleCloseModal,
+}) => {
   const handleDeleteProduct = () => {
     deleteProduct(product._id).then(async () => {
-      handleSetIsOpen();
+      handleCloseModal();
       updateProducts();
     });
   };
@@ -29,7 +34,7 @@ const DeleteModal = ({ message, product, updateProducts, handleSetIsOpen }) => {
         <BorderButton
           size="mediumBorderButton"
           text="Cancelar"
-          onClick={handleSetIsOpen}
+          onClick={handleCloseModal}
         />
         <Button
           size="mediumModalButton"

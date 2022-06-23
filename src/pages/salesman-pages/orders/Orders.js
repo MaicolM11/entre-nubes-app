@@ -22,10 +22,14 @@ const AddOrdersContainer = styled.div`
 const Orders = ({ salesmanName }) => {
   const [isOpenCreateOrderModal, setIsOpenCreateOrderModal] = useState(false);
 
+  const openCreateOrderModal = () => {
+    setIsOpenCreateOrderModal((isOpen) => !isOpen);
+  };
+
   return (
     <div className="salesman-orders-container">
       <AnimatedModalContainer
-        modal={<CreateOrderModal />}
+        modal={<CreateOrderModal handleCloseModal={openCreateOrderModal} />}
         isOpen={isOpenCreateOrderModal}
         setIsOpen={setIsOpenCreateOrderModal}
       />
@@ -40,7 +44,7 @@ const Orders = ({ salesmanName }) => {
           theme="ok"
           icon={<Add fill="white" />}
           text="Agregar Pedido"
-          // onClick={submitUser}
+          onClick={openCreateOrderModal}
         />
       </AddOrdersContainer>
       <OrderCardsContainer />

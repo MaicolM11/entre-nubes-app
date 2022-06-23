@@ -98,7 +98,7 @@ const Products = () => {
             message="¿Desea eliminar este producto?"
             product={product}
             updateProducts={getProductos}
-            handleSetIsOpen={closeDeleteProductModal}
+            handleCloseModal={closeDeleteProductModal}
           />
         }
         isOpen={isOpenDeleteProductModal}
