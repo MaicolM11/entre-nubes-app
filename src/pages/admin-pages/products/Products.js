@@ -26,7 +26,8 @@ const Products = () => {
 
   const [isOpenAddProductModal, setIsOpenAddProductModal] = useState(false);
   const [isOpenEditProductModal, setIsOpenEditProductModal] = useState(false);
-  const [isOpenDeleteProductModal, setIsOpenDeleteProductModal] = useState(false);
+  const [isOpenDeleteProductModal, setIsOpenDeleteProductModal] =
+    useState(false);
   // const [openModalCategories, setOpenModalCategories] = useState(false);
 
   const openAddProductModal = () => {
@@ -138,9 +139,9 @@ const Products = () => {
             <SelectCategory
               size="mediumSelect"
               titleOptions="Categorías"
-              options={categories}
-              selected={selected}
-              setSelected={setSelected}
+              categories={categories}
+              selectedCategory={selected}
+              setSelectedCategory={setSelected}
             />
           </div>
         </div>

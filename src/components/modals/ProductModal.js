@@ -6,7 +6,11 @@ import useForm from "../../form/useForm";
 
 import styled from "styled-components";
 import { colors } from "../styles/colors";
-import { ModalBackground, ModalTitle } from "../styles/style-components";
+import {
+  ModalBackground,
+  ModalTitle,
+  SelectContainer,
+} from "../styles/style-components";
 import { useSpring, animated } from "react-spring";
 import CloseButton from "../buttons/CloseButton";
 import DataInput from "../inputs/DataInput";
@@ -62,12 +66,6 @@ const ProductModalFormOptionContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
-`;
-
-const SelectContainer = styled.div`
-  display: flex;
-  width: 100%;
-  height: 45px;
 `;
 
 const ErrorMessageContainer = styled.div`

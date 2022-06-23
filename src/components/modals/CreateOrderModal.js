@@ -1,10 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 import { colors } from "../styles/colors";
-import { ModalTitle } from "../styles/style-components";
+import { ModalTitle, SelectContainer } from "../styles/style-components";
 import Button from "../buttons/Button";
 import BorderButton from "../buttons/BorderButton";
 import OrderProductCardsContainer from "../cards-container/OrderProductCardsContainer";
+import SearchInput from "../inputs/DataInput";
+import SelectCategory from "../select/SelectCategory";
+import { ReactComponent as Search } from "../../assets/icons/search.svg";
 
 const CreateOrderModalContainer = styled.div`
   display: flex;
@@ -34,13 +37,13 @@ const OrderOptionsContainer = styled.div`
 
 const ProductsContainer = styled.div`
   display: flex;
+  border-right: solid 1px ${colors.border};
 `;
 
 const ProductsCenterContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  background-color: darkorchid;
   margin: 25px;
   gap: 25px;
 `;
@@ -48,16 +51,15 @@ const ProductsCenterContainer = styled.div`
 const ProductsFilterContainer = styled.div`
   display: flex;
   width: 100%;
-  height: 60px;
-  min-height: 60px;
-  background-color: magenta;
+  padding-bottom: 15px;
+  border-bottom: solid 1px ${colors.border};
 `;
 
 const ProductsCardContainer = styled.div`
   display: flex;
   width: 100%;
-  height: 450px;
-  background-color: red;
+  height: 467px;
+  min-height: 467px;
 `;
 
 const OrdersContainer = styled.div`
@@ -89,7 +91,28 @@ const OrderTableContainer = styled.div`
   background-color: darkslateblue;
 `;
 
-const CreateOrderModal = ({ products, handleCloseModal }) => {
+const TitleInfo = styled.label`
+  width: 100%;
+  color: ${colors.text};
+  font-size: 24px;
+  font-weight: bold;
+  font-family: var(--roboto);
+  white-space: nowrap;
+`;
+const FilterContainer = styled.div`
+  display: flex;
+  width: 385px;
+  min-width: 385px;
+  gap: 15px;
+`;
+
+const CreateOrderModal = ({
+  categories,
+  products,
+  selected,
+  setSelected,
+  handleCloseModal,
+}) => {
   return (
     <CreateOrderModalContainer>
       <CreateOrderModalTitleContainer>
@@ -111,7 +134,28 @@ const CreateOrderModal = ({ products, handleCloseModal }) => {
       <OrderOptionsContainer>
         <ProductsContainer>
           <ProductsCenterContainer>
-            <ProductsFilterContainer></ProductsFilterContainer>
+            <ProductsFilterContainer>
+              <TitleInfo>Productos</TitleInfo>
+              <FilterContainer>
+                <SearchInput
+                  name="search"
+                  size="smallInput"
+                  icon={<Search />}
+                  placeholder="Buscar"
+                  type="text"
+                  // onChange={handleSearch}
+                />
+                <SelectContainer>
+                  <SelectCategory
+                    size="smallSelect"
+                    titleOptions="Categorías"
+                    categories={categories}
+                    selectedCategory={selected}
+                    setSelectedCategory={setSelected}
+                  />
+                </SelectContainer>
+              </FilterContainer>
+            </ProductsFilterContainer>
             <ProductsCardContainer>
               <OrderProductCardsContainer products={products} />
             </ProductsCardContainer>
