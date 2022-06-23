@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 import "./Orders.css";
+import AnimatedModalContainer from "../../../components/modals/animation/AnimatedModalContainer";
 import Header from "../../../components/header/Header";
 import SalesmanData from "../../../components/header/SalesmanData";
 import Button from "../../../components/buttons/Button";
 import OrderCardsContainer from "../../../components/cards-container/OrderCardsContainer";
+import CreateOrderModal from "../../../components/modals/CreateOrderModal";
 
 import { ReactComponent as Add } from "../../../assets/icons/add.svg";
 
@@ -18,8 +20,15 @@ const AddOrdersContainer = styled.div`
 `;
 
 const Orders = ({ salesmanName }) => {
+  const [isOpenCreateOrderModal, setIsOpenCreateOrderModal] = useState(false);
+
   return (
     <div className="salesman-orders-container">
+      <AnimatedModalContainer
+        modal={<CreateOrderModal />}
+        isOpen={isOpenCreateOrderModal}
+        setIsOpen={setIsOpenCreateOrderModal}
+      />
       <Header
         title="Pedidos"
         description="Información de los pedidos realizados por mesa"

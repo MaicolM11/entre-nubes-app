@@ -1,10 +1,9 @@
-import React, { useState, useEffect, Component } from "react";
+import React, { useState, useEffect } from "react";
 import { getAllCategories } from "../../../services/category";
 import { getAllProducts } from "../../../services/product";
 import "./Products.css";
-import { colors } from "../../../components/styles/colors";
 
-//Components
+import AnimatedModalContainer from "../../../components/modals/animation/AnimatedModalContainer";
 import Header from "../../../components/header/Header";
 import NotificationButton from "../../../components/header/NotificationButton";
 import ProductModal from "../../../components/modals/ProductModal";
@@ -21,17 +20,36 @@ import { ReactComponent as Search } from "../../../assets/icons/search.svg";
 
 const Products = () => {
   const [categories, setCategories] = useState({});
+  const [product, setProduct] = useState({});
   const [products, setProducts] = useState([]);
   const [selected, setSelected] = useState("Categoría");
 
   const [isOpenAddProductModal, setIsOpenAddProductModal] = useState(false);
   const [isOpenEditProductModal, setIsOpenEditProductModal] = useState(false);
-  const [isOpenDeleteProductModal, setIsOpenDeleteProductModal] =
-    useState(false);
+  const [isOpenDeleteProductModal, setIsOpenDeleteProductModal] = useState(false);
   // const [openModalCategories, setOpenModalCategories] = useState(false);
 
   const openAddProductModal = () => {
     setIsOpenAddProductModal((isOpen) => !isOpen);
+  };
+
+  const openEditProductModal = (product) => {
+    setProduct(product);
+    setIsOpenEditProductModal((isOpen) => !isOpen);
+  };
+
+  const openDeleteProductModal = (product) => {
+    setProduct(product);
+    setIsOpenDeleteProductModal((isOpen) => !isOpen);
+  };
+
+  const closeDeleteProductModal = () => {
+    setIsOpenDeleteProductModal((isOpen) => !isOpen);
+  };
+
+  const handleSearch = (e) => {
+    const { name, value } = e.target;
+    console.log(`${name}: ${value}`);
   };
 
   // const modalCategoriesState = () => {
@@ -50,53 +68,41 @@ const Products = () => {
     });
   };
 
-  const handleSearch = (e) => {
-    const { name, value } = e.target;
-    console.log(`${name}: ${value}`);
-  };
-
   useEffect(() => {
     getCategories();
     getProductos();
   }, []);
 
-  const [product, setProduct] = useState({});
-
-  const openEditProductModal = (product) => {
-    setIsOpenEditProductModal((isOpen) => !isOpen);
-    setProduct(product);
-  };
-
-  const openDeleteProductModal = (product) => {
-    setIsOpenDeleteProductModal((isOpen) => !isOpen);
-    setProduct(product);
-  };
-
   return (
     <div className="admin-products-container">
       <ProductModal
-        isOpen={isOpenAddProductModal}
-        setIsOpen={setIsOpenAddProductModal}
+        isTheme={true}
         info="Agregar Producto"
         buttonTheme="ok"
         updateProducts={getProductos}
-        isTheme={true}
+        isOpen={isOpenAddProductModal}
+        setIsOpen={setIsOpenAddProductModal}
       />
       <ProductModal
-        isOpen={isOpenEditProductModal}
-        setIsOpen={setIsOpenEditProductModal}
+        isTheme={false}
         info="Editar Producto"
         buttonTheme="highlighted"
-        updateProducts={getProductos}
-        isTheme={false}
         product={product}
+        updateProducts={getProductos}
+        isOpen={isOpenEditProductModal}
+        setIsOpen={setIsOpenEditProductModal}
       />
-      <DeleteModal
+      <AnimatedModalContainer
+        modal={
+          <DeleteModal
+            message="¿Desea eliminar este producto?"
+            product={product}
+            updateProducts={getProductos}
+            handleSetIsOpen={closeDeleteProductModal}
+          />
+        }
         isOpen={isOpenDeleteProductModal}
         setIsOpen={setIsOpenDeleteProductModal}
-        message="¿Desea eliminar este producto?"
-        product={product}
-        updateProducts={getProductos}
       />
       <Header
         title="Productos"

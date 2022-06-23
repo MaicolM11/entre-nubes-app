@@ -158,6 +158,23 @@ export const InputValueContainer = styled.input`
   }
 `;
 
+export const MessageDeleteContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 253px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 15px;
+`;
+export const MessageDeleteInfoContainer = styled.label`
+  font-size: 20px;
+  font-weight: bold;
+  font-family: var(--roboto);
+  color: ${colors.text};
+  text-align: center;
+`;
+
 export const ModalBackground = styled.div`
   display: flex;
   width: 100%;
@@ -183,26 +200,18 @@ export const ModalDeleteContainer = styled.div`
   border-radius: 16px;
 `;
 
-export const MessageDeleteContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 253px;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 15px;
-`;
-export const MessageDeleteInfoContainer = styled.label`
-  font-size: 20px;
-  font-weight: bold;
-  font-family: var(--roboto);
-  color: ${colors.text};
-  text-align: center;
-`;
-
 export const ModalDeleteButtonsContainer = styled.div`
   display: flex;
   gap: 25px;
+`;
+
+export const ModalTitle = styled.label`
+  width: 100%;
+  color: ${colors.text};
+  font-size: 24px;
+  font-weight: bold;
+  font-family: var(--roboto);
+  white-space: nowrap;
 `;
 
 export const ShowPasswordButton = styled.div`
