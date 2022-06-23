@@ -12,6 +12,9 @@ const size = {
   mediumSelect: {
     width: "250px",
   },
+  smallSelect: {
+    width: "185px",
+  },
 };
 
 const SelectContainer = styled.div`
@@ -133,7 +136,8 @@ const SelectCategory = ({
             <Category />
           </SelectIconContainer>
           <DefaultValue>
-            {productCategory ? productCategory : selectedCategory}
+            {/* {productCategory ? productCategory : selectedCategory} */}
+            {selectedCategory}
           </DefaultValue>
           <SelectCaretDownContainer isActive={isActive}>
             <CaretDown />

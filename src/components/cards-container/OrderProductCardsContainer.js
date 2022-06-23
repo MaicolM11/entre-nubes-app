@@ -9,6 +9,7 @@ const CardsContainer = styled.div`
   grid-template-columns: repeat(2, minmax(250px, 1fr));
   overflow-x: hidden;
   overflow-y: auto;
+  padding: 0 3px;
 `;
 
 const OrderProductCardsContainer = ({ products, addProductOrder }) => {

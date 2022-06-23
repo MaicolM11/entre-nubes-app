@@ -107,9 +107,7 @@ const OrderProductCard = ({
         <ProductInfoContainer>
           <ProductName>{brand}</ProductName>
           <ProductCategory>{category}</ProductCategory>
-          <ProductData>
-            Precio por Unidad: <DataSpan>${unitPrice}</DataSpan>
-          </ProductData>
+
           <ProductData>
             Precio de Venta: <DataSpan>${salePrice}</DataSpan>
           </ProductData>
@@ -117,7 +115,7 @@ const OrderProductCard = ({
             Presentación: <DataSpan>{presentation}</DataSpan>
           </ProductData>
           <ProductData>
-            Unidades de Venta: <DataSpan>{stock}</DataSpan>
+            Unidades disponibles: <DataSpan>{stock}</DataSpan>
           </ProductData>
           <ProductOptionButtons>
             <CirclePlusButton onClick={onClickAddProductOrder} />

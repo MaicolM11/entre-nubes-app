@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { getAllProducts } from "../../../services/product";
-import styled from "styled-components";
+import { getAllCategories } from "../../../services/category";
+
 import "./Orders.css";
+import styled from "styled-components";
 import AnimatedModalContainer from "../../../components/modals/animation/AnimatedModalContainer";
 import Header from "../../../components/header/Header";
 import SalesmanData from "../../../components/header/SalesmanData";
 import Button from "../../../components/buttons/Button";
 import OrderCardsContainer from "../../../components/cards-container/OrderCardsContainer";
 import CreateOrderModal from "../../../components/modals/CreateOrderModal";
-
 import { ReactComponent as Add } from "../../../assets/icons/add.svg";
 
 const AddOrdersContainer = styled.div`
@@ -20,11 +21,19 @@ const AddOrdersContainer = styled.div`
 `;
 
 const Orders = ({ salesmanName }) => {
+  const [categories, setCategories] = useState({});
   const [products, setProducts] = useState([]);
   const [isOpenCreateOrderModal, setIsOpenCreateOrderModal] = useState(false);
+  const [selected, setSelected] = useState("Categoría");
 
   const openCreateOrderModal = () => {
     setIsOpenCreateOrderModal((isOpen) => !isOpen);
+  };
+
+  const getCategories = () => {
+    getAllCategories().then(async (res) => {
+      setCategories(await res.json());
+    });
   };
 
   const getProductos = () => {
@@ -34,6 +43,7 @@ const Orders = ({ salesmanName }) => {
   };
 
   useEffect(() => {
+    getCategories();
     getProductos();
   }, []);
 
@@ -42,8 +52,11 @@ const Orders = ({ salesmanName }) => {
       <AnimatedModalContainer
         modal={
           <CreateOrderModal
+            categories={categories}
             products={products}
             handleCloseModal={openCreateOrderModal}
+            selected={selected}
+            setSelected={setSelected}
           />
         }
         isOpen={isOpenCreateOrderModal}

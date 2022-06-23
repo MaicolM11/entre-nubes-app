@@ -38,6 +38,9 @@ const size = {
   mediumInput: {
     width: "248px",
   },
+  smallInput: {
+    width: "185px",
+  },
 };
 
 const theme = {
@@ -212,6 +215,11 @@ export const ModalTitle = styled.label`
   font-weight: bold;
   font-family: var(--roboto);
   white-space: nowrap;
+`;
+
+export const SelectContainer = styled.div`
+  display: flex;
+  height: 45px;
 `;
 
 export const ShowPasswordButton = styled.div`
