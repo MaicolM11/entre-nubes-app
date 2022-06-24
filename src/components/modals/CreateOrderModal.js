@@ -7,8 +7,10 @@ import BorderButton from "../buttons/BorderButton";
 import OrderProductCardsContainer from "../cards-container/OrderProductCardsContainer";
 import SearchInput from "../inputs/DataInput";
 import SelectCategory from "../select/SelectCategory";
-import { ReactComponent as Search } from "../../assets/icons/search.svg";
+import PlaceInput from "../inputs/DataInput";
 import Table from "../table/Table";
+import { ReactComponent as Search } from "../../assets/icons/search.svg";
+import { ReactComponent as HomeTable } from "../../assets/icons/home-table.svg";
 
 const CreateOrderModalContainer = styled.div`
   display: flex;
@@ -38,7 +40,6 @@ const OrderOptionsContainer = styled.div`
 
 const ProductsContainer = styled.div`
   display: flex;
-  border-right: solid 1px ${colors.border};
 `;
 
 const ProductsCenterContainer = styled.div`
@@ -66,13 +67,14 @@ const ProductsCardContainer = styled.div`
 const OrdersContainer = styled.div`
   display: flex;
   width: 630px;
+  height: 579px;
+  border-left: solid 1px ${colors.border};
 `;
 
 const OrdersCenterContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  background-color: darkorchid;
   margin: 25px;
   gap: 25px;
 `;
@@ -82,13 +84,14 @@ const OrderPlaceContainer = styled.div`
   width: 100%;
   height: 60px;
   min-height: 60px;
-  background-color: magenta;
+  border-bottom: solid 1px ${colors.border};
 `;
 
 const OrderTableContainer = styled.div`
   display: flex;
+  flex-direction: column;
   width: 100%;
-  height: 450px;
+  height: 467px;
   background-color: darkslateblue;
 `;
 
@@ -107,6 +110,12 @@ const FilterContainer = styled.div`
   gap: 15px;
 `;
 
+const InputContainer = styled.div`
+  display: flex;
+  width: 250px;
+  min-width: 250px;
+`;
+
 const CreateOrderModal = ({
   categories,
   products,
@@ -114,12 +123,72 @@ const CreateOrderModal = ({
   setSelected,
   handleCloseModal,
 }) => {
-  const productList = [];
   const [orderProducts, setOrderProducts] = useState([]);
+  const [place, setPlace] = useState("");
+  const [sales, setSales] = useState([]);
+
+  const order = {
+    description: place,
+    sales: sales,
+  };
+
+  const handleSubmitOrder = () => {
+    console.log(order);
+  };
+
+  const productsOnTable = [];
+  const showProductsOnTable = [];
+
+  let quantity = 0;
 
   const handleAddProductOrder = (product) => {
-    productList.push({ brand: product.brand, sale_price: product.buy_price });
-    setOrderProducts((productList) => [...productList, product]);
+    //Manejo de los datos del producto
+    const productOnTable = {
+      _id: product._id,
+      brand: product.brand,
+      sale_price: product.sale_price,
+      quantity: quantity,
+    };
+
+    //Productos en venta
+    const productOnSale = { product: product._id, quantity: quantity };
+    if (sales.length === 0) {
+      setSales((sales) => [...sales, productOnSale]);
+    } else {
+      const exist = sales.some(
+        (data) => data.product === productOnSale.product
+      );
+      if (exist) {
+        // quantity=+1
+        console.log(quantity++);
+        // productOnSale.quantity+=1
+        console.log("Aumenta + 1");
+      } else {
+        console.log("Agrega...");
+        setSales((sales) => [...sales, productOnSale]);
+      }
+    }
+    console.log(sales);
+
+    //Productos en tabla
+    if (orderProducts.length === 0) {
+      setOrderProducts((productsOnTable) => [...productsOnTable, product]);
+    } else {
+      const exist = orderProducts.includes(product);
+      if (!exist) {
+        setOrderProducts((productsOnTable) => [...productsOnTable, product]);
+      }
+    }
+  };
+
+  const handlePlaceChange = (e) => {
+    const { value } = e.target;
+    setPlace(value);
+  };
+
+  const handleSearchChange = (e) => {
+    const { name, value } = e.target;
+    console.log(`${name}: ${value}`);
   };
 
   return (
@@ -136,7 +205,7 @@ const CreateOrderModal = ({
             size="mediumModalButton"
             theme="ok"
             text="Agregar Pedido"
-            //   onClick={handleDeleteProduct}
+            onClick={handleSubmitOrder}
           />
         </ButtonsContainer>
       </CreateOrderModalTitleContainer>
@@ -152,7 +221,7 @@ const CreateOrderModal = ({
                   icon={<Search />}
                   placeholder="Buscar"
                   type="text"
-                  // onChange={handleSearch}
+                  onChange={handleSearchChange}
                 />
                 <SelectContainer>
                   <SelectCategory
@@ -175,7 +244,19 @@ const CreateOrderModal = ({
         </ProductsContainer>
         <OrdersContainer>
           <OrdersCenterContainer>
-            <OrderPlaceContainer></OrderPlaceContainer>
+            <OrderPlaceContainer>
+              <TitleInfo>Pedidos</TitleInfo>
+              <InputContainer>
+                <PlaceInput
+                  name="place"
+                  size="mediumInput"
+                  icon={<HomeTable stroke={colors.brand} />}
+                  placeholder="Lugar"
+                  type="text"
+                  onChange={handlePlaceChange}
+                />
+              </InputContainer>
+            </OrderPlaceContainer>
             <OrderTableContainer>
               <Table data={orderProducts} />
             </OrderTableContainer>
