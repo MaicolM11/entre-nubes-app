@@ -114,6 +114,7 @@ const ProductModal = ({
   const { handleChange, values, handleSubmit, errors, clearValues } = useForm(
     submitProduct,
     productValidation,
+    product,
     categories,
     selectedCategory
   );
@@ -281,7 +282,7 @@ const ProductModal = ({
                         type="text"
                         name="salePrice"
                         placeholder="Precio de venta"
-                        defaultValue={product ? product.sale_price : ""}
+                        value={product ? product.sale_price : ""}
                         onChange={handleChange}
                       />
                       {errors.salePrice ? (

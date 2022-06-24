@@ -1,6 +1,7 @@
 import { toHaveErrorMessage } from "@testing-library/jest-dom/dist/matchers";
 
 export const productValidation = (values) => {
+  console.log(values)
   const errors = {};
   const numberRegex = /^[0-9]*$/;
 

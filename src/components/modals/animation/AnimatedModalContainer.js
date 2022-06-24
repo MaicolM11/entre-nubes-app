@@ -32,7 +32,6 @@ const AnimatedModalContainer = ({ modal, isOpen, setIsOpen }) => {
     document.addEventListener("keydown", keyPress);
     return () => document.removeEventListener("keydown", keyPress);
   }, [keyPress]);
-
   return (
     <>
       {isOpen && (

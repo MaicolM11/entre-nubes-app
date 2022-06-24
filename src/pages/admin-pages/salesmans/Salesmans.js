@@ -5,7 +5,8 @@ import NotificationButton from "../../../components/header/NotificationButton";
 import { ReactComponent as AddPerson } from "../../../assets/icons/person_add.svg";
 import styled from "styled-components";
 import Button from "../../../components/buttons/Button";
-
+import AnimatedModalContainer from "../../../components/modals/animation/AnimatedModalContainer";
+import DeleteModal from "../../../components/modals/DeleteModal";
 import SalesmanCardsContainer from "../../../components/cards-container/SalesmanCardsContainer";
 import SalesmanModal from "../../../components/modals/SalesmanModal";
 import {getAllUsers } from "../../../services/user" 
@@ -20,12 +21,23 @@ padding-left: 25px;
 
 const Salesmans = () => {
   const [salesmans, setSalesmans] = useState([]);
-
+  const [salesman, setSalesman] = useState({});
   const [isOpenAddSalesmanModal, setIsOpenAddSalesmanModal] = useState(false);
-  
+  const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false)
+
+
   const openAddSalesmanModal = () => {
     setIsOpenAddSalesmanModal((isOpen) => !isOpen);
   };
+
+  const openDeleteSalesmanModal = (salesman) => {
+    setSalesman(salesman)
+    setIsOpenDeleteModal((isOpen) => !isOpen)
+  }
+
+  const closeDeleteSalesmanModal = () =>{
+    setIsOpenDeleteModal((isOpen) => !isOpen)
+  }
 
   useEffect(() => {
     getSalesmans();
@@ -47,6 +59,20 @@ const Salesmans = () => {
       isOpen={isOpenAddSalesmanModal}
       setIsOpen={setIsOpenAddSalesmanModal}>
       </SalesmanModal>
+      <AnimatedModalContainer
+        modal={
+          <DeleteModal
+            isProduct={false}
+            message="¿Desea eliminar este vendedor?"
+            buttonMessage="Eliminar Vendedor"
+            data={salesman}
+            update={getSalesmans}
+            handleCloseModal={closeDeleteSalesmanModal}
+          />
+        }
+        isOpen={isOpenDeleteModal}
+        setIsOpen={setIsOpenDeleteModal}
+      />
       <Header
         title="Vendedores"
         description="Información de los vendedores contratados"
@@ -61,7 +87,10 @@ const Salesmans = () => {
             onClick={openAddSalesmanModal}
           />
       </AddSalesmanContainer>
-      <SalesmanCardsContainer salesmans={salesmans}/>
+      <SalesmanCardsContainer 
+      salesmans={salesmans}
+      openDeleteSalesmanModal= {openDeleteSalesmanModal}
+      />
     </div>
   );
 };

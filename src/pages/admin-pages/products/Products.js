@@ -96,9 +96,11 @@ const Products = () => {
       <AnimatedModalContainer
         modal={
           <DeleteModal
+            isProduct={true}
             message="¿Desea eliminar este producto?"
-            product={product}
-            updateProducts={getProductos}
+            buttonMessage="Eliminar Producto"
+            data={product}
+            update={getProductos}
             handleCloseModal={closeDeleteProductModal}
           />
         }
