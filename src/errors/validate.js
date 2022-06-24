@@ -37,13 +37,13 @@ export const productValidation = (values) => {
   return errors;
 };
 
-export const salesmanValidation = () =>{
+export const salesmanValidation = (values) =>{
   const errors = {};
   const numberRegex = /^[0-9]*$/;
   const emailRegex = /^[^@]+@[^@]+\.[a-zA-Z]{2,}$/
 
-    if(!values.fullName){
-        errors.fullName = 'Nombre completo requerido'
+    if(!values.fullname){
+        errors.fullname = 'Nombre completo requerido'
     }
 
     if(!values.cc){
@@ -53,7 +53,7 @@ export const salesmanValidation = () =>{
     }
 
     if(!values.phone){
-        toHaveErrorMessage.phone = 'El numero de telefono es requerido'
+        errors.phone = 'El numero de telefono es requerido'
     }else if (!numberRegex.test(phone)){
         errors.phone = 'El numero de telefono no puede contener letras'
     }
@@ -74,7 +74,8 @@ export const salesmanValidation = () =>{
 
     if(!values.repeatPassWord){
         errors.repeatPassWord = 'Se debe confirmar contraseña'
-    }else if (!values.password==values.repeatPassWord){
+    }else if (!(values.password==values.repeatPassWord)){
         errors.repeatPassWord = 'Las contraseñas no coinciden'
     }
+    return errors;
 }

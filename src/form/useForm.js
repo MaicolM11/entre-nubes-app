@@ -11,13 +11,13 @@ const useForm = (callback, validate, categories, selectedCategory) => {
   });
 
   const [salesmanValues, setSalesmanValues] = useState({
-    fullname : '',
-    cc: '',
-    phone: '',
-    email: '',
-    address: '',
-    password: '',
-    repeatPassWord: ''
+    fullname : "",
+    cc: 0,
+    phone: 0,
+    email: "",
+    address: "",
+    password: "",
+    repeatPassWord: ""
   })
 
 
@@ -55,7 +55,7 @@ const useForm = (callback, validate, categories, selectedCategory) => {
 
   const handleSubmitSalesman = (e) => {
     e.preventDefault();
-    setErros(validate(productValues));
+    setErros(validate(salesmanValues));
   };
 
   const clearValues = () => {
