@@ -1,17 +1,14 @@
 import { useState, useEffect } from "react";
 
-const useForm = (callback, validate,product, categories, selectedCategory) => {
-
+const useForm = (callback, validate, categories, selectedCategory) => {
   const [productValues, setProductValues] = useState({
     brand: "",
-    category:  "",
-    unitPrice:  0,
-    salePrice:  0,
+    category: "",
+    unitPrice: 0,
+    salePrice: 0,
     presentation: "",
-    stock:"",
+    stock: 0,
   });
-
-
 
   const [salesmanValues, setSalesmanValues] = useState({
     fullname : "",
@@ -26,26 +23,14 @@ const useForm = (callback, validate,product, categories, selectedCategory) => {
 
   const [errors, setErros] = useState({});
 
-
-  const editProduct = ()=>{
-    setProductValues((prod) =>{
-      prod.brand = product.brand,
-      prod.category = product.category,
-      prod.unitPrice = product.unitPrice,
-      prod.salePrice = product.salePrice,
-      prod.presentation = product.presentation,
-      prod.stock= product.stock    
-    })
-  }
-
   const handleChange = (e) => {
     const { name, value } = e.target;
-      setProductValues((values) => {
-        return {
-          ...values,
-          [name]: value,
-        };
-      });
+    setProductValues((values) => {
+      return {
+        ...values,
+        [name]: value,
+      };
+    });
   };
 
   const handleChangeSalesman = (e) => {
@@ -65,7 +50,6 @@ const useForm = (callback, validate,product, categories, selectedCategory) => {
         productValues.category = category._id;
       }
     });
-    
     setErros(validate(productValues));
   };
 
