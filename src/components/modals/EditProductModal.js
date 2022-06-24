@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { reqProduct, editProduct } from "../../services/product";
 import { getAllCategories } from "../../services/category";
-import { productValidation } from "../../errors/validate";
-import useForm from "../../form/useForm";
+import { productEditValidation } from "../../errors/validate";
+import useForm from "../../form/useFormEdit";
 
 import styled from "styled-components";
 import { colors } from "../styles/colors";
@@ -93,61 +93,40 @@ const ErrorMessage = styled.label`
 `;
 
 const ProductModal = ({
-  isTheme,
   info,
   buttonTheme,
   product,
   updateProducts,
   isOpen,
   setIsOpen,
+  category
 }) => {
 
-  const category = "Categoría"
   const [selectedCategory, setSelectedCategory] = useState(category);
   const [categories, setCategories] = useState({});
 
-
+  
   const submitProduct = () => {
-    if (isOpen) {
-      isTheme ? sendData() : editData();
-    }
+    editData();
   };
 
   const { handleChange, values, handleSubmit, errors, clearValues } = useForm(
-    submitProduct,
-    productValidation,
-    categories,
-    selectedCategory
-  );
-
-  const clearModalInputs = () => {
-    clearValues();
-    setSelectedCategory(category);
-  };
+      submitProduct,
+      productEditValidation,
+      categories,
+      selectedCategory,
+      product,
+      category
+      );
+      
+      const clearModalInputs = () => {
+        clearValues()
+        setSelectedCategory(category);
+        };
 
   const handleSetIsOpen = () => {
     clearModalInputs();
     setIsOpen((isOpen) => !isOpen);
-  };
-
-  const sendData = () => {
-    reqProduct(
-      values.brand,
-      values.category,
-      values.unitPrice,
-      values.salePrice,
-      values.presentation,
-      values.stock,
-      values.img_url
-    ).then(async (res) => {
-      const data = await res.json();
-      if (res.ok) {
-        handleSetIsOpen();
-        updateProducts();
-      } else {
-        alert(data.message);
-      }
-    });
   };
 
   const editData = () => {
@@ -166,7 +145,7 @@ const ProductModal = ({
         handleSetIsOpen();
         updateProducts();
       } else {
-        alert(data.message);
+        // alert(data.message);
       }
     });
   };

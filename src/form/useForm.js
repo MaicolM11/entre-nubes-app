@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 
-const useForm = (callback, validate, categories, selectedCategory) => {
+const useForm = (callback, validate, categories, selectedCategory,product) => {
   const [productValues, setProductValues] = useState({
-    brand: "",
-    category: "",
-    unitPrice: 0,
-    salePrice: 0,
-    presentation: "",
-    stock: 0,
+    brand: product? product.brand :"",
+    category: product?product.category :"",
+    unitPrice: product?product.buy_price:0,
+    salePrice: product?product.sale_price:0,
+    presentation: product?product.presentation:"",
+    stock: product?product.stock:0
   });
 
   const [salesmanValues, setSalesmanValues] = useState({

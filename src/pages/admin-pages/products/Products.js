@@ -7,6 +7,7 @@ import AnimatedModalContainer from "../../../components/modals/animation/Animate
 import Header from "../../../components/header/Header";
 import NotificationButton from "../../../components/header/NotificationButton";
 import ProductModal from "../../../components/modals/ProductModal";
+import EditProductModal from '../../../components/modals/EditProductModal'
 import DeleteModal from "../../../components/modals/DeleteModal";
 import ProductCardsContainer from "../../../components/cards-container/ProductCardsContainer";
 import Button from "../../../components/buttons/Button";
@@ -23,7 +24,7 @@ const Products = () => {
   const [product, setProduct] = useState({});
   const [products, setProducts] = useState([]);
   const [selected, setSelected] = useState("Categoría");
-
+  const [category, setCategory] = useState("Categoría")
   const [isOpenAddProductModal, setIsOpenAddProductModal] = useState(false);
   const [isOpenEditProductModal, setIsOpenEditProductModal] = useState(false);
   const [isOpenDeleteProductModal, setIsOpenDeleteProductModal] =
@@ -36,6 +37,7 @@ const Products = () => {
 
   const openEditProductModal = (product) => {
     setProduct(product);
+    setCategory((cat)=> cat = product.category.name)
     setIsOpenEditProductModal((isOpen) => !isOpen);
   };
 
@@ -84,15 +86,18 @@ const Products = () => {
         isOpen={isOpenAddProductModal}
         setIsOpen={setIsOpenAddProductModal}
       />
-      <ProductModal
-        isTheme={false}
+      <> {isOpenEditProductModal&& (
+        <EditProductModal
         info="Editar Producto"
         buttonTheme="highlighted"
         product={product}
         updateProducts={getProductos}
         isOpen={isOpenEditProductModal}
         setIsOpen={setIsOpenEditProductModal}
-      />
+        category= {category}
+        />
+      )}
+      </>
       <AnimatedModalContainer
         modal={
           <DeleteModal
