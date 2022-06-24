@@ -12,11 +12,11 @@ const useForm = (callback, validate, categories, selectedCategory) => {
 
   const [salesmanValues, setSalesmanValues] = useState({
     fullname : "",
-    cc: 0,
-    phone: 0,
     email: "",
-    address: "",
     password: "",
+    cc: 0,
+    address: "",
+    phone: 0,
     repeatPassWord: ""
   })
 
@@ -72,9 +72,9 @@ const useForm = (callback, validate, categories, selectedCategory) => {
     salesmanValues.fullname = '',
     salesmanValues.email= '',
     salesmanValues.password= '',
-    salesmanValues.cc = '',
+    salesmanValues.cc = 0,
     salesmanValues.address= '',
-    salesmanValues.phone= '',
+    salesmanValues.phone= 0,
     salesmanValues.repeatPassWord = '',
     setErros(0);
   }

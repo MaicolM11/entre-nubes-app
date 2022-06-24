@@ -24,7 +24,7 @@ export const createUser = (
   cc,
   address,
   phone,
-  rol
+  rol,
 ) =>{
     const requestOptions = {
         method: 'POST',
@@ -34,13 +34,14 @@ export const createUser = (
                 fullname: fullname,
                 email: email,
                 password: password,
+                rol: rol,
                 cc: cc,
                 address:address,
                 phone: phone,
-                rol: rol
             }
         ),
     };
+    console.log(requestOptions.body)
     return fetch(BASE_URL,requestOptions)
 }
 

@@ -54,7 +54,7 @@ export const salesmanValidation = (values) =>{
 
     if(!values.phone){
         errors.phone = 'El numero de telefono es requerido'
-    }else if (!numberRegex.test(phone)){
+    }else if (!numberRegex.test(values.phone)){
         errors.phone = 'El numero de telefono no puede contener letras'
     }
 

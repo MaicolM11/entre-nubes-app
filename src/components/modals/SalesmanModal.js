@@ -1,6 +1,7 @@
 import React , { useRef } from "react";
 import styled from "styled-components";
 import DataInput from "../inputs/DataInput";
+import PasswordInput from "../inputs/PasswordInput";
 import { salesmanValidation } from "../../errors/validate";
 import useForm from "../../form/useForm";
 import { createUser } from "../../services/user";
@@ -13,6 +14,13 @@ import {
 } from "../styles/style-components";
 import { useSpring, animated } from "react-spring";
 import CloseButton from "../buttons/CloseButton";
+
+import { ReactComponent as UserIcon } from "../../assets/icons/user.svg";
+import { ReactComponent as PhoneIcon } from "../../assets/icons/phone.svg";
+import { ReactComponent as MailIcon } from "../../assets/icons/email.svg";
+import { ReactComponent as LocationIcon } from "../../assets/icons/location.svg";
+import { ReactComponent as LockIcon } from "../../assets/icons/lock.svg";
+
 
 const ProductModalContainer = styled.div`
   display: flex;
@@ -124,11 +132,12 @@ const SalesmanModal = ({
           salesmanValues.cc,
           salesmanValues.address,
           salesmanValues.phone,
-          'SALESMAN'
+          'SALESMAN',
         )
         .then(async(res)=>{
           let data = await res.json()
           if(res.ok){
+            handleSetIsOpen()
             updateSalesman()
           }else{
             alert(data.message)
@@ -153,8 +162,7 @@ const SalesmanModal = ({
                     <ErrorMessageContainer>
                       <DataInput
                         size="normalInput"
-                        // icon={<WineBottle stroke={colors.brand} />}
-                        icon=''
+                        icon={<UserIcon stroke={colors.brand} />}
                         type="text"
                         name="fullname"
                         placeholder="Usuario"
@@ -170,8 +178,7 @@ const SalesmanModal = ({
                     <ErrorMessageContainer>
                       <DataInput
                         size="normalInput"
-                        // icon={<WineBottle stroke={colors.brand} />}
-                        icon=''
+                        icon = ''
                         type="text"
                         name="cc"
                         placeholder="Documento de identidad"
@@ -187,8 +194,7 @@ const SalesmanModal = ({
                     <ErrorMessageContainer>
                       <DataInput
                         size="normalInput"
-                        // icon={<WineBottle stroke={colors.brand} />}
-                        icon=''
+                        icon={<PhoneIcon stroke={colors.brand} />}
                         type="text"
                         name="phone"
                         placeholder="Telefono"
@@ -204,8 +210,7 @@ const SalesmanModal = ({
                     <ErrorMessageContainer>
                       <DataInput
                         size="normalInput"
-                        // icon={<WineBottle stroke={colors.brand} />}
-                        icon=''
+                        icon={<MailIcon stroke={colors.brand} />}
                         type="text"
                         name="email"
                         placeholder="Correo electronico"
@@ -221,8 +226,7 @@ const SalesmanModal = ({
                     <ErrorMessageContainer>
                       <DataInput
                         size="normalInput"
-                        // icon={<WineBottle stroke={colors.brand} />}
-                        icon=''
+                        icon={<LocationIcon stroke={colors.brand} />}
                         type="text"
                         name="address"
                         placeholder="Direccion"
@@ -236,14 +240,11 @@ const SalesmanModal = ({
                       )}
                     </ErrorMessageContainer>
                     <ErrorMessageContainer>
-                      <DataInput
-                        size="normalInput"
-                        // icon={<WineBottle stroke={colors.brand} />}
-                        icon=''
-                        type="text"
+                      <PasswordInput
                         name="password"
-                        placeholder="Contraseña"
-                        defaultValue={/**product ? product.brand : **/""}
+                        size="normalInput"
+                        icon={<LockIcon stroke={colors.brand} />}
+                        placeholder="Contraseña" 
                         onChange={handleChangeSalesman}
                       />
                       {errors.password ? (
@@ -253,14 +254,11 @@ const SalesmanModal = ({
                       )}
                     </ErrorMessageContainer>
                     <ErrorMessageContainer>
-                      <DataInput
-                        size="normalInput"
-                        // icon={<WineBottle stroke={colors.brand} />}
-                        icon=''
-                        type="text"
+                      <PasswordInput
                         name="repeatPassWord"
+                        size="normalInput"
+                        icon={<LockIcon stroke={colors.brand} />}
                         placeholder="Confirmar contraseña"
-                        defaultValue={/**product ? product.brand : **/""}
                         onChange={handleChangeSalesman}
                       />
                       {errors.repeatPassWord ? (
