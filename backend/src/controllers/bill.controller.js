@@ -2,19 +2,22 @@ import Bill from "../models/Bill";
 import { findProductsAndUpdate } from "./sale.controller";
 
 export const createBill = async (req, res) => {
+    try {
+        const data = req.body;
+        data.salesman = req.user._id;
+        
+        await findProductsAndUpdate(data.sales)
+        await calculateTotalAndSubtotal(data)
+        
+        const newBill = new Bill(data);
     
-    const data = req.body;
-    data.salesman = req.user._id;
-    
-    await findProductsAndUpdate(data.sales)
-    await calculateTotalAndSubtotal(data)
-    
-    const newBill = new Bill(data);
-
-    newBill.save()
-        .then(doc => res.status(201).json(doc))
-        .then(() => emitLastBills())
-        .catch(error => res.status(400).json({ message: error.message }))
+        newBill.save()
+            .then(doc => res.status(201).json(doc))
+            .then(() => emitLastBills())
+            .catch(error => res.status(400).json({ message: error.message }))
+    } catch(err) {
+        res.status(400).json({ message: err.message }) 
+    }  
 }
 
 // get all my lastbills

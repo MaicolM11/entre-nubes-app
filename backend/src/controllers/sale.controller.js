@@ -1,8 +1,17 @@
-import { updateStockToProduct } from './product.controller';
+import { updateStockToProduct, getAllByIds } from './product.controller';
 
 // update sales
 export const findProductsAndUpdate = async (sales) => {
-    for (let sale of sales) {
+
+    const products = await getAllByIds(sales.map(sale => sale.product));
+
+    for await (let prod of products) {
+        if(prod.stock < sales.find(x => x.product == prod._id).quantity) {
+            throw new Error("stock not available")
+        }
+    }
+    console.log("entra");
+    for await (let sale of sales) {
         await updateSale(sale);
     }
 }
