@@ -1,4 +1,5 @@
 import React from "react";
+import { deleteUser } from "../../services/user";
 import { deleteProduct } from "../../services/product";
 import { colors } from "../styles/colors";
 import {
@@ -12,17 +13,29 @@ import BorderButton from "../buttons/BorderButton";
 import Button from "../buttons/Button";
 
 const DeleteModal = ({
+  isProduct,
   message,
-  product,
-  updateProducts,
+  buttonMessage,
+  data,
+  update,
   handleCloseModal,
 }) => {
   const handleDeleteProduct = () => {
-    deleteProduct(product._id).then(async () => {
-      handleCloseModal();
-      updateProducts();
-    });
+    if(isProduct){
+      deleteProduct(data._id).then(async () => {
+        handleCloseModal();
+        update();
+      });
+    }else{
+      deleteUser(data._id).then(async () => {
+        handleCloseModal();
+        update();
+      });
+    }
+    
   };
+
+
 
   return (
     <ModalDeleteContainer>
@@ -39,7 +52,7 @@ const DeleteModal = ({
         <Button
           size="mediumModalButton"
           theme="delete"
-          text="Eliminar Producto"
+          text={buttonMessage}
           onClick={handleDeleteProduct}
         />
       </ModalDeleteButtonsContainer>

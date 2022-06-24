@@ -10,7 +10,7 @@ const CardsContainer = styled.div`
   overflow-x: auto;
 `;
 
-const SalesmanCardsContainer = ({salesmans}) => {
+const SalesmanCardsContainer = ({salesmans, openDeleteSalesmanModal}) => {
   return (
     <CardsContainer>
       {Object.values(salesmans).map((salesman, i) => (
@@ -21,6 +21,8 @@ const SalesmanCardsContainer = ({salesmans}) => {
           email={salesman.email}
           phone={salesman.phone}
           address={salesman.address}
+          clickOnDelete={ () =>{
+            openDeleteSalesmanModal(salesman)}}
         />
       ))}
     </CardsContainer>

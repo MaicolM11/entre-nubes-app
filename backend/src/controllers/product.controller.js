@@ -50,14 +50,18 @@ export const updateStock = (req, res) => {
         .catch(error => res.status(400).json({ message: error.message }))
 }
 
-// increment | decrement . Promise
-export const updateStockToProduct = (id, value) => {
-    return Product.findByIdAndUpdate(id, { $inc: { 'stock': value } }, { new: true })
-}
-
 export const searchProduct = (req, res) => {
     const query = productFilter(req.query);
     Product.find(query)
         .then(data => res.status(200).json(data))
         .catch(err => res.status(400).json({ message: err.message}));
+    // increment | decrement . Promise
+}
+
+export const updateStockToProduct = (id, value) => {
+    return Product.findByIdAndUpdate(id, { $inc: { 'stock': value } }, { new: true })
+}
+
+export const getAllByIds = async (ids) => {
+    return await Product.find({'_id': { $in: ids }});
 }
