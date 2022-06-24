@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { colors } from "../styles/colors";
 import { ModalTitle, SelectContainer } from "../styles/style-components";
@@ -8,11 +8,12 @@ import OrderProductCardsContainer from "../cards-container/OrderProductCardsCont
 import SearchInput from "../inputs/DataInput";
 import SelectCategory from "../select/SelectCategory";
 import { ReactComponent as Search } from "../../assets/icons/search.svg";
+import Table from "../table/Table";
 
 const CreateOrderModalContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 1205px;
+  width: 1230px;
   height: 675px;
   background-color: ${colors.secondary};
   border-radius: 16px;
@@ -113,6 +114,14 @@ const CreateOrderModal = ({
   setSelected,
   handleCloseModal,
 }) => {
+  const productList = [];
+  const [orderProducts, setOrderProducts] = useState([]);
+
+  const handleAddProductOrder = (product) => {
+    productList.push({ brand: product.brand, sale_price: product.buy_price });
+    setOrderProducts((productList) => [...productList, product]);
+  };
+
   return (
     <CreateOrderModalContainer>
       <CreateOrderModalTitleContainer>
@@ -157,14 +166,19 @@ const CreateOrderModal = ({
               </FilterContainer>
             </ProductsFilterContainer>
             <ProductsCardContainer>
-              <OrderProductCardsContainer products={products} />
+              <OrderProductCardsContainer
+                products={products}
+                addProductOrder={handleAddProductOrder}
+              />
             </ProductsCardContainer>
           </ProductsCenterContainer>
         </ProductsContainer>
         <OrdersContainer>
           <OrdersCenterContainer>
             <OrderPlaceContainer></OrderPlaceContainer>
-            <OrderTableContainer></OrderTableContainer>
+            <OrderTableContainer>
+              <Table data={orderProducts} />
+            </OrderTableContainer>
           </OrdersCenterContainer>
         </OrdersContainer>
       </OrderOptionsContainer>
