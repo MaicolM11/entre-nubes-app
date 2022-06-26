@@ -99,30 +99,28 @@ const ProductModal = ({
   updateProducts,
   isOpen,
   setIsOpen,
-  category
+  category,
 }) => {
-
   const [selectedCategory, setSelectedCategory] = useState(category);
   const [categories, setCategories] = useState({});
 
-  
   const submitProduct = () => {
     editData();
   };
 
   const { handleChange, values, handleSubmit, errors, clearValues } = useForm(
-      submitProduct,
-      productEditValidation,
-      categories,
-      selectedCategory,
-      product,
-      category
-      );
-      
-      const clearModalInputs = () => {
-        clearValues()
-        setSelectedCategory(category);
-        };
+    submitProduct,
+    productEditValidation,
+    categories,
+    selectedCategory,
+    product,
+    category
+  );
+
+  const clearModalInputs = () => {
+    clearValues();
+    setSelectedCategory(category);
+  };
 
   const handleSetIsOpen = () => {
     clearModalInputs();
@@ -228,7 +226,7 @@ const ProductModal = ({
                           categories={categories}
                           selectedCategory={selectedCategory}
                           setSelectedCategory={setSelectedCategory}
-                          product = {product}
+                          product={product}
                         />
                       </SelectContainer>
                       {selectedCategory === category ? (

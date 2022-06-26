@@ -21,19 +21,13 @@ const AddOrdersContainer = styled.div`
 `;
 
 const Orders = ({ salesmanName }) => {
-  const [categories, setCategories] = useState({});
   const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState({});
   const [isOpenCreateOrderModal, setIsOpenCreateOrderModal] = useState(false);
   const [selected, setSelected] = useState("Categoría");
 
   const openCreateOrderModal = () => {
     setIsOpenCreateOrderModal((isOpen) => !isOpen);
-  };
-
-  const getCategories = () => {
-    getAllCategories().then(async (res) => {
-      setCategories(await res.json());
-    });
   };
 
   const getProductos = () => {
@@ -42,9 +36,15 @@ const Orders = ({ salesmanName }) => {
     });
   };
 
+  const getCategories = () => {
+    getAllCategories().then(async (res) => {
+      setCategories(await res.json());
+    });
+  };
+
   useEffect(() => {
-    getCategories();
     getProductos();
+    getCategories();
   }, []);
 
   return (
@@ -54,9 +54,9 @@ const Orders = ({ salesmanName }) => {
           <CreateOrderModal
             categories={categories}
             products={products}
-            handleCloseModal={openCreateOrderModal}
             selected={selected}
             setSelected={setSelected}
+            handleCloseModal={openCreateOrderModal}
           />
         }
         isOpen={isOpenCreateOrderModal}

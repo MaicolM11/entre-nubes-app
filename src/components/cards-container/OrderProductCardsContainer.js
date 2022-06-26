@@ -1,4 +1,5 @@
 import React from "react";
+
 import styled from "styled-components";
 import OrderProductCard from "../cards/OrderProductCard";
 
@@ -15,9 +16,9 @@ const CardsContainer = styled.div`
 const OrderProductCardsContainer = ({ products, addProductOrder }) => {
   return (
     <CardsContainer>
-      {Object.values(products).map((product, i) => (
+      {Object.values(products).map((product) => (
         <OrderProductCard
-          key={i}
+          key={product._id}
           brand={product.brand}
           category={product.category.name}
           unitPrice={product.buy_price}

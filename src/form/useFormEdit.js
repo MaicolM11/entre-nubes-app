@@ -1,14 +1,20 @@
 import { useState, useEffect } from "react";
 import { productEditValidation } from "../errors/validate";
-const useForm = (callback, validate, categories, selectedCategory,product, category) => {
-  
+const useForm = (
+  callback,
+  validate,
+  categories,
+  selectedCategory,
+  product,
+  category
+) => {
   const [productValues, setProductValues] = useState({
-    brand: product? product.brand :"",
-    category: category?category.name :"",
-    unitPrice: product?product.buy_price:0,
-    salePrice: product?product.sale_price:0,
-    presentation: product?product.presentation:"",
-    stock: product?product.stock:0
+    brand: product ? product.brand : "",
+    category: category ? category.name : "",
+    unitPrice: product ? product.buy_price : 0,
+    salePrice: product ? product.sale_price : 0,
+    presentation: product ? product.presentation : "",
+    stock: product ? product.stock : 0,
   });
 
   const [errors, setErros] = useState({});
@@ -33,7 +39,6 @@ const useForm = (callback, validate, categories, selectedCategory,product, categ
     setErros(0);
   };
 
-
   const handleSubmit = (e) => {
     e.preventDefault();
     categories.map((category) => {
@@ -42,18 +47,17 @@ const useForm = (callback, validate, categories, selectedCategory,product, categ
       }
     });
     setErros(productEditValidation(productValues));
-    if(!Object.keys(errors).length){
-      callback()
+    if (!Object.keys(errors).length) {
+      callback();
     }
   };
-
 
   return {
     handleChange,
     values: productValues,
     handleSubmit,
     errors,
-    clearValues
+    clearValues,
   };
 };
 

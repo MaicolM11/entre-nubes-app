@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
+
 import styled from "styled-components";
 import { colors } from "../styles/colors";
 import { ModalTitle, SelectContainer } from "../styles/style-components";
+import { ReactComponent as Search } from "../../assets/icons/search.svg";
+import { ReactComponent as HomeTable } from "../../assets/icons/home-table.svg";
+
 import Button from "../buttons/Button";
 import BorderButton from "../buttons/BorderButton";
 import OrderProductCardsContainer from "../cards-container/OrderProductCardsContainer";
@@ -9,8 +13,6 @@ import SearchInput from "../inputs/DataInput";
 import SelectCategory from "../select/SelectCategory";
 import PlaceInput from "../inputs/DataInput";
 import Table from "../table/Table";
-import { ReactComponent as Search } from "../../assets/icons/search.svg";
-import { ReactComponent as HomeTable } from "../../assets/icons/home-table.svg";
 
 const CreateOrderModalContainer = styled.div`
   display: flex;
@@ -123,67 +125,46 @@ const CreateOrderModal = ({
   setSelected,
   handleCloseModal,
 }) => {
-  const [orderProducts, setOrderProducts] = useState([]);
-  const [place, setPlace] = useState("");
-  const [sales, setSales] = useState([]);
+  const [orderedProducts, setOrderedProducts] = useState([]);
+  const [location, setLocation] = useState("");
+  const [productsOnSale, setproductsOnSale] = useState([]);
+
+  // const [productsOnTable, setProductsOnTable] = useState([]);
 
   const order = {
-    description: place,
-    sales: sales,
+    location: location,
+    sales: productsOnSale,
   };
 
   const handleSubmitOrder = () => {
     console.log(order);
+    // const productOnSale = { product: product._id, quantity: quantity };
+    // getProductsOnSale(productsOnSale, setproductsOnSale, productOnSale);
   };
-
-  const productsOnTable = [];
-  const showProductsOnTable = [];
-
-  let quantity = 0;
 
   const handleAddProductOrder = (product) => {
-    //Manejo de los datos del producto
-    const productOnTable = {
-      _id: product._id,
+    const orderedProduct = {
+      id: product._id,
       brand: product.brand,
       sale_price: product.sale_price,
-      quantity: quantity,
+      quantity: 1,
+      pricePerQuantity: product.sale_price,
     };
-
-    //Productos en venta
-    const productOnSale = { product: product._id, quantity: quantity };
-    if (sales.length === 0) {
-      setSales((sales) => [...sales, productOnSale]);
-    } else {
-      const exist = sales.some(
-        (data) => data.product === productOnSale.product
-      );
-      if (exist) {
-        // quantity=+1
-        console.log(quantity++);
-        // productOnSale.quantity+=1
-        console.log("Aumenta + 1");
-      } else {
-        console.log("Agrega...");
-        setSales((sales) => [...sales, productOnSale]);
-      }
-    }
-    console.log(sales);
-
-    //Productos en tabla
-    if (orderProducts.length === 0) {
-      setOrderProducts((productsOnTable) => [...productsOnTable, product]);
-    } else {
-      const exist = orderProducts.includes(product);
-      if (!exist) {
-        setOrderProducts((productsOnTable) => [...productsOnTable, product]);
-      }
-    }
+    showProductsOnTable(orderedProducts, setOrderedProducts, orderedProduct);
+    updateTable();
   };
+
+  const updateTable = () => {
+    console.log(orderedProducts);
+  };
+
+  useEffect(() => {
+    updateTable();
+  }, []);
 
   const handlePlaceChange = (e) => {
     const { value } = e.target;
-    setPlace(value);
+    setLocation(value);
   };
 
   const handleSearchChange = (e) => {
@@ -258,7 +239,7 @@ const CreateOrderModal = ({
               </InputContainer>
             </OrderPlaceContainer>
             <OrderTableContainer>
-              <Table data={orderProducts} />
+              <Table data={orderedProducts} />
             </OrderTableContainer>
           </OrdersCenterContainer>
         </OrdersContainer>
@@ -268,3 +249,29 @@ const CreateOrderModal = ({
 };
 
 export default CreateOrderModal;
+
+function showProductsOnTable(
+  orderedProducts,
+  setOrderedProducts,
+  orderedProduct
+) {
+  if (orderedProducts.length === 0) {
+    setOrderedProducts((products) => [...products, orderedProduct]);
+  } else {
+    const isOnTable = orderedProducts.some(
+      (data) => data.id === orderedProduct.id
+    );
+    if (!isOnTable) {
+      setOrderedProducts((products) => [...products, orderedProduct]);
+    } else {
+      for (const product of orderedProducts) {
+        if (product.id === orderedProduct.id) {
+          product.quantity++;
+          const totalPricePerQuantity = product.quantity * product.sale_price;
+          product.pricePerQuantity = +totalPricePerQuantity;
+          break;
+        }
+      }
+    }
+  }
+}

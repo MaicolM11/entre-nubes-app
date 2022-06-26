@@ -1,6 +1,5 @@
-import React from "react";
-import DataTable, { createTheme } from "react-data-table-component";
-// import { useTable, usePagination } from "react-table";
+import React, { useEffect, useState } from "react";
+import DataTable from "react-data-table-component";
 
 const columns = [
   {
@@ -17,7 +16,7 @@ const columns = [
   },
   {
     name: "Precio por Cantidad",
-    selector: (row) => row.amountPrice,
+    selector: (row) => row.pricePerQuantity,
   },
   {
     name: "Quitar Producto",
@@ -34,20 +33,8 @@ const paginationComponentOptions = {
 };
 
 const Table = ({ data }) => {
-  // const table = useTable(
-  //   {
-  //     columns,
-  //     data,
-  //     initialState: {
-  //       pageSize: 5,
-  //       pageIndex: 0,
-  //     },
-  //   },
-  //   usePagination
-  // );
-
+  console.log(data);
   return (
-    // {table}
     <DataTable
       columns={columns}
       data={data}
