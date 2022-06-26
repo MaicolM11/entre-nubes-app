@@ -28,6 +28,35 @@ router.post('/', [verifyToken, isAdmin] ,controller.createUser);
 
 /**
  * @swagger
+ * /api/user/{id}:
+ *  put:
+ *      sumary : editUser
+ *      tags : [User]
+ *      parameters:
+ *          - in : path
+ *            name: id
+ *            schema:
+ *              type: string
+ *            required: true
+ *            description : user id
+ *      requestBody:
+ *          required: true
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      $ref: '#/components/schemas/User'
+ *      responses:
+ *          201:
+ *              description : user edit!
+ *          400:
+ *              description: user not edit
+ *      security:
+ *	        - jwt: []
+ */
+router.put('/:id', [verifyToken, isAdmin] ,controller.editUser);
+
+/**
+ * @swagger
  * /api/user:
  *  get:
  *      sumary : get all users

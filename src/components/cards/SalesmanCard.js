@@ -89,7 +89,7 @@ const SalesmanCardButtonsContainer = styled.div`
   gap: 20px;
 `;
 
-const SalesmanCard = ({id, fullname, email, cc, phone, address, clickOnDelete }) => {
+const SalesmanCard = ({id, fullname, email, cc, phone, address,clickOnEdit, clickOnDelete }) => {
 
   
   return (
@@ -124,7 +124,8 @@ const SalesmanCard = ({id, fullname, email, cc, phone, address, clickOnDelete })
             </DataWithIcon>
             <SalesmanCardButtonsContainer>
               
-              <EditButtonContainer >
+              <EditButtonContainer 
+              onClick={clickOnEdit}>
                 <Edit/>
               </EditButtonContainer>
 

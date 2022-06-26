@@ -27,6 +27,18 @@ export const getAll = (req, res) => {
         .catch(error => res.status(400).json({ message: error.message }));
 }
 
+export const editUser = async(req, res) => {
+    const { id } = req.params;
+    const user = req.body
+    user.password = await User.encryptPass(user.password);
+    User.findByIdAndUpdate(id, user, { new: true })
+        .then(doc => {
+            if (!doc) res.status(404).json({ message: 'User not found' })
+            else res.status(201).json(doc)
+        })
+        .catch(error => res.status(400).json({ message: error.message }))
+}
+
 export const searchUser = (req, res) => {
     const query = userFilter(req.query);
     User.find(query, { password: 0 })

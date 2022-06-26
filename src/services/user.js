@@ -41,9 +41,37 @@ export const createUser = (
             }
         ),
     };
-    console.log(requestOptions.body)
     return fetch(BASE_URL,requestOptions)
 }
+
+export const editUser = (
+    id,
+    fullname,
+    email,
+    password,
+    cc,
+    address,
+    phone,
+    rol,
+  ) =>{
+      const requestOptions = {
+          method: 'PUT',
+          headers: { "Content-Type": "application/json", authorization: getToken() },
+          body : JSON.stringify(
+              {
+                  fullname: fullname,
+                  email: email,
+                  password: password,
+                  rol: rol,
+                  cc: cc,
+                  address:address,
+                  phone: phone,
+              }
+          ),
+      };
+      console.log(requestOptions)
+      return fetch(BASE_URL+`/${id}`,requestOptions)
+  }
 
 export const deleteUser = (id) =>{
     const requestOptions = {

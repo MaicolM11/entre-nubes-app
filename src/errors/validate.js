@@ -38,7 +38,6 @@ export const productValidation = (values) => {
 };
 
 export const productEditValidation = (values) => {
-  console.log(values)
   const errors = {};
   const numberRegex = /^[0-9]*$/;
 
@@ -71,7 +70,6 @@ export const productEditValidation = (values) => {
   } else if (!numberRegex.test(values.stock)) {
     errors.stock = "El stock sólo es de números";
   }
-
   return errors;
 };
 
@@ -94,6 +92,8 @@ export const salesmanValidation = (values) =>{
         errors.phone = 'El numero de telefono es requerido'
     }else if (!numberRegex.test(values.phone)){
         errors.phone = 'El numero de telefono no puede contener letras'
+    }else if(!(values.phone.split('').length == 10)){
+      errors.phone = 'Un numero telefonico consta de 10 numeros'
     }
 
     if(!values.email){
