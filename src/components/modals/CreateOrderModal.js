@@ -13,6 +13,7 @@ import SearchInput from "../inputs/DataInput";
 import SelectCategory from "../select/SelectCategory";
 import PlaceInput from "../inputs/DataInput";
 import Table from "../table/Table";
+import TableTest from "../table/TableTest";
 
 const CreateOrderModalContainer = styled.div`
   display: flex;
@@ -62,8 +63,8 @@ const ProductsFilterContainer = styled.div`
 const ProductsCardContainer = styled.div`
   display: flex;
   width: 100%;
-  height: 467px;
-  min-height: 467px;
+  height: 460px;
+  min-height: 460px;
 `;
 
 const OrdersContainer = styled.div`
@@ -93,7 +94,7 @@ const OrderTableContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 467px;
+  height: 460px;
   background-color: darkslateblue;
 `;
 
@@ -129,8 +130,6 @@ const CreateOrderModal = ({
   const [location, setLocation] = useState("");
   const [productsOnSale, setproductsOnSale] = useState([]);
 
-  // const [productsOnTable, setProductsOnTable] = useState([]);
-
   const order = {
     location: location,
     sales: productsOnSale,
@@ -151,16 +150,11 @@ const CreateOrderModal = ({
       pricePerQuantity: product.sale_price,
     };
     showProductsOnTable(orderedProducts, setOrderedProducts, orderedProduct);
-    updateTable();
   };
 
-  const updateTable = () => {
-    console.log(orderedProducts);
-  };
-
-  useEffect(() => {
-    updateTable();
-  }, []);
+  const updataData = () =>{
+    setOrderedProducts(orderedProducts)
+  }
 
   const handlePlaceChange = (e) => {
     const { value } = e.target;
@@ -239,7 +233,8 @@ const CreateOrderModal = ({
               </InputContainer>
             </OrderPlaceContainer>
             <OrderTableContainer>
-              <Table data={orderedProducts} />
+              <Table data={orderedProducts}/>
+              {/* <TableTest data={orderedProducts} /> */}
             </OrderTableContainer>
           </OrdersCenterContainer>
         </OrdersContainer>

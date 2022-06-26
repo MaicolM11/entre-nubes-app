@@ -33,7 +33,7 @@ const paginationComponentOptions = {
 };
 
 const Table = ({ data }) => {
-  console.log(data);
+  console.log(data)
   return (
     <DataTable
       columns={columns}
