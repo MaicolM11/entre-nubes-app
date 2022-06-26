@@ -4,7 +4,8 @@ import DataInput from "../inputs/DataInput";
 import PasswordInput from "../inputs/PasswordInput";
 import { salesmanValidation } from "../../errors/validate";
 import useForm from "../../form/useForm";
-import { createUser } from "../../services/user";
+import useFormEdit from "../../form/useFormEdit";
+import { createUser,editUser } from "../../services/user";
 import { colors } from "../styles/colors";
 import Button from "../buttons/Button";
 import {
@@ -87,20 +88,62 @@ const SalesmanModal = ({
     isThem,
     info,
     buttonTheme,
+    salesman,
     updateSalesman,
     isOpen,
     setIsOpen
 })=>{
-    const submitSalesman = () => {
-        if (isOpen) {
-          isThem ? sendData() : editData();
-        }
-      };
+    
+  const sendData =()=>{
+    createUser(
+      salesmanValues.fullname,
+      salesmanValues.email,
+      salesmanValues.password,
+      salesmanValues.cc,
+      salesmanValues.address,
+      salesmanValues.phone,
+      'SALESMAN',
+    )
+    .then(async(res)=>{
+      let data = await res.json()
+      if(res.ok){
+        handleSetIsOpen()
+        updateSalesman()
+      }else{
+        alert(data.message)
+      }
+    })
+  } 
 
+  const editData =()=>{
+    editUser(
+      salesman._id,
+      valuesSalesman.fullname,
+      valuesSalesman.email,
+      valuesSalesman.password,
+      valuesSalesman.cc,
+      valuesSalesman.address,
+      valuesSalesman.phone,
+      'SALESMAN',
+    )
+    .then(async(res)=>{
+      let data = await res.json()
+      if(res.ok){
+        handleSetIsOpen()
+        updateSalesman()
+      }else{
+        alert(data.message)
+      }
+    })
+  } 
       const { handleChangeSalesman, salesmanValues, handleSubmitSalesman, errors , clearSalesmanValues } = useForm(
-        submitSalesman,
+        sendData,
         salesmanValidation
       );
+
+      const{handleChangeSalesmanEdit,valuesSalesman,handleSubmitSalesmanEdit,clearSalesmanValuesEdit} = useFormEdit(
+        editData,salesmanValidation,salesman
+      )
 
       const closeModal = (e) => {
         if (ref.current === e.target) {
@@ -120,30 +163,11 @@ const SalesmanModal = ({
 
 
       const handleSetIsOpen = () => {
-        clearSalesmanValues()
+        isThem ? clearSalesmanValues(): clearSalesmanValuesEdit()
         setIsOpen((isOpen) => !isOpen);
       };
       
-      const sendData =()=>{
-        createUser(
-          salesmanValues.fullname,
-          salesmanValues.email,
-          salesmanValues.password,
-          salesmanValues.cc,
-          salesmanValues.address,
-          salesmanValues.phone,
-          'SALESMAN',
-        )
-        .then(async(res)=>{
-          let data = await res.json()
-          if(res.ok){
-            handleSetIsOpen()
-            updateSalesman()
-          }else{
-            alert(data.message)
-          }
-        })
-      } 
+      
       
   return(
     <>{isOpen &&(
@@ -166,8 +190,8 @@ const SalesmanModal = ({
                         type="text"
                         name="fullname"
                         placeholder="Usuario"
-                        defaultValue={/**product ? product.brand : **/""}
-                        onChange={handleChangeSalesman}
+                        defaultValue={salesman ? salesman.fullname : ""}
+                        onChange={isThem ? handleChangeSalesman: handleChangeSalesmanEdit}
                       />
                       {errors.fullname ? (
                         <ErrorMessage>{errors.fullname}</ErrorMessage>
@@ -182,8 +206,8 @@ const SalesmanModal = ({
                         type="text"
                         name="cc"
                         placeholder="Documento de identidad"
-                        defaultValue={/**product ? product.brand : **/""}
-                        onChange={handleChangeSalesman}
+                        defaultValue={salesman ? salesman.cc : ""}
+                        onChange={isThem ? handleChangeSalesman: handleChangeSalesmanEdit}
                       />
                       {errors.cc ? (
                         <ErrorMessage>{errors.cc}</ErrorMessage>
@@ -198,8 +222,8 @@ const SalesmanModal = ({
                         type="text"
                         name="phone"
                         placeholder="Telefono"
-                        defaultValue={/**product ? product.brand : **/""}
-                        onChange={handleChangeSalesman}
+                        defaultValue={salesman ? salesman.phone : ""}
+                        onChange={isThem ? handleChangeSalesman: handleChangeSalesmanEdit}
                       />
                       {errors.phone ? (
                         <ErrorMessage>{errors.phone}</ErrorMessage>
@@ -214,8 +238,8 @@ const SalesmanModal = ({
                         type="text"
                         name="email"
                         placeholder="Correo electronico"
-                        defaultValue={/**product ? product.brand : **/""}
-                        onChange={handleChangeSalesman}
+                        defaultValue={salesman ? salesman.email : ""}
+                        onChange={isThem ? handleChangeSalesman: handleChangeSalesmanEdit}
                       />
                       {errors.email ? (
                         <ErrorMessage>{errors.email}</ErrorMessage>
@@ -230,8 +254,8 @@ const SalesmanModal = ({
                         type="text"
                         name="address"
                         placeholder="Direccion"
-                        defaultValue={/**product ? product.brand : **/""}
-                        onChange={handleChangeSalesman}
+                        defaultValue={salesman ? salesman.address : ""}
+                        onChange={isThem ? handleChangeSalesman: handleChangeSalesmanEdit}
                       />
                       {errors.address ? (
                         <ErrorMessage>{errors.address}</ErrorMessage>
@@ -245,7 +269,8 @@ const SalesmanModal = ({
                         size="normalInput"
                         icon={<LockIcon stroke={colors.brand} />}
                         placeholder="Contraseña" 
-                        onChange={handleChangeSalesman}
+                        defaultValue={salesman ? salesman.password : ""}
+                        onChange={isThem ? handleChangeSalesman: handleChangeSalesmanEdit}
                       />
                       {errors.password ? (
                         <ErrorMessage>{errors.password}</ErrorMessage>
@@ -259,7 +284,8 @@ const SalesmanModal = ({
                         size="normalInput"
                         icon={<LockIcon stroke={colors.brand} />}
                         placeholder="Confirmar contraseña"
-                        onChange={handleChangeSalesman}
+                        defaultValue={salesman ? salesman.password : ""}
+                        onChange={isThem ? handleChangeSalesman: handleChangeSalesmanEdit}
                       />
                       {errors.repeatPassWord ? (
                         <ErrorMessage>{errors.repeatPassWord}</ErrorMessage>
@@ -271,7 +297,7 @@ const SalesmanModal = ({
                       size="normalButton"
                       theme={buttonTheme}
                       text={info}
-                      onClick={handleSubmitSalesman}
+                      onClick={isThem ?handleSubmitSalesman: handleSubmitSalesmanEdit}
                     />
                     </ProductModalFormOptionContainer>
                   </ProductModalFormCenterContainer>

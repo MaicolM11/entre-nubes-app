@@ -51,11 +51,17 @@ const useForm = (callback, validate, categories, selectedCategory,product) => {
       }
     });
     setErros(validate(productValues));
+    if(!(Object.keys(validate(productValues)).length>0)){
+      callback()
+    }
   };
 
   const handleSubmitSalesman = (e) => {
     e.preventDefault();
     setErros(validate(salesmanValues));
+    if(!(Object.keys(validate(salesmanValues)).length>0)){
+      callback()
+    }
   };
 
   const clearValues = () => {
@@ -79,11 +85,12 @@ const useForm = (callback, validate, categories, selectedCategory,product) => {
     setErros(0);
   }
 
-  useEffect(() => {
-    if (!Object.keys(errors).length) {
-      callback();
-    }
-  }, [errors]);
+  // useEffect(() => {
+  //   console.log("aqui")
+  //   if (!Object.keys(errors).length) {
+  //     callback();
+  //   }
+  // }, [errors]);
 
   return {
     handleChange,

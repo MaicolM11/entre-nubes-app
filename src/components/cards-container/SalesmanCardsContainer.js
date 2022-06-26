@@ -10,7 +10,7 @@ const CardsContainer = styled.div`
   overflow-x: auto;
 `;
 
-const SalesmanCardsContainer = ({salesmans, openDeleteSalesmanModal}) => {
+const SalesmanCardsContainer = ({salesmans,openEditSalemanModal, openDeleteSalesmanModal}) => {
   return (
     <CardsContainer>
       {Object.values(salesmans).map((salesman, i) => (
@@ -21,8 +21,12 @@ const SalesmanCardsContainer = ({salesmans, openDeleteSalesmanModal}) => {
           email={salesman.email}
           phone={salesman.phone}
           address={salesman.address}
+          clickOnEdit={() =>{
+            openEditSalemanModal(salesman)
+          }
+          }
           clickOnDelete={ () =>{
-            openDeleteSalesmanModal(salesman)}}
+          openDeleteSalesmanModal(salesman)}}
         />
       ))}
     </CardsContainer>

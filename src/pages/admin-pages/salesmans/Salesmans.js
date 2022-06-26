@@ -24,7 +24,7 @@ const Salesmans = () => {
   const [salesman, setSalesman] = useState({});
   const [isOpenAddSalesmanModal, setIsOpenAddSalesmanModal] = useState(false);
   const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false)
-
+  const [isOpenEditSalesmanModal, setIsOpenEditSalesmanModal] = useState (false)
 
   const openAddSalesmanModal = () => {
     setIsOpenAddSalesmanModal((isOpen) => !isOpen);
@@ -33,6 +33,11 @@ const Salesmans = () => {
   const openDeleteSalesmanModal = (salesman) => {
     setSalesman(salesman)
     setIsOpenDeleteModal((isOpen) => !isOpen)
+  }
+
+  const openEditSalesmanModal = (salesman) => {
+    setSalesman(salesman)
+    setIsOpenEditSalesmanModal((isOpen) => !isOpen)
   }
 
   const closeDeleteSalesmanModal = () =>{
@@ -59,6 +64,19 @@ const Salesmans = () => {
       isOpen={isOpenAddSalesmanModal}
       setIsOpen={setIsOpenAddSalesmanModal}>
       </SalesmanModal>
+      <>{isOpenEditSalesmanModal &&(
+        <SalesmanModal
+        isThem={false}
+        info='Editar Vendedor'
+        buttonTheme='highlighted'
+        salesman={salesman}
+        updateSalesman={getSalesmans}
+        isOpen={isOpenEditSalesmanModal}
+        setIsOpen={setIsOpenEditSalesmanModal}>
+      </SalesmanModal>
+      )}
+
+      </>
       <AnimatedModalContainer
         modal={
           <DeleteModal
@@ -89,6 +107,7 @@ const Salesmans = () => {
       </AddSalesmanContainer>
       <SalesmanCardsContainer 
       salesmans={salesmans}
+      openEditSalemanModal= {openEditSalesmanModal}
       openDeleteSalesmanModal= {openDeleteSalesmanModal}
       />
     </div>
