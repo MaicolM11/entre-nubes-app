@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-import { BILL_STATES } from "./Enums";
+import { BILL_STATES, PAYMENT_METHODS } from "./Enums";
 
 const billSchema = mongoose.Schema(
     {
@@ -43,6 +43,11 @@ const billSchema = mongoose.Schema(
         salesman: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "User",
+        },
+
+        payment_method: {
+            type: "string",
+            enum: Object.values(PAYMENT_METHODS)
         }
 
     },

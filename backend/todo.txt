@@ -1,0 +1,10 @@
+// sprint 3
+
+deudores - add, get, append due, 
+pagos - pagar factura,
+
+cerrar caja ?
+
+append due
+pay bill - (cambiar estado factura, agregar metodo de pago)
+pay due - donde busco.

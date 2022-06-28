@@ -1,23 +1,24 @@
 import Bill from "../models/Bill";
+import { BILL_STATES } from "../models/Enums";
 import { findProductsAndUpdate } from "./sale.controller";
 
 export const createBill = async (req, res) => {
     try {
         const data = req.body;
         data.salesman = req.user._id;
-        
+
         await findProductsAndUpdate(data.sales)
         await calculateTotalAndSubtotal(data)
-        
+
         const newBill = new Bill(data);
-    
+
         newBill.save()
             .then(doc => res.status(201).json(doc))
             .then(() => emitLastBills())
             .catch(error => res.status(400).json({ message: error.message }))
-    } catch(err) {
-        res.status(400).json({ message: err.message }) 
-    }  
+    } catch (err) {
+        res.status(400).json({ message: err.message })
+    }
 }
 
 // get all my lastbills
@@ -37,14 +38,14 @@ export const appendProductsToBill = async (req, res) => {
 
     const { id } = req.params;
     const newSales = req.body;
-    
+
     const foundBill = await Bill.findById(id);
-    
+
     await findProductsAndUpdate(newSales);
     Array.prototype.push.apply(foundBill.sales, newSales)
-    
+
     await calculateTotalAndSubtotal(foundBill)
-    
+
     foundBill.save()
         .then(doc => res.status(201).json(doc))
         .then(() => emitLastBills())
@@ -52,18 +53,32 @@ export const appendProductsToBill = async (req, res) => {
 }
 
 const calculateTotalAndSubtotal = async (bill) => {
-    let total = 0, subtotal = 0; 
-    
+    let total = 0, subtotal = 0;
+
     for await (let sale of bill.sales) {
         total += sale.quantity * sale.sale_price;
         subtotal += sale.quantity * sale.buy_price;
     }
-    
+
     bill.total = total;
     bill.subtotal = subtotal;
 }
 
+export const payBill = (req, res) => {
+    const { id } = req.params;
+
+    Bill.findByIdAndUpdate(id, {
+        status: BILL_STATES.PAID,
+        payment_method: req.body.payment_method.toUpperCase()
+    }, { new: true })
+        .then(doc => {
+            if (!doc) res.status(404).json({ message: 'Bill not found' })
+            else res.status(201).json(doc)
+        })
+        .catch(error => res.status(400).json({ message: error.message }))
+}
+
 export const emitLastBills = (socket = global.sockets) => {
     Bill.find()
-        .then(data => socket.emit('sales', data));    
+        .then(data => socket.emit('sales', data));
 }

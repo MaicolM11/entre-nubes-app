@@ -26,7 +26,7 @@ import { verifyToken } from './../middlewares/jwt'
  *      security:
  *	        - jwt: []
  */
-router.post("/", [verifyToken, hasAnyRol], controller.createBill);
+router.post('/', [verifyToken, hasAnyRol], controller.createBill);
 
 /**
  * @swagger
@@ -56,7 +56,7 @@ router.post("/", [verifyToken, hasAnyRol], controller.createBill);
  *      security:
  *	        - jwt: []
  */
-router.put("/append/:id", [verifyToken, hasAnyRol], controller.appendProductsToBill)
+router.put('/append/:id', [verifyToken, hasAnyRol], controller.appendProductsToBill)
 
 /**
  * @swagger
@@ -76,9 +76,40 @@ router.put("/append/:id", [verifyToken, hasAnyRol], controller.appendProductsToB
  *      security:
  *	        - jwt: []
  */
-router.get("/my-sales/today", [verifyToken, hasAnyRol], controller.getMyLastBills);
+router.get('/my-sales/today', [verifyToken, hasAnyRol], controller.getMyLastBills);
 
-// web socket
-router.get("/all-sales/today", [verifyToken, isAdmin], controller.getAllLastBills);
+/**
+ * @swagger
+ * /api/bill/{id}/payment:
+ *  put:
+ *      sumary : pay bill
+ *      tags : [Bill]
+ *      parameters:
+ *          - in : path
+ *            name: id
+ *            schema:
+ *              type: string
+ *            required: true
+ *            description : bill id
+ *      requestBody:
+ *          required: true
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      type: object
+ *                      properties:
+ *                          payment_method:
+ *                              type: string
+ *      responses:
+ *          200:
+ *              description : bill update sucesfull
+ *          404:
+ *              description:  bill not found
+ *          400: 
+ *              description: error to pay bill
+ *      security:
+ *	        - jwt: []
+ */
+router.put('/:id/payment', [verifyToken, hasAnyRol], controller.payBill)
 
 module.exports = router;

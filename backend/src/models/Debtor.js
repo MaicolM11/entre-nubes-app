@@ -2,12 +2,12 @@ const mongoose = require("mongoose");
 
 const debtorSchema = mongoose.Schema(
     {
-        name: String,
+        fullname: String,
         cc: String,
         phone: String,
         debts: [{
             type: mongoose.Schema.Types.ObjectId,
-            ref: "Bill",
+            ref: "last_bills",
         }]
     },
     {

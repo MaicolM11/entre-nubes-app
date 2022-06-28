@@ -44,6 +44,23 @@ module.exports = {
                 }
             },
 
+            Debtor: {
+                type: "object",
+                properties: {
+                    fullname: { type: "string" },
+                    cc: { type: "string" },
+                    phone: { type: "string" },
+                    cc: { type: "string" },
+                    debts: { 
+                        type: "array", 
+                        items: {
+                            type: "string",
+                            description: "bills id"
+                        }
+                    }
+                }
+            },
+
             CreateBill: {
                 type: "object",
                 properties: {
