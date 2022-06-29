@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import styled from "styled-components";
 import { colors } from "../styles/colors";
@@ -12,7 +12,7 @@ import OrderProductCardsContainer from "../cards-container/OrderProductCardsCont
 import SearchInput from "../inputs/DataInput";
 import SelectCategory from "../select/SelectCategory";
 import PlaceInput from "../inputs/DataInput";
-import Table from "../table/Table";
+import ProductsTable from "../tables/ProductsTable";
 
 const CreateOrderModalContainer = styled.div`
   display: flex;
@@ -233,7 +233,7 @@ const CreateOrderModal = ({
               </InputContainer>
             </OrderPlaceContainer>
             <OrderTableContainer>
-              <Table data={orderedProducts} />
+              <ProductsTable data={orderedProducts} />
             </OrderTableContainer>
           </OrdersCenterContainer>
         </OrdersContainer>
