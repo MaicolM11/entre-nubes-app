@@ -26,6 +26,3 @@ export const getById = (req, res) => {
         .catch(error => res.status(400).json({ message: error.message }));
 }
 
-export const appendDueBill = (req, res) => {
-    
-}

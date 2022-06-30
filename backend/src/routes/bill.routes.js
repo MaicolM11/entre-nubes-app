@@ -1,6 +1,7 @@
 const router = require("express").Router();
 
 const controller = require('../controllers/bill.controller')
+const payController = require('../controllers/payment.controller');
 
 import { isAdmin, isSalesman, hasAnyRol } from '../middlewares/checkRole'
 import { verifyToken } from './../middlewares/jwt'
@@ -110,6 +111,75 @@ router.get('/my-sales/today', [verifyToken, hasAnyRol], controller.getMyLastBill
  *      security:
  *	        - jwt: []
  */
-router.put('/:id/payment', [verifyToken, hasAnyRol], controller.payBill)
+router.put('/:id/payment', [verifyToken, hasAnyRol], payController.payBill);
+
+/**
+ * @swagger
+ * /api/bill/{id}/due:
+ *  put:
+ *      sumary : append due bill
+ *      tags : [Bill]
+ *      parameters:
+ *          - in : path
+ *            name: id
+ *            schema:
+ *              type: string
+ *            required: true
+ *            description : bill id
+ *      requestBody:
+ *          required: true
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      type: object
+ *                      properties:
+ *                          debtor_id:
+ *                              type: string
+ *      responses:
+ *          200:
+ *              description : sucesfull
+ *          404:
+ *              description:  bill not found
+ *          400: 
+ *              description: error
+ *      security:
+ *	        - jwt: []
+ */
+router.put('/:id/due', [verifyToken, hasAnyRol], payController.generateDueBill);
+
+/**
+ * @swagger
+ * /api/bill/{id}/due/payment:
+ *  put:
+ *      sumary : pay due bill
+ *      tags : [Bill]
+ *      parameters:
+ *          - in : path
+ *            name: id
+ *            schema:
+ *              type: string
+ *            required: true
+ *            description : bill id
+ *      requestBody:
+ *          required: true
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      type: object
+ *                      properties:
+ *                          payment_method:
+ *                              type: string
+ *      responses:
+ *          200:
+ *              description : bill update sucesfull
+ *          404:
+ *              description:  bill not found
+ *          400: 
+ *              description: error to pay bill
+ *      security:
+ *	        - jwt: []
+ */
+router.put('/:id/due/payment', [verifyToken, hasAnyRol], payController.payDueBill);
+
 
 module.exports = router;

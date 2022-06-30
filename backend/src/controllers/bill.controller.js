@@ -1,5 +1,4 @@
 import Bill from "../models/Bill";
-import { BILL_STATES } from "../models/Enums";
 import { findProductsAndUpdate } from "./sale.controller";
 
 export const createBill = async (req, res) => {
@@ -62,20 +61,6 @@ const calculateTotalAndSubtotal = async (bill) => {
 
     bill.total = total;
     bill.subtotal = subtotal;
-}
-
-export const payBill = (req, res) => {
-    const { id } = req.params;
-
-    Bill.findByIdAndUpdate(id, {
-        status: BILL_STATES.PAID,
-        payment_method: req.body.payment_method.toUpperCase()
-    }, { new: true })
-        .then(doc => {
-            if (!doc) res.status(404).json({ message: 'Bill not found' })
-            else res.status(201).json(doc)
-        })
-        .catch(error => res.status(400).json({ message: error.message }))
 }
 
 export const emitLastBills = (socket = global.sockets) => {
