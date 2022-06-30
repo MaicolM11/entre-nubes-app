@@ -1,62 +1,4 @@
-// import React from "react";
-// import {
-//   TableContainer,
-//   Table,
-//   TableHead,
-//   TableBody,
-//   TableRow,
-//   TableCell,
-//   Paper,
-//   TablePagination,
-// } from "@mui/material";
-
-// const headerCells = [
-//   { name: "Nombre del Producto" },
-//   { name: "Precio de Venta" },
-//   { name: "Unidades" },
-//   { name: "Precio por Cantidad" },
-//   { name: "Quitar Producto" },
-// ];
-
-// const ProductsTable = ({ data }) => {
-//   return (
-//     <TableContainer component={Paper}>
-//       <Table>
-//         <TableHead>
-//           <TableRow>
-//             {headerCells.map((cell, i) => {
-//               return (
-//                 <TableCell key={i} size="small" align="center">
-//                   {cell.name}
-//                 </TableCell>
-//               );
-//             })}
-//           </TableRow>
-//         </TableHead>
-//         <TableBody>
-//           {data.map((product) => {
-//             return (
-//               <TableRow
-//                 key={product.id}
-//                 sx={{ "&last-child td, &:last-child th": { border: 0 } }}
-//               >
-//                 <TableCell align="center">{product.brand}</TableCell>
-//                 <TableCell align="center">{product.sale_price}</TableCell>
-//                 <TableCell align="center">{product.quantity}</TableCell>
-//                 <TableCell align="center">{product.pricePerQuantity}</TableCell>
-//                 <button>Test</button>
-//               </TableRow>
-//             );
-//           })}
-//         </TableBody>
-//       </Table>
-//     </TableContainer>
-//   );
-// };
-
-// export default ProductsTable;
-
-import * as React from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
@@ -76,8 +18,8 @@ import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import LastPageIcon from "@mui/icons-material/LastPage";
 
 import { styled } from "@mui/material/styles";
-import { tableCellClasses } from "@mui/material/TableCell";
 import { colors } from "../styles/colors";
+import { tableCellClasses } from "@mui/material/TableCell";
 
 const headerCells = [
   { name: "Nombre del Producto" },
@@ -86,8 +28,6 @@ const headerCells = [
   { name: "Precio por Cantidad" },
   { name: "Quitar Producto" },
 ];
-
-import { esES } from "@mui/material/locale";
 
 function TablePaginationActions(props) {
   const theme = useTheme();
@@ -163,7 +103,6 @@ const ProductsTable = ({ data }) => {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
-  // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
@@ -236,31 +175,6 @@ const ProductsTable = ({ data }) => {
             </TableRow>
           )}
         </TableBody>
-
-        {/* <TableBody>
-          {(rowsPerPage > 0
-            ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-            : rows
-          ).map((row) => (
-            <TableRow key={row.name}>
-              <TableCell component="th" scope="row">
-                {row.name}
-              </TableCell>
-              <TableCell style={{ width: 160 }} align="right">
-                {row.calories}
-              </TableCell>
-              <TableCell style={{ width: 160 }} align="right">
-                {row.fat}
-              </TableCell>
-            </TableRow>
-          ))}
-
-          {emptyRows > 0 && (
-            <TableRow style={{ height: 53 * emptyRows }}>
-              <TableCell colSpan={6} />
-            </TableRow>
-          )}
-        </TableBody> */}
         <TableFooter>
           <TableRow>
             <TablePagination
@@ -283,23 +197,3 @@ const ProductsTable = ({ data }) => {
 };
 
 export default ProductsTable;
-
-{
-  /* <Pagination
-  count={3}
-  variant="outlined"
-  shape="rounded"
-  hideNextButton={true}
-  hidePrevButton={true}
-  // showFirstButton
-  // showLastButton
-  style={{
-    display: "flex",
-    justifyContent: "center",
-    padding: "15px",
-  }}
-  page={page}
-  defaultPage={page}
-  onChange={(e) => handleChangePage(e.target.textContent)}
-/> */
-}
