@@ -20,6 +20,7 @@ import LastPageIcon from "@mui/icons-material/LastPage";
 import { styled } from "@mui/material/styles";
 import { colors } from "../styles/colors";
 import { tableCellClasses } from "@mui/material/TableCell";
+import { DataSpan, TotalPaymentContainer } from "../styles/style-components";
 
 const headerCells = [
   { name: "Nombre del Producto" },
@@ -102,6 +103,8 @@ const ProductsTable = ({ data }) => {
   const [rows, setRows] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [totalPayment, setTotalPayment] = React.useState(0);
+  let totalOrderPayment = 0;
 
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
@@ -128,8 +131,16 @@ const ProductsTable = ({ data }) => {
     },
   }));
 
+  const getTotalPayment = () => {
+    rows.map((product) => {
+      totalOrderPayment = +totalOrderPayment + product.pricePerQuantity;
+    });
+    setTotalPayment(totalOrderPayment);
+  };
+
   React.useEffect(() => {
     setRows(data);
+    getTotalPayment();
   });
 
   return (
@@ -192,6 +203,9 @@ const ProductsTable = ({ data }) => {
           </TableRow>
         </TableFooter>
       </Table>
+      <TotalPaymentContainer>
+        Total a Pagar: <DataSpan>${totalPayment}</DataSpan>
+      </TotalPaymentContainer>
     </TableContainer>
   );
 };

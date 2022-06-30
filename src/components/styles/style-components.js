@@ -106,6 +106,10 @@ export const BorderButtonContainer = styled.button`
   }
 `;
 
+export const DataSpan = styled.span`
+  font-weight: 500;
+`;
+
 export const InputContainer = styled.div`
   display: flex;
   gap: 5px;
@@ -248,4 +252,18 @@ export const SidebarButtonIconContainer = styled.div`
   align-items: center;
   width: 30px;
   height: 30px;
+`;
+
+export const TotalPaymentContainer = styled.label`
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  padding: 25px 0;
+  gap: 5px;
+  color: ${colors.text};
+  font-size: 16px;
+  font-weight: bold;
+  font-family: var(--roboto);
+  white-space: nowrap;
 `;

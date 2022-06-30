@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Button from "../buttons/Button";
 import { colors } from "../styles/colors";
 import { ReactComponent as EmptyProduct } from "../../assets/images/empty-product.svg";
+import { DataSpan } from "../styles/style-components";
 
 const ProductCardContainer = styled.div`
   display: flex;
@@ -75,10 +76,6 @@ const ProductData = styled.label`
   font-weight: bold;
   font-family: var(--roboto);
   white-space: nowrap;
-`;
-
-const DataSpan = styled.span`
-  font-weight: 500;
 `;
 
 const ProductOptionButtons = styled.div`
