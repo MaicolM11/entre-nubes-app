@@ -60,6 +60,10 @@ const theme = {
     default: colors.delete,
     hover: colors.deleteHover,
   },
+  dark: {
+    default: colors.dark,
+    hover: colors.darkHover,
+  },
 };
 
 export const ButtonContainer = styled.button`

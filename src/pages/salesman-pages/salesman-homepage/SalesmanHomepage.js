@@ -22,7 +22,7 @@ const SalesmanHomepage = () => {
             path="orders"
             element={<Orders salesmanName={getFullname()} />}
           />
-          <Route path="guarantors" element={<Guarantors />} />
+          <Route path="guarantors" element={<Guarantors salesmanName = {getFullname()} />} />
           <Route path="boliranas" element={<Boliranas />} />
         </Routes>
       </div>
