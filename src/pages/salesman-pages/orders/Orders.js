@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getAllProducts } from "../../../services/product";
 import { getAllCategories } from "../../../services/category";
+import {getAllSalesToDay} from "../../../services/bill"
 
 import "./Orders.css";
 import styled from "styled-components";
@@ -25,6 +26,7 @@ const Orders = ({ salesmanName }) => {
   const [categories, setCategories] = useState({});
   const [isOpenCreateOrderModal, setIsOpenCreateOrderModal] = useState(false);
   const [selected, setSelected] = useState("Categoría");
+  const [getBills, setBills] = useState([])
 
   const openCreateOrderModal = () => {
     setIsOpenCreateOrderModal((isOpen) => !isOpen);
@@ -42,9 +44,16 @@ const Orders = ({ salesmanName }) => {
     });
   };
 
+  const updateBills = ()=>{
+    getAllSalesToDay().then(async (res) =>{
+      setBills(await res.json())
+    })
+  }
+
   useEffect(() => {
     getProductos();
     getCategories();
+    updateBills();
   }, []);
 
   return (
@@ -57,6 +66,7 @@ const Orders = ({ salesmanName }) => {
             selected={selected}
             setSelected={setSelected}
             handleCloseModal={openCreateOrderModal}
+            updateBills= {updateBills}
           />
         }
         isOpen={isOpenCreateOrderModal}
@@ -76,7 +86,9 @@ const Orders = ({ salesmanName }) => {
           onClick={openCreateOrderModal}
         />
       </AddOrdersContainer>
-      <OrderCardsContainer />
+      <OrderCardsContainer
+      bills = {getBills} 
+      />
     </div>
   );
 };

@@ -10,14 +10,18 @@ const CardsContainer = styled.div`
   padding: 0 0 25px 25px;
   overflow-y: auto;
 `;
-const OrderCardsContainer = () => {
+const OrderCardsContainer = ({bills}) => {
   return (
     <CardsContainer>
-      <OrderCard
-        orderNumber="#"
-        place="Algún lugar del local"
-        totalPayment="000.000"
+      {Object.values(bills).map((bill,id)=>(
+        <OrderCard
+        // orderNumber={bill.}
+        place={bill.location}
+        totalPayment={bill.total  }
       />
+      ))
+      }
+     
     </CardsContainer>
   );
 };

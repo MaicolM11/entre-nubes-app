@@ -14,6 +14,8 @@ import SelectCategory from "../select/SelectCategory";
 import PlaceInput from "../inputs/DataInput";
 import ProductsTable from "../tables/ProductsTable";
 
+import {postBill} from '../../services/bill'
+
 const CreateOrderModalContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -114,6 +116,7 @@ const CreateOrderModal = ({
   selected,
   setSelected,
   handleCloseModal,
+  updateBills
 }) => {
   const [orderedProducts, setOrderedProducts] = useState([]);
   const [location, setLocation] = useState("");
@@ -132,6 +135,10 @@ const CreateOrderModal = ({
       };
       setproductsOnSale((products) => [...products, productOnSale]);
     }
+    postBill(location,productsOnSale).then(()=>{
+      handleCloseModal()
+      updateBills()
+    })
     console.log(order);
   };
 

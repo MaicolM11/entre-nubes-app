@@ -10,7 +10,7 @@ export const postBill = (
         method: 'POST',
         headers: { "Content-Type": "application/json", authorization: getToken() },
         body : JSON.stringify({
-            description: description,
+            location: description,
             sales : sales
         })
     }
