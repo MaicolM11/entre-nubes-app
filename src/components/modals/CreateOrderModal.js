@@ -14,7 +14,7 @@ import SelectCategory from "../select/SelectCategory";
 import PlaceInput from "../inputs/DataInput";
 import ProductsTable from "../tables/ProductsTable";
 
-import {postBill} from '../../services/bill'
+import { postBill } from "../../services/bill";
 
 const CreateOrderModalContainer = styled.div`
   display: flex;
@@ -116,30 +116,27 @@ const CreateOrderModal = ({
   selected,
   setSelected,
   handleCloseModal,
-  updateBills
+  updateBills,
 }) => {
   const [orderedProducts, setOrderedProducts] = useState([]);
   const [location, setLocation] = useState("");
-  const [productsOnSale, setproductsOnSale] = useState([]);
 
-  const order = {
-    location: location,
-    sales: productsOnSale,
-  };
+  let productsOnSale = [];
 
   const handleSubmitOrder = () => {
-    for (const product of orderedProducts) {
-      const productOnSale = {
-        product: product.id,
-        quantity: product.quantity,
-      };
-      setproductsOnSale((products) => [...products, productOnSale]);
-    }
-    postBill(location,productsOnSale).then(()=>{
-      handleCloseModal()
-      updateBills()
-    })
-    console.log(order);
+    orderedProducts.map((product) => {
+      const productOnSale = { product: product.id, quantity: product.quantity };
+      productsOnSale.push(productOnSale);
+    });
+    postBill(location, productsOnSale).then(async (res) => {
+      const data = await res.json();
+      if (res.ok) {
+        handleCloseModal();
+        updateBills();
+      } else {
+        alert(data.message);
+      }
+    });
   };
 
   const handleAddProductOrder = (product) => {
@@ -238,6 +235,7 @@ const CreateOrderModal = ({
               <ProductsTable
                 data={orderedProducts}
                 onDelete={deleteProductToTable}
+                // setProductsOnSale={setproductsOnSale}
               />
             </OrderTableContainer>
           </OrdersCenterContainer>

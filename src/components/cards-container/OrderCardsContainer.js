@@ -16,6 +16,7 @@ const OrderCardsContainer = ({bills}) => {
       {Object.values(bills).map((bill,id)=>(
         <OrderCard
         // orderNumber={bill.}
+        key={id}
         place={bill.location}
         totalPayment={bill.total  }
       />

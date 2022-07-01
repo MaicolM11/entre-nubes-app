@@ -105,8 +105,6 @@ const ProductsTable = ({ data, onDelete }) => {
   const [totalPayment, setTotalPayment] = React.useState(0);
   let totalOrderPayment = 0;
 
-  // const [tempArray, setTempArray] = useState()
-
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
@@ -143,11 +141,6 @@ const ProductsTable = ({ data, onDelete }) => {
     setRows(data);
     getTotalPayment();
   });
-
-  // const deleteProductToTable = (id) => {
-  //   const currentProducts = rows.filter((item) => item.id !== id);
-  //   setRows(currentProducts);
-  // };
 
   return (
     <TableContainer component={Paper}>

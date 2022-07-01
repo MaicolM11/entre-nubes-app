@@ -107,7 +107,6 @@ const OrderProductCard = ({
         <ProductInfoContainer>
           <ProductName>{brand}</ProductName>
           <ProductCategory>{category}</ProductCategory>
-
           <ProductData>
             Precio de Venta: <DataSpan>${salePrice}</DataSpan>
           </ProductData>
