@@ -1,6 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useTheme } from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
+import { tableCellClasses } from "@mui/material/TableCell";
+import { colors } from "../styles/colors";
+import { DataSpan, TotalPaymentContainer } from "../styles/style-components";
 import Box from "@mui/material/Box";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -16,11 +20,6 @@ import FirstPageIcon from "@mui/icons-material/FirstPage";
 import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import LastPageIcon from "@mui/icons-material/LastPage";
-
-import { styled } from "@mui/material/styles";
-import { colors } from "../styles/colors";
-import { tableCellClasses } from "@mui/material/TableCell";
-import { DataSpan, TotalPaymentContainer } from "../styles/style-components";
 
 const headerCells = [
   { name: "Nombre del Producto" },
@@ -99,12 +98,14 @@ TablePaginationActions.propTypes = {
   rowsPerPage: PropTypes.number.isRequired,
 };
 
-const ProductsTable = ({ data }) => {
+const ProductsTable = ({ data, onDelete }) => {
   const [rows, setRows] = React.useState([]);
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rowsPerPage, setRowsPerPage] = React.useState(6);
   const [totalPayment, setTotalPayment] = React.useState(0);
   let totalOrderPayment = 0;
+
+  // const [tempArray, setTempArray] = useState()
 
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
@@ -114,7 +115,7 @@ const ProductsTable = ({ data }) => {
   };
 
   const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 5));
+    setRowsPerPage(parseInt(event.target.value, 6));
     setPage(0);
   };
 
@@ -143,6 +144,11 @@ const ProductsTable = ({ data }) => {
     getTotalPayment();
   });
 
+  // const deleteProductToTable = (id) => {
+  //   const currentProducts = rows.filter((item) => item.id !== id);
+  //   setRows(currentProducts);
+  // };
+
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
@@ -158,34 +164,46 @@ const ProductsTable = ({ data }) => {
           </TableRow>
         </TableHead>
 
-        <TableBody>
-          {(rowsPerPage > 0
-            ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-            : rows
-          ).map((product) => {
-            return (
-              <TableRow
-                key={product.id}
-                sx={{ "&last-child td, &:last-child th": { border: 0 } }}
-              >
-                <TableCell align="center">{product.brand}</TableCell>
-                <TableCell align="center">${product.sale_price}</TableCell>
-                <TableCell align="center">{product.quantity}</TableCell>
-                <TableCell align="center">
-                  ${product.pricePerQuantity}
-                </TableCell>
-                <TableCell align="center">
-                  <button>Test</button>
-                </TableCell>
+        {rows.length ? (
+          <TableBody>
+            {(rowsPerPage > 0
+              ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              : rows
+            ).map((product) => {
+              return (
+                <TableRow
+                  key={product.id}
+                  sx={{ "&last-child td, &:last-child th": { border: 0 } }}
+                >
+                  <TableCell align="center">{product.brand}</TableCell>
+                  <TableCell align="center">${product.sale_price}</TableCell>
+                  <TableCell align="center">{product.quantity}</TableCell>
+                  <TableCell align="center">
+                    ${product.pricePerQuantity}
+                  </TableCell>
+                  <TableCell align="center">
+                    <button onClick={() => onDelete(product.id)}>Delete</button>
+                  </TableCell>
+                </TableRow>
+              );
+            })}
+            {emptyRows > 0 && (
+              <TableRow style={{ height: 54 * emptyRows }}>
+                <TableCell colSpan={6} />
               </TableRow>
-            );
-          })}
-          {emptyRows > 0 && (
-            <TableRow style={{ height: 53 * emptyRows }}>
-              <TableCell colSpan={6} />
-            </TableRow>
-          )}
-        </TableBody>
+            )}
+          </TableBody>
+        ) : (
+          <TableBody>
+            {[...Array(6)].map((data, i) => {
+              return (
+                <TableRow key={i} style={{ height: 54 }}>
+                  <TableCell colSpan={6} />
+                </TableRow>
+              );
+            })}
+          </TableBody>
+        )}
         <TableFooter>
           <TableRow>
             <TablePagination

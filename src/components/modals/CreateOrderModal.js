@@ -18,7 +18,6 @@ const CreateOrderModalContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 1230px;
-  height: 675px;
   background-color: ${colors.secondary};
   border-radius: 16px;
 `;
@@ -48,7 +47,7 @@ const ProductsCenterContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  margin: 25px;
+  margin: 25px 25px 2px 25px;
   gap: 25px;
 `;
 
@@ -62,14 +61,11 @@ const ProductsFilterContainer = styled.div`
 const ProductsCardContainer = styled.div`
   display: flex;
   width: 100%;
-  height: 460px;
-  min-height: 460px;
+  height: 525px;
 `;
 
 const OrdersContainer = styled.div`
   display: flex;
-  width: 630px;
-  height: 579px;
   border-left: solid 1px ${colors.border};
 `;
 
@@ -93,8 +89,6 @@ const OrderTableContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 460px;
-  background-color: darkslateblue;
 `;
 
 const TitleInfo = styled.label`
@@ -107,15 +101,11 @@ const TitleInfo = styled.label`
 `;
 const FilterContainer = styled.div`
   display: flex;
-  width: 385px;
-  min-width: 385px;
   gap: 15px;
 `;
 
 const InputContainer = styled.div`
   display: flex;
-  width: 250px;
-  min-width: 250px;
 `;
 
 const CreateOrderModal = ({
@@ -164,6 +154,11 @@ const CreateOrderModal = ({
   const handleSearchChange = (e) => {
     const { name, value } = e.target;
     console.log(`${name}: ${value}`);
+  };
+
+  const deleteProductToTable = (id) => {
+    const currentProducts = orderedProducts.filter((item) => item.id !== id);
+    setOrderedProducts(currentProducts);
   };
 
   return (
@@ -233,7 +228,10 @@ const CreateOrderModal = ({
               </InputContainer>
             </OrderPlaceContainer>
             <OrderTableContainer>
-              <ProductsTable data={orderedProducts} />
+              <ProductsTable
+                data={orderedProducts}
+                onDelete={deleteProductToTable}
+              />
             </OrderTableContainer>
           </OrdersCenterContainer>
         </OrdersContainer>
@@ -255,10 +253,11 @@ function showProductsOnTable(
   if (index === -1) {
     setOrderedProducts((products) => [...products, orderedProduct]);
   } else {
-    let temp = [...orderedProducts];
-    temp[index].quantity++;
-    const totalPricePerQuantity = temp[index].quantity * temp[index].sale_price;
-    temp[index].pricePerQuantity = +totalPricePerQuantity;
-    setOrderedProducts(temp);
+    let tempArray = [...orderedProducts];
+    tempArray[index].quantity++;
+    const totalPricePerQuantity =
+      tempArray[index].quantity * tempArray[index].sale_price;
+    tempArray[index].pricePerQuantity = +totalPricePerQuantity;
+    setOrderedProducts(tempArray);
   }
 }
