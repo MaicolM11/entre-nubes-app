@@ -128,12 +128,14 @@ export const InputContainer = styled.div`
   :focus-within {
     border-color: ${colors.highlighted};
     path {
-      fill: ${colors.highlighted};
+      stroke: ${(props) => (props.isStroke ? colors.highlighted : "none")};
+      fill: ${(props) => (props.isFill ? colors.highlighted : "none")};
     }
   }
 
   path {
-    fill: ${colors.brand};
+    stroke: ${(props) => (props.isStroke ? colors.brand : "none")};
+    fill: ${(props) => (props.isFill ? colors.brand : "none")};
   }
 `;
 
@@ -151,6 +153,32 @@ export const IconContainer = styled.div`
   align-items: center;
   min-width: 24px;
   min-height: 24px;
+`;
+
+export const InputPasswordContainer = styled.div`
+  display: flex;
+  gap: 5px;
+  width: ${(props) => size[props.size].width};
+  height: 43px;
+  background-color: ${colors.secondary};
+  border: 1px solid ${colors.border};
+  border-radius: 25px;
+  :focus-within {
+    border-color: ${colors.highlighted};
+    path {
+      stroke: ${colors.highlighted};
+    }
+    circle {
+      stroke: ${colors.highlighted};
+    }
+  }
+
+  path {
+    stroke: ${colors.brand};
+  }
+  circle {
+    stroke: ${colors.brand};
+  }
 `;
 
 export const InputValueContainer = styled.input`
@@ -234,11 +262,11 @@ export const SelectContainer = styled.div`
 `;
 
 export const ShowPasswordButton = styled.div`
-  display: inline-flex;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   min-width: 24px;
   min-height: 24px;
-  justify-content: center;
-  align-items: center;
   border: none;
   border-radius: 100%;
   cursor: pointer;

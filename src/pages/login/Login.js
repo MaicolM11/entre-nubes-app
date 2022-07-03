@@ -45,7 +45,7 @@ const Login = () => {
       let data = await res.json();
       if (res.ok) {
         Object.entries(data).forEach(([key, value]) => {
-          localStorage.setItem(key, value)
+          localStorage.setItem(key, value);
         });
         redirectByRol(data.rol);
       } else {
@@ -67,6 +67,8 @@ const Login = () => {
               name="email"
               size="normalInput"
               icon={<UserIcon />}
+              isStroke={true}
+              isFill={false}
               placeholder="Usuario"
               type="text"
               onChange={handleChange}
@@ -74,7 +76,7 @@ const Login = () => {
             <PasswordInput
               name="password"
               size="normalInput"
-              icon={<LockIcon />}
+              icon={<LockIcon fill="black" />}
               placeholder="Contraseña"
               onChange={handleChange}
             />

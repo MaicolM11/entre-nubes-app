@@ -9,6 +9,8 @@ import {
 const DataInput = ({
   size,
   icon,
+  isStroke,
+  isFill,
   type,
   name,
   placeholder,
@@ -16,7 +18,7 @@ const DataInput = ({
   onChange,
 }) => {
   return (
-    <InputContainer size={size}>
+    <InputContainer size={size} isStroke={isStroke} isFill={isFill}>
       <InputCenterContainer>
         <IconContainer>{icon}</IconContainer>
         <InputValueContainer

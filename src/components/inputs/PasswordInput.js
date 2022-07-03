@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import { ReactComponent as Eye } from "../../assets/icons/eye.svg";
 import { ReactComponent as EyeOff } from "../../assets/icons/eye-off.svg";
 import {
-  InputContainer,
+  InputPasswordContainer,
   InputCenterContainer,
   IconContainer,
   InputValueContainer,
@@ -19,7 +19,7 @@ const PasswordInput = ({ size, icon, name, placeholder, onChange }) => {
   };
 
   return (
-    <InputContainer size={size}>
+    <InputPasswordContainer size={size}>
       <InputCenterContainer>
         <IconContainer>{icon}</IconContainer>
         <InputValueContainer
@@ -33,7 +33,7 @@ const PasswordInput = ({ size, icon, name, placeholder, onChange }) => {
           {showPassword ? <EyeOff /> : <Eye />}
         </ShowPasswordButton>
       </InputCenterContainer>
-    </InputContainer>
+    </InputPasswordContainer>
   );
 };
 

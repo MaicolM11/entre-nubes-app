@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import "./Salesmans.css";
 import Header from "../../../components/header/Header";
 import NotificationButton from "../../../components/header/NotificationButton";
-import { ReactComponent as AddPerson } from "../../../assets/icons/person_add.svg";
+import { ReactComponent as AddPerson } from "../../../assets/icons/add-person.svg";
 import styled from "styled-components";
 import Button from "../../../components/buttons/Button";
 import AnimatedModalContainer from "../../../components/modals/animation/AnimatedModalContainer";
