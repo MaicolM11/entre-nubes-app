@@ -19,6 +19,7 @@ const AdminHomepage = () => {
       <Sidebar links={AdminLinks} />
       <div className="admin-pages-container">
         <Routes>
+          <Route index element={<Orders />} />
           <Route path="orders" element={<Orders />} />
           <Route path="reports" element={<Reports />} />
           <Route path="products" element={<Products />} />

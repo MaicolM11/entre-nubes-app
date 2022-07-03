@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getAllProducts } from "../../../services/product";
 import { getAllCategories } from "../../../services/category";
-import {getAllSalesToDay} from "../../../services/bill"
+import { getAllSalesToDay } from "../../../services/bill";
 
 import "./Orders.css";
 import styled from "styled-components";
@@ -9,16 +9,14 @@ import AnimatedModalContainer from "../../../components/modals/animation/Animate
 import Header from "../../../components/header/Header";
 import SalesmanData from "../../../components/header/SalesmanData";
 import Button from "../../../components/buttons/Button";
-import OrderCardsContainer from "../../../components/cards-container/OrderCardsContainer";
+import OrdersSalesmanCardsContainer from "../../../components/cards-container/OrdersSalesmanCardsContainer";
 import CreateOrderModal from "../../../components/modals/CreateOrderModal";
 import { ReactComponent as Add } from "../../../assets/icons/add.svg";
 
 const AddOrdersContainer = styled.div`
   display: flex;
   width: 100%;
-  min-height: 95px;
-  align-items: center;
-  padding-left: 25px;
+  padding: 25px 25px 0 25px;
 `;
 
 const Orders = ({ salesmanName }) => {
@@ -26,7 +24,7 @@ const Orders = ({ salesmanName }) => {
   const [categories, setCategories] = useState({});
   const [isOpenCreateOrderModal, setIsOpenCreateOrderModal] = useState(false);
   const [selected, setSelected] = useState("Categoría");
-  const [getBills, setBills] = useState([])
+  const [getBills, setBills] = useState([]);
 
   const openCreateOrderModal = () => {
     setIsOpenCreateOrderModal((isOpen) => !isOpen);
@@ -44,11 +42,11 @@ const Orders = ({ salesmanName }) => {
     });
   };
 
-  const updateBills = ()=>{
-    getAllSalesToDay().then(async (res) =>{
-      setBills(await res.json())
-    })
-  }
+  const updateBills = () => {
+    getAllSalesToDay().then(async (res) => {
+      setBills(await res.json());
+    });
+  };
 
   useEffect(() => {
     getProductos();
@@ -66,7 +64,7 @@ const Orders = ({ salesmanName }) => {
             selected={selected}
             setSelected={setSelected}
             handleCloseModal={openCreateOrderModal}
-            updateBills= {updateBills}
+            updateBills={updateBills}
           />
         }
         isOpen={isOpenCreateOrderModal}
@@ -86,9 +84,7 @@ const Orders = ({ salesmanName }) => {
           onClick={openCreateOrderModal}
         />
       </AddOrdersContainer>
-      <OrderCardsContainer
-      bills = {getBills} 
-      />
+      <OrdersSalesmanCardsContainer bills={getBills} />
     </div>
   );
 };

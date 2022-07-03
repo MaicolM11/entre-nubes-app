@@ -18,11 +18,15 @@ const SalesmanHomepage = () => {
       <Sidebar links={SalesmanLinks} />
       <div className="salesman-pages-container">
         <Routes>
+          <Route index element={<Orders salesmanName={getFullname()} />} />
           <Route
             path="orders"
             element={<Orders salesmanName={getFullname()} />}
           />
-          <Route path="guarantors" element={<Guarantors salesmanName = {getFullname()} />} />
+          <Route
+            path="guarantors"
+            element={<Guarantors salesmanName={getFullname()} />}
+          />
           <Route path="boliranas" element={<Boliranas />} />
         </Routes>
       </div>

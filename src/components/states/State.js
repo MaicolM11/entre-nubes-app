@@ -8,7 +8,7 @@ const StateContainer = styled.div`
   height: 36px;
   align-items: center;
   justify-content: center;
-
+  user-select: none;
   color: ${colors.delete};
   font-size: 14px;
   font-weight: bold;

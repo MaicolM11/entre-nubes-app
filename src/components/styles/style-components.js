@@ -113,6 +113,15 @@ export const BorderButtonContainer = styled.button`
   }
 `;
 
+export const CardsContainer = styled.div`
+  display: grid;
+  grid-row-gap: 25px;
+  grid-column-gap: 50px;
+  grid-template-columns: repeat(auto-fill, minmax(194px, 1fr));
+  padding: 25px;
+  overflow-y: auto;
+`;
+
 export const DataSpan = styled.span`
   font-weight: 500;
 `;
@@ -254,6 +263,84 @@ export const ModalTitle = styled.label`
   font-weight: bold;
   font-family: var(--roboto);
   white-space: nowrap;
+`;
+
+export const OrderCardContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 194px;
+  gap: 25px;
+  border: 1px solid ${colors.border};
+  border-radius: 8px;
+  &:hover {
+    border-color: ${colors.highlighted};
+  }
+`;
+
+export const OrderCardDataContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 25px 21px;
+  gap: 25px;
+`;
+
+export const OrderTitle = styled.label`
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  color: ${colors.text};
+  font-size: 22px;
+  font-weight: bold;
+  font-family: var(--roboto);
+  white-space: nowrap;
+`;
+
+export const OrderPlaceTitle = styled.label`
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  color: ${colors.text};
+  font-size: 18px;
+  font-weight: bold;
+  font-family: var(--roboto);
+  white-space: nowrap;
+`;
+
+export const OrderPlaceDescription = styled.label`
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  color: ${colors.text};
+  font-size: 16px;
+  font-weight: 500;
+  font-family: var(--roboto);
+`;
+
+export const OrderTotalPayment = styled.label`
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  color: ${colors.text};
+  font-size: 18px;
+  font-weight: bold;
+  font-family: var(--roboto);
+  white-space: nowrap;
+`;
+
+export const OrderCardButtonsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  gap: 10px;
 `;
 
 export const SelectContainer = styled.div`
