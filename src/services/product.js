@@ -27,11 +27,12 @@ export const deleteProduct = (id) => {
 };
 
 export const updateUnits = (id, units) => {
+ 
   const requestOptions = {
     method: "PUT",
     headers: { "Content-Type": "application/json", authorization: getToken() },
     body: JSON.stringify({
-      increment: units,
+      increment: units.stock,
     }),
   };
   return fetch(BASE_URL + `/${id}/stock`, requestOptions);

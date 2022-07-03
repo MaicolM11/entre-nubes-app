@@ -16,6 +16,7 @@ import SelectCategory from "../../../components/select/SelectCategory";
 import { ReactComponent as Add } from "../../../assets/icons/add.svg";
 import { ReactComponent as Category } from "../../../assets/icons/category.svg";
 import { ReactComponent as Search } from "../../../assets/icons/search.svg";
+import AddStock from "../../../components/modals/AddStock";
 
 // import { ModalCategories } from "../../components/modals/categories/ModalCategories";
 
@@ -29,6 +30,7 @@ const Products = () => {
   const [isOpenEditProductModal, setIsOpenEditProductModal] = useState(false);
   const [isOpenDeleteProductModal, setIsOpenDeleteProductModal] =
     useState(false);
+  const [isOpenAddStock, setIsOpenAddStock] = useState (false)
   // const [openModalCategories, setOpenModalCategories] = useState(false);
 
   const openAddProductModal = () => {
@@ -37,9 +39,14 @@ const Products = () => {
 
   const openEditProductModal = (product) => {
     setProduct(product);
-    setCategory((cat)=> cat = product.category.name)
+    setCategory(product.category.name)
     setIsOpenEditProductModal((isOpen) => !isOpen);
   };
+
+  const openAddStock = (product) =>{
+    setProduct(product)
+    setIsOpenAddStock((isOpen) => !isOpen)
+  }
 
   const openDeleteProductModal = (product) => {
     setProduct(product);
@@ -112,6 +119,16 @@ const Products = () => {
         isOpen={isOpenDeleteProductModal}
         setIsOpen={setIsOpenDeleteProductModal}
       />
+      <>{ isOpenAddStock && (
+        <AddStock
+        product={product}
+        isOpen = {isOpenAddStock}
+        setIsOpenAddStock = {setIsOpenAddStock}
+        update= { getProductos}
+        />
+      )
+      }
+      </>
       <Header
         title="Productos"
         description="Información de los productos registrados"
@@ -155,8 +172,10 @@ const Products = () => {
       </div>
       <ProductCardsContainer
         products={products}
+        openAddStock = {openAddStock}
         openEditProductModal={openEditProductModal}
         openDeleteProductModal={openDeleteProductModal}
+        updateProductList = {getProductos}
       />
     </div>
   );

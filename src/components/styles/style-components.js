@@ -35,6 +35,9 @@ const size = {
   normalInput: {
     width: "403px",
   },
+  stockInput: {
+    width: "365px",
+  },
   mediumInput: {
     width: "248px",
   },

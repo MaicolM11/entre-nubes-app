@@ -13,6 +13,7 @@ const CardsContainer = styled.div`
 
 const ProductCardsContainer = ({
   products,
+  openAddStock,
   openEditProductModal,
   openDeleteProductModal,
 }) => {
@@ -27,6 +28,7 @@ const ProductCardsContainer = ({
           salePrice={product.sale_price}
           presentation={product.presentation}
           stock={product.stock}
+          onClickStock = {() => openAddStock(product)}
           onClickEdit={() => openEditProductModal(product)}
           onClickDelete={() => openDeleteProductModal(product)}
         />
