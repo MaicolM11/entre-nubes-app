@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { reqProduct, editProduct } from "../../services/product";
+import { editProduct } from "../../services/product";
 import { getAllCategories } from "../../services/category";
 import { productEditValidation } from "../../errors/validate";
 import useForm from "../../form/useFormEdit";
@@ -220,7 +220,6 @@ const ProductModal = ({
                     <ErrorMessageContainer>
                       <SelectContainer>
                         <SelectCategory
-                          size="normalSelect"
                           name="category"
                           titleOptions="Categorías"
                           categories={categories}

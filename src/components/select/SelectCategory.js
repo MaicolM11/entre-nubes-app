@@ -20,7 +20,7 @@ const size = {
 const SelectContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: ${(props) => size[props.size].width};
+  width: 100%;
   align-items: center;
   gap: 10px;
   color: ${colors.brand};
@@ -28,7 +28,7 @@ const SelectContainer = styled.div`
   font-weight: bold;
   font-family: var(--roboto);
   user-select: none;
-  z-index: 90;
+  z-index: 95;
 `;
 
 export const SelectValueContainer = styled.div`
@@ -116,29 +116,24 @@ const DefaultValue = styled.span`
 `;
 
 const SelectCategory = ({
-  size,
   titleOptions,
   categories,
   selectedCategory,
   setSelectedCategory,
-  product
 }) => {
-  const [isActive, setIsActive] = useState(false);
-
+  const [isActive, setIsActive] = useState();
 
   return (
-    <SelectContainer size={size}>
+    <SelectContainer>
       <SelectValueContainer
-        isActive={isActive}
         onClick={() => setIsActive(!isActive)}
+        isActive={isActive}
       >
         <InputCenterContainer>
           <SelectIconContainer isActive={isActive}>
             <Category />
           </SelectIconContainer>
-          <DefaultValue>
-            {selectedCategory}
-          </DefaultValue>
+          <DefaultValue>{selectedCategory}</DefaultValue>
           <SelectCaretDownContainer isActive={isActive}>
             <CaretDown />
           </SelectCaretDownContainer>

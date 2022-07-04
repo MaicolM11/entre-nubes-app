@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import styled from "styled-components";
 import { colors } from "../styles/colors";
-import { ModalTitle, SelectContainer } from "../styles/style-components";
+import { ModalTitle, SelectOrderContainer } from "../styles/style-components";
 import { ReactComponent as Search } from "../../assets/icons/search.svg";
 import { ReactComponent as HomeTable } from "../../assets/icons/home-table.svg";
 
@@ -19,7 +19,6 @@ import { postBill } from "../../services/bill";
 const CreateOrderModalContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 1230px;
   background-color: ${colors.secondary};
   border-radius: 16px;
 `;
@@ -56,6 +55,7 @@ const ProductsCenterContainer = styled.div`
 const ProductsFilterContainer = styled.div`
   display: flex;
   width: 100%;
+  align-items: center;
   padding-bottom: 15px;
   border-bottom: solid 1px ${colors.border};
 `;
@@ -82,8 +82,8 @@ const OrdersCenterContainer = styled.div`
 const OrderPlaceContainer = styled.div`
   display: flex;
   width: 100%;
-  height: 60px;
-  min-height: 60px;
+  align-items: center;
+  padding-bottom: 15px;
   border-bottom: solid 1px ${colors.border};
 `;
 
@@ -193,19 +193,19 @@ const CreateOrderModal = ({
                   name="search"
                   size="smallInput"
                   icon={<Search />}
+                  isStroke={true}
                   placeholder="Buscar"
                   type="text"
                   onChange={handleSearchChange}
                 />
-                <SelectContainer>
+                <SelectOrderContainer>
                   <SelectCategory
-                    size="smallSelect"
                     titleOptions="Categorías"
                     categories={categories}
                     selectedCategory={selected}
                     setSelectedCategory={setSelected}
                   />
-                </SelectContainer>
+                </SelectOrderContainer>
               </FilterContainer>
             </ProductsFilterContainer>
             <ProductsCardContainer>
@@ -224,6 +224,7 @@ const CreateOrderModal = ({
                 <PlaceInput
                   name="place"
                   size="mediumInput"
+                  isStroke={true}
                   icon={<HomeTable stroke={colors.brand} />}
                   placeholder="Lugar"
                   type="text"
@@ -235,7 +236,6 @@ const CreateOrderModal = ({
               <ProductsTable
                 data={orderedProducts}
                 onDelete={deleteProductToTable}
-                // setProductsOnSale={setproductsOnSale}
               />
             </OrderTableContainer>
           </OrdersCenterContainer>

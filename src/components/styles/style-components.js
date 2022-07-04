@@ -170,6 +170,25 @@ export const InputCenterContainer = styled.div`
   gap: 10px;
 `;
 
+export const DeleteIconButtonContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 45px;
+  transition: 0.2s;
+  cursor: pointer;
+  &:hover {
+    path {
+      stroke: ${(props) => (props.isStroke ? colors.deleteHover : "none")};
+      fill: ${(props) => (props.isFill ? colors.deleteHover : "none")};
+    }
+  }
+  path {
+    stroke: ${(props) => (props.isStroke ? colors.delete : "none")};
+    fill: ${(props) => (props.isFill ? colors.delete : "none")};
+  }
+`;
+
 export const IconContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -359,6 +378,13 @@ export const OrderCardButtonsContainer = styled.div`
 
 export const SelectContainer = styled.div`
   display: flex;
+  width: 405px;
+  height: 45px;
+`;
+
+export const SelectOrderContainer = styled.div`
+  display: flex;
+  width: 220px;
   height: 45px;
 `;
 

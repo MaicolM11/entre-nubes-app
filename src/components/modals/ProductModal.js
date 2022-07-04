@@ -101,11 +101,9 @@ const ProductModal = ({
   isOpen,
   setIsOpen,
 }) => {
-
-  const category = "Categoría"
+  const category = "Categoría";
   const [selectedCategory, setSelectedCategory] = useState(category);
   const [categories, setCategories] = useState({});
-
 
   const submitProduct = () => {
     if (isOpen) {
@@ -243,13 +241,12 @@ const ProductModal = ({
                     <ErrorMessageContainer>
                       <SelectContainer>
                         <SelectCategory
-                          size="normalSelect"
                           name="category"
                           titleOptions="Categorías"
                           categories={categories}
                           selectedCategory={selectedCategory}
                           setSelectedCategory={setSelectedCategory}
-                          product = {product}
+                          product={product}
                         />
                       </SelectContainer>
                       {selectedCategory === category ? (

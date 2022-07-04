@@ -1,10 +1,13 @@
 import React from "react";
+import { colors } from "../styles/colors";
+import { DataSpan, TotalPaymentContainer } from "../styles/style-components";
+import { DeleteIconButtonContainer } from "../styles/style-components";
+import { ReactComponent as Delete } from "../../assets/icons/delete.svg";
+
 import PropTypes from "prop-types";
 import { useTheme } from "@mui/material/styles";
 import { styled } from "@mui/material/styles";
 import { tableCellClasses } from "@mui/material/TableCell";
-import { colors } from "../styles/colors";
-import { DataSpan, TotalPaymentContainer } from "../styles/style-components";
 import Box from "@mui/material/Box";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -175,7 +178,12 @@ const ProductsTable = ({ data, onDelete }) => {
                     ${product.pricePerQuantity}
                   </TableCell>
                   <TableCell align="center">
-                    <button onClick={() => onDelete(product.id)}>Delete</button>
+                    <DeleteIconButtonContainer
+                      isFill={true}
+                      onClick={() => onDelete(product.id)}
+                    >
+                      <Delete width={20} height={21} />
+                    </DeleteIconButtonContainer>
                   </TableCell>
                 </TableRow>
               );
@@ -200,8 +208,8 @@ const ProductsTable = ({ data, onDelete }) => {
         <TableFooter>
           <TableRow>
             <TablePagination
-              labelDisplayedRows={({ from, to, count }) =>
-                `Mostrando ${from} - ${to} de ${count} páginas`
+              labelDisplayedRows={({ from, to }) =>
+                `Mostrando los productos del ${from} al ${to}`
               }
               rowsPerPageOptions={[]}
               count={rows.length}
