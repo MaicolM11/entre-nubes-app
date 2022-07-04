@@ -50,7 +50,7 @@ router.get('/', [verifyToken, hasAnyRol], controller.getAll);
 
 /**
  * @swagger
- * /api/debtor/{id}:
+ * /api/debtor/{id}/debts:
  *  get:
  *      sumary : get debtor by id
  *      tags : [Debtor]
@@ -69,6 +69,6 @@ router.get('/', [verifyToken, hasAnyRol], controller.getAll);
  *      security:
  *	        - jwt: []
  */
-router.get('/:id', [verifyToken, hasAnyRol], controller.getById);
+router.get('/:id/debts', [verifyToken, hasAnyRol], controller.getDebtsOfDebtor);
 
 module.exports = router;

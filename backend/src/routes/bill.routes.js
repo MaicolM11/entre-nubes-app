@@ -1,7 +1,7 @@
 const router = require("express").Router();
 
 const controller = require('../controllers/bill.controller')
-const payController = require('../controllers/payment.controller');
+const payController = require('../controllers/paymentAndDue.controller');
 
 import { isAdmin, isSalesman, hasAnyRol } from '../middlewares/checkRole'
 import { verifyToken } from './../middlewares/jwt'

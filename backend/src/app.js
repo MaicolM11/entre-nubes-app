@@ -11,11 +11,12 @@ import cors from 'cors'
 const app = express()
 const http = createServer(app);
 const io = new Server(http, {});
-
+const fs = require('fs')
 global.sockets = io.sockets;
 
 // middlewares
-app.use(morgan(':method :url :referrer :body :status :response-time ms', {
+app.use(morgan(':method\t:url\t:referrer\t:body\t:status\t:response-time ms', {
+            stream: fs.createWriteStream('./info.log', {flags: 'a'}),
             skip: (req, res) => req.method === "GET"
         }));
 

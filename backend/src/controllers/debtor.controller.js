@@ -15,14 +15,13 @@ export const getAll = (req, res) => {
         .catch(error => res.status(400).json({ message: error.message }));
 }
 
-export const getById = (req, res) => {
+export const getDebtsOfDebtor = (req, res) => {
     const { id } = req.params;
-    Debtor.findById(id).populate({
+    Debtor.findById(id, 'debts').populate({
             path: 'debts',
             select: { 'sales': 0 },
             // match: { status: "PENDIENTE" },
         })
-        .then(data => res.status(200).json(data))
+        .then(data => res.status(200).json(data.debts))
         .catch(error => res.status(400).json({ message: error.message }));
 }
-

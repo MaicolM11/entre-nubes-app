@@ -37,8 +37,7 @@ export const generateDueBill = (req, res) => {
             return debtor.save();
         })
         .then(() => res.sendStatus(200))
-        .catch(err => res.status(400).json({message: err.message})) 
-        
+        .catch(err => res.status(400).json({message: err.message}))        
 }
 
 export const payDueBill = (req, res) => {
