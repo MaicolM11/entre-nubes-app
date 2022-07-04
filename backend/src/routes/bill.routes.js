@@ -165,7 +165,7 @@ router.put('/:id/payment', [verifyToken, hasAnyRol], payController.payBill);
  *      security:
  *	        - jwt: []
  */
-router.put('/:id/due', [verifyToken, hasAnyRol], payController.generateDueBill);
+router.put('/:id/due', [verifyToken, hasAnyRol], payController.assingBillToDebtor);
 
 /**
  * @swagger

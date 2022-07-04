@@ -24,6 +24,7 @@ export const createBill = async (req, res) => {
 // get all my lastbills
 export const getMyLastBills = (req, res) => {
   Bill.find({ salesman: req.user._id }, {sales: 0})
+    .sort({status: -1, location: 1})
     .then((data) => res.status(200).json(data))
     .catch((error) => res.status(400).json({ message: error.message }));
 };

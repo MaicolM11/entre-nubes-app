@@ -20,12 +20,12 @@ export const payBill = (req, res, next, Collection = Bill) => {
 }
 
 // agrega id al array, clona la venta
-export const generateDueBill = (req, res) => {
+export const assingBillToDebtor = (req, res) => {
     
     const { id : bill_id } = req.params;
     const { debtor_id } = req.body;
     
-    Bill.findById(bill_id)
+    Bill.findByIdAndUpdate(bill_id, { status: BILL_STATES.CREDIT}, { new: true })
         .then(bill => {
             let copy = new BillRecord(bill);
             copy.isNew = true;
