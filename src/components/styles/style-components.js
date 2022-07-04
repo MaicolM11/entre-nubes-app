@@ -126,6 +126,20 @@ export const DataSpan = styled.span`
   font-weight: 500;
 `;
 
+export const HeaderSeparator = styled.div`
+  width: 1px;
+  height: 25px;
+  background-color: ${colors.border};
+`;
+
+export const HeaderTitle = styled.label`
+  color: ${colors.text};
+  font-size: 24px;
+  font-weight: bold;
+  font-family: var(--roboto);
+  white-space: nowrap;
+`;
+
 export const InputContainer = styled.div`
   display: flex;
   gap: 5px;

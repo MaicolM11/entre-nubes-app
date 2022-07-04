@@ -12,7 +12,12 @@ import {
 import State from "../states/State";
 import Button from "../buttons/Button";
 
-const OrderSalesmanCard = ({ orderNumber, place, totalPayment }) => {
+const OrderSalesmanCard = ({
+  orderNumber,
+  place,
+  totalPayment,
+  handleOpenProductList,
+}) => {
   return (
     <OrderCardContainer>
       <OrderCardDataContainer>
@@ -28,7 +33,7 @@ const OrderSalesmanCard = ({ orderNumber, place, totalPayment }) => {
             size="mediumSmallButton"
             theme="highlighted"
             text="Productos"
-            // onClick={submitUser}
+            onClick={handleOpenProductList}
           />
           <Button
             size="mediumSmallButton"

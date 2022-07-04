@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { colors } from "../styles/colors";
+import { HeaderSeparator } from "../styles/style-components";
 
 const HeaderContainer = styled.div`
   display: flex;
@@ -22,12 +23,6 @@ const HeaderTitle = styled.span`
   font-family: var(--roboto);
   font-size: 28px;
   font-weight: bold;
-`;
-
-const HeaderSeparator = styled.div`
-  width: 1px;
-  height: 25px;
-  background-color: ${colors.border};
 `;
 
 const HeaderDescription = styled.span`

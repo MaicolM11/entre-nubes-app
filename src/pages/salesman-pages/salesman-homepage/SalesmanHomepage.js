@@ -1,14 +1,13 @@
 import React from "react";
-import "./SalesmanHomepage.css";
 import { Routes, Route } from "react-router-dom";
 import { SalesmanLinks } from "../../../routes/Links";
 import { getFullname } from "../../../services/storage";
 
-//Components
+import "./SalesmanHomepage.css";
 import Sidebar from "../../../components/sidebar/Sidebar";
 
 //Pages
-import Orders from "../orders/Orders";
+import SalesmanOrders from "../salesman-orders/SalesmanOrders";
 import Guarantors from "../guarantors/Guarantors";
 import Boliranas from "../boliranas/Boliranas";
 
@@ -18,10 +17,13 @@ const SalesmanHomepage = () => {
       <Sidebar links={SalesmanLinks} />
       <div className="salesman-pages-container">
         <Routes>
-          <Route index element={<Orders salesmanName={getFullname()} />} />
+          <Route
+            index
+            element={<SalesmanOrders salesmanName={getFullname()} />}
+          />
           <Route
             path="orders"
-            element={<Orders salesmanName={getFullname()} />}
+            element={<SalesmanOrders salesmanName={getFullname()} />}
           />
           <Route
             path="guarantors"

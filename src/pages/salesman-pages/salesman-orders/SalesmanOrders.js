@@ -3,7 +3,7 @@ import { getAllProducts } from "../../../services/product";
 import { getAllCategories } from "../../../services/category";
 import { getAllSalesToDay } from "../../../services/bill";
 
-import "./Orders.css";
+import "./SalesmanOrders.css";
 import styled from "styled-components";
 import AnimatedModalContainer from "../../../components/modals/animation/AnimatedModalContainer";
 import Header from "../../../components/header/Header";
@@ -11,6 +11,7 @@ import SalesmanData from "../../../components/header/SalesmanData";
 import Button from "../../../components/buttons/Button";
 import OrdersSalesmanCardsContainer from "../../../components/cards-container/OrdersSalesmanCardsContainer";
 import CreateOrderModal from "../../../components/modals/CreateOrderModal";
+import OrderProductsListModal from "../../../components/modals/OrderProductsListModal";
 import { ReactComponent as Add } from "../../../assets/icons/add.svg";
 
 const AddOrdersContainer = styled.div`
@@ -19,12 +20,14 @@ const AddOrdersContainer = styled.div`
   padding: 25px 25px 0 25px;
 `;
 
-const Orders = ({ salesmanName }) => {
+const SalesmanOrders = ({ salesmanName }) => {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState({});
-  const [isOpenCreateOrderModal, setIsOpenCreateOrderModal] = useState(false);
-  const [selected, setSelected] = useState("Categoría");
   const [getBills, setBills] = useState([]);
+  const [bill, setBill] = useState();
+  const [selected, setSelected] = useState("Categoría");
+  const [isOpenCreateOrderModal, setIsOpenCreateOrderModal] = useState(false);
+  const [isOpenProductListModal, setIsOpenProductListModal] = useState(false);
 
   const openCreateOrderModal = () => {
     setIsOpenCreateOrderModal((isOpen) => !isOpen);
@@ -46,6 +49,15 @@ const Orders = ({ salesmanName }) => {
     getAllSalesToDay().then(async (res) => {
       setBills(await res.json());
     });
+  };
+
+  const showBill = (bill) => {
+    setBill(bill);
+    setIsOpenProductListModal((isOpen) => !isOpen);
+  };
+
+  const isOpenProductList = () => {
+    setIsOpenProductListModal(false);
   };
 
   useEffect(() => {
@@ -70,6 +82,16 @@ const Orders = ({ salesmanName }) => {
         isOpen={isOpenCreateOrderModal}
         setIsOpen={setIsOpenCreateOrderModal}
       />
+      <AnimatedModalContainer
+        modal={
+          <OrderProductsListModal
+            bill={bill}
+            handleCloseModal={isOpenProductList}
+          />
+        }
+        isOpen={isOpenProductListModal}
+        setIsOpen={setIsOpenProductListModal}
+      />
       <Header
         title="Pedidos"
         description="Información de los pedidos realizados por mesa"
@@ -84,9 +106,12 @@ const Orders = ({ salesmanName }) => {
           onClick={openCreateOrderModal}
         />
       </AddOrdersContainer>
-      <OrdersSalesmanCardsContainer bills={getBills} />
+      <OrdersSalesmanCardsContainer
+        bills={getBills}
+        handleOpenProductList={showBill}
+      />
     </div>
   );
 };
 
-export default Orders;
+export default SalesmanOrders;

@@ -143,7 +143,7 @@ const ProductModal = ({
         handleSetIsOpen();
         updateProducts();
       } else {
-        // alert(data.message);
+        alert(data.message);
       }
     });
   };
