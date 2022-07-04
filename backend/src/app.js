@@ -15,7 +15,13 @@ const io = new Server(http, {});
 global.sockets = io.sockets;
 
 // middlewares
-app.use(morgan(':method :url - :referrer :status :response-time ms'));
+app.use(morgan(':method :url :referrer :body :status :response-time ms', {
+            skip: (req, res) => req.method === "GET"
+        }));
+
+morgan.token('body', (req, res) => JSON.stringify(req.body));
+
+
 app.use(express.static('public'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }))

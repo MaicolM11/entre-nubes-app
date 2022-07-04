@@ -6,8 +6,6 @@ import { BILL_STATES } from "../models/Enums";
 
 // paga una venta
 export const payBill = (req, res, next, Collection = Bill) => {
-    console.log(Bill);
-    console.log(Collection);
     const { id } = req.params;
     
     Collection.findByIdAndUpdate(id, {

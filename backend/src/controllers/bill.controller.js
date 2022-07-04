@@ -23,7 +23,7 @@ export const createBill = async (req, res) => {
 
 // get all my lastbills
 export const getMyLastBills = (req, res) => {
-  Bill.find({ salesman: req.user._id })
+  Bill.find({ salesman: req.user._id }, {sales: 0})
     .then((data) => res.status(200).json(data))
     .catch((error) => res.status(400).json({ message: error.message }));
 };
@@ -33,6 +33,14 @@ export const getAllLastBills = (req, res) => {
     .then((data) => res.status(200).json(data))
     .catch((error) => res.status(400).json({ message: error.message }));
 };
+
+export const getSalesOfBill = (req, res) => {
+    const { id } = req.params;
+    Bill.findById(id, 'sales')
+        .populate('sales.product', 'brand')
+        .then(data => res.status(200).json(data.sales))
+        .catch(err => res.status(400).json({ message: err.message }))
+}
 
 export const appendProductsToBill = async (req, res) => {
   const { id } = req.params;

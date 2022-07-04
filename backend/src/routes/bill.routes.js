@@ -81,6 +81,26 @@ router.get('/my-sales/today', [verifyToken, hasAnyRol], controller.getMyLastBill
 
 /**
  * @swagger
+ * /api/bill/{id}/sales:
+ *  get:
+ *      sumary : get all products of bill
+ *      tags : [Bill]   
+ *      responses:
+ *          200:
+ *              description : success
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          type : array
+ *                          items:
+ *                              $ref: '#/components/schemas/Sale'
+ *      security:
+ *	        - jwt: []
+ */
+router.get('/:id/sales', [verifyToken, hasAnyRol], controller.getSalesOfBill);
+
+/**
+ * @swagger
  * /api/bill/{id}/payment:
  *  put:
  *      sumary : pay bill

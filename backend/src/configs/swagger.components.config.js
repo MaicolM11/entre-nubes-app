@@ -93,21 +93,23 @@ module.exports = {
                 type: "object",
                 properties: {
                     location: { type: "string" },
-                    sales: {
-                        type: "array",
-                        items: {
-                            type: "object",
-                            properties: {
-                                product: { type: "string" },
-                                quantity: { type: "integer" },
-                                buy_price: { type: "integer" },
-                                sale_price: { type: "integer" }
-                            }
-                        }
-                    },
                     total: { type: "integer" },
                     subtotal: { type: "integer" },
                     status: { type: "string" }
+                }
+            },
+            Sale: {
+                type: "object",
+                properties: {
+                    product: { 
+                        type: "object", 
+                        properties: {
+                            brand: { type: "string" }
+                        }
+                    },
+                    quantity: { type: "integer" },
+                    buy_price: { type: "integer" },
+                    sale_price: { type: "integer" }
                 }
             }
         },

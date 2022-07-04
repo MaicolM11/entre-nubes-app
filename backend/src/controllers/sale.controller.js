@@ -10,7 +10,7 @@ export const findProductsAndUpdate = async (sales) => {
             throw new Error("stock not available")
         }
     }
-    console.log("entra");
+
     for await (let sale of sales) {
         await updateSale(sale);
     }
