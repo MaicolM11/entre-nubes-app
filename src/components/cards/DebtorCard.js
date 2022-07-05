@@ -15,6 +15,9 @@ const DebtorCardContainer = styled.div`
   padding: 25px 35px;
   border: 1px solid ${colors.border};
   border-radius: 25px;
+  &:hover {
+    border-color: ${colors.highlighted};
+  }
 `;
 
 const DebtorContainer = styled.div`
@@ -52,13 +55,13 @@ const DebtorCard = ({ debtor }) => {
             <IconContainer>
               <UserIcon stroke={colors.brand} />
             </IconContainer>
-            <DebtorData>{debtor.name}</DebtorData>
+            <DebtorData>{debtor.fullname}</DebtorData>
           </DebtorInfoContainer>
           <DebtorInfoContainer>
             <IconContainer>
               <DocumentIcon fill={colors.brand} />
             </IconContainer>
-            <DebtorData>{debtor.document}</DebtorData>
+            <DebtorData>{debtor.cc}</DebtorData>
           </DebtorInfoContainer>
           <DebtorInfoContainer>
             <IconContainer>

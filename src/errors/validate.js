@@ -1,8 +1,10 @@
 import { toHaveErrorMessage } from "@testing-library/jest-dom/dist/matchers";
 
+const numberRegex = /^[0-9]*$/;
+
 export const productValidation = (values) => {
   const errors = {};
-  const numberRegex = /^[0-9]*$/;
+
 
   if (!values.brand) {
     errors.brand = "Nombre del producto requerido";
@@ -39,7 +41,7 @@ export const productValidation = (values) => {
 
 export const productEditValidation = (values) => {
   const errors = {};
-  const numberRegex = /^[0-9]*$/;
+
 
   if (!values.brand) {
     errors.brand = "Nombre del producto requerido";
@@ -73,9 +75,18 @@ export const productEditValidation = (values) => {
   return errors;
 };
 
+export const stockValidation = (values) =>{
+  const errors = {};
+  if(!numberRegex.test(values.stock)){
+    errors.push("Solo dede ingresar números")
+  }else if(values.stock<=0){
+    errors.push("El valor ingresado debe ser mayor a 0")
+  }
+  return errors
+}
+
 export const salesmanValidation = (values) =>{
   const errors = {};
-  const numberRegex = /^[0-9]*$/;
   const emailRegex = /^[^@]+@[^@]+\.[a-zA-Z]{2,}$/
 
     if(!values.fullname){

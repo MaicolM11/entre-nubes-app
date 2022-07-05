@@ -23,7 +23,7 @@ const ProductDataContainer = styled.div`
 
 const ProductListCard = ({ productOnList }) => {
   const productName = productOnList.product;
-  const PricePerQuantity = productOnList.quantity * productOnList.buy_price;
+  const PricePerQuantity = productOnList.quantity * productOnList.sale_price;
 
   return (
     <ProductListCardContainer>

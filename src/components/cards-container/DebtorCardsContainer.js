@@ -25,7 +25,7 @@ const DebtorCardsContainer = ({ debtors }) => {
   return (
     <CardsContainer>
       {Object.values(debtors).map((debtor) => (
-        <DebtorCard key={debtor.id} debtor={debtor} />
+        <DebtorCard key={debtor._id} debtor={debtor} />
       ))}
     </CardsContainer>
   );
