@@ -12,11 +12,10 @@ const CardsContainer = styled.div`
 `;
 
 const ProductListContainer = ({ productList }) => {
-  console.log(productList);
   return (
     <CardsContainer>
-      {Object.values(productList).map((orderedProduct) => (
-        <ProductListCard key={orderedProduct.product} />
+      {Object.values(productList).map((product) => (
+        <ProductListCard key={product._id} productOnList={product} />
       ))}
     </CardsContainer>
   );

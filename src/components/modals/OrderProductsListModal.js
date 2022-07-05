@@ -1,4 +1,5 @@
 import React from "react";
+
 import styled from "styled-components";
 import { colors } from "../styles/colors";
 import {
@@ -32,7 +33,7 @@ const TotalPaymentContainer = styled.label`
   white-space: nowrap;
 `;
 
-const OrderProductsListModal = ({ bill, handleCloseModal }) => {
+const OrderProductsListModal = ({ bill, productsSale, handleCloseModal }) => {
   return (
     <OrderProductListContainer>
       <HeaderProductListContainer>
@@ -43,7 +44,7 @@ const OrderProductsListModal = ({ bill, handleCloseModal }) => {
         </TotalPaymentContainer>
         <CloseButton onClick={handleCloseModal} />
       </HeaderProductListContainer>
-      <ProductListContainer productList={bill.sales} />
+      <ProductListContainer productList={productsSale} />
     </OrderProductListContainer>
   );
 };

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getAllProducts } from "../../../services/product";
 import { getAllCategories } from "../../../services/category";
 import { getAllSalesToDay } from "../../../services/bill";
+import { getBillById } from "../../../services/bill";
 
 import "./SalesmanOrders.css";
 import styled from "styled-components";
@@ -25,6 +26,7 @@ const SalesmanOrders = ({ salesmanName }) => {
   const [categories, setCategories] = useState({});
   const [getBills, setBills] = useState([]);
   const [bill, setBill] = useState();
+  const [productsSale, setProductsSale] = useState([]);
   const [selected, setSelected] = useState("Categoría");
   const [isOpenCreateOrderModal, setIsOpenCreateOrderModal] = useState(false);
   const [isOpenProductListModal, setIsOpenProductListModal] = useState(false);
@@ -52,6 +54,10 @@ const SalesmanOrders = ({ salesmanName }) => {
   };
 
   const showBill = (bill) => {
+    setProductsSale([]);
+    getBillById(bill._id).then(async (res) => {
+      setProductsSale(await res.json());
+    });
     setBill(bill);
     setIsOpenProductListModal((isOpen) => !isOpen);
   };
@@ -86,6 +92,7 @@ const SalesmanOrders = ({ salesmanName }) => {
         modal={
           <OrderProductsListModal
             bill={bill}
+            productsSale={productsSale}
             handleCloseModal={isOpenProductList}
           />
         }

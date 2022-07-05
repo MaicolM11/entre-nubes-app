@@ -33,3 +33,11 @@ export const getAllSalesToDay = () => {
   };
   return fetch(BASE_URL + "/my-sales/today", requestOptions);
 };
+
+export const getBillById = (id) => {
+  const requestOptions = {
+    method: "GET",
+    headers: { "Content-Type": "application/json", authorization: getToken() },
+  };
+  return fetch(BASE_URL + `/${id}/sales`, requestOptions);
+};

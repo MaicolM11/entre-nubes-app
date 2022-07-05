@@ -7,7 +7,6 @@ import { DataSpan } from "../styles/style-components";
 const ProductListCardContainer = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 25px;
   padding: 25px;
   border-radius: 25px;
@@ -22,20 +21,24 @@ const ProductDataContainer = styled.div`
   white-space: nowrap;
 `;
 
-const ProductListCard = ({ product }) => {
-  console.log(product);
+const ProductListCard = ({ productOnList }) => {
+  const productName = productOnList.product;
+  const PricePerQuantity = productOnList.quantity * productOnList.buy_price;
+
   return (
     <ProductListCardContainer>
       <EmptyProductList width={50} height={50} />
-      <ProductDataContainer>Nombre del Producto</ProductDataContainer>
       <ProductDataContainer>
-        Precio de Venta: <DataSpan>$000.000</DataSpan>
+        {productName && productName.brand}
       </ProductDataContainer>
       <ProductDataContainer>
-        Unidades: <DataSpan>0</DataSpan>
+        Precio de Venta: <DataSpan>${productOnList.buy_price}</DataSpan>
       </ProductDataContainer>
       <ProductDataContainer>
-        Precio por Cantidad: <DataSpan>$000.000</DataSpan>
+        Unidades: <DataSpan>{productOnList.quantity}</DataSpan>
+      </ProductDataContainer>
+      <ProductDataContainer>
+        Precio por Cantidad: <DataSpan>${PricePerQuantity}</DataSpan>
       </ProductDataContainer>
     </ProductListCardContainer>
   );
