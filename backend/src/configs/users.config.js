@@ -31,7 +31,3 @@ export const createUsers = () => {
     createAdmin()
     createSalesman()
 }
-
-module.exports = {
-    createUsers
-}

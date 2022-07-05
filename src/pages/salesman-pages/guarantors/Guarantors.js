@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Guarantors.css";
 import Header from "../../../components/header/Header";
 import SalesmanData from "../../../components/header/SalesmanData";
 import DebtorCardsContainer from "../../../components/cards-container/DebtorCardsContainer";
+
+import {getAllDebtors} from "../../../services/debtor"
 
 const Guarantors = ({ salesmanName }) => {
   let debtors = [
@@ -15,6 +17,8 @@ const Guarantors = ({ salesmanName }) => {
     { id: 7, name: "Pichin", document: 91300324, phone: 3213453234 },
     { id: 8, name: "El Jajas", document: 91300324, phone: 3213453234 },
   ];
+
+  // [debtors, setDebtors] = useState([])
 
   return (
     <div className="salesman-guarantors-container">

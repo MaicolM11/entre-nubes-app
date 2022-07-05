@@ -32,7 +32,7 @@ const ProductListCard = ({ productOnList }) => {
         {productName && productName.brand}
       </ProductDataContainer>
       <ProductDataContainer>
-        Precio de Venta: <DataSpan>${productOnList.buy_price}</DataSpan>
+        Precio de Venta: <DataSpan>${productOnList.sale_price}</DataSpan>
       </ProductDataContainer>
       <ProductDataContainer>
         Unidades: <DataSpan>{productOnList.quantity}</DataSpan>
