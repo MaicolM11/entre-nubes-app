@@ -5,60 +5,72 @@ import { IconContainer } from "../styles/style-components";
 import Button from "../buttons/Button";
 import { ReactComponent as UserIcon } from "../../assets/icons/user.svg";
 import { ReactComponent as PhoneIcon } from "../../assets/icons/phone.svg";
-import { ReactComponent as DocumentIcon } from "../../assets/icons/home-table.svg";
-
+import { ReactComponent as DocumentIcon } from "../../assets/icons/id-card.svg";
 
 const DebtorCardContainer = styled.div`
-box-sizing: border-box;
-display: flex;
-flex-direction: column;
-align-items: flex-start;
-padding: 25px 35px;
-gap: 25px;
-width: 283px;
-height: 242px;
-border: 1px solid #000000;
-flex: none;
-order: 0;
-flex-grow: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 25px 35px;
+  border: 1px solid ${colors.border};
+  border-radius: 25px;
+`;
+
+const DebtorContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+`;
+
+const DebtorInfoCardContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+`;
+
+const DebtorInfoContainer = styled.div`
+  display: flex;
+  gap: 10px;
 `;
 
 const DebtorData = styled.label`
-color: ${colors.text};
-font-size: 20px;
-font-weight: bold;
-font-family: var(--roboto);
-white-space: nowrap;;
-margin-left : 20px;
+  color: ${colors.text};
+  font-size: 20px;
+  font-weight: bold;
+  font-family: var(--roboto);
+  white-space: nowrap;
+  margin-left: 20px;
 `;
 
-const Debtor = styled.div`
-display:flex;
-`;
+const DebtorCard = ({ debtor }) => {
+  return (
+    <DebtorCardContainer>
+      <DebtorContainer>
+        <DebtorInfoCardContainer>
+          <DebtorInfoContainer>
+            <IconContainer>
+              <UserIcon stroke={colors.brand} />
+            </IconContainer>
+            <DebtorData>{debtor.name}</DebtorData>
+          </DebtorInfoContainer>
+          <DebtorInfoContainer>
+            <IconContainer>
+              <DocumentIcon fill={colors.brand} />
+            </IconContainer>
+            <DebtorData>{debtor.document}</DebtorData>
+          </DebtorInfoContainer>
+          <DebtorInfoContainer>
+            <IconContainer>
+              <PhoneIcon fill={colors.brand} />
+            </IconContainer>
+            <DebtorData>{debtor.phone}</DebtorData>
+          </DebtorInfoContainer>
+        </DebtorInfoCardContainer>
+        <Button size="mediumButton" theme="ok" text="Realizar pago" />
+      </DebtorContainer>
+    </DebtorCardContainer>
+  );
+};
 
-const DebtorCard = ({debtor})=>{
-    return(
-      <DebtorCardContainer>
-      <Debtor>
-      <IconContainer><UserIcon stroke={colors.brand} /></IconContainer>
-      <DebtorData>{debtor.name}</DebtorData>
-      </Debtor>
-      <Debtor>
-      <IconContainer><DocumentIcon stroke={colors.brand} /></IconContainer>
-      <DebtorData>{debtor.document}</DebtorData>
-      </Debtor>
-      <Debtor>
-      <IconContainer><PhoneIcon  /></IconContainer>
-      <DebtorData>{debtor.phone}</DebtorData>
-      </Debtor>
-      <Button
-        size="mediumButton"
-        theme={"dark"}
-        text={"Realizar pago"}
-      />
-      </DebtorCardContainer>
-      
-    )
-}
-
-export default DebtorCard
+export default DebtorCard;

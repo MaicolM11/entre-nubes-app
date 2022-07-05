@@ -92,7 +92,6 @@ const OrderProductCard = ({
   image,
   brand,
   category,
-  unitPrice,
   salePrice,
   presentation,
   stock,
