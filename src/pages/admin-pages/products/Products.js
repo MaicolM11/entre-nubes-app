@@ -7,16 +7,16 @@ import AnimatedModalContainer from "../../../components/modals/animation/Animate
 import Header from "../../../components/header/Header";
 import NotificationButton from "../../../components/header/NotificationButton";
 import ProductModal from "../../../components/modals/ProductModal";
-import EditProductModal from '../../../components/modals/EditProductModal'
+import EditProductModal from "../../../components/modals/EditProductModal";
 import DeleteModal from "../../../components/modals/DeleteModal";
 import ProductCardsContainer from "../../../components/cards-container/ProductCardsContainer";
 import Button from "../../../components/buttons/Button";
 import DataInput from "../../../components/inputs/DataInput";
 import SelectCategory from "../../../components/select/SelectCategory";
+import AddStockModal from "../../../components/modals/AddStockModal";
 import { ReactComponent as Add } from "../../../assets/icons/add.svg";
 import { ReactComponent as Category } from "../../../assets/icons/category.svg";
 import { ReactComponent as Search } from "../../../assets/icons/search.svg";
-import AddStock from "../../../components/modals/AddStock";
 
 // import { ModalCategories } from "../../components/modals/categories/ModalCategories";
 
@@ -25,12 +25,12 @@ const Products = () => {
   const [product, setProduct] = useState({});
   const [products, setProducts] = useState([]);
   const [selected, setSelected] = useState("Categoría");
-  const [category, setCategory] = useState("Categoría")
+  const [category, setCategory] = useState("Categoría");
   const [isOpenAddProductModal, setIsOpenAddProductModal] = useState(false);
   const [isOpenEditProductModal, setIsOpenEditProductModal] = useState(false);
   const [isOpenDeleteProductModal, setIsOpenDeleteProductModal] =
     useState(false);
-  const [isOpenAddStock, setIsOpenAddStock] = useState (false)
+  const [isOpenAddStock, setIsOpenAddStock] = useState(false);
   // const [openModalCategories, setOpenModalCategories] = useState(false);
 
   const openAddProductModal = () => {
@@ -39,14 +39,14 @@ const Products = () => {
 
   const openEditProductModal = (product) => {
     setProduct(product);
-    setCategory(product.category.name)
+    setCategory(product.category.name);
     setIsOpenEditProductModal((isOpen) => !isOpen);
   };
 
-  const openAddStock = (product) =>{
-    setProduct(product)
-    setIsOpenAddStock((isOpen) => !isOpen)
-  }
+  const openAddStock = (product) => {
+    setProduct(product);
+    setIsOpenAddStock((isOpen) => !isOpen);
+  };
 
   const openDeleteProductModal = (product) => {
     setProduct(product);
@@ -93,17 +93,29 @@ const Products = () => {
         isOpen={isOpenAddProductModal}
         setIsOpen={setIsOpenAddProductModal}
       />
-      <> {isOpenEditProductModal&& (
-        <EditProductModal
-        info="Editar Producto"
-        buttonTheme="highlighted"
-        product={product}
-        updateProducts={getProductos}
-        isOpen={isOpenEditProductModal}
-        setIsOpen={setIsOpenEditProductModal}
-        category= {category}
-        />
-      )}
+      <AnimatedModalContainer
+        modal={
+          <AddStockModal
+            product={product}
+            update={getProductos}
+            setIsOpenAddStock={setIsOpenAddStock}
+          />
+        }
+        isOpen={isOpenAddStock}
+        setIsOpen={setIsOpenAddStock}
+      ></AnimatedModalContainer>
+      <>
+        {isOpenEditProductModal && (
+          <EditProductModal
+            info="Editar Producto"
+            buttonTheme="highlighted"
+            product={product}
+            updateProducts={getProductos}
+            isOpen={isOpenEditProductModal}
+            setIsOpen={setIsOpenEditProductModal}
+            category={category}
+          />
+        )}
       </>
       <AnimatedModalContainer
         modal={
@@ -119,16 +131,6 @@ const Products = () => {
         isOpen={isOpenDeleteProductModal}
         setIsOpen={setIsOpenDeleteProductModal}
       />
-      <>{ isOpenAddStock && (
-        <AddStock
-        product={product}
-        isOpen = {isOpenAddStock}
-        setIsOpenAddStock = {setIsOpenAddStock}
-        update= { getProductos}
-        />
-      )
-      }
-      </>
       <Header
         title="Productos"
         description="Información de los productos registrados"
@@ -172,10 +174,10 @@ const Products = () => {
       </div>
       <ProductCardsContainer
         products={products}
-        openAddStock = {openAddStock}
+        openAddStock={openAddStock}
         openEditProductModal={openEditProductModal}
         openDeleteProductModal={openDeleteProductModal}
-        updateProductList = {getProductos}
+        updateProductList={getProductos}
       />
     </div>
   );
