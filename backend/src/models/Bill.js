@@ -52,7 +52,7 @@ const billSchema = mongoose.Schema(
 
     },
     {
-        timestamps: false,
+        timestamps: true,
         versionKey: false,
     }
 );

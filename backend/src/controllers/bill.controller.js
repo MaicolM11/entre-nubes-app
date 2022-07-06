@@ -75,5 +75,8 @@ const calculateTotalAndSubtotal = async (bill) => {
 };
 
 export const emitLastBills = (socket = global.sockets) => {
-  Bill.find().then((data) => socket.emit("sales", data));
+  Bill.find({}, {sales: 0})
+    .populate('salesman', 'fullname')
+    .sort('-updatedAt')
+    .then(data => socket.emit("sales", data));
 };
