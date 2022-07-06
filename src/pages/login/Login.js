@@ -64,8 +64,8 @@ const Login = () => {
           <label className="login-title">Inicio de Sesión</label>
           <div className="login-options-container">
             <DataInput
-              name="email"
               size="normalInput"
+              name="email"
               icon={<UserIcon />}
               isStroke={true}
               isFill={false}
@@ -74,8 +74,8 @@ const Login = () => {
               onChange={handleChange}
             />
             <PasswordInput
-              name="password"
               size="normalInput"
+              name="password"
               icon={<LockIcon fill="black" />}
               placeholder="Contraseña"
               onChange={handleChange}

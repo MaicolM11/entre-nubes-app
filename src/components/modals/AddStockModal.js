@@ -6,62 +6,45 @@ import { colors } from "../styles/colors";
 import { ReactComponent as Box } from "../../assets/icons/box.svg";
 import DataInput from "../inputs/DataInput";
 import Button from "../buttons/Button";
+import CloseButton from "../buttons/CloseButton";
+
+import {
+  DataSpan,
+  ModalSubtitle,
+  ModalTitle,
+} from "../styles/style-components";
+
+import { stockValidation } from "../../errors/validate";
 
 const AddStockModalContainer = styled.div`
   display: flex;
-  width: 423px;
-  height: 293px;
-  background-color: red;
+  flex-direction: column;
+  background-color: ${colors.secondary};
+  border-radius: 16px;
 `;
 
-const TitleAddStock = styled.div`
-  height: 28px;
-
-  font-family: "Roboto";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 24px;
-  line-height: 28px;
-  font-feature-settings: "liga" off;
-
-  padding-top: 30px;
-  padding-left: 25px;
-
-  color: #262626;
-`;
-
-const Units = styled.div`
-  height: 20px;
-
-  font-family: "Roboto";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 20px;
-
+const HeaderModalContainer = styled.div`
   display: flex;
   align-items: center;
-
-  padding-top: 30px;
-  padding-left: 25px;
-
-  color: #262626;
+  padding: 35px 35px 0 35px;
 `;
 
-const Input = styled.div`
-  padding-top: 30px;
-  padding-left: 25px;
-`;
-
-const ButtonStock = styled.div`
-  padding-top: 30px;
-  padding-bottom: 30px;
+const ModalContainer = styled.div`
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding: 35px;
 `;
 
-const AddStockModal = ({ product, update, setIsOpenAddStock }) => {
+const ModalInfoContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+`;
+
+const AddStockModal = ({ product, updateProducts, setIsOpenAddStock }) => {
   const [units, setUnits] = useState(0);
 
   const handleSetIsOpen = () => {
@@ -69,40 +52,52 @@ const AddStockModal = ({ product, update, setIsOpenAddStock }) => {
   };
 
   const handleChangeUnits = (e) => {
-    const { value } = e.target;
-    setUnits(value);
+    const { name, value } = e.target;
+    setUnits((values) => {
+      return {
+        ...values,
+        [name]: value,
+      };
+    });
   };
 
-  const handleSubmit = () => {
-    updateUnits(product._id, units).then(async (res) => {
+  const handleSubmitUpdateUnits = () => {
+    updateUnits(product._id, units).then(async () => {
       handleSetIsOpen();
-      update();
+      updateProducts();
     });
   };
 
   return (
     <AddStockModalContainer>
-      <TitleAddStock>Producto : {product.brand}</TitleAddStock>
-      <Units>Unidades actuales : {product.stock}</Units>
-      <Input>
-        <DataInput
-          size="stockInput"
-          isStroke={true}
-          icon={<Box stroke={colors.brand} />}
-          type="text"
-          name="stock"
-          placeholder="Unidades para stock"
-          onChange={handleChangeUnits}
-        />
-      </Input>
-      <ButtonStock>
-        <Button
-          size="mediumButton"
-          theme="ok"
-          text="Agregar Unidades"
-          onClick={handleSubmit}
-        />
-      </ButtonStock>
+      <HeaderModalContainer>
+        <ModalTitle>
+          Producto : <DataSpan>{product.brand}</DataSpan>
+        </ModalTitle>
+        <CloseButton />
+      </HeaderModalContainer>
+      <ModalContainer>
+        <ModalInfoContainer>
+          <ModalSubtitle>
+            Unidades actuales : <DataSpan>{product.stock}</DataSpan>
+          </ModalSubtitle>
+          <DataInput
+            size="normalInput"
+            icon={<Box stroke={colors.brand} />}
+            isStroke={true}
+            type="text"
+            name="stock"
+            placeholder="Unidades para stock"
+            onChange={handleChangeUnits}
+          />
+          <Button
+            size="mediumModalButton"
+            theme="ok"
+            text="Agregar Unidades"
+            onClick={handleSubmitUpdateUnits}
+          />
+        </ModalInfoContainer>
+      </ModalContainer>
     </AddStockModalContainer>
   );
 };

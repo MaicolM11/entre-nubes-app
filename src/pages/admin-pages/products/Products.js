@@ -97,7 +97,7 @@ const Products = () => {
         modal={
           <AddStockModal
             product={product}
-            update={getProductos}
+            updateProducts={getProductos}
             setIsOpenAddStock={setIsOpenAddStock}
           />
         }

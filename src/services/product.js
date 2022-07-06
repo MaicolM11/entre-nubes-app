@@ -7,8 +7,8 @@ export const getAllProducts = () => {
     method: "GET",
     headers: { "Content-Type": "application/json", authorization: getToken() },
   };
-    return fetch(BASE_URL, requestOptions);
-  };
+  return fetch(BASE_URL, requestOptions);
+};
 
 export const getByIdProducts = (id) => {
   const requestOptions = {
@@ -27,7 +27,6 @@ export const deleteProduct = (id) => {
 };
 
 export const updateUnits = (id, units) => {
- 
   const requestOptions = {
     method: "PUT",
     headers: { "Content-Type": "application/json", authorization: getToken() },

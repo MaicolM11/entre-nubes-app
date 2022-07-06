@@ -1,10 +1,7 @@
-import { toHaveErrorMessage } from "@testing-library/jest-dom/dist/matchers";
-
 const numberRegex = /^[0-9]*$/;
 
 export const productValidation = (values) => {
   const errors = {};
-
 
   if (!values.brand) {
     errors.brand = "Nombre del producto requerido";
@@ -42,7 +39,6 @@ export const productValidation = (values) => {
 export const productEditValidation = (values) => {
   const errors = {};
 
-
   if (!values.brand) {
     errors.brand = "Nombre del producto requerido";
   }
@@ -75,56 +71,57 @@ export const productEditValidation = (values) => {
   return errors;
 };
 
-export const stockValidation = (values) =>{
+export const stockValidation = (values) => {
   const errors = {};
-  if(!numberRegex.test(values.stock)){
-    errors.push("Solo dede ingresar números")
-  }else if(values.stock<=0){
-    errors.push("El valor ingresado debe ser mayor a 0")
+
+  if (!numberRegex.test(values.stock)) {
+    errors.push("Solo dede ingresar números");
+  } else if (values.stock <= 0) {
+    errors.push("El valor ingresado debe ser mayor a 0");
   }
-  return errors
-}
+  return errors;
+};
 
-export const salesmanValidation = (values) =>{
+export const salesmanValidation = (values) => {
   const errors = {};
-  const emailRegex = /^[^@]+@[^@]+\.[a-zA-Z]{2,}$/
+  const emailRegex = /^[^@]+@[^@]+\.[a-zA-Z]{2,}$/;
 
-    if(!values.fullname){
-        errors.fullname = 'Nombre completo requerido'
-    }
+  if (!values.fullname) {
+    errors.fullname = "Nombre completo requerido";
+  }
 
-    if(!values.cc){
-        errors.cc = ' Documento de identidad requerido'
-    }else if (!numberRegex.test(values.cc)){
-        errors.cc = 'El documento de identidad no puede contener letras'
-    }
+  if (!values.cc) {
+    errors.cc = " Documento de identidad requerido";
+  } else if (!numberRegex.test(values.cc)) {
+    errors.cc = "El documento de identidad no puede contener letras";
+  }
 
-    if(!values.phone){
-        errors.phone = 'El numero de telefono es requerido'
-    }else if (!numberRegex.test(values.phone)){
-        errors.phone = 'El numero de telefono no puede contener letras'
-    }else if(!(values.phone.split('').length == 10)){
-      errors.phone = 'Un numero telefonico consta de 10 numeros'
-    }
+  if (!values.phone) {
+    errors.phone = "El numero de telefono es requerido";
+  } else if (!numberRegex.test(values.phone)) {
+    errors.phone = "El numero de telefono no puede contener letras";
+  } else if (!(values.phone.split("").length == 10)) {
+    errors.phone = "Un numero telefonico consta de 10 numeros";
+  }
 
-    if(!values.email){
-        errors.email = 'Direccion de correo requerida'
-    }else if (!emailRegex.test(values.email)){
-        errors.email= 'La entrada no es una direccion de correo valida'
-    }
+  if (!values.email) {
+    errors.email = "Direccion de correo requerida";
+  } else if (!emailRegex.test(values.email)) {
+    errors.email = "La entrada no es una direccion de correo valida";
+  }
 
-    if(!values.address){
-        errors.address = 'La direcion es requerida'
-    }
+  if (!values.address) {
+    errors.address = "La direcion es requerida";
+  }
 
-    if(!values.password){
-        errors.password= "Contraseña requerida"
-    }
+  if (!values.password) {
+    errors.password = "Contraseña requerida";
+  }
 
-    if(!values.repeatPassWord){
-        errors.repeatPassWord = 'Se debe confirmar contraseña'
-    }else if (!(values.password==values.repeatPassWord)){
-        errors.repeatPassWord = 'Las contraseñas no coinciden'
-    }
-    return errors;
-}
+  if (!values.repeatPassWord) {
+    errors.repeatPassWord = "Se debe confirmar contraseña";
+  } else if (!(values.password == values.repeatPassWord)) {
+    errors.repeatPassWord = "Las contraseñas no coinciden";
+  }
+  return errors;
+};

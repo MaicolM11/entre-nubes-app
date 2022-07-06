@@ -35,9 +35,6 @@ const size = {
   normalInput: {
     width: "403px",
   },
-  stockInput: {
-    width: "365px",
-  },
   mediumInput: {
     width: "248px",
   },
@@ -293,6 +290,15 @@ export const ModalTitle = styled.label`
   width: 100%;
   color: ${colors.text};
   font-size: 24px;
+  font-weight: bold;
+  font-family: var(--roboto);
+  white-space: nowrap;
+`;
+
+export const ModalSubtitle = styled.label`
+  width: 100%;
+  color: ${colors.text};
+  font-size: 18px;
   font-weight: bold;
   font-family: var(--roboto);
   white-space: nowrap;
