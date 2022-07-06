@@ -2,7 +2,7 @@ import { ROLES } from "../models/Enums";
 
 export const isSalesman = async (req, res, next) => {
    
-    if(req.user.rol == ROLES.SALESMAN) {
+    if(req.user.rol === ROLES.SALESMAN) {
         next()
         return;
     }
@@ -12,7 +12,7 @@ export const isSalesman = async (req, res, next) => {
 
 export const isAdmin = async (req, res, next) => {
 
-    if(req.user.rol == ROLES.ADMIN ) {
+    if(req.user.rol === ROLES.ADMIN ) {
         next()
         return;
     }

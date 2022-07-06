@@ -2,4 +2,4 @@ export const ROLES = { SALESMAN: 'SALESMAN', ADMIN: 'ADMIN' };
 
 export const BILL_STATES = { DUE: 'PENDIENTE', PAID: 'PAGO', CREDIT: 'A CREDITO' }
 
-export const PAYMENT_METHODS = { CASH: 'EFECTIVO' };
+export const PAYMENT_METHODS = { CASH: 'EFECTIVO', NEQUI: 'NEQUI' };

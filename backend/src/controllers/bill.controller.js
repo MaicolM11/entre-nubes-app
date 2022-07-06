@@ -1,4 +1,7 @@
 import Bill from "../models/Bill";
+import Debtor from "../models/Debtor";
+import { BILL_STATES } from "../models/Enums";
+
 import { findProductsAndUpdate } from "./sale.controller";
 
 export const createBill = async (req, res) => {
@@ -14,14 +17,12 @@ export const createBill = async (req, res) => {
     newBill
       .save()
       .then((doc) => res.status(201).json(doc))
-      .then(() => emitLastBills())
       .catch((error) => res.status(400).json({ message: error.message }));
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
 };
 
-// get all my lastbills
 export const getMyLastBills = (req, res) => {
   Bill.find({ salesman: req.user._id }, {sales: 0})
     .sort({status: -1, location: 1})
@@ -57,7 +58,6 @@ export const appendProductsToBill = async (req, res) => {
   foundBill
     .save()
     .then((doc) => res.status(201).json(doc))
-    .then(() => emitLastBills())
     .catch((error) => res.status(400).json({ message: error.message }));
 };
 
@@ -74,8 +74,56 @@ const calculateTotalAndSubtotal = async (bill) => {
   bill.subtotal = subtotal;
 };
 
+export const payBill = (req, res) => {
+  const { id } = req.params;
+  
+  Bill.findByIdAndUpdate(id, {
+      status: BILL_STATES.PAID,
+      payment_method: req.body.payment_method.toUpperCase()
+  }, { new: true })
+      .then(doc => {
+          if (!doc) res.status(404).json({ message: 'Bill not found' })
+          else res.status(201).json(doc)
+      })
+      .catch(error => res.status(400).json({ message: error.message }))
+}
+
+export const assingBillToDebtor = (req, res) => {
+    
+  const { id : bill_id } = req.params;
+  const { debtor_id } = req.body;
+  Bill.findByIdAndUpdate(bill_id, { status: BILL_STATES.CREDIT}, { new: true })
+      .then(() => Debtor.findByIdAndUpdate(debtor_id, 
+          { $push: { debts: { item: bill_id } }}, { new:true }))
+      .then(() => res.sendStatus(200))
+      .catch(err => res.status(400).json({ message: err.message }))        
+}
+
+export const payDueBill = (req, res) => {
+  const { id: bill_id } = req.params;
+  const { debtor_id } = req.body;
+
+  Debtor.findById(debtor_id).populate('debts.item')
+      .then(debtor => debtor.debts.find(x => x.item._id == bill_id))
+      .then(bill => {
+          let newBill = bill.item;
+          newBill.status = BILL_STATES.PAID
+          payment_method = req.body.payment_method.toUpperCase()
+          return newBill.save()
+      })
+      .then(() => res.sendStatus(200))
+      .catch(error => res.status(400).json({ message: error.message }));
+}
+
+export const deskClosing = (req, res) => {
+  res.sendStatus(200)
+  // pasar de last_bills -> bills, 
+  // cambiar la coleccion en deudores.
+  // eliminar last_bills
+}
+
 export const emitLastBills = (socket = global.sockets) => {
-  Bill.find({}, {sales: 0})
+  Bill.find({}, { sales: 0 })
     .populate('salesman', 'fullname')
     .sort('-updatedAt')
     .then(data => socket.emit("sales", data));

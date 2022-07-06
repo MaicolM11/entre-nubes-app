@@ -18,10 +18,13 @@ export const getAll = (req, res) => {
 export const getDebtsOfDebtor = (req, res) => {
     const { id } = req.params;
     Debtor.findById(id, 'debts').populate({
-            path: 'debts',
+            path: 'debts.item',
             select: { 'sales': 0 },
             // match: { status: "PENDIENTE" },
         })
-        .then(data => res.status(200).json(data.debts))
+        .then(data => {
+            let debts = data.debts.map(x => x.item);
+            res.status(200).json(debts)
+        })
         .catch(error => res.status(400).json({ message: error.message }));
 }
