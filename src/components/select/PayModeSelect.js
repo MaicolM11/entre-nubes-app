@@ -9,12 +9,6 @@ const size = {
   normalSelect: {
     width: "405px",
   },
-  mediumSelect: {
-    width: "250px",
-  },
-  smallSelect: {
-    width: "185px",
-  },
 };
 
 const SelectContainer = styled.div`
@@ -115,25 +109,17 @@ const DefaultValue = styled.span`
   width: 100%;
 `;
 
-const SelectCategory = ({
-  titleOptions,
-  categories,
-  selectedCategory,
-  setSelectedCategory,
-}) => {
+const PayModeSelect = ({ titleOptions, payModes, payMode, setPayMode }) => {
   const [isActive, setIsActive] = useState();
 
-  useEffect(()=>{
+  useEffect(() => {
+    const closeDropdown = (e) => {
+      console.log(e);
+    };
 
-    const closeDropdown = (e)=>{
-      console.log(e)
-      
-    }
-
-    document.body.addEventListener("click", closeDropdown)
-    return ()=> document.body.removeEventListener("click", closeDropdown)
-
-  }, [])
+    document.body.addEventListener("click", closeDropdown);
+    return () => document.body.removeEventListener("click", closeDropdown);
+  }, []);
 
   return (
     <SelectContainer>
@@ -145,7 +131,7 @@ const SelectCategory = ({
           <SelectIconContainer isActive={isActive}>
             <Category />
           </SelectIconContainer>
-          <DefaultValue>{selectedCategory}</DefaultValue>
+          <DefaultValue>{payMode}</DefaultValue>
           <SelectCaretDownContainer isActive={isActive}>
             <CaretDown />
           </SelectCaretDownContainer>
@@ -154,15 +140,15 @@ const SelectCategory = ({
       {isActive && (
         <SelectOptionsContainer>
           <SelectTitleOptions>{titleOptions}</SelectTitleOptions>
-          {Object.values(categories).map((category) => (
+          {Object.values(payModes).map((payMode, i) => (
             <SelectOption
-              key={category._id}
+              key={i}
               onClick={() => {
-                setSelectedCategory(category.name);
+                setPayMode(payMode.mode);
                 setIsActive(false);
               }}
             >
-              {category.name}
+              {payMode.mode}
             </SelectOption>
           ))}
         </SelectOptionsContainer>
@@ -171,4 +157,4 @@ const SelectCategory = ({
   );
 };
 
-export default SelectCategory;
+export default PayModeSelect;
