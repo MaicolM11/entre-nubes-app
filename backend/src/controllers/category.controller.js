@@ -19,7 +19,7 @@ export const create = async (req, res) => {
 export const edit = async (req, res) => {
     const { id } = req.params;
 
-    Category.findByIdAndUpdate(id, req.body, { new: true })
+    Category.findByIdAndUpdate(id, req.body, { new: true, runValidators: true })
         .then(doc => {
             if (!doc) res.status(404).json({ message: 'Category not found' })
             else res.status(201).json(doc)

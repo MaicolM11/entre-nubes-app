@@ -1,4 +1,4 @@
-import { admin, salesman, API, 
+import { admin, admin_token, API, 
     login, USER_URL } from '../config'
 
 const user = {
@@ -9,29 +9,26 @@ const user = {
 describe.skip('User api', () => {
     
     it('GET all', async () => {
-        let token =  (await login(admin)).body.token;
 
         const response = await API.get(USER_URL)
-            .set('authorization', token)
+            .set('authorization', admin_token)
             .send();
         expect(response.statusCode).toBe(200) 
         expect(response.body.length).toBe(2)
     });
 
     it('Create user without email - (required)', async () => {
-        let token =  (await login(admin)).body.token;
 
         const response = await API.post(USER_URL)
-            .set('authorization', token)
+            .set('authorization', admin_token)
             .send(user);
         expect(response.statusCode).toBe(400); 
     });
 
     it('Create user', async () => {
-        let token =  (await login(admin)).body.token;
         user.email = 'test@gmail.com';
         const response = await API.post(USER_URL)
-            .set('authorization', token)
+            .set('authorization', admin_token)
             .send(user);
         expect(response.statusCode).toBe(201); 
         expect(response.body.rol).toBe("SALESMAN")
@@ -44,18 +41,16 @@ describe.skip('User api', () => {
     });
 
     it('Create user with exist email', async () => {
-        let token =  (await login(admin)).body.token;
         const response = await API.post(USER_URL)
-            .set('authorization', token)
+            .set('authorization', admin_token)
             .send(user);
         expect(response.statusCode).toBe(400); 
     });
 
     it('Get my info by token', async () => {
-        let token =  (await login(admin)).body.token;
 
         const response = await API.get(USER_URL + 'my-info')
-            .set('authorization', token)
+            .set('authorization', admin_token)
             .send();
         expect(response.statusCode).toBe(200);
         expect(response.body.fullname).toBe(admin.fullname)
@@ -64,10 +59,9 @@ describe.skip('User api', () => {
     });
 
     it('Delete user', async () => {
-        let token =  (await login(admin)).body.token;
-
         const response = await API.delete(USER_URL + user.id)
-            .set('authorization', token);
+            .set('authorization', admin_token);
+
         expect(response.statusCode).toBe(200); 
     });
 

@@ -4,6 +4,8 @@ import { BILL_STATES } from "../models/Enums";
 
 import { findProductsAndUpdate } from "./sale.controller";
 
+const updateOptions = { new: true, runValidators: true };
+
 export const createBill = async (req, res) => {
   try {
     const data = req.body;
@@ -80,7 +82,7 @@ export const payBill = (req, res) => {
   Bill.findByIdAndUpdate(id, {
       status: BILL_STATES.PAID,
       payment_method: req.body.payment_method.toUpperCase()
-  }, { new: true })
+  }, updateOptions)
       .then(doc => {
           if (!doc) res.status(404).json({ message: 'Bill not found' })
           else res.status(201).json(doc)
@@ -92,9 +94,9 @@ export const assingBillToDebtor = (req, res) => {
     
   const { id : bill_id } = req.params;
   const { debtor_id } = req.body;
-  Bill.findByIdAndUpdate(bill_id, { status: BILL_STATES.CREDIT}, { new: true })
+  Bill.findByIdAndUpdate(bill_id, { status: BILL_STATES.CREDIT}, updateOptions)
       .then(() => Debtor.findByIdAndUpdate(debtor_id, 
-          { $push: { debts: { item: bill_id } }}, { new:true }))
+          { $push: { debts: { item: bill_id } }}, updateOptions))
       .then(() => res.sendStatus(200))
       .catch(err => res.status(400).json({ message: err.message }))        
 }

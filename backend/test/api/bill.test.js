@@ -1,4 +1,4 @@
-import { admin, salesman, API, 
+import { admin_token, salesman_token, API, 
     login, BILL_URL, CATEGORY_URL, PRODUCT_URL } from '../config'
 
 let product1 = {
@@ -26,14 +26,8 @@ let bill = {
     sales: []
 }
 
-let salesman_token, admin_token;
-
 describe('Bill api', () => {
 
-    it('Generate tokens', async ()=> {
-        salesman_token = (await login(salesman)).body.token;
-        admin_token =  (await login(admin)).body.token;
-    })
     it('Create some products', async ()=> {
 
         const res = await API.post(CATEGORY_URL)
@@ -80,7 +74,7 @@ describe('Bill api', () => {
         const subtotal = product1.buy_price * 10 + product2.buy_price * 20;
         
         expect(response.statusCode).toBe(201)
-        expect(response.body.status).toBe('DUE')
+        expect(response.body.status).toBe('PENDIENTE')
         expect(response.body.total).toEqual(total)
         expect(response.body.subtotal).toEqual(subtotal)
     })
@@ -109,7 +103,6 @@ describe('Bill api', () => {
         expect(response.statusCode).toBe(201)
         expect(response.body.total).toEqual(total)
         expect(response.body.subtotal).toEqual(subtotal)
-        expect(response.body.sales.length).toEqual(3)    
     })
 
     it('Check if decrement products stock to append', async () => {
@@ -122,6 +115,23 @@ describe('Bill api', () => {
 
         expect(prod1.stock).toBe(product1.stock - 15)
         expect(prod2.stock).toBe(product2.stock - 20)
+    })
+
+    // sprint 3
+    it('Pay bill', async () => {
+        const response = await API.put(BILL_URL + bill.id +'/payment' )
+                            .set('authorization', salesman_token)
+                            .send({ payment_method: "EFECTIVO" });
+        expect(response.statusCode).toBe(201)
+        expect(response.body.status).toBe('PAGO')
+    })
+
+    it('Pay bill with non-existent payment method ', async () => {
+
+        const response = await API.put(BILL_URL + bill.id +'/payment' )
+                            .set('authorization', salesman_token)
+                            .send({ payment_method: "BAD" });
+        expect(response.statusCode).toBe(400)
     })
 
 })
