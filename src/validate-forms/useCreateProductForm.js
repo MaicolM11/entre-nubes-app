@@ -29,7 +29,7 @@ const useCreateProductForm = (selectedCategory, categories, callback) => {
       }
     });
     setErros(productValidation(productValues, selectedCategory));
-    if (!(Object.keys(productValidation(productValues)).length > 0)) {
+    if (!(Object.keys(productValidation(productValues,selectedCategory)).length > 0)) {
       callback();
     }
   };
@@ -38,7 +38,7 @@ const useCreateProductForm = (selectedCategory, categories, callback) => {
 
   const clearCreateProductValues = () => {
     productValues.brand = "";
-    productValues.category = selectedCategory;
+    productValues.category = "Categoría";
     productValues.unitPrice = 0;
     productValues.salePrice = 0;
     productValues.presentation = "";
