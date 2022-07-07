@@ -71,7 +71,10 @@ export const editUser = (
       };
       console.log(requestOptions)
       return fetch(BASE_URL+`/${id}`,requestOptions)
+  
   }
+
+
 
 export const deleteUser = (id) =>{
     const requestOptions = {

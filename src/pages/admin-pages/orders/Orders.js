@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import socket from "../../../services/socket";
-import { getBillById } from "../../../services/bill";
+import { getAllSalesToDay } from "../../../services/bill";
+import { getBillById } from "../../../services/bill"; 
 
 import "./Orders.css";
 import Header from "../../../components/header/Header";
@@ -8,28 +8,20 @@ import NotificationButton from "../../../components/header/NotificationButton";
 import OrdersAdminCardsContainer from "../../../components/cards-container/OrdersAdminCardsContainer";
 import AnimatedModalContainer from "../../../components/modals/animation/AnimatedModalContainer";
 import OrderProductsListModal from "../../../components/modals/OrderProductsListModal";
-
-const data = [
-  {
-    orderNumber: "Pedido 1",
-    place: "En la nevera",
-    totalPayment: "000000",
-    seller: "EL Pepe",
-    gain: "000000",
-    status: "Pagado",
-  },
-];
+import socket from "../../../services/socket";
 
 const Orders = () => {
-  const [bills, setBills] = useState(data);
+
+  const [bills, setBills] = useState([]);
   const [bill, setBill] = useState();
   const [productsSale, setProductsSale] = useState([]);
   const [isOpenProductListModal, setIsOpenProductListModal] = useState(false);
 
-  socket.on("sales", (data) => setBills(data));
+
+  socket.on('sales', data => setBills(data));
 
   const showBill = (bill) => {
-    console.log("click");
+    console.log("click")
     setProductsSale([]);
     getBillById(bill._id).then(async (res) => {
       setProductsSale(await res.json());
@@ -44,7 +36,7 @@ const Orders = () => {
 
   return (
     <div className="admin-orders-container">
-      <AnimatedModalContainer
+       <AnimatedModalContainer
         modal={
           <OrderProductsListModal
             bill={bill}
@@ -60,10 +52,8 @@ const Orders = () => {
         description="Información de los pedidos realizados por los clientes"
         component={<NotificationButton />}
       />
-      <OrdersAdminCardsContainer
-        bills={bills}
-        handleOpenProductList={showBill}
-      />
+       <OrdersAdminCardsContainer bills={bills}
+        handleOpenProductList={showBill} /> 
     </div>
   );
 };

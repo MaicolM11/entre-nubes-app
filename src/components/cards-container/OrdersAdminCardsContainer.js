@@ -11,9 +11,12 @@ const OrdersAdminCardsContainer = ({ bills,handleOpenProductList }) => {
           orderNumber={i + 1}
           place={bill.location}
           totalPayment={bill.total}
+          salesman = {bill.salesman.fullname}
+          gain = {(bill.total - bill.subtotal)}
           handleOpenProductList={() => handleOpenProductList(bill)}
         />
-      ))}
+      )
+      )}
     </CardsContainer>
   );
 };
