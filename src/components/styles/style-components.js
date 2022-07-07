@@ -123,6 +123,30 @@ export const DataSpan = styled.span`
   font-weight: 500;
 `;
 
+export const ErrorMessage = styled.label`
+  display: flex;
+  width: 100%;
+  height: 10px;
+  align-items: center;
+  color: ${colors.delete};
+  font-size: 12px;
+  font-weight: 500;
+  font-family: var(--roboto);
+  white-space: nowrap;
+`;
+
+export const ErrorMessageContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 5px;
+`;
+
+export const ErrorMessageSpace = styled.label`
+  width: 100%;
+  height: 10px;
+`;
+
 export const HeaderSeparator = styled.div`
   width: 1px;
   height: 25px;

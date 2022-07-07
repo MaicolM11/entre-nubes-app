@@ -1,8 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { reqProduct, editProduct } from "../../services/product";
+import { createProduct } from "../../services/product";
 import { getAllCategories } from "../../services/category";
-import { productValidation } from "../../errors/validate";
-import useForm from "../../form/useForm";
+import useCreateProductForm from "../../validate-forms/useCreateProductForm";
 
 import styled from "styled-components";
 import { colors } from "../styles/colors";
@@ -92,81 +91,58 @@ const ErrorMessage = styled.label`
   white-space: nowrap;
 `;
 
-const ProductModal = ({
-  isTheme,
+const CreateProductModal = ({
   info,
   buttonTheme,
-  product,
   updateProducts,
   isOpen,
   setIsOpen,
 }) => {
-  const category = "Categoría";
-  const [selectedCategory, setSelectedCategory] = useState(category);
+  const defaultCategory = "Categoría";
+  const [selectedCategory, setSelectedCategory] = useState(defaultCategory);
   const [categories, setCategories] = useState({});
 
-  const submitProduct = () => {
-    if (isOpen) {
-      isTheme ? sendData() : editData();
-    }
+  const handleSubmitProduct = () => {
+    createCurrentProduct();
   };
 
-  const { handleChange, values, handleSubmit, errors, clearValues } = useForm(
-    submitProduct,
-    productValidation,
-    categories,
-    selectedCategory
-  );
-
-  const clearModalInputs = () => {
-    clearValues();
-    setSelectedCategory(category);
-  };
+  const {
+    productValues,
+    handleChangeCreateProduct,
+    handleSubmitCreateProduct,
+    errors,
+    clearCreateProductValues,
+  } = useCreateProductForm(selectedCategory, categories, handleSubmitProduct);
 
   const handleSetIsOpen = () => {
     clearModalInputs();
     setIsOpen((isOpen) => !isOpen);
   };
 
-  const sendData = () => {
-    reqProduct(
-      values.brand,
-      values.category,
-      values.unitPrice,
-      values.salePrice,
-      values.presentation,
-      values.stock,
-      values.img_url
-    ).then(async (res) => {
-      const data = await res.json();
-      if (res.ok) {
-        handleSetIsOpen();
-        updateProducts();
-      } else {
-        alert(data.message);
-      }
-    });
+  const clearModalInputs = () => {
+    clearCreateProductValues();
+    setSelectedCategory(defaultCategory);
   };
 
-  const editData = () => {
-    editProduct(
-      product._id,
-      values.brand,
-      values.category,
-      values.unitPrice,
-      values.salePrice,
-      values.presentation,
-      values.stock,
-      values.img_url
-    ).then(async (res) => {
-      const data = await res.json();
-      if (res.ok) {
-        handleSetIsOpen();
-        updateProducts();
-      } else {
-        alert(data.message);
-      }
-    });
+  const createCurrentProduct = () => {
+    console.log(productValues)
+    // createProduct(
+    //   productValues.brand,
+    //   productValues.category,
+    //   productValues.unitPrice,
+    //   productValues.salePrice,
+    //   productValues.presentation,
+    //   productValues.stock,
+    //   productValues.img_url
+    // ).then(async (res) => {
+    //   const data = await res.json();
+    //   if (res.ok) {
+    //     handleSetIsOpen();
+    //     updateProducts();
+    //   } else {
+    //     alert(data.message);
+    //   }
+    // });
   };
 
   const getCategories = () => {
@@ -229,8 +205,7 @@ const ProductModal = ({
                         type="text"
                         name="brand"
                         placeholder="Nombre del producto"
-                        defaultValue={product ? product.brand : ""}
-                        onChange={handleChange}
+                        onChange={handleChangeCreateProduct}
                       />
                       {errors.brand ? (
                         <ErrorMessage>{errors.brand}</ErrorMessage>
@@ -241,15 +216,13 @@ const ProductModal = ({
                     <ErrorMessageContainer>
                       <SelectContainer>
                         <SelectCategory
-                          name="category"
                           titleOptions="Categorías"
                           categories={categories}
                           selectedCategory={selectedCategory}
                           setSelectedCategory={setSelectedCategory}
-                          product={product}
                         />
                       </SelectContainer>
-                      {selectedCategory === category ? (
+                      {selectedCategory === defaultCategory ? (
                         <ErrorMessage>{errors.category}</ErrorMessage>
                       ) : (
                         <ErrorMessageSpace />
@@ -262,8 +235,7 @@ const ProductModal = ({
                         type="text"
                         name="unitPrice"
                         placeholder="Precio por unidad"
-                        defaultValue={product ? product.buy_price : ""}
-                        onChange={handleChange}
+                        onChange={handleChangeCreateProduct}
                       />
                       {errors.unitPrice ? (
                         <ErrorMessage>{errors.unitPrice}</ErrorMessage>
@@ -278,8 +250,7 @@ const ProductModal = ({
                         type="text"
                         name="salePrice"
                         placeholder="Precio de venta"
-                        defaultValue={product ? product.sale_price : ""}
-                        onChange={handleChange}
+                        onChange={handleChangeCreateProduct}
                       />
                       {errors.salePrice ? (
                         <ErrorMessage>{errors.salePrice}</ErrorMessage>
@@ -294,8 +265,7 @@ const ProductModal = ({
                         type="text"
                         name="presentation"
                         placeholder="Presentación"
-                        defaultValue={product ? product.presentation : ""}
-                        onChange={handleChange}
+                        onChange={handleChangeCreateProduct}
                       />
                       {errors.presentation ? (
                         <ErrorMessage>{errors.presentation}</ErrorMessage>
@@ -310,8 +280,7 @@ const ProductModal = ({
                         type="text"
                         name="stock"
                         placeholder="Unidades de venta"
-                        defaultValue={product ? product.stock : ""}
-                        onChange={handleChange}
+                        onChange={handleChangeCreateProduct}
                       />
                       {errors.stock ? (
                         <ErrorMessage>{errors.stock}</ErrorMessage>
@@ -323,7 +292,7 @@ const ProductModal = ({
                       size="normalButton"
                       theme={buttonTheme}
                       text={info}
-                      onClick={handleSubmit}
+                      onClick={handleSubmitCreateProduct}
                     />
                   </ProductModalFormOptionContainer>
                 </ProductModalFormCenterContainer>
@@ -336,4 +305,4 @@ const ProductModal = ({
   );
 };
 
-export default ProductModal;
+export default CreateProductModal;

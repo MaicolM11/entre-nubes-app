@@ -63,7 +63,7 @@ export const editProduct = (
   return fetch(BASE_URL + `/${id}`, requestOptions);
 };
 
-export const reqProduct = (
+export const createProduct = (
   brand,
   category,
   buy_price,

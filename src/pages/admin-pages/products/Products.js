@@ -6,7 +6,7 @@ import "./Products.css";
 import AnimatedModalContainer from "../../../components/modals/animation/AnimatedModalContainer";
 import Header from "../../../components/header/Header";
 import NotificationButton from "../../../components/header/NotificationButton";
-import ProductModal from "../../../components/modals/ProductModal";
+import CreateProductModal from "../../../components/modals/CreateProductModal";
 import EditProductModal from "../../../components/modals/EditProductModal";
 import DeleteModal from "../../../components/modals/DeleteModal";
 import ProductCardsContainer from "../../../components/cards-container/ProductCardsContainer";
@@ -85,8 +85,7 @@ const Products = () => {
 
   return (
     <div className="admin-products-container">
-      <ProductModal
-        isTheme={true}
+      <CreateProductModal
         info="Agregar Producto"
         buttonTheme="ok"
         updateProducts={getProductos}

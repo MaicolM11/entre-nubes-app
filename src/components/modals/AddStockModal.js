@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { updateUnits } from "../../services/product";
+import useIncreaseStockForm from "../../validate-forms/useIncreaseStockForm";
 
 import styled from "styled-components";
 import { colors } from "../styles/colors";
@@ -7,14 +8,14 @@ import { ReactComponent as Box } from "../../assets/icons/box.svg";
 import DataInput from "../inputs/DataInput";
 import Button from "../buttons/Button";
 import CloseButton from "../buttons/CloseButton";
-
 import {
   DataSpan,
   ModalSubtitle,
   ModalTitle,
+  ErrorMessage,
+  ErrorMessageContainer,
+  ErrorMessageSpace,
 } from "../styles/style-components";
-
-import { stockValidation } from "../../errors/validate";
 
 const AddStockModalContainer = styled.div`
   display: flex;
@@ -45,24 +46,25 @@ const ModalInfoContainer = styled.div`
 `;
 
 const AddStockModal = ({ product, updateProducts, setIsOpenAddStock }) => {
-  const [units, setUnits] = useState(0);
+  const handleSubmitUpdateStock = () => {
+    updateCurrentUnits();
+  };
+
+  const {
+    stockValue,
+    handleChangeIncreaseStock,
+    handleSubmitIncreaseStock,
+    errors,
+    clearIncreaseStockValue,
+  } = useIncreaseStockForm(handleSubmitUpdateStock);
 
   const handleSetIsOpen = () => {
+    clearIncreaseStockValue();
     setIsOpenAddStock((isOpen) => !isOpen);
   };
 
-  const handleChangeUnits = (e) => {
-    const { name, value } = e.target;
-    setUnits((values) => {
-      return {
-        ...values,
-        [name]: value,
-      };
-    });
-  };
-
-  const handleSubmitUpdateUnits = () => {
-    updateUnits(product._id, units).then(async () => {
+  const updateCurrentUnits = () => {
+    updateUnits(product._id, stockValue).then(async () => {
       handleSetIsOpen();
       updateProducts();
     });
@@ -74,27 +76,34 @@ const AddStockModal = ({ product, updateProducts, setIsOpenAddStock }) => {
         <ModalTitle>
           Producto : <DataSpan>{product.brand}</DataSpan>
         </ModalTitle>
-        <CloseButton />
+        <CloseButton onClick={handleSetIsOpen} />
       </HeaderModalContainer>
       <ModalContainer>
         <ModalInfoContainer>
           <ModalSubtitle>
             Unidades actuales : <DataSpan>{product.stock}</DataSpan>
           </ModalSubtitle>
-          <DataInput
-            size="normalInput"
-            icon={<Box stroke={colors.brand} />}
-            isStroke={true}
-            type="text"
-            name="stock"
-            placeholder="Unidades para stock"
-            onChange={handleChangeUnits}
-          />
+          <ErrorMessageContainer>
+            <DataInput
+              size="normalInput"
+              icon={<Box stroke={colors.brand} />}
+              isStroke={true}
+              type="text"
+              name="stock"
+              placeholder="Unidades para stock"
+              onChange={handleChangeIncreaseStock}
+            />
+            {errors.stock ? (
+              <ErrorMessage>{errors.stock}</ErrorMessage>
+            ) : (
+              <ErrorMessageSpace />
+            )}
+          </ErrorMessageContainer>
           <Button
             size="mediumModalButton"
             theme="ok"
             text="Agregar Unidades"
-            onClick={handleSubmitUpdateUnits}
+            onClick={handleSubmitIncreaseStock}
           />
         </ModalInfoContainer>
       </ModalContainer>

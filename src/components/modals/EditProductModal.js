@@ -1,14 +1,16 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { editProduct } from "../../services/product";
 import { getAllCategories } from "../../services/category";
-import { productEditValidation } from "../../errors/validate";
-import useForm from "../../form/useFormEdit";
+import useEditProductForm from "../../validate-forms/useEditProductForm";
 
 import styled from "styled-components";
 import { colors } from "../styles/colors";
 import {
   ModalBackground,
   ModalTitle,
+  ErrorMessage,
+  ErrorMessageContainer,
+  ErrorMessageSpace,
   SelectContainer,
 } from "../styles/style-components";
 import { useSpring, animated } from "react-spring";
@@ -68,31 +70,7 @@ const ProductModalFormOptionContainer = styled.div`
   gap: 10px;
 `;
 
-const ErrorMessageContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  gap: 5px;
-`;
-
-const ErrorMessageSpace = styled.label`
-  width: 100%;
-  height: 10px;
-`;
-
-const ErrorMessage = styled.label`
-  display: flex;
-  width: 100%;
-  height: 10px;
-  align-items: center;
-  color: ${colors.delete};
-  font-size: 12px;
-  font-weight: 500;
-  font-family: var(--roboto);
-  white-space: nowrap;
-`;
-
-const ProductModal = ({
+const EditProductModal = ({
   info,
   buttonTheme,
   product,
@@ -104,30 +82,35 @@ const ProductModal = ({
   const [selectedCategory, setSelectedCategory] = useState(category);
   const [categories, setCategories] = useState({});
 
-  const submitProduct = () => {
-    editData();
+  const handleSubmitProduct = () => {
+    editCurrentProduct();
   };
 
-  const { handleChange, values, handleSubmit, errors, clearValues } = useForm(
-    submitProduct,
-    productEditValidation,
-    categories,
-    selectedCategory,
+  const {
+    handleChangeEditProduct,
+    values,
+    handleSubmitEditProduct,
+    errors,
+    clearEditProductValues,
+  } = useEditProductForm(
     product,
-    category
+    category,
+    selectedCategory,
+    categories,
+    handleSubmitProduct
   );
-
-  const clearModalInputs = () => {
-    clearValues();
-    setSelectedCategory(category);
-  };
 
   const handleSetIsOpen = () => {
     clearModalInputs();
     setIsOpen((isOpen) => !isOpen);
   };
 
-  const editData = () => {
+  const clearModalInputs = () => {
+    clearEditProductValues();
+    setSelectedCategory(category);
+  };
+
+  const editCurrentProduct = () => {
     editProduct(
       product._id,
       values.brand,
@@ -209,7 +192,7 @@ const ProductModal = ({
                         name="brand"
                         placeholder="Nombre del producto"
                         defaultValue={product ? product.brand : ""}
-                        onChange={handleChange}
+                        onChange={handleChangeEditProduct}
                       />
                       {errors.brand ? (
                         <ErrorMessage>{errors.brand}</ErrorMessage>
@@ -220,7 +203,6 @@ const ProductModal = ({
                     <ErrorMessageContainer>
                       <SelectContainer>
                         <SelectCategory
-                          name="category"
                           titleOptions="Categorías"
                           categories={categories}
                           selectedCategory={selectedCategory}
@@ -228,11 +210,7 @@ const ProductModal = ({
                           product={product}
                         />
                       </SelectContainer>
-                      {selectedCategory === category ? (
-                        <ErrorMessage>{errors.category}</ErrorMessage>
-                      ) : (
-                        <ErrorMessageSpace />
-                      )}
+                      <ErrorMessageSpace />
                     </ErrorMessageContainer>
                     <ErrorMessageContainer>
                       <DataInput
@@ -242,7 +220,7 @@ const ProductModal = ({
                         name="unitPrice"
                         placeholder="Precio por unidad"
                         defaultValue={product ? product.buy_price : ""}
-                        onChange={handleChange}
+                        onChange={handleChangeEditProduct}
                       />
                       {errors.unitPrice ? (
                         <ErrorMessage>{errors.unitPrice}</ErrorMessage>
@@ -258,7 +236,7 @@ const ProductModal = ({
                         name="salePrice"
                         placeholder="Precio de venta"
                         defaultValue={product ? product.sale_price : ""}
-                        onChange={handleChange}
+                        onChange={handleChangeEditProduct}
                       />
                       {errors.salePrice ? (
                         <ErrorMessage>{errors.salePrice}</ErrorMessage>
@@ -274,7 +252,7 @@ const ProductModal = ({
                         name="presentation"
                         placeholder="Presentación"
                         defaultValue={product ? product.presentation : ""}
-                        onChange={handleChange}
+                        onChange={handleChangeEditProduct}
                       />
                       {errors.presentation ? (
                         <ErrorMessage>{errors.presentation}</ErrorMessage>
@@ -290,7 +268,7 @@ const ProductModal = ({
                         name="stock"
                         placeholder="Unidades de venta"
                         defaultValue={product ? product.stock : ""}
-                        onChange={handleChange}
+                        onChange={handleChangeEditProduct}
                       />
                       {errors.stock ? (
                         <ErrorMessage>{errors.stock}</ErrorMessage>
@@ -302,7 +280,7 @@ const ProductModal = ({
                       size="normalButton"
                       theme={buttonTheme}
                       text={info}
-                      onClick={handleSubmit}
+                      onClick={handleSubmitEditProduct}
                     />
                   </ProductModalFormOptionContainer>
                 </ProductModalFormCenterContainer>
@@ -315,4 +293,4 @@ const ProductModal = ({
   );
 };
 
-export default ProductModal;
+export default EditProductModal;
