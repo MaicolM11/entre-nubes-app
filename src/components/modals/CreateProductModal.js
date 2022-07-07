@@ -125,24 +125,23 @@ const CreateProductModal = ({
   };
 
   const createCurrentProduct = () => {
-    console.log(productValues)
-    // createProduct(
-    //   productValues.brand,
-    //   productValues.category,
-    //   productValues.unitPrice,
-    //   productValues.salePrice,
-    //   productValues.presentation,
-    //   productValues.stock,
-    //   productValues.img_url
-    // ).then(async (res) => {
-    //   const data = await res.json();
-    //   if (res.ok) {
-    //     handleSetIsOpen();
-    //     updateProducts();
-    //   } else {
-    //     alert(data.message);
-    //   }
-    // });
+    createProduct(
+      productValues.brand,
+      productValues.category,
+      productValues.unitPrice,
+      productValues.salePrice,
+      productValues.presentation,
+      productValues.stock,
+      productValues.img_url
+    ).then(async (res) => {
+      const data = await res.json();
+      if (res.ok) {
+        handleSetIsOpen();
+        updateProducts();
+      } else {
+        alert(data.message);
+      }
+    });
   };
 
   const getCategories = () => {
