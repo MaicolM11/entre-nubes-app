@@ -21,21 +21,18 @@ const DeleteModal = ({
   handleCloseModal,
 }) => {
   const handleDeleteProduct = () => {
-    if(isProduct){
+    if (isProduct) {
       deleteProduct(data._id).then(async () => {
         handleCloseModal();
         update();
       });
-    }else{
+    } else {
       deleteUser(data._id).then(async () => {
         handleCloseModal();
         update();
       });
     }
-    
   };
-
-
 
   return (
     <ModalDeleteContainer>
