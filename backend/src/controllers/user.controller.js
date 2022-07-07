@@ -31,7 +31,7 @@ export const editUser = async(req, res) => {
     const { id } = req.params;
     const user = req.body
     user.password = await User.encryptPass(user.password);
-    User.findByIdAndUpdate(id, user, { new: true })
+    User.findByIdAndUpdate(id, user, { new: true, runValidators: true  })
         .then(doc => {
             if (!doc) res.status(404).json({ message: 'User not found' })
             else res.status(201).json(doc)

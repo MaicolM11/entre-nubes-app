@@ -26,7 +26,7 @@ export const create = (req, res) => {
 export const edit = (req, res) => {
     const { id } = req.params;
 
-    Product.findByIdAndUpdate(id, req.body, { new: true })
+    Product.findByIdAndUpdate(id, req.body, { new: true, runValidators: true  })
         .then(doc => {
             if (!doc) res.status(404).json({ message: 'Product not found' })
             else res.status(201).json(doc)
@@ -59,7 +59,8 @@ export const searchProduct = (req, res) => {
 }
 
 export const updateStockToProduct = (id, value) => {
-    return Product.findByIdAndUpdate(id, { $inc: { 'stock': value } }, { new: true })
+    return Product.findByIdAndUpdate(id, { $inc: { 'stock': value } }, 
+            { new: true, runValidators: true  })
 }
 
 export const getAllByIds = async (ids) => {

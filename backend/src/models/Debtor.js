@@ -3,11 +3,16 @@ const mongoose = require("mongoose");
 const debtorSchema = mongoose.Schema(
     {
         fullname: String,
-        cc: String,
+        cc: {
+            type: String,
+            unique: true,
+            required: true
+        },
         phone: String,
-        debts: [{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "bills",
+        debts:  [{
+            _id : false, 
+            reference: { type: String, default: 'last_bills' },
+            item: { type: mongoose.Schema.Types.ObjectId, refPath: 'debts.reference' }
         }]
     },
     {

@@ -1,10 +1,10 @@
 const router = require("express").Router();
 
 const controller = require('../controllers/bill.controller')
-const payController = require('../controllers/paymentAndDue.controller');
 
-import { isAdmin, isSalesman, hasAnyRol } from '../middlewares/checkRole'
-import { verifyToken } from './../middlewares/jwt'
+import { hasAnyRol } from '../middlewares/checkRole'
+import { verifyToken } from '../middlewares/jwt'
+import { emitBills } from '../middlewares/socket'
 
 /**
  * @swagger
@@ -27,7 +27,7 @@ import { verifyToken } from './../middlewares/jwt'
  *      security:
  *	        - jwt: []
  */
-router.post('/', [verifyToken, hasAnyRol], controller.createBill);
+router.post('/', [verifyToken, hasAnyRol, emitBills], controller.createBill);
 
 /**
  * @swagger
@@ -57,7 +57,7 @@ router.post('/', [verifyToken, hasAnyRol], controller.createBill);
  *      security:
  *	        - jwt: []
  */
-router.put('/append/:id', [verifyToken, hasAnyRol], controller.appendProductsToBill)
+router.put('/append/:id', [verifyToken, hasAnyRol, emitBills], controller.appendProductsToBill)
 
 /**
  * @swagger
@@ -131,7 +131,7 @@ router.get('/:id/sales', [verifyToken, hasAnyRol], controller.getSalesOfBill);
  *      security:
  *	        - jwt: []
  */
-router.put('/:id/payment', [verifyToken, hasAnyRol], payController.payBill);
+router.put('/:id/payment', [verifyToken, hasAnyRol, emitBills], controller.payBill);
 
 /**
  * @swagger
@@ -165,7 +165,7 @@ router.put('/:id/payment', [verifyToken, hasAnyRol], payController.payBill);
  *      security:
  *	        - jwt: []
  */
-router.put('/:id/due', [verifyToken, hasAnyRol], payController.assingBillToDebtor);
+router.put('/:id/due', [verifyToken, hasAnyRol, emitBills], controller.assingBillToDebtor);
 
 /**
  * @swagger
@@ -189,6 +189,8 @@ router.put('/:id/due', [verifyToken, hasAnyRol], payController.assingBillToDebto
  *                      properties:
  *                          payment_method:
  *                              type: string
+ *                          debtor_id:
+ *                              type: string
  *      responses:
  *          200:
  *              description : bill update sucesfull
@@ -199,7 +201,6 @@ router.put('/:id/due', [verifyToken, hasAnyRol], payController.assingBillToDebto
  *      security:
  *	        - jwt: []
  */
-router.put('/:id/due/payment', [verifyToken, hasAnyRol], payController.payDueBill);
-
+router.put('/:id/due/payment', [verifyToken, hasAnyRol, emitBills], controller.payDueBill);
 
 module.exports = router;

@@ -5,6 +5,7 @@ import { BILL_STATES, PAYMENT_METHODS } from "./Enums";
 const billSchema = mongoose.Schema(
     {
         sales: [{
+            _id : false, 
             product: {
                 type: mongoose.Schema.Types.ObjectId,
                 ref: "Product",
