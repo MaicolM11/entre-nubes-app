@@ -2,7 +2,7 @@ import React from "react";
 import OrderAdminCard from "../cards/OrderAdminCard";
 import { CardsContainer } from "../styles/style-components";
 
-const OrdersAdminCardsContainer = ({ bills }) => {
+const OrdersAdminCardsContainer = ({ bills,handleOpenProductList }) => {
   return (
     <CardsContainer>
       {Object.values(bills).map((bill, i) => (
@@ -11,6 +11,7 @@ const OrdersAdminCardsContainer = ({ bills }) => {
           orderNumber={i + 1}
           place={bill.location}
           totalPayment={bill.total}
+          handleOpenProductList={() => handleOpenProductList(bill)}
         />
       ))}
     </CardsContainer>

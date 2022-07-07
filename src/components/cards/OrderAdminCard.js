@@ -16,7 +16,7 @@ const OrderAdminCard = ({
   orderNumber,
   place,
   totalPayment,
-  handleShowProducts,
+  handleOpenProductList,
 }) => {
   return (
     <OrderCardContainer>
@@ -33,7 +33,7 @@ const OrderAdminCard = ({
             size="mediumSmallButton"
             theme="highlighted"
             text="Productos"
-            onClick={handleShowProducts}
+            onClick={handleOpenProductList}
           />
         </OrderCardButtonsContainer>
       </OrderCardDataContainer>
