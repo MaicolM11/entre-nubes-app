@@ -200,7 +200,8 @@ const CreateProductModal = ({
                     <ErrorMessageContainer>
                       <DataInput
                         size="normalInput"
-                        icon={<WineBottle stroke={colors.brand} />}
+                        icon={<WineBottle />}
+                        isFill={true}
                         type="text"
                         name="brand"
                         placeholder="Nombre del producto"
@@ -230,7 +231,8 @@ const CreateProductModal = ({
                     <ErrorMessageContainer>
                       <DataInput
                         size="normalInput"
-                        icon={<AttachMoney stroke={colors.brand} />}
+                        icon={<AttachMoney />}
+                        isFill={true}
                         type="text"
                         name="unitPrice"
                         placeholder="Precio por unidad"
@@ -245,7 +247,8 @@ const CreateProductModal = ({
                     <ErrorMessageContainer>
                       <DataInput
                         size="normalInput"
-                        icon={<SackDollar stroke={colors.brand} />}
+                        icon={<SackDollar />}
+                        isFill={true}
                         type="text"
                         name="salePrice"
                         placeholder="Precio de venta"
@@ -260,7 +263,8 @@ const CreateProductModal = ({
                     <ErrorMessageContainer>
                       <DataInput
                         size="normalInput"
-                        icon={<Box stroke={colors.brand} />}
+                        icon={<Box />}
+                        isStroke={true}
                         type="text"
                         name="presentation"
                         placeholder="Presentación"
@@ -275,7 +279,8 @@ const CreateProductModal = ({
                     <ErrorMessageContainer>
                       <DataInput
                         size="normalInput"
-                        icon={<Circle stroke={colors.brand} />}
+                        icon={<Circle />}
+                        isFill={true}
                         type="text"
                         name="stock"
                         placeholder="Unidades de venta"
