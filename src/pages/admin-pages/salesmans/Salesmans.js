@@ -64,25 +64,21 @@ const Salesmans = () => {
         updateSalesman={getSalesmans}
         isOpen={isOpenAddSalesmanModal}
         setIsOpen={setIsOpenAddSalesmanModal}
-      ></SalesmanModal>
-      <>
-        {isOpenEditSalesmanModal && (
-          <SalesmanModal
-            isTheme={false}
-            info="Editar Vendedor"
-            buttonTheme="highlighted"
-            salesman={salesman}
-            updateSalesman={getSalesmans}
-            isOpen={isOpenEditSalesmanModal}
-            setIsOpen={setIsOpenEditSalesmanModal}
-          ></SalesmanModal>
-        )}
-      </>
+      />
+      <SalesmanModal
+        isTheme={false}
+        info="Editar Vendedor"
+        buttonTheme="highlighted"
+        salesman={salesman}
+        updateSalesman={getSalesmans}
+        isOpen={isOpenEditSalesmanModal}
+        setIsOpen={setIsOpenEditSalesmanModal}
+      />
       <AnimatedModalContainer
         modal={
           <DeleteModal
             isProduct={false}
-            message="¿Desea eliminar este vendedor?"
+            message="¿Desea eliminar el contrato del vendedor?"
             buttonMessage="Eliminar Vendedor"
             data={salesman}
             update={getSalesmans}

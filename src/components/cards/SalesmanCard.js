@@ -1,145 +1,135 @@
 import React from "react";
+import { formatPhoneNumber } from "../../format/DataFormat";
+
 import styled from "styled-components";
 import { colors } from "../styles/colors";
-import { IconContainer } from "../styles/style-components";
-import { formatPhoneNumber } from "../../format/DataFormat";
-import Button from "../buttons/Button";
-
-import { ReactComponent as Phone } from "../../assets/icons/phone.svg";
-import { ReactComponent as Location } from "../../assets/icons/location.svg";
-import { ReactComponent as Email } from "../../assets/icons/email.svg";
+import {
+  IconContainer,
+  DeleteIconButtonContainer,
+  EditIconButtonContainer,
+} from "../styles/style-components";
 import { ReactComponent as SalesmanPhoto } from "../../assets/images/salesman-photo.svg";
+import { ReactComponent as IdCard } from "../../assets/icons/id-card.svg";
+import { ReactComponent as Phone } from "../../assets/icons/phone.svg";
+import { ReactComponent as Email } from "../../assets/icons/email.svg";
+import { ReactComponent as Location } from "../../assets/icons/location.svg";
 import { ReactComponent as Edit } from "../../assets/icons/edit.svg";
 import { ReactComponent as Delete } from "../../assets/icons/delete.svg";
 
 const SalesmanCardContainer = styled.div`
   display: flex;
-  flex-direction: row;
-  width: 95%;
   border: 1px solid ${colors.border};
-  border-radius: 8px;
+  border-radius: 25px;
   &:hover {
     border-color: ${colors.highlighted};
   }
-  padding: 20px 2.5%;
 `;
 
 const SalesmanCardDataContainer = styled.div`
-  display: contents;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  gap: 25px;
-`;
-
-const SalesmanName = styled.label`
   display: flex;
   width: 100%;
+  padding: 25px;
+  gap: 15px;
+`;
+
+const InfoSalesmanContainer = styled.div`
+  display: flex;
   align-items: center;
+  gap: 15px;
+`;
+
+const PhotoSalesmanContainer = styled.div`
+  display: flex;
   justify-content: center;
-  color: ${colors.text};
+  align-items: center;
+  min-width: 50px;
+  min-height: 50px;
+`;
+
+const SalesmanNameContainer = styled.label`
   font-size: 20px;
   font-weight: bold;
   font-family: var(--roboto);
-  white-space: nowrap;
+  color: ${colors.text};
+  text-align: center;
 `;
 
-const DataWithIcon =  styled.div`
-display: flex;
-flex-direction: row;
-gap: 5px;
-font-family: var(--roboto);
-width: 100%;
-align-items: center;
-justify-content: center;
-white-space: nowrap;
-`;
-
-const EditButtonContainer = styled.div`
-  align-items: center;
-  transition: 0.2s;
-  cursor: pointer;
-
-  &:hover {
-    path {
-      fill: orange;
-    }
-  }
-`;
-
-const DeleteButtonContainer = styled.div`
-  align-items: center;
-  transition: 0.2s;
-  cursor: pointer;
-
-  &:hover {
-    path {
-      fill: red;
-    }
-  }
-`;
-
-
-const SalesmanCardButtonsContainer = styled.div`
+const DataContainer = styled.div`
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
   width: 100%;
-  gap: 20px;
+  align-items: center;
+  gap: 5px;
 `;
 
-const SalesmanCard = ({id, fullname, email, cc, phone, address,clickOnEdit, clickOnDelete }) => {
+const DataTextContainer = styled.label`
+  font-size: 14px;
+  font-weight: 500;
+  font-family: var(--roboto);
+  color: ${colors.text};
+  text-align: center;
+`;
 
-  
+const ButtonsContainer = styled.div`
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 25px;
+`;
+
+const SalesmanCard = ({
+  fullname,
+  cc,
+  email,
+  phone,
+  address,
+  clickOnEdit,
+  clickOnDelete,
+}) => {
   return (
     <SalesmanCardContainer>
-        <SalesmanCardDataContainer>
-            
-            <IconContainer>
-              <SalesmanPhoto/>
-            </IconContainer>
-
-            <SalesmanName> {fullname} </SalesmanName>
-  
-            <DataWithIcon>
-              <IconContainer>
-                <Email/>
-              </IconContainer>
-              <span>{email}</span>
-            </DataWithIcon>
-
-            <DataWithIcon>
-              <IconContainer>
-                <Phone/>
-              </IconContainer>
-              <span>{formatPhoneNumber(phone)}</span>
-            </DataWithIcon>
-
-            <DataWithIcon>
-              <IconContainer>
-                <Location/>
-              </IconContainer>
-              <span>{address}</span>
-            </DataWithIcon>
-            <SalesmanCardButtonsContainer>
-              
-              <EditButtonContainer 
-              onClick={clickOnEdit}>
-                <Edit/>
-              </EditButtonContainer>
-
-              <DeleteButtonContainer
-               onClick={
-                clickOnDelete}
-              >
-                <Delete/>
-              </DeleteButtonContainer>
-
-            </SalesmanCardButtonsContainer>
-        </SalesmanCardDataContainer>
+      <SalesmanCardDataContainer>
+        <InfoSalesmanContainer>
+          <PhotoSalesmanContainer>
+            <SalesmanPhoto />
+          </PhotoSalesmanContainer>
+          <SalesmanNameContainer>{fullname}</SalesmanNameContainer>
+        </InfoSalesmanContainer>
+        <DataContainer>
+          <IconContainer>
+            <IdCard fill={colors.brand} />
+          </IconContainer>
+          <DataTextContainer>{cc}</DataTextContainer>
+        </DataContainer>
+        <DataContainer>
+          <IconContainer>
+            <Phone fill={colors.brand} />
+          </IconContainer>
+          <DataTextContainer>{formatPhoneNumber(phone)}</DataTextContainer>
+        </DataContainer>
+        <DataContainer>
+          <IconContainer>
+            <Email fill={colors.brand} />
+          </IconContainer>
+          <DataTextContainer>{email}</DataTextContainer>
+        </DataContainer>
+        <DataContainer>
+          <IconContainer>
+            <Location fill={colors.brand} />
+          </IconContainer>
+          <DataTextContainer>{address}</DataTextContainer>
+        </DataContainer>
+        <ButtonsContainer>
+          <EditIconButtonContainer isStroke={true} onClick={clickOnEdit}>
+            <Edit width={24} height={24} />
+          </EditIconButtonContainer>
+          <DeleteIconButtonContainer isFill={true} onClick={clickOnDelete}>
+            <Delete width={24} height={24} />
+          </DeleteIconButtonContainer>
+        </ButtonsContainer>
+      </SalesmanCardDataContainer>
     </SalesmanCardContainer>
-    );
+  );
 };
 
 export default SalesmanCard;

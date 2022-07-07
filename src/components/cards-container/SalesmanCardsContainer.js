@@ -3,14 +3,19 @@ import styled from "styled-components";
 import SalesmanCard from "../cards/SalesmanCard";
 
 const CardsContainer = styled.div`
-  display: grid;
-  grid-row-gap: 10px;
-  grid-column-gap: 0px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
   padding: 0 25px 0 25px;
-  overflow-x: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
 `;
 
-const SalesmanCardsContainer = ({salesmans,openEditSalemanModal, openDeleteSalesmanModal}) => {
+const SalesmanCardsContainer = ({
+  salesmans,
+  openEditSalemanModal,
+  openDeleteSalesmanModal,
+}) => {
   return (
     <CardsContainer>
       {Object.values(salesmans).map((salesman, i) => (
@@ -21,12 +26,12 @@ const SalesmanCardsContainer = ({salesmans,openEditSalemanModal, openDeleteSales
           email={salesman.email}
           phone={salesman.phone}
           address={salesman.address}
-          clickOnEdit={() =>{
-            openEditSalemanModal(salesman)
-          }
-          }
-          clickOnDelete={ () =>{
-          openDeleteSalesmanModal(salesman)}}
+          clickOnEdit={() => {
+            openEditSalemanModal(salesman);
+          }}
+          clickOnDelete={() => {
+            openDeleteSalesmanModal(salesman);
+          }}
         />
       ))}
     </CardsContainer>

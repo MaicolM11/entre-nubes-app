@@ -123,6 +123,61 @@ export const DataSpan = styled.span`
   font-weight: 500;
 `;
 
+export const DeleteIconButtonContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.2s;
+  cursor: pointer;
+  &:hover {
+    path {
+      stroke: ${(props) => (props.isStroke ? colors.deleteHover : "none")};
+      fill: ${(props) => (props.isFill ? colors.deleteHover : "none")};
+    }
+  }
+  path {
+    stroke: ${(props) => (props.isStroke ? colors.delete : "none")};
+    fill: ${(props) => (props.isFill ? colors.delete : "none")};
+  }
+`;
+
+export const DeleteIconTableButtonContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 45px;
+  transition: 0.2s;
+  cursor: pointer;
+  &:hover {
+    path {
+      stroke: ${(props) => (props.isStroke ? colors.deleteHover : "none")};
+      fill: ${(props) => (props.isFill ? colors.deleteHover : "none")};
+    }
+  }
+  path {
+    stroke: ${(props) => (props.isStroke ? colors.delete : "none")};
+    fill: ${(props) => (props.isFill ? colors.delete : "none")};
+  }
+`;
+
+export const EditIconButtonContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.2s;
+  cursor: pointer;
+  &:hover {
+    path {
+      stroke: ${(props) => (props.isStroke ? colors.highlightedHover : "none")};
+      fill: ${(props) => (props.isFill ? colors.highlightedHover : "none")};
+    }
+  }
+  path {
+    stroke: ${(props) => (props.isStroke ? colors.highlighted : "none")};
+    fill: ${(props) => (props.isFill ? colors.highlighted : "none")};
+  }
+`;
+
 export const ErrorMessage = styled.label`
   display: flex;
   width: 100%;
@@ -191,29 +246,10 @@ export const InputCenterContainer = styled.div`
   gap: 10px;
 `;
 
-export const DeleteIconButtonContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 45px;
-  transition: 0.2s;
-  cursor: pointer;
-  &:hover {
-    path {
-      stroke: ${(props) => (props.isStroke ? colors.deleteHover : "none")};
-      fill: ${(props) => (props.isFill ? colors.deleteHover : "none")};
-    }
-  }
-  path {
-    stroke: ${(props) => (props.isStroke ? colors.delete : "none")};
-    fill: ${(props) => (props.isFill ? colors.delete : "none")};
-  }
-`;
-
 export const IconContainer = styled.div`
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   min-width: 24px;
   min-height: 24px;
 `;

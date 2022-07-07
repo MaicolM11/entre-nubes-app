@@ -17,6 +17,7 @@ import { ReactComponent as PhoneIcon } from "../../assets/icons/phone.svg";
 import { ReactComponent as EmailIcon } from "../../assets/icons/email.svg";
 import { ReactComponent as LocationIcon } from "../../assets/icons/location.svg";
 import { ReactComponent as LockIcon } from "../../assets/icons/lock.svg";
+import { ReactComponent as IdCardIcon } from "../../assets/icons/id-card.svg";
 import DataInput from "../inputs/DataInput";
 import PasswordInput from "../inputs/PasswordInput";
 import Button from "../buttons/Button";
@@ -24,7 +25,6 @@ import CloseButton from "../buttons/CloseButton";
 
 const ProductModalContainer = styled.div`
   display: flex;
-  width: 490px;
   flex-direction: column;
   background-color: ${colors.secondary};
   border-radius: 16px;
@@ -173,7 +173,8 @@ const SalesmanModal = ({
                     <ErrorMessageContainer>
                       <DataInput
                         size="normalInput"
-                        icon={<UserIcon stroke={colors.brand} />}
+                        icon={<UserIcon />}
+                        isStroke={true}
                         type="text"
                         name="fullname"
                         placeholder="Usuario"
@@ -193,7 +194,8 @@ const SalesmanModal = ({
                     <ErrorMessageContainer>
                       <DataInput
                         size="normalInput"
-                        icon=""
+                        icon={<IdCardIcon />}
+                        isFill={true}
                         type="text"
                         name="cc"
                         placeholder="Documento de identidad"
@@ -213,7 +215,8 @@ const SalesmanModal = ({
                     <ErrorMessageContainer>
                       <DataInput
                         size="normalInput"
-                        icon={<PhoneIcon stroke={colors.brand} />}
+                        icon={<PhoneIcon />}
+                        isFill={true}
                         type="text"
                         name="phone"
                         placeholder="Telefono"
@@ -233,7 +236,8 @@ const SalesmanModal = ({
                     <ErrorMessageContainer>
                       <DataInput
                         size="normalInput"
-                        icon={<EmailIcon stroke={colors.brand} />}
+                        icon={<EmailIcon />}
+                        isFill={true}
                         type="text"
                         name="email"
                         placeholder="Correo electronico"
@@ -253,7 +257,8 @@ const SalesmanModal = ({
                     <ErrorMessageContainer>
                       <DataInput
                         size="normalInput"
-                        icon={<LocationIcon stroke={colors.brand} />}
+                        icon={<LocationIcon />}
+                        isFill={true}
                         type="text"
                         name="address"
                         placeholder="Direccion"

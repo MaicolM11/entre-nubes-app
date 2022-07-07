@@ -1,7 +1,7 @@
 import React from "react";
 import { colors } from "../styles/colors";
 import { DataSpan, TotalPaymentContainer } from "../styles/style-components";
-import { DeleteIconButtonContainer } from "../styles/style-components";
+import { DeleteIconTableButtonContainer } from "../styles/style-components";
 import { ReactComponent as Delete } from "../../assets/icons/delete.svg";
 
 import PropTypes from "prop-types";
@@ -178,12 +178,12 @@ const ProductsTable = ({ data, onDelete }) => {
                     ${product.pricePerQuantity}
                   </TableCell>
                   <TableCell align="center">
-                    <DeleteIconButtonContainer
+                    <DeleteIconTableButtonContainer
                       isFill={true}
                       onClick={() => onDelete(product.id)}
                     >
                       <Delete width={20} height={21} />
-                    </DeleteIconButtonContainer>
+                    </DeleteIconTableButtonContainer>
                   </TableCell>
                 </TableRow>
               );
