@@ -103,7 +103,8 @@ const Products = () => {
         isOpen={isOpenAddStock}
         setIsOpen={setIsOpenAddStock}
       ></AnimatedModalContainer>
-      <EditProductModal
+      {isOpenEditProductModal && (
+        <EditProductModal
         info="Editar Producto"
         buttonTheme="highlighted"
         product={product}
@@ -112,6 +113,9 @@ const Products = () => {
         setIsOpen={setIsOpenEditProductModal}
         category={category}
       />
+      )
+
+      }
       <AnimatedModalContainer
         modal={
           <DeleteModal

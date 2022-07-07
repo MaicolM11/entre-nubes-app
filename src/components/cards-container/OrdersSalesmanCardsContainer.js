@@ -10,7 +10,7 @@ const OrdersSalesmanCardsContainer = ({ bills, handleOpenProductList }) => {
           key={bill._id}
           orderNumber={i + 1}
           place={bill.location}
-          satatus = {bill.satatus}
+          status = {bill.status}
           totalPayment={bill.total}
           handleOpenProductList={() => handleOpenProductList(bill)}
         />

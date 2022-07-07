@@ -4,6 +4,7 @@ const emailRegex = /^[^@]+@[^@]+\.[a-zA-Z]{2,}$/;
 export const productValidation = (values, selectedCategory) => {
   const errors = {};
 
+
   if (!values.brand) {
     errors.brand = "Nombre del producto requerido";
   }

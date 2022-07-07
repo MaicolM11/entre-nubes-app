@@ -9,12 +9,12 @@ const useEditProductForm = (
   callback
 ) => {
   const [productValues, setProductValues] = useState({
-    brand: product ? product.brand : "",
-    category: category ? category.name : "",
-    unitPrice: product ? product.buy_price : 0,
-    salePrice: product ? product.sale_price : 0,
-    presentation: product ? product.presentation : "",
-    stock: product ? product.stock : 0,
+    brand:  product.brand,
+    category: category.name,
+    unitPrice:  product.buy_price ,
+    salePrice:  product.sale_price ,
+    presentation:  product.presentation ,
+    stock: product.stock 
   });
 
   const handleChangeEditProduct = (e) => {
@@ -35,7 +35,7 @@ const useEditProductForm = (
       }
     });
     setErros(productValidation(productValues));
-    if (!(Object.keys(productValidation(productValues)).length > 0)) {
+    if (!(Object.keys(productValidation(productValues,selectedCategory)).length > 0)) {
       callback();
     }
   };

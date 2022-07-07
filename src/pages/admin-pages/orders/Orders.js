@@ -18,7 +18,10 @@ const Orders = () => {
   const [isOpenProductListModal, setIsOpenProductListModal] = useState(false);
 
 
-  socket.on('sales', data => setBills(data));
+  socket.on('sales', data => {
+    console.log(data)
+    setBills(data)
+  });
 
   const showBill = (bill) => {
     console.log("click")

@@ -15,6 +15,7 @@ import Button from "../buttons/Button";
 const OrderSalesmanCard = ({
   orderNumber,
   place,
+  status,
   totalPayment,
   handleOpenProductList,
 }) => {
