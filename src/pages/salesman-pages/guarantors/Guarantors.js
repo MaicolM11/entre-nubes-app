@@ -1,43 +1,49 @@
 import React, { useEffect, useState } from "react";
+import { getAllDebtors } from "../../../services/debtor";
+
 import "./Guarantors.css";
 import Header from "../../../components/header/Header";
 import SalesmanData from "../../../components/header/SalesmanData";
 import DebtorCardsContainer from "../../../components/cards-container/DebtorCardsContainer";
-
-import {getAllDebtors} from "../../../services/debtor"
+import AnimatedModalContainer from "../../../components/modals/animation/AnimatedModalContainer";
+import PayModeModal from "../../../components/modals/PayModeModal";
 
 const Guarantors = ({ salesmanName }) => {
-  // let debtors = [
-  //   { id: 1, name: "Juan Jose", document: 91300324, phone: 3213453234 },
-  //   { id: 2, name: "Enrnezto Frey", document: 91300324, phone: 3213453234 },
-  //   { id: 3, name: "Mr Jagger", document: 91300324, phone: 3213453234 },
-  //   { id: 4, name: "Sr Lili", document: 91300324, phone: 3213453234 },
-  //   { id: 5, name: "Omaewa", document: 91300324, phone: 3213453234 },
-  //   { id: 6, name: "El Pepe", document: 91300324, phone: 3213453234 },
-  //   { id: 7, name: "Pichin", document: 91300324, phone: 3213453234 },
-  //   { id: 8, name: "El Jajas", document: 91300324, phone: 3213453234 },
-  // ];
+  const [debtors, setDebtors] = useState([]);
+  const [isOpenPayModeModal, setIsOpenPayModeModal] = useState(false);
 
-   const [debtors, setDebtors] = useState([])
+  const getDebtors = () => {
+    getAllDebtors().then(async (res) => {
+      setDebtors(await res.json());
+    });
+  };
 
-   const getDebtors = () =>{
-    getAllDebtors().then(async(res) =>{
-      setDebtors(await res.json())
-    })
-   }
+  const handlePayMode = (debtor) => {
+    console.log(debtor.fullname);
+    openPayModeModal();
+  };
 
-   useEffect(()=>{
-    getDebtors()
-   },[])
+  const openPayModeModal = () => {
+    setIsOpenPayModeModal((isOpen) => !isOpen);
+  };
+
+  useEffect(() => {
+    getDebtors();
+  }, []);
 
   return (
     <div className="salesman-guarantors-container">
+      <AnimatedModalContainer
+        modal={<PayModeModal />}
+        isOpen={isOpenPayModeModal}
+        setIsOpen={setIsOpenPayModeModal}
+      />
       <Header
         title="Fiadores"
         description="Información de los clientes fiadores"
         component={<SalesmanData salesmanName={salesmanName} />}
       />
-      <DebtorCardsContainer debtors={debtors} />
+      <DebtorCardsContainer debtors={debtors} handlePayMode={handlePayMode} />
     </div>
   );
 };

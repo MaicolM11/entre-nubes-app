@@ -46,7 +46,7 @@ const DebtorData = styled.label`
   margin-left: 20px;
 `;
 
-const DebtorCard = ({ debtor }) => {
+const DebtorCard = ({ debtor, handlePayMode }) => {
   return (
     <DebtorCardContainer>
       <DebtorContainer>
@@ -70,7 +70,12 @@ const DebtorCard = ({ debtor }) => {
             <DebtorData>{debtor.phone}</DebtorData>
           </DebtorInfoContainer>
         </DebtorInfoCardContainer>
-        <Button size="mediumButton" theme="ok" text="Realizar pago" />
+        <Button
+          size="mediumButton"
+          theme="ok"
+          text="Realizar pago"
+          onClick={handlePayMode}
+        />
       </DebtorContainer>
     </DebtorCardContainer>
   );

@@ -21,11 +21,15 @@ const CardsContainer = styled.div`
   }
 `;
 
-const DebtorCardsContainer = ({ debtors }) => {
+const DebtorCardsContainer = ({ debtors, handlePayMode }) => {
   return (
     <CardsContainer>
       {Object.values(debtors).map((debtor) => (
-        <DebtorCard key={debtor._id} debtor={debtor} />
+        <DebtorCard
+          key={debtor._id}
+          debtor={debtor}
+          handlePayMode={() => handlePayMode(debtor)}
+        />
       ))}
     </CardsContainer>
   );
