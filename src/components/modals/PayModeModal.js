@@ -1,17 +1,58 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { colors } from "../styles/colors";
+import { ModalTitle } from "../styles/style-components";
+import CloseButton from "../buttons/CloseButton";
+import Button from "../buttons/Button";
+import PayModeSelect from "../select/PayModeSelect";
 
 const PayModeModalContainer = styled.div`
   display: flex;
-  width: 475px;
-  height: 248px;
-  background-color: darkmagenta;
   border-radius: 16px;
+  background-color: ${colors.secondary};
 `;
 
-const PayModeModal = () => {
-  return <PayModeModalContainer></PayModeModalContainer>;
+const PayModeModalDataContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 25px;
+  padding: 35px;
+`;
+
+const HeaderModal = styled.div`
+  display: flex;
+  width: 100%;
+  align-items: center;
+`;
+
+const payModes = [{ mode: "Efectivo", mode: "Daviplata", mode: "Nequi" }];
+
+const PayModeModal = (handleSubmitPayment) => {
+  const [payMode, setPayMode] = useState("Modo de Pago");
+
+  return (
+    <PayModeModalContainer>
+      <PayModeModalDataContainer>
+        <HeaderModal>
+          <ModalTitle>Modo de Pago</ModalTitle>
+          <CloseButton />
+        </HeaderModal>
+        <PayModeSelect
+          titleOptions="Modo de Pagos"
+          payModes={payModes}
+          payMode={payMode}
+          setPayMode={setPayMode}
+        />
+        <Button
+          size="normalButton"
+          theme="highlighted"
+          text="Realizar Pago"
+          onClick={handleSubmitPayment}
+        />
+      </PayModeModalDataContainer>
+    </PayModeModalContainer>
+  );
 };
 
 export default PayModeModal;
