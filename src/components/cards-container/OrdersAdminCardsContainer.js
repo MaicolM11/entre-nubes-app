@@ -10,6 +10,7 @@ const OrdersAdminCardsContainer = ({ bills,handleOpenProductList }) => {
           key={i}
           orderNumber={i + 1}
           place={bill.location}
+          status = {bill.status}
           totalPayment={bill.total}
           salesman = {bill.salesman.fullname}
           gain = {(bill.total - bill.subtotal)}

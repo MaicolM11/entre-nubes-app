@@ -31,6 +31,7 @@ const DataInfoContainer = styled.label`
 const OrderAdminCard = ({
   orderNumber,
   place,
+  status,
   totalPayment,
   salesman,
   gain,
@@ -51,7 +52,7 @@ const OrderAdminCard = ({
         <DataInfoContainer>
           Ganancia: <DataSpan>${gain}</DataSpan>
         </DataInfoContainer>
-        <State state="Pendiente" />
+        <State state={status=="PENDIENTE"?"Pendiente":"Pagado"} />
         <OrderCardButtonsContainer>
           <Button
             size="mediumSmallButton"

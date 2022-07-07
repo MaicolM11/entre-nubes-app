@@ -27,7 +27,7 @@ const OrderSalesmanCard = ({
         <OrderTotalPayment>
           Total: <DataSpan>${totalPayment}</DataSpan>
         </OrderTotalPayment>
-        <State state="Pendiente" />
+        <State state={status=="PENDIENTE"?"Pendiente":"Pagado"} />
         <OrderCardButtonsContainer>
           <Button
             size="mediumSmallButton"
