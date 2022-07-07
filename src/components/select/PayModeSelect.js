@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { colors } from "../styles/colors";
 import { InputCenterContainer } from "../styles/style-components";
@@ -29,7 +29,6 @@ export const SelectValueContainer = styled.div`
   display: flex;
   width: 100%;
   min-height: 43px;
-  background-color: ${colors.secondary};
   border: 1px solid
     ${(props) => (props.isActive ? colors.highlighted : colors.border)};
   border-radius: 25px;
@@ -110,34 +109,39 @@ const DefaultValue = styled.span`
 `;
 
 const PayModeSelect = ({ titleOptions, payModes, payMode, setPayMode }) => {
-  const [isActive, setIsActive] = useState();
+  const [isOpen, setIsOpen] = useState(true);
+  const btnRef = useRef();
 
   useEffect(() => {
     const closeDropdown = (e) => {
-      console.log(e);
+      if (e.path[0] !== btnRef.current) {
+        setIsOpen(false);
+      }
     };
 
     document.body.addEventListener("click", closeDropdown);
+
     return () => document.body.removeEventListener("click", closeDropdown);
   }, []);
 
   return (
     <SelectContainer>
       <SelectValueContainer
-        onClick={() => setIsActive(!isActive)}
-        isActive={isActive}
+        ref={btnRef}
+        onClick={() => setIsOpen((prev) => !prev)}
+        isActive={isOpen}
       >
         <InputCenterContainer>
-          <SelectIconContainer isActive={isActive}>
+          <SelectIconContainer isActive={isOpen}>
             <Category />
           </SelectIconContainer>
           <DefaultValue>{payMode}</DefaultValue>
-          <SelectCaretDownContainer isActive={isActive}>
+          <SelectCaretDownContainer isActive={isOpen}>
             <CaretDown />
           </SelectCaretDownContainer>
         </InputCenterContainer>
       </SelectValueContainer>
-      {isActive && (
+      {isOpen && (
         <SelectOptionsContainer>
           <SelectTitleOptions>{titleOptions}</SelectTitleOptions>
           {Object.values(payModes).map((payMode, i) => (
@@ -145,7 +149,7 @@ const PayModeSelect = ({ titleOptions, payModes, payMode, setPayMode }) => {
               key={i}
               onClick={() => {
                 setPayMode(payMode.mode);
-                setIsActive(false);
+                setIsOpen(false);
               }}
             >
               {payMode.mode}
