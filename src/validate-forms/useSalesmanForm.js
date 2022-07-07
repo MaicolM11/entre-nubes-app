@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { salesmanValidation } from "../errors/validate";
 
-const useSalesmanForm = ({ salesman, createCallback, editCallback }) => {
+const useSalesmanForm = (salesman, createCallback, editCallback) => {
   const [createSalesmanValues, setCreateSalesmanValues] = useState({
     fullname: "",
     email: "",
