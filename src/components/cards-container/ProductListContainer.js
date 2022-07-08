@@ -14,8 +14,8 @@ const CardsContainer = styled.div`
 const ProductListContainer = ({ productList }) => {
   return (
     <CardsContainer>
-      {Object.values(productList).map((product) => (
-        <ProductListCard key={product._id} productOnList={product} />
+      {Object.values(productList).map((product, i) => (
+        <ProductListCard key={i} productOnList={product} />
       ))}
     </CardsContainer>
   );
