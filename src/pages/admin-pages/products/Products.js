@@ -12,11 +12,12 @@ import DeleteModal from "../../../components/modals/DeleteModal";
 import ProductCardsContainer from "../../../components/cards-container/ProductCardsContainer";
 import Button from "../../../components/buttons/Button";
 import DataInput from "../../../components/inputs/DataInput";
-import SelectCategory from "../../../components/select/SelectCategory";
+import CategorySelect from "../../../components/select/CategorySelect";
 import AddStockModal from "../../../components/modals/AddStockModal";
 import { ReactComponent as Add } from "../../../assets/icons/add.svg";
 import { ReactComponent as Category } from "../../../assets/icons/category.svg";
 import { ReactComponent as Search } from "../../../assets/icons/search.svg";
+import { MediumContainer } from "../../../components/styles/style-components";
 
 // import { ModalCategories } from "../../components/modals/categories/ModalCategories";
 
@@ -102,19 +103,20 @@ const Products = () => {
         isOpen={isOpenAddStock}
         setIsOpen={setIsOpenAddStock}
       ></AnimatedModalContainer>
-      {isOpenEditProductModal && (
-        <EditProductModal
-        info="Editar Producto"
-        buttonTheme="highlighted"
-        product={product}
-        updateProducts={getProductos}
+      <AnimatedModalContainer
+        modal={
+          <EditProductModal
+            info="Editar Producto"
+            buttonTheme="highlighted"
+            product={product}
+            updateProducts={getProductos}
+            setIsOpen={setIsOpenEditProductModal}
+            category={category}
+          />
+        }
         isOpen={isOpenEditProductModal}
         setIsOpen={setIsOpenEditProductModal}
-        category={category}
       />
-      )
-
-      }
       <AnimatedModalContainer
         modal={
           <DeleteModal
@@ -156,19 +158,22 @@ const Products = () => {
               name="search"
               size="mediumInput"
               icon={<Search />}
+              isStroke={true}
               placeholder="Buscar"
               type="text"
               onChange={handleSearch}
             />
-            <SelectCategory
-              size="mediumSelect"
-              titleOptions="Categorías"
-              categories={categories}
-              selectedCategory={selected}
-              setSelectedCategory={setSelected}
-              isOpenFilter = {true}
-              setProducts = {setProducts}
-            />
+            <MediumContainer>
+              <CategorySelect
+                icon={<Category width={25} height={25} />}
+                dropdownTitle="Categorías"
+                options={categories}
+                selectedOption={selected}
+                setSelectedOption={setSelected}
+                isFilter={true}
+                setIsFilter={setProducts}
+              />
+            </MediumContainer>
           </div>
         </div>
       </div>

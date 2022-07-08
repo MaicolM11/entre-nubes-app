@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { colors } from "../styles/colors";
 import { ModalTitle, SelectContainer } from "../styles/style-components";
+import { ReactComponent as Payment } from "../../assets/icons/payment.svg";
 import CloseButton from "../buttons/CloseButton";
 import Button from "../buttons/Button";
 import PayModeSelect from "../select/PayModeSelect";
@@ -32,30 +33,35 @@ const payModes = [
   { mode: "Nequi" },
 ];
 
-const PayModeModal = (handleSubmitPayment) => {
+const PayModeModal = ({ handleSubmitPayment, setIsOpen }) => {
   const defaultPayMode = "Modo de Pago";
   const [payMode, setPayMode] = useState(defaultPayMode);
+
+  const handleSetIsOpen = () => {
+    setIsOpen((isOpen) => !isOpen);
+  };
 
   return (
     <PayModeModalContainer>
       <PayModeModalDataContainer>
         <HeaderModal>
           <ModalTitle>Modo de Pago</ModalTitle>
-          <CloseButton />
+          <CloseButton onClick={handleSetIsOpen} />
         </HeaderModal>
         <SelectContainer>
           <PayModeSelect
-            titleOptions="Modo de Pagos"
-            payModes={payModes}
-            payMode={payMode}
-            setPayMode={setPayMode}
+            icon={<Payment width={25} height={25} />}
+            dropdownTitle="Modo de Pagos"
+            options={payModes}
+            selectedOption={payMode}
+            setSelectedOption={setPayMode}
           />
         </SelectContainer>
         <Button
           size="normalButton"
           theme="highlighted"
           text="Realizar Pago"
-          // onClick={handleSubmitPayment}
+          onClick={() => handleSubmitPayment(payMode)}
         />
       </PayModeModalDataContainer>
     </PayModeModalContainer>

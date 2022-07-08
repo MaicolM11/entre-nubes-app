@@ -13,9 +13,10 @@ import {
 import { useSpring, animated } from "react-spring";
 import CloseButton from "../buttons/CloseButton";
 import DataInput from "../inputs/DataInput";
-import SelectCategory from "../select/SelectCategory";
+import CategorySelect from "../select/CategorySelect";
 import Button from "../buttons/Button";
 import { ReactComponent as WineBottle } from "../../assets/icons/wine-bottle.svg";
+import { ReactComponent as Category } from "../../assets/icons/category.svg";
 import { ReactComponent as AttachMoney } from "../../assets/icons/attach-money.svg";
 import { ReactComponent as SackDollar } from "../../assets/icons/sack-dollar.svg";
 import { ReactComponent as Box } from "../../assets/icons/box.svg";
@@ -215,11 +216,13 @@ const CreateProductModal = ({
                     </ErrorMessageContainer>
                     <ErrorMessageContainer>
                       <SelectContainer>
-                        <SelectCategory
-                          titleOptions="Categorías"
-                          categories={categories}
-                          selectedCategory={selectedCategory}
-                          setSelectedCategory={setSelectedCategory}
+                        <CategorySelect
+                          icon={<Category width={25} height={25} />}
+                          dropdownTitle="Categorías"
+                          options={categories}
+                          selectedOption={selectedCategory}
+                          setSelectedOption={setSelectedCategory}
+                          isFilter={false}
                         />
                       </SelectContainer>
                       {selectedCategory === defaultCategory ? (

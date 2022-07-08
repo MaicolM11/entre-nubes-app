@@ -23,6 +23,10 @@ const Guarantors = ({ salesmanName }) => {
     openPayModeModal();
   };
 
+  const handleSubmitPayMode = (payMode) => {
+    console.log(payMode);
+  };
+
   const openPayModeModal = () => {
     setIsOpenPayModeModal((isOpen) => !isOpen);
   };
@@ -34,7 +38,12 @@ const Guarantors = ({ salesmanName }) => {
   return (
     <div className="salesman-guarantors-container">
       <AnimatedModalContainer
-        modal={<PayModeModal />}
+        modal={
+          <PayModeModal
+            handleSubmitPayment={handleSubmitPayMode}
+            setIsOpen={setIsOpenPayModeModal}
+          />
+        }
         isOpen={isOpenPayModeModal}
         setIsOpen={setIsOpenPayModeModal}
       />

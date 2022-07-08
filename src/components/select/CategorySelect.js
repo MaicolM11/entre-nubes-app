@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { filterProducts, getAllProducts } from "../../services/product";
 import {
   SelectComponentContainer,
   SelectValueContainer,
@@ -12,15 +13,31 @@ import {
 } from "../styles/style-components";
 import { ReactComponent as CaretDown } from "../../assets/icons/caret-down.svg";
 
-const PayModeSelect = ({
+const CategorySelect = ({
   icon,
   dropdownTitle,
   options,
   selectedOption,
   setSelectedOption,
+  isFilter,
+  setIsFilter,
 }) => {
   const [isOpen, setIsOpen] = useState(true);
   const btnRef = useRef();
+
+  const filterProductsByCategory = (id) => {
+    if (isFilter) {
+      if (id === "all") {
+        getAllProducts().then(async (res) => {
+          setIsFilter(await res.json());
+        });
+      } else {
+        filterProducts(id, "").then(async (res) => {
+          setIsFilter(await res.json());
+        });
+      }
+    }
+  };
 
   useEffect(() => {
     const closeDropdown = (e) => {
@@ -50,15 +67,30 @@ const PayModeSelect = ({
       {isOpen && (
         <SelectOptionsContainer>
           <SelectOptionsTitle>{dropdownTitle}</SelectOptionsTitle>
-          {Object.values(options).map((option, i) => (
+          {isFilter && (
             <SelectOption
-              key={i}
+              key={"all"}
               onClick={() => {
-                setSelectedOption(option.mode);
+                setSelectedOption("Todos los Productos");
+                filterProductsByCategory("all");
                 setIsOpen(false);
               }}
             >
-              {option.mode}
+              Todos los Productos
+            </SelectOption>
+          )}
+          {Object.values(options).map((option) => (
+            <SelectOption
+              key={option._id}
+              onClick={() => {
+                {
+                  isFilter && filterProductsByCategory(option._id);
+                }
+                setSelectedOption(option.name);
+                setIsOpen(false);
+              }}
+            >
+              {option.name}
             </SelectOption>
           ))}
         </SelectOptionsContainer>
@@ -67,4 +99,4 @@ const PayModeSelect = ({
   );
 };
 
-export default PayModeSelect;
+export default CategorySelect;

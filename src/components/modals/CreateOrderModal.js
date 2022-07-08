@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { postBill } from "../../services/bill";
 
 import styled from "styled-components";
 import { colors } from "../styles/colors";
@@ -10,11 +11,9 @@ import Button from "../buttons/Button";
 import BorderButton from "../buttons/BorderButton";
 import OrderProductCardsContainer from "../cards-container/OrderProductCardsContainer";
 import SearchInput from "../inputs/DataInput";
-import SelectCategory from "../select/SelectCategory";
+import CategorySelect from "../select/CategorySelect";
 import PlaceInput from "../inputs/DataInput";
 import ProductsTable from "../tables/ProductsTable";
-
-import { postBill } from "../../services/bill";
 
 const CreateOrderModalContainer = styled.div`
   display: flex;
@@ -199,11 +198,12 @@ const CreateOrderModal = ({
                   onChange={handleSearchChange}
                 />
                 <SelectOrderContainer>
-                  <SelectCategory
-                    titleOptions="Categorías"
-                    categories={categories}
-                    selectedCategory={selected}
-                    setSelectedCategory={setSelected}
+                  <CategorySelect
+                    icon={<Category width={25} height={25} />}
+                    dropdownTitle="Categorías"
+                    options={categories}
+                    selectedOption={selected}
+                    setSelectedOption={setSelected}
                   />
                 </SelectOrderContainer>
               </FilterContainer>

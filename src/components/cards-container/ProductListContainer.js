@@ -5,10 +5,10 @@ import ProductListCard from "../cards/ProductListCard";
 const CardsContainer = styled.div`
   display: flex;
   flex-direction: column;
-  overflow-x: hidden;
-  overflow-y: auto;
   gap: 25px;
   padding: 0 35px 35px 35px;
+  overflow-x: hidden;
+  overflow-y: auto;
 `;
 
 const ProductListContainer = ({ productList }) => {
