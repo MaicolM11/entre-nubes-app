@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { getAllSalesToDay } from "../../../services/bill";
+import React, { useEffect, useState } from "react";
 import { getBillById } from "../../../services/bill"; 
 
 import "./Orders.css";
@@ -8,7 +7,7 @@ import NotificationButton from "../../../components/header/NotificationButton";
 import OrdersAdminCardsContainer from "../../../components/cards-container/OrdersAdminCardsContainer";
 import AnimatedModalContainer from "../../../components/modals/animation/AnimatedModalContainer";
 import OrderProductsListModal from "../../../components/modals/OrderProductsListModal";
-import socket from "../../../services/socket";
+import {getSocket } from "../../../services/socket";
 
 const Orders = () => {
 
@@ -17,11 +16,11 @@ const Orders = () => {
   const [productsSale, setProductsSale] = useState([]);
   const [isOpenProductListModal, setIsOpenProductListModal] = useState(false);
 
-
-  socket.on('sales', data => {
-    console.log(data)
-    setBills(data)
-  });
+  useEffect(() => {
+    let socket = getSocket()    
+    socket.on('sales', data => setBills(data));
+    return () => socket.disconnect();
+  }, [])
 
   const showBill = (bill) => {
     console.log("click")

@@ -52,10 +52,10 @@ export const updateStock = (req, res) => {
 
 export const searchProduct = (req, res) => {
     const query = productFilter(req.query);
-    Product.find(query)
+    Product.find(query) 
+        .populate('category')
         .then(data => res.status(200).json(data))
         .catch(err => res.status(400).json({ message: err.message}));
-    // increment | decrement . Promise
 }
 
 export const updateStockToProduct = (id, value) => {
