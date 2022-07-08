@@ -32,7 +32,6 @@ const Products = () => {
     useState(false);
   const [isOpenAddStock, setIsOpenAddStock] = useState(false);
   // const [openModalCategories, setOpenModalCategories] = useState(false);
-
   const openAddProductModal = () => {
     setIsOpenAddProductModal((isOpen) => !isOpen);
   };
@@ -167,6 +166,8 @@ const Products = () => {
               categories={categories}
               selectedCategory={selected}
               setSelectedCategory={setSelected}
+              isOpenFilter = {true}
+              setProducts = {setProducts}
             />
           </div>
         </div>

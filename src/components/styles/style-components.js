@@ -244,7 +244,7 @@ export const InputCenterContainer = styled.div`
   align-items: center;
   margin: 0 25px;
   gap: 10px;
-  z-index: -1;
+  // z-index: -1;
 `;
 
 export const IconContainer = styled.div`

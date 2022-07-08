@@ -4,6 +4,7 @@ import { colors } from "../styles/colors";
 import { InputCenterContainer } from "../styles/style-components";
 import { ReactComponent as Category } from "../../assets/icons/category.svg";
 import { ReactComponent as CaretDown } from "../../assets/icons/caret-down.svg";
+import { filterProducts, getAllProducts } from "../../services/product";
 
 const size = {
   normalSelect: {
@@ -120,6 +121,8 @@ const SelectCategory = ({
   categories,
   selectedCategory,
   setSelectedCategory,
+  isOpenFilter,
+  setProducts
 }) => {
   const [isActive, setIsActive] = useState();
 
@@ -127,13 +130,26 @@ const SelectCategory = ({
 
     const closeDropdown = (e)=>{
       console.log(e)
-      
     }
 
     document.body.addEventListener("click", closeDropdown)
     return ()=> document.body.removeEventListener("click", closeDropdown)
 
   }, [])
+
+  const filterProductsByCategory = (id) =>{
+    if(isOpenFilter  ){
+      if(id === 'all'){
+        getAllProducts().then(async (res) =>{
+          setProducts(await (res.json()))
+        })
+      }else{
+        filterProducts(id,'').then(async (res) =>{
+          setProducts(await(res.json()))
+        })   
+      }
+    }
+  }
 
   return (
     <SelectContainer>
@@ -154,11 +170,20 @@ const SelectCategory = ({
       {isActive && (
         <SelectOptionsContainer>
           <SelectTitleOptions>{titleOptions}</SelectTitleOptions>
+          <SelectOption key={'all'}
+           onClick={() => {
+            setSelectedCategory('Todos los Productos');
+            filterProductsByCategory("all")
+            setIsActive(false);
+          }}> 
+          Todos los Productos
+          </SelectOption>
           {Object.values(categories).map((category) => (
             <SelectOption
               key={category._id}
               onClick={() => {
                 setSelectedCategory(category.name);
+                filterProductsByCategory(category._id)
                 setIsActive(false);
               }}
             >
