@@ -18,6 +18,7 @@ const OrderSalesmanCard = ({
   status,
   totalPayment,
   handleOpenProductList,
+  handlePayOptions,
 }) => {
   return (
     <OrderCardContainer>
@@ -28,7 +29,7 @@ const OrderSalesmanCard = ({
         <OrderTotalPayment>
           Total: <DataSpan>${totalPayment}</DataSpan>
         </OrderTotalPayment>
-        <State state={status=="PENDIENTE"?"Pendiente":"Pagado"} />
+        <State state={status == "PENDIENTE" ? "Pendiente" : "Pagado"} />
         <OrderCardButtonsContainer>
           <Button
             size="mediumSmallButton"
@@ -40,7 +41,7 @@ const OrderSalesmanCard = ({
             size="mediumSmallButton"
             theme="edit"
             text="Pagar"
-            // onClick={submitUser}
+            onClick={handlePayOptions}
           />
         </OrderCardButtonsContainer>
       </OrderCardDataContainer>

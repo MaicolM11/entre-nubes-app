@@ -6,8 +6,7 @@ import { getFullname } from "../../../services/storage";
 import "./SalesmanHomepage.css";
 import Sidebar from "../../../components/sidebar/Sidebar";
 
-//Pages
-import SalesmanOrders from "../salesman-orders/SalesmanOrders";
+import SalesmanOrders from "../orders/SalesmanOrders";
 import Guarantors from "../guarantors/Guarantors";
 import Boliranas from "../boliranas/Boliranas";
 

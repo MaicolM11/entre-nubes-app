@@ -3,7 +3,9 @@ import styled from "styled-components";
 import { colors } from "../styles/colors";
 import { ModalTitle, SelectContainer } from "../styles/style-components";
 import { ReactComponent as Payment } from "../../assets/icons/payment.svg";
+import { ReactComponent as BackArrow } from "../../assets/icons/arrow-back.svg";
 import CloseButton from "../buttons/CloseButton";
+import ArrowButton from "../buttons/ArrowButton";
 import Button from "../buttons/Button";
 import PayModeSelect from "../select/PayModeSelect";
 
@@ -27,13 +29,23 @@ const HeaderModal = styled.div`
   align-items: center;
 `;
 
+const ButtonContainer = styled.div`
+  display: flex;
+  padding-right: 15px;
+`;
+
 const payModes = [
   { mode: "Efectivo" },
   { mode: "Daviplata" },
   { mode: "Nequi" },
 ];
 
-const PayModeModal = ({ handleSubmitPayment, setIsOpen }) => {
+const PayModeModal = ({
+  handleSubmitPayment,
+  setIsOpen,
+  isBack,
+  handleBackPayOrder,
+}) => {
   const defaultPayMode = "Modo de Pago";
   const [payMode, setPayMode] = useState(defaultPayMode);
 
@@ -45,6 +57,15 @@ const PayModeModal = ({ handleSubmitPayment, setIsOpen }) => {
     <PayModeModalContainer>
       <PayModeModalDataContainer>
         <HeaderModal>
+          {isBack && (
+            <ButtonContainer>
+              <ArrowButton
+                icon={
+                  <BackArrow fill={colors.brand} onClick={handleBackPayOrder} />
+                }
+              />
+            </ButtonContainer>
+          )}
           <ModalTitle>Modo de Pago</ModalTitle>
           <CloseButton onClick={handleSetIsOpen} />
         </HeaderModal>

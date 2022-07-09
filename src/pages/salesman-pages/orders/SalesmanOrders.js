@@ -13,6 +13,8 @@ import Button from "../../../components/buttons/Button";
 import OrdersSalesmanCardsContainer from "../../../components/cards-container/OrdersSalesmanCardsContainer";
 import CreateOrderModal from "../../../components/modals/CreateOrderModal";
 import OrderProductsListModal from "../../../components/modals/OrderProductsListModal";
+import PayOptionsModal from "../../../components/modals/PayOptionsModal";
+import PayModeModal from "../../../components/modals/PayModeModal";
 import { ReactComponent as Add } from "../../../assets/icons/add.svg";
 
 const AddOrdersContainer = styled.div`
@@ -30,9 +32,19 @@ const SalesmanOrders = ({ salesmanName }) => {
   const [selected, setSelected] = useState("Categoría");
   const [isOpenCreateOrderModal, setIsOpenCreateOrderModal] = useState(false);
   const [isOpenProductListModal, setIsOpenProductListModal] = useState(false);
+  const [isOpenPayOptionsModal, setIsOpenPayOptionsModal] = useState(false);
+  const [isOpenPayModeModal, setIsOpenPayModeModal] = useState(false);
 
   const openCreateOrderModal = () => {
     setIsOpenCreateOrderModal((isOpen) => !isOpen);
+  };
+
+  const isOpenProductList = () => {
+    setIsOpenProductListModal(false);
+  };
+
+  const openPayOptionsModal = () => {
+    setIsOpenPayOptionsModal((isOpen) => !isOpen);
   };
 
   const getProductos = () => {
@@ -62,8 +74,25 @@ const SalesmanOrders = ({ salesmanName }) => {
     setIsOpenProductListModal((isOpen) => !isOpen);
   };
 
-  const isOpenProductList = () => {
-    setIsOpenProductListModal(false);
+  const handlePayOptions = (bill) => {
+    console.log(bill);
+    openPayOptionsModal();
+  };
+
+  const handleAssignGuarantor = () => {};
+
+  const handlePayOrder = () => {
+    setIsOpenPayOptionsModal(false);
+    setIsOpenPayModeModal((isOpen) => !isOpen);
+  };
+
+  const handleBackPayOrder = () => {
+    setIsOpenPayOptionsModal(true);
+    setIsOpenPayModeModal((isOpen) => !isOpen);
+  };
+
+  const handleSubmitPayMode = (payMode) => {
+    console.log(payMode);
   };
 
   useEffect(() => {
@@ -99,6 +128,28 @@ const SalesmanOrders = ({ salesmanName }) => {
         isOpen={isOpenProductListModal}
         setIsOpen={setIsOpenProductListModal}
       />
+      <AnimatedModalContainer
+        modal={
+          <PayOptionsModal
+            handleAssignGuarantor={handleAssignGuarantor}
+            handlePayOrder={handlePayOrder}
+          />
+        }
+        isOpen={isOpenPayOptionsModal}
+        setIsOpen={setIsOpenPayOptionsModal}
+      />
+      <AnimatedModalContainer
+        modal={
+          <PayModeModal
+            handleSubmitPayment={handleSubmitPayMode}
+            setIsOpen={setIsOpenPayModeModal}
+            isBack={true}
+            handleBackPayOrder={handleBackPayOrder}
+          />
+        }
+        isOpen={isOpenPayModeModal}
+        setIsOpen={setIsOpenPayModeModal}
+      />
       <Header
         title="Pedidos"
         description="Información de los pedidos realizados por mesa"
@@ -116,6 +167,7 @@ const SalesmanOrders = ({ salesmanName }) => {
       <OrdersSalesmanCardsContainer
         bills={getBills}
         handleOpenProductList={showBill}
+        handlePayOptions={handlePayOptions}
       />
     </div>
   );

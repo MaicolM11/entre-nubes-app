@@ -5,7 +5,7 @@ import { colors } from "../styles/colors";
 import {
   ModalDeleteContainer,
   MessageDeleteContainer,
-  MessageDeleteInfoContainer,
+  MessageInfoContainer,
   ModalDeleteButtonsContainer,
 } from "../styles/style-components";
 import { ReactComponent as Alert } from "../../assets/icons/alert.svg";
@@ -38,7 +38,7 @@ const DeleteModal = ({
     <ModalDeleteContainer>
       <MessageDeleteContainer>
         <Alert width="24" height="24" stroke={colors.delete} />
-        <MessageDeleteInfoContainer>{message}</MessageDeleteInfoContainer>
+        <MessageInfoContainer>{message}</MessageInfoContainer>
       </MessageDeleteContainer>
       <ModalDeleteButtonsContainer>
         <BorderButton

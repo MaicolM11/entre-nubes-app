@@ -66,28 +66,6 @@ const theme = {
   },
 };
 
-export const ButtonContainer = styled.button`
-  display: flex;
-  width: ${(props) => size[props.size].width};
-  height: ${(props) => size[props.size].height};
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-  background-color: ${(props) => theme[props.theme].default};
-  color: white;
-  font-size: ${(props) => size[props.size].fontSize};
-  font-weight: bold;
-  font-family: var(--roboto);
-  white-space: nowrap;
-  border-radius: 25px;
-  border: none;
-  transition: 0.2s;
-  cursor: pointer;
-  &:hover {
-    background-color: ${(props) => theme[props.theme].hover};
-  }
-`;
-
 export const BorderButtonContainer = styled.button`
   display: flex;
   width: ${(props) => size[props.size].width};
@@ -107,6 +85,28 @@ export const BorderButtonContainer = styled.button`
   &:hover {
     border-color: ${colors.highlighted};
     color: ${colors.highlighted};
+  }
+`;
+
+export const ButtonContainer = styled.button`
+  display: flex;
+  width: ${(props) => size[props.size].width};
+  height: ${(props) => size[props.size].height};
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  background-color: ${(props) => theme[props.theme].default};
+  color: white;
+  font-size: ${(props) => size[props.size].fontSize};
+  font-weight: bold;
+  font-family: var(--roboto);
+  white-space: nowrap;
+  border-radius: 25px;
+  border: none;
+  transition: 0.2s;
+  cursor: pointer;
+  &:hover {
+    background-color: ${(props) => theme[props.theme].hover};
   }
 `;
 
@@ -314,7 +314,7 @@ export const MessageDeleteContainer = styled.div`
   flex-direction: column;
   gap: 15px;
 `;
-export const MessageDeleteInfoContainer = styled.label`
+export const MessageInfoContainer = styled.label`
   font-size: 20px;
   font-weight: bold;
   font-family: var(--roboto);
@@ -331,7 +331,7 @@ export const ModalBackground = styled.div`
   position: fixed;
   top: 0;
   right: 0px;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.6);
   z-index: 100;
 `;
 
