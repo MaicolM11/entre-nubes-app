@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import useGuarantorForm from "../../validate-forms/useGuarantorForm";
 import { createDebtor } from "../../services/debtor";
 
@@ -37,7 +37,11 @@ const HeaderModal = styled.div`
   align-items: center;
 `;
 
-const CreateGuarantorModal = ({ setIsOpen, updateGuarantors }) => {
+const CreateGuarantorModal = ({
+  setIsOpen,
+  setIsOpenSuccessfulModal,
+  updateGuarantors,
+}) => {
   const handleSubmitGuarantor = () => {
     createGuarantor();
   };
@@ -50,9 +54,15 @@ const CreateGuarantorModal = ({ setIsOpen, updateGuarantors }) => {
     clearCreateGuarantorValues,
   } = useGuarantorForm(handleSubmitGuarantor);
 
+  const handleCloseModal = () => {
+    clearModalInputs();
+    setIsOpen((isOpen) => !isOpen);
+  };
+
   const handleSetIsOpen = () => {
     clearModalInputs();
     setIsOpen((isOpen) => !isOpen);
+    setIsOpenSuccessfulModal((isOpen) => !isOpen);
   };
 
   const clearModalInputs = () => {
@@ -80,7 +90,7 @@ const CreateGuarantorModal = ({ setIsOpen, updateGuarantors }) => {
       <CenterContainer>
         <HeaderModal>
           <ModalTitle>Agregar Fiador</ModalTitle>
-          <CloseButton onClick={handleSetIsOpen} />
+          <CloseButton onClick={handleCloseModal} />
         </HeaderModal>
         <ModalFormOptionContainer>
           <ErrorMessageContainer>

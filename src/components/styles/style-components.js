@@ -69,7 +69,7 @@ const theme = {
 export const AddButtonTopContainer = styled.div`
   display: flex;
   width: 100%;
-  padding: 25px 25px 0 25px;
+  padding: 25px;
 `;
 
 export const BorderButtonContainer = styled.button`
@@ -121,7 +121,7 @@ export const CardsContainer = styled.div`
   grid-row-gap: 25px;
   grid-column-gap: 50px;
   grid-template-columns: repeat(auto-fill, minmax(194px, 1fr));
-  padding: 25px;
+  padding: 0 25px 25px 25px;
   overflow-y: auto;
 `;
 
