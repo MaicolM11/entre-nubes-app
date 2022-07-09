@@ -5,7 +5,6 @@ import { getAllSalesToDay } from "../../../services/bill";
 import { getBillById } from "../../../services/bill";
 
 import "./SalesmanOrders.css";
-import styled from "styled-components";
 import AnimatedModalContainer from "../../../components/modals/animation/AnimatedModalContainer";
 import Header from "../../../components/header/Header";
 import SalesmanData from "../../../components/header/SalesmanData";
@@ -15,13 +14,9 @@ import CreateOrderModal from "../../../components/modals/CreateOrderModal";
 import OrderProductsListModal from "../../../components/modals/OrderProductsListModal";
 import PayOptionsModal from "../../../components/modals/PayOptionsModal";
 import PayModeModal from "../../../components/modals/PayModeModal";
+import { AddButtonTopContainer } from "../../../components/styles/style-components";
 import { ReactComponent as Add } from "../../../assets/icons/add.svg";
-
-const AddOrdersContainer = styled.div`
-  display: flex;
-  width: 100%;
-  padding: 25px 25px 0 25px;
-`;
+import { colors } from "../../../components/styles/colors";
 
 const SalesmanOrders = ({ salesmanName }) => {
   const [products, setProducts] = useState([]);
@@ -155,15 +150,15 @@ const SalesmanOrders = ({ salesmanName }) => {
         description="Información de los pedidos realizados por mesa"
         component={<SalesmanData salesmanName={salesmanName} />}
       />
-      <AddOrdersContainer>
+      <AddButtonTopContainer>
         <Button
           size="mediumButton"
           theme="ok"
-          icon={<Add fill="white" />}
+          icon={<Add fill={colors.secondary} />}
           text="Agregar Pedido"
           onClick={openCreateOrderModal}
         />
-      </AddOrdersContainer>
+      </AddButtonTopContainer>
       <OrdersSalesmanCardsContainer
         bills={getBills}
         handleOpenProductList={showBill}

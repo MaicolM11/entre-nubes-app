@@ -2,15 +2,22 @@ import React, { useEffect, useState } from "react";
 import { getAllDebtors } from "../../../services/debtor";
 
 import "./Guarantors.css";
+import { colors } from "../../../components/styles/colors";
 import Header from "../../../components/header/Header";
 import SalesmanData from "../../../components/header/SalesmanData";
 import DebtorCardsContainer from "../../../components/cards-container/DebtorCardsContainer";
 import AnimatedModalContainer from "../../../components/modals/animation/AnimatedModalContainer";
 import PayModeModal from "../../../components/modals/PayModeModal";
+import Button from "../../../components/buttons/Button";
+import CreateGuarantorModal from "../../../components/modals/CreateGuarantorModal";
+import { AddButtonTopContainer } from "../../../components/styles/style-components";
+import { ReactComponent as Add } from "../../../assets/icons/add.svg";
 
 const Guarantors = ({ salesmanName }) => {
   const [debtors, setDebtors] = useState([]);
   const [isOpenPayModeModal, setIsOpenPayModeModal] = useState(false);
+  const [isOpenCreateGuarantorModal, setIsOpenCreateGuarantorModal] =
+    useState(false);
 
   const getDebtors = () => {
     getAllDebtors().then(async (res) => {
@@ -31,6 +38,10 @@ const Guarantors = ({ salesmanName }) => {
     setIsOpenPayModeModal((isOpen) => !isOpen);
   };
 
+  const openCreateGuarantorModal = () => {
+    setIsOpenCreateGuarantorModal((isOpen) => !isOpen);
+  };
+
   useEffect(() => {
     getDebtors();
   }, []);
@@ -47,11 +58,30 @@ const Guarantors = ({ salesmanName }) => {
         isOpen={isOpenPayModeModal}
         setIsOpen={setIsOpenPayModeModal}
       />
+      <AnimatedModalContainer
+        modal={
+          <CreateGuarantorModal
+            setIsOpen={setIsOpenCreateGuarantorModal}
+            updateGuarantors={getDebtors}
+          />
+        }
+        isOpen={isOpenCreateGuarantorModal}
+        setIsOpen={setIsOpenCreateGuarantorModal}
+      />
       <Header
         title="Fiadores"
         description="Información de los clientes fiadores"
         component={<SalesmanData salesmanName={salesmanName} />}
       />
+      <AddButtonTopContainer>
+        <Button
+          size="mediumButton"
+          theme="ok"
+          icon={<Add fill={colors.secondary} />}
+          text="Agregar Fiador"
+          onClick={openCreateGuarantorModal}
+        />
+      </AddButtonTopContainer>
       <DebtorCardsContainer debtors={debtors} handlePayMode={handlePayMode} />
     </div>
   );

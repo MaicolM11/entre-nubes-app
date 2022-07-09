@@ -7,7 +7,11 @@ import styled from "styled-components";
 import { colors } from "../styles/colors";
 import {
   ModalBackground,
+  ModalFormOptionContainer,
   ModalTitle,
+  ErrorMessageContainer,
+  ErrorMessage,
+  ErrorMessageSpace,
   SelectContainer,
 } from "../styles/style-components";
 import { useSpring, animated } from "react-spring";
@@ -60,36 +64,6 @@ const ProductModalImageContainer = styled.div`
   height: 395px;
   border-radius: 25px;
   border: 1px solid ${colors.border};
-`;
-
-const ProductModalFormOptionContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-`;
-
-const ErrorMessageContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  gap: 5px;
-`;
-
-const ErrorMessageSpace = styled.label`
-  width: 100%;
-  height: 10px;
-`;
-
-const ErrorMessage = styled.label`
-  display: flex;
-  width: 100%;
-  height: 10px;
-  align-items: center;
-  color: ${colors.delete};
-  font-size: 12px;
-  font-weight: 500;
-  font-family: var(--roboto);
-  white-space: nowrap;
 `;
 
 const CreateProductModal = ({
@@ -197,7 +171,7 @@ const CreateProductModal = ({
               <ProductModalFormContainer>
                 <ProductModalFormCenterContainer>
                   <ProductModalImageContainer />
-                  <ProductModalFormOptionContainer>
+                  <ModalFormOptionContainer>
                     <ErrorMessageContainer>
                       <DataInput
                         size="normalInput"
@@ -301,7 +275,7 @@ const CreateProductModal = ({
                       text={info}
                       onClick={handleSubmitCreateProduct}
                     />
-                  </ProductModalFormOptionContainer>
+                  </ModalFormOptionContainer>
                 </ProductModalFormCenterContainer>
               </ProductModalFormContainer>
             </ProductModalContainer>

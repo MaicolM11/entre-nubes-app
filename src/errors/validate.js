@@ -4,7 +4,6 @@ const emailRegex = /^[^@]+@[^@]+\.[a-zA-Z]{2,}$/;
 export const productValidation = (values, selectedCategory) => {
   const errors = {};
 
-
   if (!values.brand) {
     errors.brand = "Nombre del producto requerido";
   }
@@ -42,7 +41,7 @@ export const salesmanValidation = (values) => {
   const errors = {};
 
   if (!values.fullname) {
-    errors.fullname = "Nombre completo requerido";
+    errors.fullname = "Nombre requerido";
   }
 
   if (!values.cc) {
@@ -52,11 +51,11 @@ export const salesmanValidation = (values) => {
   }
 
   if (!values.phone) {
-    errors.phone = "El numero de telefono es requerido";
+    errors.phone = "El número de teléfono es requerido";
   } else if (!numberRegex.test(values.phone)) {
-    errors.phone = "El numero de telefono no puede contener letras";
+    errors.phone = "El número de teléfono no puede contener letras";
   } else if (!(values.phone.split("").length == 10)) {
-    errors.phone = "Un numero telefonico consta de 10 numeros";
+    errors.phone = "Un número telefónico consta de 10 numeros";
   }
 
   if (!values.email) {
@@ -78,6 +77,31 @@ export const salesmanValidation = (values) => {
   } else if (!(values.password == values.repeatPassWord)) {
     errors.repeatPassWord = "Las contraseñas no coinciden";
   }
+
+  return errors;
+};
+
+export const guarantorsValidation = (values) => {
+  const errors = {};
+
+  if (!values.fullName) {
+    errors.fullName = "Nombre requerido";
+  }
+
+  if (!values.cc) {
+    errors.cc = " Documento de identidad requerido";
+  } else if (!numberRegex.test(values.cc)) {
+    errors.cc = "El documento de identidad no puede contener letras";
+  }
+
+  if (!values.phone) {
+    errors.phone = "El número de teléfono es requerido";
+  } else if (!numberRegex.test(values.phone)) {
+    errors.phone = "El número de teléfono no puede contener letras";
+  } else if (!(values.phone.split("").length == 10)) {
+    errors.phone = "Un número telefónico consta de 10 numeros";
+  }
+
   return errors;
 };
 
@@ -89,5 +113,6 @@ export const increaseStockValidation = (values) => {
   } else if (values.stock <= 0) {
     errors.stock = "El valor ingresado debe ser mayor a 0";
   }
+
   return errors;
 };

@@ -66,6 +66,12 @@ const theme = {
   },
 };
 
+export const AddButtonTopContainer = styled.div`
+  display: flex;
+  width: 100%;
+  padding: 25px 25px 0 25px;
+`;
+
 export const BorderButtonContainer = styled.button`
   display: flex;
   width: ${(props) => size[props.size].width};
@@ -350,6 +356,12 @@ export const ModalDeleteContainer = styled.div`
 export const ModalDeleteButtonsContainer = styled.div`
   display: flex;
   gap: 25px;
+`;
+
+export const ModalFormOptionContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 `;
 
 export const ModalTitle = styled.label`
