@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { getAllCategories } from "../../../services/category";
-import { getAllProducts } from "../../../services/product";
-import "./Products.css";
+import { getAllCategories, deleteCategory } from "../../../services/category";
+import { getAllProducts, deleteProduct } from "../../../services/product";
 
+import "./Products.css";
 import AnimatedModalContainer from "../../../components/modals/animation/AnimatedModalContainer";
 import Header from "../../../components/header/Header";
 import NotificationButton from "../../../components/header/NotificationButton";
@@ -11,6 +11,7 @@ import CategoriesModal from "../../../components/modals/CategoriesModal";
 import AddStockModal from "../../../components/modals/AddStockModal";
 import EditProductModal from "../../../components/modals/EditProductModal";
 import DeleteModal from "../../../components/modals/DeleteModal";
+import CategoryModal from "../../../components/modals/CategoryModal";
 import ProductCardsContainer from "../../../components/cards-container/ProductCardsContainer";
 import Button from "../../../components/buttons/Button";
 import DataInput from "../../../components/inputs/DataInput";
@@ -21,29 +22,40 @@ import { ReactComponent as Search } from "../../../assets/icons/search.svg";
 import { MediumContainer } from "../../../components/styles/style-components";
 
 const Products = () => {
-  const [products, setProducts] = useState([]);
-  const [categories, setCategories] = useState({});
   const [product, setProduct] = useState({});
-  const [category, setCategory] = useState("Categoría");
+  const [products, setProducts] = useState([]);
+  const [category, setCategory] = useState({});
+  const [categories, setCategories] = useState({});
+  const [selectedCategory, setSelectedCategory] = useState("Categoría");
   const [isOpenAddProductModal, setIsOpenAddProductModal] = useState(false);
   const [isOpenEditProductModal, setIsOpenEditProductModal] = useState(false);
   const [isOpenDeleteProductModal, setIsOpenDeleteProductModal] =
     useState(false);
   const [isOpenAddStock, setIsOpenAddStock] = useState(false);
-  const [isOpenModalCategories, setIsOpenModalCategories] = useState(false);
+  const [isOpenCategoriesModal, setIsOpenCategoriesModal] = useState(false);
+  const [isOpenCategoryModal, setIsOpenCategoryModal] = useState(false);
+  const [isOpenDeleteCategoryModal, setIsOpenDeleteCategoryModal] =
+    useState(false);
 
   const openAddProductModal = () => {
     setIsOpenAddProductModal((isOpen) => !isOpen);
   };
 
   const openCategoriesModal = () => {
-    setIsOpenModalCategories((isOpen) => !isOpen);
+    setIsOpenCategoriesModal((isOpen) => !isOpen);
   };
 
-  const openEditProductModal = (product) => {
-    setProduct(product);
-    setCategory(product.category.name);
-    setIsOpenEditProductModal((isOpen) => !isOpen);
+  const openCategoryModal = () => {
+    setIsOpenCategoriesModal((isOpen) => !isOpen);
+    setIsOpenCategoryModal((isOpen) => !isOpen);
+  };
+
+  const closeDeleteProductModal = () => {
+    setIsOpenDeleteProductModal((isOpen) => !isOpen);
+  };
+
+  const closeDeleteCategoryModal = () => {
+    setIsOpenDeleteCategoryModal((isOpen) => !isOpen);
   };
 
   const openAddStock = (product) => {
@@ -51,18 +63,39 @@ const Products = () => {
     setIsOpenAddStock((isOpen) => !isOpen);
   };
 
+  const openEditProductModal = (product) => {
+    setProduct(product);
+    setSelectedCategory(product.category.name);
+    setIsOpenEditProductModal((isOpen) => !isOpen);
+  };
+
   const openDeleteProductModal = (product) => {
     setProduct(product);
     setIsOpenDeleteProductModal((isOpen) => !isOpen);
   };
 
-  const closeDeleteProductModal = () => {
-    setIsOpenDeleteProductModal((isOpen) => !isOpen);
+  const openDeleteCategoryModal = (category) => {
+    setCategory(category);
+    setIsOpenDeleteCategoryModal((isOpen) => !isOpen);
   };
 
   const handleSearch = (e) => {
     const { name, value } = e.target;
     console.log(`${name}: ${value}`);
+  };
+
+  const deleteCurrentProduct = () => {
+    deleteProduct(product._id).then(async () => {
+      closeDeleteProductModal();
+      getProductos();
+    });
+  };
+
+  const deleteCurrentCategory = () => {
+    deleteCategory(category._id).then(async () => {
+      closeDeleteCategoryModal();
+      getCategories();
+    });
   };
 
   const getCategories = () => {
@@ -92,9 +125,16 @@ const Products = () => {
         setIsOpen={setIsOpenAddProductModal}
       />
       <AnimatedModalContainer
-        modal={<CategoriesModal categories={categories} />}
-        isOpen={isOpenModalCategories}
-        setIsOpen={setIsOpenModalCategories}
+        modal={
+          <CategoriesModal
+            categories={categories}
+            handleSubmitCreateCategory={openCategoryModal}
+            handleSubmitDeleteCategory={openDeleteCategoryModal}
+            setIsOpen={setIsOpenCategoriesModal}
+          />
+        }
+        isOpen={isOpenCategoriesModal}
+        setIsOpen={setIsOpenCategoriesModal}
       />
       <AnimatedModalContainer
         modal={
@@ -115,7 +155,7 @@ const Products = () => {
             product={product}
             updateProducts={getProductos}
             setIsOpen={setIsOpenEditProductModal}
-            category={category}
+            category={selectedCategory}
           />
         }
         isOpen={isOpenEditProductModal}
@@ -124,16 +164,37 @@ const Products = () => {
       <AnimatedModalContainer
         modal={
           <DeleteModal
-            isProduct={true}
             message="¿Desea eliminar este producto?"
             buttonMessage="Eliminar Producto"
-            data={product}
-            update={getProductos}
             handleCloseModal={closeDeleteProductModal}
+            handleSubmitDelete={deleteCurrentProduct}
           />
         }
         isOpen={isOpenDeleteProductModal}
         setIsOpen={setIsOpenDeleteProductModal}
+      />
+      <AnimatedModalContainer
+        modal={
+          <CategoryModal
+            setIsOpen={setIsOpenCategoryModal}
+            openCategoriesModal={setIsOpenCategoriesModal}
+            updateCategories={getCategories}
+          />
+        }
+        isOpen={isOpenCategoryModal}
+        setIsOpen={setIsOpenCategoryModal}
+      />
+      <AnimatedModalContainer
+        modal={
+          <DeleteModal
+            message="¿Desea eliminar esta categoría?"
+            buttonMessage="Eliminar Categoría"
+            handleCloseModal={closeDeleteCategoryModal}
+            handleSubmitDelete={deleteCurrentCategory}
+          />
+        }
+        isOpen={isOpenDeleteCategoryModal}
+        setIsOpen={setIsOpenDeleteCategoryModal}
       />
       <Header
         title="Productos"
@@ -173,8 +234,8 @@ const Products = () => {
                 icon={<Category width={25} height={25} />}
                 dropdownTitle="Categorías"
                 options={categories}
-                selectedOption={category}
-                setSelectedOption={setCategory}
+                selectedOption={selectedCategory}
+                setSelectedOption={setSelectedCategory}
                 isFilter={true}
                 setIsFilter={setProducts}
               />

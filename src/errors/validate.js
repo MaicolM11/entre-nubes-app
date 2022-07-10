@@ -1,6 +1,16 @@
 const numberRegex = /^[0-9]*$/;
 const emailRegex = /^[^@]+@[^@]+\.[a-zA-Z]{2,}$/;
 
+export const categoryValidation = (values) => {
+  const errors = {};
+
+  if (!values.name) {
+    errors.name = "Nombre de la categoría requerido";
+  }
+
+  return errors;
+};
+
 export const productValidation = (values, selectedCategory) => {
   const errors = {};
 

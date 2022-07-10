@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import { colors } from "../styles/colors";
-import CategoriesContainer from "../cards-container/CategoriesContainer";
-import Button from "../buttons/Button";
 import { ModalTitle } from "../styles/style-components";
 import CloseButton from "../buttons/CloseButton";
+import Button from "../buttons/Button";
+import CategoriesContainer from "../cards-container/CategoriesContainer";
 
 const CategoriesModalContainer = styled.div`
   display: flex;
@@ -24,15 +24,29 @@ const HeaderContainer = styled.div`
   display: flex;
 `;
 
-const CategoriesModal = ({ categories, handleSubmitCreateCategory }) => {
+const CategoriesModal = ({
+  categories,
+  handleSubmitCreateCategory,
+  handleSubmitEditCategory,
+  handleSubmitDeleteCategory,
+  setIsOpen,
+}) => {
+  const handleCloseModal = () => {
+    setIsOpen((isOpen) => !isOpen);
+  };
+
   return (
     <CategoriesModalContainer>
       <CenterModalContainer>
         <HeaderContainer>
           <ModalTitle>Categorías</ModalTitle>
-          <CloseButton />
+          <CloseButton onClick={handleCloseModal} />
         </HeaderContainer>
-        <CategoriesContainer categories={categories}></CategoriesContainer>
+        <CategoriesContainer
+          categories={categories}
+          handleSubmitEditCategory={handleSubmitEditCategory}
+          handleSubmitDeleteCategory={handleSubmitDeleteCategory}
+        ></CategoriesContainer>
         <Button
           size="normalButton"
           theme="ok"
