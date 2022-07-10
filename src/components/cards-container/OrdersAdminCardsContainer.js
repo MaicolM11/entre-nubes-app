@@ -2,12 +2,13 @@ import React from "react";
 import OrderAdminCard from "../cards/OrderAdminCard";
 import styled from "styled-components";
 
-export const CardsContainer = styled.div`
+const CardsContainer = styled.div`
   display: grid;
   grid-row-gap: 25px;
   grid-column-gap: 50px;
   grid-template-columns: repeat(auto-fill, minmax(194px, 1fr));
   padding: 25px;
+  overflow-x: hidden;
   overflow-y: auto;
 `;
 

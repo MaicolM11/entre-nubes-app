@@ -7,34 +7,37 @@ import AnimatedModalContainer from "../../../components/modals/animation/Animate
 import Header from "../../../components/header/Header";
 import NotificationButton from "../../../components/header/NotificationButton";
 import CreateProductModal from "../../../components/modals/CreateProductModal";
+import CategoriesModal from "../../../components/modals/CategoriesModal";
+import AddStockModal from "../../../components/modals/AddStockModal";
 import EditProductModal from "../../../components/modals/EditProductModal";
 import DeleteModal from "../../../components/modals/DeleteModal";
 import ProductCardsContainer from "../../../components/cards-container/ProductCardsContainer";
 import Button from "../../../components/buttons/Button";
 import DataInput from "../../../components/inputs/DataInput";
 import CategorySelect from "../../../components/select/CategorySelect";
-import AddStockModal from "../../../components/modals/AddStockModal";
 import { ReactComponent as Add } from "../../../assets/icons/add.svg";
 import { ReactComponent as Category } from "../../../assets/icons/category.svg";
 import { ReactComponent as Search } from "../../../assets/icons/search.svg";
 import { MediumContainer } from "../../../components/styles/style-components";
 
-// import { ModalCategories } from "../../components/modals/categories/ModalCategories";
-
 const Products = () => {
+  const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState({});
   const [product, setProduct] = useState({});
-  const [products, setProducts] = useState([]);
-  const [selected, setSelected] = useState("Categoría");
   const [category, setCategory] = useState("Categoría");
   const [isOpenAddProductModal, setIsOpenAddProductModal] = useState(false);
   const [isOpenEditProductModal, setIsOpenEditProductModal] = useState(false);
   const [isOpenDeleteProductModal, setIsOpenDeleteProductModal] =
     useState(false);
   const [isOpenAddStock, setIsOpenAddStock] = useState(false);
-  // const [openModalCategories, setOpenModalCategories] = useState(false);
+  const [isOpenModalCategories, setIsOpenModalCategories] = useState(false);
+
   const openAddProductModal = () => {
     setIsOpenAddProductModal((isOpen) => !isOpen);
+  };
+
+  const openCategoriesModal = () => {
+    setIsOpenModalCategories((isOpen) => !isOpen);
   };
 
   const openEditProductModal = (product) => {
@@ -62,10 +65,6 @@ const Products = () => {
     console.log(`${name}: ${value}`);
   };
 
-  // const modalCategoriesState = () => {
-  //   setOpenModalCategories((prev) => !prev);
-  // };
-
   const getCategories = () => {
     getAllCategories().then(async (res) => {
       setCategories(await res.json());
@@ -91,6 +90,11 @@ const Products = () => {
         updateProducts={getProductos}
         isOpen={isOpenAddProductModal}
         setIsOpen={setIsOpenAddProductModal}
+      />
+      <AnimatedModalContainer
+        modal={<CategoriesModal categories={categories} />}
+        isOpen={isOpenModalCategories}
+        setIsOpen={setIsOpenModalCategories}
       />
       <AnimatedModalContainer
         modal={
@@ -151,6 +155,7 @@ const Products = () => {
               theme="highlighted"
               icon={<Category fill="white" />}
               text="Categorías"
+              onClick={openCategoriesModal}
             />
           </div>
           <div className="admin-product-option-filter-container">
@@ -168,8 +173,8 @@ const Products = () => {
                 icon={<Category width={25} height={25} />}
                 dropdownTitle="Categorías"
                 options={categories}
-                selectedOption={selected}
-                setSelectedOption={setSelected}
+                selectedOption={category}
+                setSelectedOption={setCategory}
                 isFilter={true}
                 setIsFilter={setProducts}
               />

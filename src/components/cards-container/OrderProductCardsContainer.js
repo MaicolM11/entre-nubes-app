@@ -7,9 +7,9 @@ const CardsContainer = styled.div`
   grid-row-gap: 25px;
   grid-column-gap: 25px;
   grid-template-columns: repeat(2, minmax(250px, 1fr));
+  padding: 0 3px;
   overflow-x: hidden;
   overflow-y: auto;
-  padding: 0 3px;
 `;
 
 const OrderProductCardsContainer = ({ products, addProductOrder }) => {
