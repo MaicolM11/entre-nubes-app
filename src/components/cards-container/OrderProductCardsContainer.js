@@ -5,8 +5,8 @@ import OrderProductCard from "../cards/OrderProductCard";
 const CardsContainer = styled.div`
   display: grid;
   grid-row-gap: 25px;
-  grid-column-gap: 25px;
-  grid-template-columns: repeat(2, minmax(250px, 1fr));
+  grid-column-gap: 60px;
+  grid-template-columns: repeat(2, minmax(255px, 1fr));
   padding: 0 3px;
   overflow-x: hidden;
   overflow-y: auto;

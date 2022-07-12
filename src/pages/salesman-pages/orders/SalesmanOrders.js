@@ -103,6 +103,7 @@ const SalesmanOrders = ({ salesmanName }) => {
           <CreateOrderModal
             categories={categories}
             products={products}
+            setProducts={setProducts}
             selected={selected}
             setSelected={setSelected}
             handleCloseModal={openCreateOrderModal}

@@ -182,14 +182,14 @@ const ProductsTable = ({ data, onDelete }) => {
                       isFill={true}
                       onClick={() => onDelete(product.id)}
                     >
-                      <Delete width={20} height={21} />
+                      <Delete width={24} height={25} />
                     </DeleteIconTableButtonContainer>
                   </TableCell>
                 </TableRow>
               );
             })}
             {emptyRows > 0 && (
-              <TableRow style={{ height: 54 * emptyRows }}>
+              <TableRow style={{ height: 58.19 * emptyRows }}>
                 <TableCell colSpan={6} />
               </TableRow>
             )}
@@ -198,7 +198,7 @@ const ProductsTable = ({ data, onDelete }) => {
           <TableBody>
             {[...Array(6)].map((data, i) => {
               return (
-                <TableRow key={i} style={{ height: 54 }}>
+                <TableRow key={i} style={{ height: 58.19 }}>
                   <TableCell colSpan={6} />
                 </TableRow>
               );

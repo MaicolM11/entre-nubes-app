@@ -11,6 +11,16 @@ export const categoryValidation = (values) => {
   return errors;
 };
 
+export const placeValidation = (values) => {
+  const errors = {};
+
+  if (!values.place) {
+    errors.place = "Lugar de la orden requerida";
+  }
+
+  return errors;
+};
+
 export const productValidation = (values, selectedCategory) => {
   const errors = {};
 

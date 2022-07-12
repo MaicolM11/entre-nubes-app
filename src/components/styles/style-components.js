@@ -151,7 +151,6 @@ export const DeleteIconTableButtonContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 45px;
   transition: 0.2s;
   cursor: pointer;
   &:hover {
@@ -575,7 +574,8 @@ export const SelectOption = styled.div`
 
 export const SelectOrderContainer = styled.div`
   display: flex;
-  width: 220px;
+  width: 250px;
+  max-width: 250px;
   height: 45px;
 `;
 

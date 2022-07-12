@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { postBill } from "../../services/bill";
+import usePlaceForm from "../../validate-forms/usePlaceForm";
 
 import styled from "styled-components";
 import { colors } from "../styles/colors";
 import { ModalTitle, SelectOrderContainer } from "../styles/style-components";
 import { ReactComponent as Search } from "../../assets/icons/search.svg";
 import { ReactComponent as HomeTable } from "../../assets/icons/home-table.svg";
+import { ReactComponent as Category } from "../../assets/icons/category.svg";
 
 import Button from "../buttons/Button";
 import BorderButton from "../buttons/BorderButton";
@@ -14,6 +16,11 @@ import SearchInput from "../inputs/DataInput";
 import CategorySelect from "../select/CategorySelect";
 import PlaceInput from "../inputs/DataInput";
 import ProductsTable from "../tables/ProductsTable";
+import {
+  ErrorMessageContainer,
+  ErrorMessage,
+  ErrorMessageSpace,
+} from "../styles/style-components";
 
 const CreateOrderModalContainer = styled.div`
   display: flex;
@@ -55,14 +62,16 @@ const ProductsFilterContainer = styled.div`
   display: flex;
   width: 100%;
   align-items: center;
-  padding-bottom: 15px;
+  gap: 25px;
+  padding-bottom: 25px;
   border-bottom: solid 1px ${colors.border};
 `;
 
 const ProductsCardContainer = styled.div`
   display: flex;
   width: 100%;
-  height: 525px;
+  min-height: 535px;
+  height: 535px;
 `;
 
 const OrdersContainer = styled.div`
@@ -80,9 +89,8 @@ const OrdersCenterContainer = styled.div`
 
 const OrderPlaceContainer = styled.div`
   display: flex;
-  width: 100%;
   align-items: center;
-  padding-bottom: 15px;
+  padding-bottom: 10px;
   border-bottom: solid 1px ${colors.border};
 `;
 
@@ -90,6 +98,8 @@ const OrderTableContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+  min-height: 535px;
+  height: 535px;
 `;
 
 const TitleInfo = styled.label`
@@ -112,14 +122,13 @@ const InputContainer = styled.div`
 const CreateOrderModal = ({
   categories,
   products,
+  setProducts,
   selected,
   setSelected,
   handleCloseModal,
   updateBills,
 }) => {
   const [orderedProducts, setOrderedProducts] = useState([]);
-  const [location, setLocation] = useState("");
-
   let productsOnSale = [];
 
   const handleSubmitOrder = () => {
@@ -127,15 +136,28 @@ const CreateOrderModal = ({
       const productOnSale = { product: product.id, quantity: product.quantity };
       productsOnSale.push(productOnSale);
     });
-    postBill(location, productsOnSale).then(async (res) => {
+    postBill(placeValue.place, productsOnSale).then(async (res) => {
       const data = await res.json();
       if (res.ok) {
+        clearInputs();
         handleCloseModal();
         updateBills();
       } else {
         alert(data.message);
       }
     });
+  };
+
+  const {
+    placeValue,
+    handleChangePlace,
+    handleSubmitPlace,
+    errors,
+    clearPlaceValue,
+  } = usePlaceForm(handleSubmitOrder);
+
+  const clearInputs = () => {
+    clearPlaceValue();
   };
 
   const handleAddProductOrder = (product) => {
@@ -147,11 +169,6 @@ const CreateOrderModal = ({
       pricePerQuantity: product.sale_price,
     };
     showProductsOnTable(orderedProducts, setOrderedProducts, orderedProduct);
-  };
-
-  const handlePlaceChange = (e) => {
-    const { value } = e.target;
-    setLocation(value);
   };
 
   const handleSearchChange = (e) => {
@@ -178,7 +195,7 @@ const CreateOrderModal = ({
             size="mediumModalButton"
             theme="ok"
             text="Agregar Pedido"
-            onClick={handleSubmitOrder}
+            onClick={handleSubmitPlace}
           />
         </ButtonsContainer>
       </CreateOrderModalTitleContainer>
@@ -204,6 +221,8 @@ const CreateOrderModal = ({
                     options={categories}
                     selectedOption={selected}
                     setSelectedOption={setSelected}
+                    isFilter={true}
+                    setIsFilter={setProducts}
                   />
                 </SelectOrderContainer>
               </FilterContainer>
@@ -220,17 +239,24 @@ const CreateOrderModal = ({
           <OrdersCenterContainer>
             <OrderPlaceContainer>
               <TitleInfo>Pedidos</TitleInfo>
-              <InputContainer>
-                <PlaceInput
-                  name="place"
-                  size="mediumInput"
-                  isStroke={true}
-                  icon={<HomeTable stroke={colors.brand} />}
-                  placeholder="Lugar"
-                  type="text"
-                  onChange={handlePlaceChange}
-                />
-              </InputContainer>
+              <ErrorMessageContainer>
+                <InputContainer>
+                  <PlaceInput
+                    name="place"
+                    size="normalInput"
+                    isStroke={true}
+                    icon={<HomeTable stroke={colors.brand} />}
+                    placeholder="Lugar"
+                    type="text"
+                    onChange={handleChangePlace}
+                  />
+                </InputContainer>
+                {errors.place ? (
+                  <ErrorMessage>{errors.place}</ErrorMessage>
+                ) : (
+                  <ErrorMessageSpace />
+                )}
+              </ErrorMessageContainer>
             </OrderPlaceContainer>
             <OrderTableContainer>
               <ProductsTable

@@ -8,6 +8,7 @@ const ProductCardContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 250px;
+  max-height: 412px;
   align-items: center;
   justify-content: center;
   background-color: ${colors.secondary};
