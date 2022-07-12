@@ -101,7 +101,7 @@ export const salesmanValidation = (values) => {
   return errors;
 };
 
-export const guarantorsValidation = (values) => {
+export const debtorValidation = (values) => {
   const errors = {};
 
   if (!values.fullName) {

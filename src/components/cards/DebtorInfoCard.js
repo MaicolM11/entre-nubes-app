@@ -43,7 +43,7 @@ const DebtorInfoCard = ({ debtor }) => {
     <DebtorCardContainer>
       <DebtorContainer>
         <DebtorInfoCardContainer>
-          <DebtorBoldData>Fiador Actual</DebtorBoldData>
+          <DebtorBoldData>Deudor Actual</DebtorBoldData>
           <DebtorInfoContainer>
             <IconContainer>
               <UserIcon stroke={colors.brand} />

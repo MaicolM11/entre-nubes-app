@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import useGuarantorForm from "../../validate-forms/useGuarantorForm";
+import React from "react";
+import useDebtorForm from "../../validate-forms/useDebtorForm";
 import { createDebtor } from "../../services/debtor";
 
 import styled from "styled-components";
@@ -18,7 +18,7 @@ import { ReactComponent as UserIcon } from "../../assets/icons/user.svg";
 import { ReactComponent as IdIcon } from "../../assets/icons/id-card.svg";
 import { ReactComponent as PhoneIcon } from "../../assets/icons/phone.svg";
 
-const CreateGuarantorModalContainer = styled.div`
+const CreateDebtorModalContainer = styled.div`
   display: flex;
   background-color: ${colors.secondary};
   border-radius: 16px;
@@ -37,22 +37,22 @@ const HeaderModal = styled.div`
   align-items: center;
 `;
 
-const CreateGuarantorModal = ({
+const CreateDebtorModal = ({
   setIsOpen,
   setIsOpenSuccessfulModal,
-  updateGuarantors,
+  updateDebtors,
 }) => {
-  const handleSubmitGuarantor = () => {
-    createGuarantor();
+  const handleSubmitDebtor = () => {
+    createCurrentDebtor();
   };
 
   const {
-    createGuarantorValues,
-    handleChangeCreateGuarantor,
-    handleSubmitCreateGuarantor,
+    createDebtorValues,
+    handleChangeCreateDebtor,
+    handleSubmitCreateDebtor,
     errors,
-    clearCreateGuarantorValues,
-  } = useGuarantorForm(handleSubmitGuarantor);
+    clearCreateDebtorValues,
+  } = useDebtorForm(handleSubmitDebtor);
 
   const handleCloseModal = () => {
     clearModalInputs();
@@ -66,19 +66,19 @@ const CreateGuarantorModal = ({
   };
 
   const clearModalInputs = () => {
-    clearCreateGuarantorValues();
+    clearCreateDebtorValues();
   };
 
-  const createGuarantor = () => {
+  const createCurrentDebtor = () => {
     createDebtor(
-      createGuarantorValues.fullName,
-      createGuarantorValues.cc,
-      createGuarantorValues.phone
+      createDebtorValues.fullName,
+      createDebtorValues.cc,
+      createDebtorValues.phone
     ).then(async (res) => {
       const data = await res.json();
       if (res.ok) {
         handleSetIsOpen();
-        updateGuarantors();
+        updateDebtors();
       } else {
         alert(data.message);
       }
@@ -86,10 +86,10 @@ const CreateGuarantorModal = ({
   };
 
   return (
-    <CreateGuarantorModalContainer>
+    <CreateDebtorModalContainer>
       <CenterContainer>
         <HeaderModal>
-          <ModalTitle>Agregar Fiador</ModalTitle>
+          <ModalTitle>Agregar Deudor</ModalTitle>
           <CloseButton onClick={handleCloseModal} />
         </HeaderModal>
         <ModalFormOptionContainer>
@@ -102,7 +102,7 @@ const CreateGuarantorModal = ({
               isFill={false}
               placeholder="Nombre completo"
               type="text"
-              onChange={handleChangeCreateGuarantor}
+              onChange={handleChangeCreateDebtor}
             />
             {errors.fullName ? (
               <ErrorMessage>{errors.fullName}</ErrorMessage>
@@ -118,7 +118,7 @@ const CreateGuarantorModal = ({
               isFill={true}
               placeholder="Documento de identidad"
               type="text"
-              onChange={handleChangeCreateGuarantor}
+              onChange={handleChangeCreateDebtor}
             />
             {errors.cc ? (
               <ErrorMessage>{errors.cc}</ErrorMessage>
@@ -134,7 +134,7 @@ const CreateGuarantorModal = ({
               isFill={true}
               placeholder="Teléfono"
               type="text"
-              onChange={handleChangeCreateGuarantor}
+              onChange={handleChangeCreateDebtor}
             />
             {errors.phone ? (
               <ErrorMessage>{errors.phone}</ErrorMessage>
@@ -144,14 +144,14 @@ const CreateGuarantorModal = ({
           </ErrorMessageContainer>
           <Button
             size="normalButton"
-            theme="highlighted"
-            text="Agregar Fiador"
-            onClick={handleSubmitCreateGuarantor}
+            theme="ok"
+            text="Agregar Deudor"
+            onClick={handleSubmitCreateDebtor}
           />
         </ModalFormOptionContainer>
       </CenterContainer>
-    </CreateGuarantorModalContainer>
+    </CreateDebtorModalContainer>
   );
 };
 
-export default CreateGuarantorModal;
+export default CreateDebtorModal;

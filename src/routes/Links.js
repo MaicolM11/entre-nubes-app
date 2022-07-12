@@ -40,9 +40,9 @@ export const SalesmanLinks = [
     text: "Pedidos",
   },
   {
-    path: "/salesman/guarantors",
+    path: "/salesman/debtors",
     icon: <MoneyBillWave />,
-    text: "Fiadores",
+    text: "Deudores",
   },
   {
     path: "/salesman/boliranas",

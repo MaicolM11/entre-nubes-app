@@ -77,7 +77,7 @@ const DebtorCard = ({
         </DebtorInfoCardContainer>
         <Button
           size="mediumButton"
-          theme={isTheme ? "ok" : "edit"}
+          theme={isTheme ? "highlighted" : "edit"}
           text={isTheme ? "Pagos Pendientes" : "Asignar Deuda"}
           onClick={
             isTheme ? handleSubmitPendingPayments : handleSubmitAssignDebt

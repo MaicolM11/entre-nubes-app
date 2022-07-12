@@ -9,7 +9,7 @@ import DebtorInfoCard from "../cards/DebtorInfoCard";
 import TotalDebtCard from "../cards/TotalDebtCard";
 import DebtorProductsContainer from "../cards-container/DebtorProductsContainer";
 
-const GuarantorAssingModalContainer = styled.div`
+const DebtorAssignModalContainer = styled.div`
   display: flex;
   flex-direction: column;
   background-color: ${colors.secondary};
@@ -52,21 +52,23 @@ const ProductsContainer = styled.div`
   flex-direction: column;
   width: 100%;
   gap: 15px;
+  min-height: 365px;
+  height: 365px;
 `;
 
 const LeftModalContainer = styled.div`
   display: flex;
   width: 100%;
-  min-height: 535px;
-  height: 535px;
+  min-height: 615px;
+  height: 615px;
 `;
 
-const GuarantorAssingModal = ({
+const DebtorAssignModal = ({
   bill,
   productsSale,
   debtors,
   handleBackOrderOptions,
-  handleSubmitGuarantorAssing,
+  handleSubmitDebtorAssign,
 }) => {
   const [currentDebtor, setCurrentDebtor] = useState({
     fullname: "En espera...",
@@ -78,9 +80,9 @@ const GuarantorAssingModal = ({
   };
 
   return (
-    <GuarantorAssingModalContainer>
+    <DebtorAssignModalContainer>
       <ModalTitleContainer>
-        <ModalTitle>Asignar Fiador</ModalTitle>
+        <ModalTitle>Asignar Deudor</ModalTitle>
         <ButtonsContainer>
           <BorderButton
             size="mediumBorderButton"
@@ -90,8 +92,8 @@ const GuarantorAssingModal = ({
           <Button
             size="mediumModalButton"
             theme="highlighted"
-            text="Asignar Fiador"
-            onClick={handleSubmitGuarantorAssing}
+            text="Asignar Deudor"
+            onClick={() => handleSubmitDebtorAssign(currentDebtor, bill)}
           />
         </ButtonsContainer>
       </ModalTitleContainer>
@@ -109,12 +111,12 @@ const GuarantorAssingModal = ({
           </RightTopContainer>
           <ProductsContainer>
             <DebtorBoldData>Productos</DebtorBoldData>
-            <DebtorProductsContainer productList={productsSale}/>
+            <DebtorProductsContainer productList={productsSale} />
           </ProductsContainer>
         </RightModalContainer>
       </CenterModalContainer>
-    </GuarantorAssingModalContainer>
+    </DebtorAssignModalContainer>
   );
 };
 
-export default GuarantorAssingModal;
+export default DebtorAssignModal;

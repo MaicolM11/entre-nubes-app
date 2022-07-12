@@ -6,7 +6,7 @@ const CardsContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(283px, 1fr));
   padding: 0 25px 25px 25px;
-  gap: 70px;
+  gap: 25px 70px;
   overflow-x: hidden;
   overflow-y: auto;
 

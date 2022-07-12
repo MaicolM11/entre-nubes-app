@@ -5,7 +5,7 @@ import { getAllSalesToDay } from "../../../services/bill";
 import { getBillById } from "../../../services/bill";
 import { getAllDebtors } from "../../../services/debtor";
 
-import "./SalesmanOrders.css";
+import "./Orders.css";
 import AnimatedModalContainer from "../../../components/modals/animation/AnimatedModalContainer";
 import Header from "../../../components/header/Header";
 import SalesmanData from "../../../components/header/SalesmanData";
@@ -15,12 +15,12 @@ import CreateOrderModal from "../../../components/modals/CreateOrderModal";
 import OrderProductsListModal from "../../../components/modals/OrderProductsListModal";
 import PayOptionsModal from "../../../components/modals/PayOptionsModal";
 import PayModeModal from "../../../components/modals/PayModeModal";
-import GuarantorAssingModal from "../../../components/modals/GuarantorAssingModal";
+import DebtorAssignModal from "../../../components/modals/DebtorAssignModal";
 import { AddButtonTopContainer } from "../../../components/styles/style-components";
 import { ReactComponent as Add } from "../../../assets/icons/add.svg";
 import { colors } from "../../../components/styles/colors";
 
-const SalesmanOrders = ({ salesmanName }) => {
+const Orders = ({ salesmanName }) => {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState({});
   const [debtors, setDebtors] = useState({});
@@ -32,12 +32,11 @@ const SalesmanOrders = ({ salesmanName }) => {
   const [isOpenProductListModal, setIsOpenProductListModal] = useState(false);
   const [isOpenPayOptionsModal, setIsOpenPayOptionsModal] = useState(false);
   const [isOpenPayModeModal, setIsOpenPayModeModal] = useState(false);
-  const [isOpenGuarantorAssingModal, setIsOpenGuarantorAssingModal] =
-    useState(false);
+  const [isOpenDebtorAssignModal, setIsOpenDebtorAssignModal] = useState(false);
 
-  const openGuarantorAssingModal = () => {
+  const openDebtorAssignModal = () => {
     setIsOpenPayOptionsModal(false);
-    setIsOpenGuarantorAssingModal((isOpen) => !isOpen);
+    setIsOpenDebtorAssignModal((isOpen) => !isOpen);
   };
 
   const openPayModeModal = () => {
@@ -68,12 +67,21 @@ const SalesmanOrders = ({ salesmanName }) => {
 
   const handleBackOrderOptionsOne = () => {
     setIsOpenPayOptionsModal(true);
-    setIsOpenGuarantorAssingModal((isOpen) => !isOpen);
+    setIsOpenDebtorAssignModal((isOpen) => !isOpen);
   };
 
   const handleBackOrderOptionsTwo = () => {
     setIsOpenPayOptionsModal(true);
     setIsOpenPayModeModal((isOpen) => !isOpen);
+  };
+
+  const handleSubmitDebtorAssign = (currentDebtor, bill) => {
+    if (!currentDebtor._id) {
+      console.log("Falta asignar el deudor.");
+    } else {
+      console.log("Deudor: " + currentDebtor._id);
+      console.log("Deuda: " + bill._id);
+    }
   };
 
   const handleSubmitPayMode = (payMode) => {
@@ -151,7 +159,7 @@ const SalesmanOrders = ({ salesmanName }) => {
       <AnimatedModalContainer
         modal={
           <PayOptionsModal
-            openGuarantorAssingModal={openGuarantorAssingModal}
+            openDebtorAssignModal={openDebtorAssignModal}
             openPayModeModal={openPayModeModal}
           />
         }
@@ -160,15 +168,16 @@ const SalesmanOrders = ({ salesmanName }) => {
       />
       <AnimatedModalContainer
         modal={
-          <GuarantorAssingModal
+          <DebtorAssignModal
             bill={bill}
             productsSale={productsSale}
             debtors={debtors}
             handleBackOrderOptions={handleBackOrderOptionsOne}
+            handleSubmitDebtorAssign={handleSubmitDebtorAssign}
           />
         }
-        isOpen={isOpenGuarantorAssingModal}
-        setIsOpen={setIsOpenGuarantorAssingModal}
+        isOpen={isOpenDebtorAssignModal}
+        setIsOpen={setIsOpenDebtorAssignModal}
       />
       <AnimatedModalContainer
         modal={
@@ -203,4 +212,4 @@ const SalesmanOrders = ({ salesmanName }) => {
   );
 };
 
-export default SalesmanOrders;
+export default Orders;

@@ -55,7 +55,7 @@ const PayModeModal = ({ handleSubmitPayment, handleBackOrderOptions }) => {
         </SelectContainer>
         <Button
           size="normalButton"
-          theme="highlighted"
+          theme="ok"
           text="Realizar Pago"
           onClick={() => handleSubmitPayment(payMode)}
         />

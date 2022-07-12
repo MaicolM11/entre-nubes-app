@@ -6,8 +6,8 @@ import { getFullname } from "../../../services/storage";
 import "./SalesmanHomepage.css";
 import Sidebar from "../../../components/sidebar/Sidebar";
 
-import SalesmanOrders from "../orders/SalesmanOrders";
-import Guarantors from "../guarantors/Guarantors";
+import Orders from "../orders/Orders";
+import Debtors from "../debtors/Debtors";
 import Boliranas from "../boliranas/Boliranas";
 
 const SalesmanHomepage = () => {
@@ -16,17 +16,14 @@ const SalesmanHomepage = () => {
       <Sidebar links={SalesmanLinks} />
       <div className="salesman-pages-container">
         <Routes>
-          <Route
-            index
-            element={<SalesmanOrders salesmanName={getFullname()} />}
-          />
+          <Route index element={<Orders salesmanName={getFullname()} />} />
           <Route
             path="orders"
-            element={<SalesmanOrders salesmanName={getFullname()} />}
+            element={<Orders salesmanName={getFullname()} />}
           />
           <Route
-            path="guarantors"
-            element={<Guarantors salesmanName={getFullname()} />}
+            path="debtors"
+            element={<Debtors salesmanName={getFullname()} />}
           />
           <Route
             path="boliranas"
