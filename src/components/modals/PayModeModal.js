@@ -33,11 +33,7 @@ const payModes = [
   { mode: "Nequi" },
 ];
 
-const PayModeModal = ({
-  handleSubmitPayment,
-  setIsOpen,
-  handleBackPayOrder,
-}) => {
+const PayModeModal = ({ handleSubmitPayment, handleBackOrderOptions }) => {
   const defaultPayMode = "Modo de Pago";
   const [payMode, setPayMode] = useState(defaultPayMode);
 
@@ -46,7 +42,7 @@ const PayModeModal = ({
       <PayModeModalDataContainer>
         <HeaderModal>
           <ModalTitle>Modo de Pago</ModalTitle>
-          <CloseButton onClick={handleBackPayOrder} />
+          <CloseButton onClick={handleBackOrderOptions} />
         </HeaderModal>
         <SelectContainer>
           <PayModeSelect

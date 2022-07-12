@@ -129,6 +129,14 @@ export const DataSpan = styled.span`
   font-weight: 500;
 `;
 
+export const DebtorBoldData = styled.label`
+  color: ${colors.text};
+  font-size: 20px;
+  font-weight: bold;
+  font-family: var(--roboto);
+  white-space: nowrap;
+`;
+
 export const DeleteIconButtonContainer = styled.div`
   display: flex;
   align-items: center;

@@ -3,6 +3,7 @@ import { getAllProducts } from "../../../services/product";
 import { getAllCategories } from "../../../services/category";
 import { getAllSalesToDay } from "../../../services/bill";
 import { getBillById } from "../../../services/bill";
+import { getAllDebtors } from "../../../services/debtor";
 
 import "./SalesmanOrders.css";
 import AnimatedModalContainer from "../../../components/modals/animation/AnimatedModalContainer";
@@ -14,6 +15,7 @@ import CreateOrderModal from "../../../components/modals/CreateOrderModal";
 import OrderProductsListModal from "../../../components/modals/OrderProductsListModal";
 import PayOptionsModal from "../../../components/modals/PayOptionsModal";
 import PayModeModal from "../../../components/modals/PayModeModal";
+import GuarantorAssingModal from "../../../components/modals/GuarantorAssingModal";
 import { AddButtonTopContainer } from "../../../components/styles/style-components";
 import { ReactComponent as Add } from "../../../assets/icons/add.svg";
 import { colors } from "../../../components/styles/colors";
@@ -21,6 +23,7 @@ import { colors } from "../../../components/styles/colors";
 const SalesmanOrders = ({ salesmanName }) => {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState({});
+  const [debtors, setDebtors] = useState({});
   const [getBills, setBills] = useState([]);
   const [bill, setBill] = useState();
   const [productsSale, setProductsSale] = useState([]);
@@ -29,6 +32,18 @@ const SalesmanOrders = ({ salesmanName }) => {
   const [isOpenProductListModal, setIsOpenProductListModal] = useState(false);
   const [isOpenPayOptionsModal, setIsOpenPayOptionsModal] = useState(false);
   const [isOpenPayModeModal, setIsOpenPayModeModal] = useState(false);
+  const [isOpenGuarantorAssingModal, setIsOpenGuarantorAssingModal] =
+    useState(false);
+
+  const openGuarantorAssingModal = () => {
+    setIsOpenPayOptionsModal(false);
+    setIsOpenGuarantorAssingModal((isOpen) => !isOpen);
+  };
+
+  const openPayModeModal = () => {
+    setIsOpenPayOptionsModal(false);
+    setIsOpenPayModeModal((isOpen) => !isOpen);
+  };
 
   const openCreateOrderModal = () => {
     setIsOpenCreateOrderModal((isOpen) => !isOpen);
@@ -42,10 +57,27 @@ const SalesmanOrders = ({ salesmanName }) => {
     setIsOpenPayOptionsModal((isOpen) => !isOpen);
   };
 
-  const getProductos = () => {
-    getAllProducts().then(async (res) => {
-      setProducts(await res.json());
+  const handlePayOptions = (bill) => {
+    openPayOptionsModal();
+    setBill(bill);
+    getBillById(bill._id).then(async (res) => {
+      setProductsSale(await res.json());
     });
+    console.log(bill);
+  };
+
+  const handleBackOrderOptionsOne = () => {
+    setIsOpenPayOptionsModal(true);
+    setIsOpenGuarantorAssingModal((isOpen) => !isOpen);
+  };
+
+  const handleBackOrderOptionsTwo = () => {
+    setIsOpenPayOptionsModal(true);
+    setIsOpenPayModeModal((isOpen) => !isOpen);
+  };
+
+  const handleSubmitPayMode = (payMode) => {
+    console.log(payMode);
   };
 
   const getCategories = () => {
@@ -54,9 +86,15 @@ const SalesmanOrders = ({ salesmanName }) => {
     });
   };
 
-  const updateBills = () => {
-    getAllSalesToDay().then(async (res) => {
-      setBills(await res.json());
+  const getDebtors = () => {
+    getAllDebtors().then(async (res) => {
+      setDebtors(await res.json());
+    });
+  };
+
+  const getProductos = () => {
+    getAllProducts().then(async (res) => {
+      setProducts(await res.json());
     });
   };
 
@@ -69,30 +107,16 @@ const SalesmanOrders = ({ salesmanName }) => {
     setIsOpenProductListModal((isOpen) => !isOpen);
   };
 
-  const handlePayOptions = (bill) => {
-    console.log(bill);
-    openPayOptionsModal();
-  };
-
-  const handleAssignGuarantor = () => {};
-
-  const handlePayOrder = () => {
-    setIsOpenPayOptionsModal(false);
-    setIsOpenPayModeModal((isOpen) => !isOpen);
-  };
-
-  const handleBackPayOrder = () => {
-    setIsOpenPayOptionsModal(true);
-    setIsOpenPayModeModal((isOpen) => !isOpen);
-  };
-
-  const handleSubmitPayMode = (payMode) => {
-    console.log(payMode);
+  const updateBills = () => {
+    getAllSalesToDay().then(async (res) => {
+      setBills(await res.json());
+    });
   };
 
   useEffect(() => {
-    getProductos();
     getCategories();
+    getDebtors();
+    getProductos();
     updateBills();
   }, []);
 
@@ -127,8 +151,8 @@ const SalesmanOrders = ({ salesmanName }) => {
       <AnimatedModalContainer
         modal={
           <PayOptionsModal
-            handleAssignGuarantor={handleAssignGuarantor}
-            handlePayOrder={handlePayOrder}
+            openGuarantorAssingModal={openGuarantorAssingModal}
+            openPayModeModal={openPayModeModal}
           />
         }
         isOpen={isOpenPayOptionsModal}
@@ -136,11 +160,21 @@ const SalesmanOrders = ({ salesmanName }) => {
       />
       <AnimatedModalContainer
         modal={
+          <GuarantorAssingModal
+            bill={bill}
+            productsSale={productsSale}
+            debtors={debtors}
+            handleBackOrderOptions={handleBackOrderOptionsOne}
+          />
+        }
+        isOpen={isOpenGuarantorAssingModal}
+        setIsOpen={setIsOpenGuarantorAssingModal}
+      />
+      <AnimatedModalContainer
+        modal={
           <PayModeModal
             handleSubmitPayment={handleSubmitPayMode}
-            setIsOpen={setIsOpenPayModeModal}
-            isBack={true}
-            handleBackPayOrder={handleBackPayOrder}
+            handleBackOrderOptions={handleBackOrderOptionsTwo}
           />
         }
         isOpen={isOpenPayModeModal}

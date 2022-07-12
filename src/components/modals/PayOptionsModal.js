@@ -35,7 +35,7 @@ const ButtonsContainer = styled.div`
   gap: 25px;
 `;
 
-const PayOptionsModal = ({ handleAssignGuarantor, handlePayOrder }) => {
+const PayOptionsModal = ({ openGuarantorAssingModal, openPayModeModal }) => {
   return (
     <PayOptionsModalContainer>
       <CenterContainer>
@@ -48,13 +48,13 @@ const PayOptionsModal = ({ handleAssignGuarantor, handlePayOrder }) => {
             size="mediumModalButton"
             theme="highlighted"
             text="Asignar Fiador"
-            onClick={handleAssignGuarantor}
+            onClick={openGuarantorAssingModal}
           />
           <Button
             size="mediumModalButton"
             theme="ok"
             text="Pagar Pedido"
-            onClick={handlePayOrder}
+            onClick={openPayModeModal}
           />
         </ButtonsContainer>
       </CenterContainer>
