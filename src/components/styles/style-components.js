@@ -151,6 +151,7 @@ export const DeleteIconTableButtonContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  margin: 0 40px;
   transition: 0.2s;
   cursor: pointer;
   &:hover {

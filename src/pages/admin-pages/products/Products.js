@@ -33,7 +33,9 @@ const Products = () => {
     useState(false);
   const [isOpenAddStock, setIsOpenAddStock] = useState(false);
   const [isOpenCategoriesModal, setIsOpenCategoriesModal] = useState(false);
-  const [isOpenCategoryModal, setIsOpenCategoryModal] = useState(false);
+  const [isOpenCreateCategoryModal, setIsOpenCreateCategoryModal] =
+    useState(false);
+  const [isOpenEditCategoryModal, setIsOpenEditCategoryModal] = useState(false);
   const [isOpenDeleteCategoryModal, setIsOpenDeleteCategoryModal] =
     useState(false);
 
@@ -45,9 +47,15 @@ const Products = () => {
     setIsOpenCategoriesModal((isOpen) => !isOpen);
   };
 
-  const openCategoryModal = () => {
+  const openCreateCategoryModal = () => {
     setIsOpenCategoriesModal((isOpen) => !isOpen);
-    setIsOpenCategoryModal((isOpen) => !isOpen);
+    setIsOpenCreateCategoryModal((isOpen) => !isOpen);
+  };
+
+  const openEditCategoryModal = (category) => {
+    setCategory(category);
+    setIsOpenCategoriesModal((isOpen) => !isOpen);
+    setIsOpenEditCategoryModal((isOpen) => !isOpen);
   };
 
   const closeDeleteProductModal = () => {
@@ -128,7 +136,8 @@ const Products = () => {
         modal={
           <CategoriesModal
             categories={categories}
-            handleSubmitCreateCategory={openCategoryModal}
+            handleSubmitCreateCategory={openCreateCategoryModal}
+            handleSubmitEditCategory={openEditCategoryModal}
             handleSubmitDeleteCategory={openDeleteCategoryModal}
             setIsOpen={setIsOpenCategoriesModal}
           />
@@ -176,13 +185,28 @@ const Products = () => {
       <AnimatedModalContainer
         modal={
           <CategoryModal
-            setIsOpen={setIsOpenCategoryModal}
+            isTheme={true}
+            setIsOpen={setIsOpenCreateCategoryModal}
             openCategoriesModal={setIsOpenCategoriesModal}
             updateCategories={getCategories}
           />
         }
-        isOpen={isOpenCategoryModal}
-        setIsOpen={setIsOpenCategoryModal}
+        isOpen={isOpenCreateCategoryModal}
+        setIsOpen={setIsOpenCreateCategoryModal}
+      />
+      <AnimatedModalContainer
+        modal={
+          <CategoryModal
+            isTheme={false}
+            category={category}
+            setIsOpen={setIsOpenEditCategoryModal}
+            openCategoriesModal={setIsOpenCategoriesModal}
+            updateCategories={getCategories}
+            updateProducts={getProductos}
+          />
+        }
+        isOpen={isOpenEditCategoryModal}
+        setIsOpen={setIsOpenEditCategoryModal}
       />
       <AnimatedModalContainer
         modal={

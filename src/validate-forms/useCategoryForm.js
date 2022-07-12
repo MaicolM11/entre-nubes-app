@@ -1,14 +1,28 @@
 import { useState } from "react";
 import { categoryValidation } from "../errors/validate";
 
-const useCategoryForm = (callback) => {
-  const [categoryValues, setCategoryValues] = useState({
+const useCategoryForm = (category, createCallback, editCallback) => {
+  const [createCategoryValues, setCreateCategoryValues] = useState({
     name: "",
+  });
+
+  const [editCategoryValues, setEditCategoryValues] = useState({
+    name: category ? category.name : "",
   });
 
   const handleChangeCreateCategory = (e) => {
     const { name, value } = e.target;
-    setCategoryValues((values) => {
+    setCreateCategoryValues((values) => {
+      return {
+        ...values,
+        [name]: value,
+      };
+    });
+  };
+
+  const handleChangeEditCategory = (e) => {
+    const { name, value } = e.target;
+    setEditCategoryValues((values) => {
       return {
         ...values,
         [name]: value,
@@ -18,25 +32,42 @@ const useCategoryForm = (callback) => {
 
   const handleSubmitCreateCategory = (e) => {
     e.preventDefault();
-    setErros(categoryValidation(categoryValues));
-    if (!(Object.keys(categoryValidation(categoryValues)).length > 0)) {
-      callback();
+    setErros(categoryValidation(createCategoryValues));
+    if (!(Object.keys(categoryValidation(createCategoryValues)).length > 0)) {
+      createCallback();
+    }
+  };
+
+  const handleSubmitEditCategory = (e) => {
+    e.preventDefault();
+    setErros(categoryValidation(editCategoryValues));
+    if (!(Object.keys(categoryValidation(editCategoryValues)).length > 0)) {
+      editCallback();
     }
   };
 
   const [errors, setErros] = useState({});
 
   const clearCreateCategoryValues = () => {
-    categoryValues.name = "";
+    createCategoryValues.name = "";
+    setErros(0);
+  };
+
+  const clearEditCategoryValues = () => {
+    editCategoryValues.name = "";
     setErros(0);
   };
 
   return {
-    categoryValues: categoryValues,
+    createCategoryValues: createCategoryValues,
     handleChangeCreateCategory,
     handleSubmitCreateCategory,
-    errors,
     clearCreateCategoryValues,
+    editCategoryValues: editCategoryValues,
+    handleChangeEditCategory,
+    handleSubmitEditCategory,
+    clearEditCategoryValues,
+    errors,
   };
 };
 

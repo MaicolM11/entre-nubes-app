@@ -1,5 +1,5 @@
 import React from "react";
-import { createCategory } from "../../services/category";
+import { createCategory, editCategory } from "../../services/category";
 import useCategoryForm from "../../validate-forms/useCategoryForm";
 
 import styled from "styled-components";
@@ -37,21 +37,36 @@ const HeaderModal = styled.div`
 `;
 
 const CategoryModal = ({
+  isTheme,
+  category,
   setIsOpen,
   openCategoriesModal,
   updateCategories,
+  updateProducts,
 }) => {
-  const handleSubmitCategory = () => {
+  const handleSubmitCreateCurrentCategory = () => {
     createCurrentCategory();
   };
 
+  const handleSubmitEditCurrentCategory = () => {
+    editCurrentCategory();
+  };
+
   const {
-    categoryValues,
+    createCategoryValues,
     handleChangeCreateCategory,
     handleSubmitCreateCategory,
-    errors,
     clearCreateCategoryValues,
-  } = useCategoryForm(handleSubmitCategory);
+    editCategoryValues,
+    handleChangeEditCategory,
+    handleSubmitEditCategory,
+    clearEditCategoryValues,
+    errors,
+  } = useCategoryForm(
+    category,
+    handleSubmitCreateCurrentCategory,
+    handleSubmitEditCurrentCategory
+  );
 
   const handleSetIsOpen = () => {
     clearModalInputs();
@@ -60,11 +75,11 @@ const CategoryModal = ({
   };
 
   const clearModalInputs = () => {
-    clearCreateCategoryValues();
+    isTheme ? clearCreateCategoryValues() : clearEditCategoryValues();
   };
 
   const createCurrentCategory = () => {
-    createCategory(categoryValues.name).then(async (res) => {
+    createCategory(createCategoryValues.name).then(async (res) => {
       const data = await res.json();
       if (res.ok) {
         handleSetIsOpen();
@@ -75,11 +90,26 @@ const CategoryModal = ({
     });
   };
 
+  const editCurrentCategory = () => {
+    editCategory(category._id, editCategoryValues.name).then(async (res) => {
+      const data = await res.json();
+      if (res.ok) {
+        handleSetIsOpen();
+        updateCategories();
+        updateProducts();
+      } else {
+        alert(data.message);
+      }
+    });
+  };
+
   return (
     <CategoryModalContainer>
       <CategoryModalCenterContainer>
         <HeaderModal>
-          <ModalTitle>Agregar Categoría</ModalTitle>
+          <ModalTitle>
+            {isTheme ? "Agregar Categoría" : "Editar Categoría"}
+          </ModalTitle>
           <CloseButton onClick={handleSetIsOpen} />
         </HeaderModal>
         <ModalFormOptionContainer>
@@ -91,7 +121,10 @@ const CategoryModal = ({
               isFill={true}
               placeholder="Nombre de categoría"
               type="text"
-              onChange={handleChangeCreateCategory}
+              defaultValue={category ? category.name : ""}
+              onChange={
+                isTheme ? handleChangeCreateCategory : handleChangeEditCategory
+              }
             />
             {errors.name ? (
               <ErrorMessage>{errors.name}</ErrorMessage>
@@ -101,9 +134,11 @@ const CategoryModal = ({
           </ErrorMessageContainer>
           <Button
             size="normalButton"
-            theme="ok"
-            text="Agregar Categoría"
-            onClick={handleSubmitCreateCategory}
+            theme={isTheme ? "ok" : "highlighted"}
+            text={isTheme ? "Agregar Categoría" : "Editar Categoría"}
+            onClick={
+              isTheme ? handleSubmitCreateCategory : handleSubmitEditCategory
+            }
           />
         </ModalFormOptionContainer>
       </CategoryModalCenterContainer>
