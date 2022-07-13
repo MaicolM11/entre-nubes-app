@@ -14,8 +14,8 @@ const CardsContainer = styled.div`
 const DebtsContainer = ({ debts }) => {
   return (
     <CardsContainer>
-      {Object.values(debts).map((debt) => (
-        <DebtCard key={debt._id} debt={debt} />
+      {Object.values(debts).map((debt, i) => (
+        <DebtCard key={i} debtNumber={i + 1} debt={debt} />
       ))}
     </CardsContainer>
   );

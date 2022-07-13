@@ -17,6 +17,11 @@ const size = {
     height: "45px",
     fontSize: "16px",
   },
+  mediumCardButton: {
+    width: "145px",
+    height: "35px",
+    fontSize: "16px",
+  },
   mediumSmallButton: {
     width: "152px",
     height: "45px",

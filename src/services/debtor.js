@@ -29,5 +29,5 @@ export const getClientDebts = (id) => {
     method: "GET",
     headers: { "Content-Type": "application/json", authorization: getToken() },
   };
-  return fetch(BASE_URL + `${id}/debts`, requestOptions);
+  return fetch(BASE_URL + `/${id}/debts`, requestOptions);
 };

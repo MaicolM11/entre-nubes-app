@@ -7,15 +7,15 @@ import DebtsContainer from "../cards-container/DebtsContainer";
 
 const PendingPaymentsModalContainer = styled.div`
   display: flex;
-  width: 850px;
-  height: 573px;
+  flex-direction: column;
+  min-width: 857px;
+  min-height: 573px;
   background-color: ${colors.secondary};
   border-radius: 16px;
 `;
 
 const HeaderModalContainer = styled.div`
   display: flex;
-  width: 100%;
   align-items: center;
   padding: 35px;
   border-bottom: 1px solid ${colors.border};

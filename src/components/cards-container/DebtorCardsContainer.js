@@ -29,7 +29,9 @@ const DebtorCardsContainer = ({ debtors, handleSubmitPendingPayments }) => {
           key={debtor._id}
           isTheme={true}
           debtor={debtor}
-          handleSubmitPendingPayments={handleSubmitPendingPayments}
+          handleSubmitPendingPayments={() =>
+            handleSubmitPendingPayments(debtor)
+          }
         />
       ))}
     </CardsContainer>

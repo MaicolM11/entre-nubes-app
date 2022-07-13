@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getAllDebtors } from "../../../services/debtor";
+import { getAllDebtors, getClientDebts } from "../../../services/debtor";
 
 import "./Debtors.css";
 import { colors } from "../../../components/styles/colors";
@@ -37,7 +37,14 @@ const Debtors = ({ salesmanName }) => {
     setIsOpenPayModeModal((isOpen) => !isOpen);
   };
 
-  const openPendingPaymentsModal = () => {
+  const openPendingPaymentsModal = (debtor) => {
+    getClientDebts(debtor._id).then(async (res) => {
+      setDebts(await res.json());
+    });
+    handleIsOpenClosePendingPaymentsModal();
+  };
+
+  const handleIsOpenClosePendingPaymentsModal = () => {
     setIsOpenPendingPaymentsModal((isOpen) => !isOpen);
   };
 
@@ -91,7 +98,7 @@ const Debtors = ({ salesmanName }) => {
       <AnimatedModalContainer
         modal={
           <PendingPaymentsModal
-            handleCloseModal={openPendingPaymentsModal}
+            handleCloseModal={handleIsOpenClosePendingPaymentsModal}
             debts={debts}
           />
         }
