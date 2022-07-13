@@ -127,8 +127,10 @@ const CreateOrderModal = ({
   setSelected,
   handleCloseModal,
   updateBills,
+  updateListProductByFilter
 }) => {
   const [orderedProducts, setOrderedProducts] = useState([]);
+  const [searchInputValue, setSearchInputValue] = useState("")
   let productsOnSale = [];
 
   const handleSubmitOrder = () => {
@@ -174,6 +176,8 @@ const CreateOrderModal = ({
   const handleSearchChange = (e) => {
     const { name, value } = e.target;
     console.log(`${name}: ${value}`);
+    setSearchInputValue(value)
+    updateListProductByFilter(selected.id,value)
   };
 
   const deleteProductToTable = (id) => {
@@ -219,8 +223,9 @@ const CreateOrderModal = ({
                     icon={<Category width={25} height={25} />}
                     dropdownTitle="Categorías"
                     options={categories}
-                    selectedOption={selected}
+                    selectedOption={selected.name}
                     setSelectedOption={setSelected}
+                    searchInput= {searchInputValue}
                     isFilter={true}
                     setIsFilter={setProducts}
                   />
