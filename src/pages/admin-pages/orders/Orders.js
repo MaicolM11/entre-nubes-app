@@ -7,19 +7,17 @@ import Header from "../../../components/header/Header";
 import NotificationButton from "../../../components/header/NotificationButton";
 import OrdersAdminCardsContainer from "../../../components/cards-container/OrdersAdminCardsContainer";
 import AnimatedModalContainer from "../../../components/modals/animation/AnimatedModalContainer";
-import OrderProductsListModal from "../../../components/modals/OrderProductsListModal";
+import OrderProductListModal from "../../../components/modals/OrderProductListModal";
 
 const Orders = () => {
-  const [bills, setBills] = useState([]);
   const [bill, setBill] = useState();
+  const [bills, setBills] = useState([]);
   const [productsSale, setProductsSale] = useState([]);
   const [isOpenProductListModal, setIsOpenProductListModal] = useState(false);
 
-  useEffect(() => {
-    let socket = getSocket();
-    socket.on("sales", (data) => setBills(data));
-    return () => socket.disconnect();
-  }, []);
+  const isOpenProductList = () => {
+    setIsOpenProductListModal(false);
+  };
 
   const showBill = (bill) => {
     setProductsSale([]);
@@ -30,15 +28,17 @@ const Orders = () => {
     setIsOpenProductListModal((isOpen) => !isOpen);
   };
 
-  const isOpenProductList = () => {
-    setIsOpenProductListModal(false);
-  };
+  useEffect(() => {
+    let socket = getSocket();
+    socket.on("sales", (data) => setBills(data));
+    return () => socket.disconnect();
+  }, []);
 
   return (
     <div className="admin-orders-container">
       <AnimatedModalContainer
         modal={
-          <OrderProductsListModal
+          <OrderProductListModal
             bill={bill}
             productsSale={productsSale}
             handleCloseModal={isOpenProductList}

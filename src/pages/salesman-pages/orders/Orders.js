@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { getAllProducts } from "../../../services/product";
 import { getAllCategories } from "../../../services/category";
-import { getAllSalesToDay } from "../../../services/bill";
-import { getBillById } from "../../../services/bill";
+import {
+  getAllSalesToDay,
+  getBillById,
+  assignBill,
+} from "../../../services/bill";
 import { getAllDebtors } from "../../../services/debtor";
 
 import "./Orders.css";
@@ -12,7 +15,7 @@ import SalesmanData from "../../../components/header/SalesmanData";
 import Button from "../../../components/buttons/Button";
 import OrdersSalesmanCardsContainer from "../../../components/cards-container/OrdersSalesmanCardsContainer";
 import CreateOrderModal from "../../../components/modals/CreateOrderModal";
-import OrderProductsListModal from "../../../components/modals/OrderProductsListModal";
+import OrderProductListModal from "../../../components/modals/OrderProductListModal";
 import PayOptionsModal from "../../../components/modals/PayOptionsModal";
 import PayModeModal from "../../../components/modals/PayModeModal";
 import DebtorAssignModal from "../../../components/modals/DebtorAssignModal";
@@ -34,9 +37,13 @@ const Orders = ({ salesmanName }) => {
   const [isOpenPayModeModal, setIsOpenPayModeModal] = useState(false);
   const [isOpenDebtorAssignModal, setIsOpenDebtorAssignModal] = useState(false);
 
+  const closeDebtorAssignModal = () => {
+    setIsOpenDebtorAssignModal((isOpen) => !isOpen);
+  };
+
   const openDebtorAssignModal = () => {
     setIsOpenPayOptionsModal(false);
-    setIsOpenDebtorAssignModal((isOpen) => !isOpen);
+    closeDebtorAssignModal();
   };
 
   const openPayModeModal = () => {
@@ -62,12 +69,11 @@ const Orders = ({ salesmanName }) => {
     getBillById(bill._id).then(async (res) => {
       setProductsSale(await res.json());
     });
-    console.log(bill);
   };
 
   const handleBackOrderOptionsOne = () => {
     setIsOpenPayOptionsModal(true);
-    setIsOpenDebtorAssignModal((isOpen) => !isOpen);
+    closeDebtorAssignModal();
   };
 
   const handleBackOrderOptionsTwo = () => {
@@ -79,8 +85,14 @@ const Orders = ({ salesmanName }) => {
     if (!currentDebtor._id) {
       console.log("Falta asignar el deudor.");
     } else {
-      console.log("Deudor: " + currentDebtor._id);
-      console.log("Deuda: " + bill._id);
+      assignBill(bill._id, currentDebtor._id).then(async (res) => {
+        if (res.ok) {
+          console.log(
+            "¡Deuda asignada al cliente " + currentDebtor.fullname + "!"
+          );
+          closeDebtorAssignModal();
+        }
+      });
     }
   };
 
@@ -147,7 +159,7 @@ const Orders = ({ salesmanName }) => {
       />
       <AnimatedModalContainer
         modal={
-          <OrderProductsListModal
+          <OrderProductListModal
             bill={bill}
             productsSale={productsSale}
             handleCloseModal={isOpenProductList}

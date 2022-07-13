@@ -11,40 +11,44 @@ import PayModeModal from "../../../components/modals/PayModeModal";
 import Button from "../../../components/buttons/Button";
 import CreateDebtorModal from "../../../components/modals/CreateDebtorModal";
 import SuccessfulModal from "../../../components/modals/SuccessfulModal";
+import PendingPaymentsModal from "../../../components/modals/PendingPaymentsModal";
 import { AddButtonTopContainer } from "../../../components/styles/style-components";
 import { ReactComponent as Add } from "../../../assets/icons/add.svg";
 
 const Debtors = ({ salesmanName }) => {
   const [debtors, setDebtors] = useState([]);
-  const [isOpenPayModeModal, setIsOpenPayModeModal] = useState(false);
   const [isOpenCreateDebtorModal, setIsOpenCreateDebtorModal] = useState(false);
   const [isOpenSuccessfulModal, setIsOpenSuccessfulModal] = useState(false);
+  const [isOpenPayModeModal, setIsOpenPayModeModal] = useState(false);
+  const [isOpenPendingPaymentsModal, setIsOpenPendingPaymentsModal] =
+    useState(false);
+  const [debts, setDebts] = useState([]);
 
-  const closeSuccessfulModal = () => {
+  const openCreateDebtorModal = () => {
+    setIsOpenCreateDebtorModal((isOpen) => !isOpen);
+  };
+
+  const openSuccessfulModal = () => {
     setIsOpenSuccessfulModal((isOpen) => !isOpen);
   };
 
-  const getDebtors = () => {
-    getAllDebtors().then(async (res) => {
-      setDebtors(await res.json());
-    });
+  const openPayModeModal = (debtor) => {
+    console.log(debtor.fullname);
+    setIsOpenPayModeModal((isOpen) => !isOpen);
   };
 
-  const handlePayMode = (debtor) => {
-    console.log(debtor.fullname);
-    openPayModeModal();
+  const openPendingPaymentsModal = () => {
+    setIsOpenPendingPaymentsModal((isOpen) => !isOpen);
   };
 
   const handleSubmitPayMode = (payMode) => {
     console.log(payMode);
   };
 
-  const openPayModeModal = () => {
-    setIsOpenPayModeModal((isOpen) => !isOpen);
-  };
-
-  const openCreateDebtorModal = () => {
-    setIsOpenCreateDebtorModal((isOpen) => !isOpen);
+  const getDebtors = () => {
+    getAllDebtors().then(async (res) => {
+      setDebtors(await res.json());
+    });
   };
 
   useEffect(() => {
@@ -57,7 +61,7 @@ const Debtors = ({ salesmanName }) => {
         modal={
           <PayModeModal
             handleSubmitPayment={handleSubmitPayMode}
-            setIsOpen={setIsOpenPayModeModal}
+            handleBackOrderOptions={setIsOpenPayModeModal}
           />
         }
         isOpen={isOpenPayModeModal}
@@ -78,11 +82,21 @@ const Debtors = ({ salesmanName }) => {
         modal={
           <SuccessfulModal
             message="¡Deudor agregado correctamente!"
-            handleSubmitOk={closeSuccessfulModal}
+            handleSubmitOk={openSuccessfulModal}
           />
         }
         isOpen={isOpenSuccessfulModal}
         setIsOpen={setIsOpenSuccessfulModal}
+      />
+      <AnimatedModalContainer
+        modal={
+          <PendingPaymentsModal
+            handleCloseModal={openPendingPaymentsModal}
+            debts={debts}
+          />
+        }
+        isOpen={isOpenPendingPaymentsModal}
+        setIsOpen={setIsOpenPendingPaymentsModal}
       />
       <Header
         title="Deudores"
@@ -98,7 +112,10 @@ const Debtors = ({ salesmanName }) => {
           onClick={openCreateDebtorModal}
         />
       </AddButtonTopContainer>
-      <DebtorCardsContainer debtors={debtors} handlePayMode={handlePayMode} />
+      <DebtorCardsContainer
+        debtors={debtors}
+        handleSubmitPendingPayments={openPendingPaymentsModal}
+      />
     </div>
   );
 };

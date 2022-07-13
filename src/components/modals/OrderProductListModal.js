@@ -1,5 +1,4 @@
 import React from "react";
-
 import styled from "styled-components";
 import { colors } from "../styles/colors";
 import {
@@ -14,14 +13,15 @@ const OrderProductListContainer = styled.div`
   display: flex;
   flex-direction: column;
   height: 598px;
-  border-radius: 16px;
   background-color: ${colors.secondary};
+  border-radius: 16px;
 `;
 const HeaderProductListContainer = styled.div`
   display: flex;
   align-items: center;
   gap: 25px;
   padding: 35px;
+  border-bottom: 1px solid ${colors.border};
 `;
 
 const TotalPaymentContainer = styled.label`
@@ -33,7 +33,7 @@ const TotalPaymentContainer = styled.label`
   white-space: nowrap;
 `;
 
-const OrderProductsListModal = ({ bill, productsSale, handleCloseModal }) => {
+const OrderProductListModal = ({ bill, productsSale, handleCloseModal }) => {
   return (
     <OrderProductListContainer>
       <HeaderProductListContainer>
@@ -49,4 +49,4 @@ const OrderProductsListModal = ({ bill, productsSale, handleCloseModal }) => {
   );
 };
 
-export default OrderProductsListModal;
+export default OrderProductListModal;

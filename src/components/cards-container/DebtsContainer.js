@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import ProductListCard from "../cards/ProductListCard";
+import DebtCard from "../cards/DebtCard";
 
 const CardsContainer = styled.div`
   display: flex;
@@ -11,14 +11,14 @@ const CardsContainer = styled.div`
   overflow-y: auto;
 `;
 
-const ProductListContainer = ({ productList }) => {
+const DebtsContainer = ({ debts }) => {
   return (
     <CardsContainer>
-      {Object.values(productList).map((product, i) => (
-        <ProductListCard key={i} productOnList={product} />
+      {Object.values(debts).map((debt) => (
+        <DebtCard key={debt._id} debt={debt} />
       ))}
     </CardsContainer>
   );
 };
 
-export default ProductListContainer;
+export default DebtsContainer;

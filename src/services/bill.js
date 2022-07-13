@@ -41,3 +41,14 @@ export const getBillById = (id) => {
   };
   return fetch(BASE_URL + `/${id}/sales`, requestOptions);
 };
+
+export const assignBill = (id, debtorId) => {
+  const requestOptions = {
+    method: "PUT",
+    headers: { "Content-Type": "application/json", authorization: getToken() },
+    body: JSON.stringify({
+      debtor_id: debtorId,
+    }),
+  };
+  return fetch(BASE_URL + `/${id}/due`, requestOptions);
+};
