@@ -1,6 +1,6 @@
 import Bill from "../models/Bill";
 import Debtor from "../models/Debtor";
-import { BILL_STATES } from "../models/Enums";
+import { BILL_STATES, PAYMENT_METHODS } from "../models/Enums";
 
 import { findProductsAndUpdate } from "./sale.controller";
 
@@ -122,6 +122,10 @@ export const deskClosing = (req, res) => {
   // pasar de last_bills -> bills, 
   // cambiar la coleccion en deudores.
   // eliminar last_bills
+}
+
+export const getPaymentMethods = (req, res) => {
+  res.status(200).json(Object.values(PAYMENT_METHODS))
 }
 
 export const emitLastBills = (socket = global.sockets) => {

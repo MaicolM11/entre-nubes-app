@@ -101,6 +101,26 @@ router.get('/:id/sales', [verifyToken, hasAnyRol], controller.getSalesOfBill);
 
 /**
  * @swagger
+ * /api/bill/payment-methods:
+ *  get:
+ *      sumary : get all payment methods
+ *      tags : [Bill]   
+ *      responses:
+ *          200:
+ *              description : success
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          type : array
+ *                          items:
+ *                              type: string
+ *      security:
+ *	        - jwt: []
+ */
+router.get('/payment-methods', [verifyToken, hasAnyRol], controller.getPaymentMethods);
+
+/**
+ * @swagger
  * /api/bill/{id}/payment:
  *  put:
  *      sumary : pay bill
