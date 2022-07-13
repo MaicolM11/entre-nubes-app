@@ -19,6 +19,7 @@ const CategorySelect = ({
   options,
   selectedOption,
   setSelectedOption,
+  searchInput,
   isFilter,
   setIsFilter,
 }) => {
@@ -32,7 +33,7 @@ const CategorySelect = ({
           setIsFilter(await res.json());
         });
       } else {
-        filterProducts(id, "").then(async (res) => {
+        filterProducts(id, searchInput).then(async (res) => {
           setIsFilter(await res.json());
         });
       }
@@ -71,7 +72,7 @@ const CategorySelect = ({
             <SelectOption
               key={"all"}
               onClick={() => {
-                setSelectedOption("Todos los Productos");
+                setSelectedOption({name:"Todos los Productos",id:""});
                 filterProductsByCategory("all");
                 setIsOpen(false);
               }}
@@ -86,7 +87,7 @@ const CategorySelect = ({
                 {
                   isFilter && filterProductsByCategory(option._id);
                 }
-                setSelectedOption(option.name);
+                setSelectedOption({name:option.name, id : option._id});
                 setIsOpen(false);
               }}
             >
