@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getAllProducts } from "../../../services/product";
+import { getAllProducts, filterProducts} from "../../../services/product";
 import { getAllCategories } from "../../../services/category";
 import {
   getAllSalesToDay,
@@ -30,7 +30,7 @@ const Orders = ({ salesmanName }) => {
   const [getBills, setBills] = useState([]);
   const [bill, setBill] = useState();
   const [productsSale, setProductsSale] = useState([]);
-  const [selected, setSelected] = useState("Categoría");
+  const [selected, setSelected] = useState({name:"Categoría",id:""});
   const [isOpenCreateOrderModal, setIsOpenCreateOrderModal] = useState(false);
   const [isOpenProductListModal, setIsOpenProductListModal] = useState(false);
   const [isOpenPayOptionsModal, setIsOpenPayOptionsModal] = useState(false);
@@ -134,6 +134,12 @@ const Orders = ({ salesmanName }) => {
     });
   };
 
+  const getFilterProducts = (idCategory, brand) =>{
+    filterProducts(idCategory,brand).then(async (res) =>{
+      setProducts(await res.json())
+    })
+  }
+
   useEffect(() => {
     getCategories();
     getDebtors();
@@ -153,6 +159,7 @@ const Orders = ({ salesmanName }) => {
             setSelected={setSelected}
             handleCloseModal={openCreateOrderModal}
             updateBills={updateBills}
+            updateListProductByFilter = {getFilterProducts}
           />
         }
         isOpen={isOpenCreateOrderModal}

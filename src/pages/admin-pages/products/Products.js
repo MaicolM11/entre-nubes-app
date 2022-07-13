@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { getAllCategories, deleteCategory } from "../../../services/category";
-import { getAllProducts, deleteProduct } from "../../../services/product";
+import { getAllProducts, deleteProduct,filterProducts } from "../../../services/product";
 
 import "./Products.css";
 import AnimatedModalContainer from "../../../components/modals/animation/AnimatedModalContainer";
@@ -26,7 +26,7 @@ const Products = () => {
   const [products, setProducts] = useState([]);
   const [category, setCategory] = useState({});
   const [categories, setCategories] = useState({});
-  const [selectedCategory, setSelectedCategory] = useState("Categoría");
+  const [selectedCategory, setSelectedCategory] = useState({name: 'Categoría', id : ""});
   const [isOpenAddProductModal, setIsOpenAddProductModal] = useState(false);
   const [isOpenEditProductModal, setIsOpenEditProductModal] = useState(false);
   const [isOpenDeleteProductModal, setIsOpenDeleteProductModal] =
@@ -38,6 +38,7 @@ const Products = () => {
   const [isOpenEditCategoryModal, setIsOpenEditCategoryModal] = useState(false);
   const [isOpenDeleteCategoryModal, setIsOpenDeleteCategoryModal] =
     useState(false);
+  const [searchInputValue, setSearchInputValue] = useState("")
 
   const openAddProductModal = () => {
     setIsOpenAddProductModal((isOpen) => !isOpen);
@@ -73,7 +74,7 @@ const Products = () => {
 
   const openEditProductModal = (product) => {
     setProduct(product);
-    setSelectedCategory(product.category.name);
+    setSelectedCategory({name: product.category.name , id: product.category._id});
     setIsOpenEditProductModal((isOpen) => !isOpen);
   };
 
@@ -90,6 +91,11 @@ const Products = () => {
   const handleSearch = (e) => {
     const { name, value } = e.target;
     console.log(`${name}: ${value}`);
+    console.log(selectedCategory.id)
+    setSearchInputValue(value)
+    filterProducts(selectedCategory.id?selectedCategory.id:"",value).then(async (res) =>{
+      setProducts(await res.json())
+    })
   };
 
   const deleteCurrentProduct = () => {
@@ -164,7 +170,7 @@ const Products = () => {
             product={product}
             updateProducts={getProductos}
             setIsOpen={setIsOpenEditProductModal}
-            category={selectedCategory}
+            category={selectedCategory.name}
           />
         }
         isOpen={isOpenEditProductModal}
@@ -258,8 +264,9 @@ const Products = () => {
                 icon={<Category width={25} height={25} />}
                 dropdownTitle="Categorías"
                 options={categories}
-                selectedOption={selectedCategory}
+                selectedOption={selectedCategory.name}
                 setSelectedOption={setSelectedCategory}
+                searchInput = {searchInputValue}
                 isFilter={true}
                 setIsFilter={setProducts}
               />
