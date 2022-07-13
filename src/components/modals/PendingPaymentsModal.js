@@ -21,14 +21,18 @@ const HeaderModalContainer = styled.div`
   border-bottom: 1px solid ${colors.border};
 `;
 
-const PendingPaymentsModal = ({ handleCloseModal, debts }) => {
+const PendingPaymentsModal = ({
+  handleCloseModal,
+  debts,
+  openProductsModal,
+}) => {
   return (
     <PendingPaymentsModalContainer>
       <HeaderModalContainer>
         <ModalTitle>Pagos Pendientes</ModalTitle>
         <CloseButton onClick={handleCloseModal} />
       </HeaderModalContainer>
-      <DebtsContainer debts={debts} />
+      <DebtsContainer debts={debts} openProductsModal={openProductsModal} />
     </PendingPaymentsModalContainer>
   );
 };

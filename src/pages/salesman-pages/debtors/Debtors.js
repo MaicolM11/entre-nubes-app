@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { getAllDebtors, getClientDebts } from "../../../services/debtor";
+import { getBillById } from "../../../services/bill";
 
 import "./Debtors.css";
 import { colors } from "../../../components/styles/colors";
+import { AddButtonTopContainer } from "../../../components/styles/style-components";
+import { ReactComponent as Add } from "../../../assets/icons/add.svg";
 import Header from "../../../components/header/Header";
 import SalesmanData from "../../../components/header/SalesmanData";
 import DebtorCardsContainer from "../../../components/cards-container/DebtorCardsContainer";
@@ -12,8 +15,7 @@ import Button from "../../../components/buttons/Button";
 import CreateDebtorModal from "../../../components/modals/CreateDebtorModal";
 import SuccessfulModal from "../../../components/modals/SuccessfulModal";
 import PendingPaymentsModal from "../../../components/modals/PendingPaymentsModal";
-import { AddButtonTopContainer } from "../../../components/styles/style-components";
-import { ReactComponent as Add } from "../../../assets/icons/add.svg";
+import OrderProductListModal from "../../../components/modals/OrderProductListModal";
 
 const Debtors = ({ salesmanName }) => {
   const [debtors, setDebtors] = useState([]);
@@ -22,8 +24,30 @@ const Debtors = ({ salesmanName }) => {
   const [isOpenPayModeModal, setIsOpenPayModeModal] = useState(false);
   const [isOpenPendingPaymentsModal, setIsOpenPendingPaymentsModal] =
     useState(false);
+  const [isOpenProductsBillModal, setIsOpenProductsBillModal] = useState(false);
   const [debts, setDebts] = useState([]);
-  const [products, setProducts] = useState([])
+
+  const [bill, setBill] = useState({});
+  const [products, setProducts] = useState([]);
+
+  const handleIsOpenProductsModal = () => {
+    handleIsOpenClosePendingPaymentsModal();
+    openOrderProductListModal();
+  };
+
+  const showBillProducts = (debtor) => {
+    setProducts([]);
+    setBill(debtor);
+    getBillById(debtor._id).then(async (res) => {
+      setProducts(await res.json());
+    });
+    openOrderProductListModal();
+    handleIsOpenClosePendingPaymentsModal();
+  };
+
+  const openOrderProductListModal = () => {
+    setIsOpenProductsBillModal((isOpen) => !isOpen);
+  };
 
   const openCreateDebtorModal = () => {
     setIsOpenCreateDebtorModal((isOpen) => !isOpen);
@@ -39,6 +63,7 @@ const Debtors = ({ salesmanName }) => {
   };
 
   const openPendingPaymentsModal = (debtor) => {
+    setDebts([]);
     getClientDebts(debtor._id).then(async (res) => {
       setDebts(await res.json());
     });
@@ -101,10 +126,22 @@ const Debtors = ({ salesmanName }) => {
           <PendingPaymentsModal
             handleCloseModal={handleIsOpenClosePendingPaymentsModal}
             debts={debts}
+            openProductsModal={showBillProducts}
           />
         }
         isOpen={isOpenPendingPaymentsModal}
         setIsOpen={setIsOpenPendingPaymentsModal}
+      />
+      <AnimatedModalContainer
+        modal={
+          <OrderProductListModal
+            bill={bill}
+            productsSale={products}
+            handleCloseModal={handleIsOpenProductsModal}
+          />
+        }
+        isOpen={isOpenProductsBillModal}
+        setIsOpen={setIsOpenProductsBillModal}
       />
       <Header
         title="Deudores"

@@ -11,11 +11,16 @@ const CardsContainer = styled.div`
   overflow-y: auto;
 `;
 
-const DebtsContainer = ({ debts }) => {
+const DebtsContainer = ({ debts, openProductsModal }) => {
   return (
     <CardsContainer>
       {Object.values(debts).map((debt, i) => (
-        <DebtCard key={i} debtNumber={i + 1} debt={debt} />
+        <DebtCard
+          key={i}
+          debtNumber={i + 1}
+          debt={debt}
+          openProductsModal={() => openProductsModal(debt)}
+        />
       ))}
     </CardsContainer>
   );
