@@ -23,6 +23,7 @@ const Debtors = ({ salesmanName }) => {
   const [isOpenPendingPaymentsModal, setIsOpenPendingPaymentsModal] =
     useState(false);
   const [debts, setDebts] = useState([]);
+  const [products, setProducts] = useState([])
 
   const openCreateDebtorModal = () => {
     setIsOpenCreateDebtorModal((isOpen) => !isOpen);

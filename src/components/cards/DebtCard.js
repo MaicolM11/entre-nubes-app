@@ -6,8 +6,6 @@ import { DataSpan, ModalSubtitle } from "../styles/style-components";
 
 const DebtCardContainer = styled.div`
   display: flex;
-  width: 807px;
-  height: 65px;
   background-color: ${colors.secondary};
   border: 1px solid ${colors.border};
   border-radius: 8px;
@@ -21,6 +19,7 @@ const DebtCardCenterContainer = styled.div`
   width: 100%;
   align-items: center;
   padding: 15px 25px;
+  gap: 25px;
 `;
 
 const DataContainer = styled.label`
@@ -38,6 +37,7 @@ const DataContainer = styled.label`
 
 const ButtonOptionsContainer = styled.div`
   display: flex;
+  gap: 10px;
 `;
 
 const DebtCard = ({

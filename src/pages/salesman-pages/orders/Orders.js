@@ -90,6 +90,7 @@ const Orders = ({ salesmanName }) => {
           console.log(
             "¡Deuda asignada al cliente " + currentDebtor.fullname + "!"
           );
+          updateBills();
           closeDebtorAssignModal();
         }
       });
