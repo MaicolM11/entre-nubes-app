@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getAllDebtors, getClientDebts } from "../../../services/debtor";
-import { getBillById } from "../../../services/bill";
+import { getBillById, payment } from "../../../services/bill";
 
 import "./Debtors.css";
 import { colors } from "../../../components/styles/colors";
@@ -26,8 +26,9 @@ const Debtors = ({ salesmanName }) => {
     useState(false);
   const [isOpenProductsBillModal, setIsOpenProductsBillModal] = useState(false);
   const [debts, setDebts] = useState([]);
-
+  const [debtor, setDebtor] = useState({});
   const [bill, setBill] = useState({});
+  const [debt, setDebt] = useState({});
   const [products, setProducts] = useState([]);
 
   const handleIsOpenProductsModal = () => {
@@ -35,10 +36,10 @@ const Debtors = ({ salesmanName }) => {
     openOrderProductListModal();
   };
 
-  const showBillProducts = (debtor) => {
+  const showBillProducts = (debt) => {
     setProducts([]);
-    setBill(debtor);
-    getBillById(debtor._id).then(async (res) => {
+    setBill(debt);
+    getBillById(debt._id).then(async (res) => {
       setProducts(await res.json());
     });
     openOrderProductListModal();
@@ -57,12 +58,14 @@ const Debtors = ({ salesmanName }) => {
     setIsOpenSuccessfulModal((isOpen) => !isOpen);
   };
 
-  const openPayModeModal = (debtor) => {
-    console.log(debtor.fullname);
+  const openPayModeModal = (debt) => {
+    setDebt(debt);
+    handleIsOpenClosePendingPaymentsModal();
     setIsOpenPayModeModal((isOpen) => !isOpen);
   };
 
   const openPendingPaymentsModal = (debtor) => {
+    setDebtor(debtor);
     setDebts([]);
     getClientDebts(debtor._id).then(async (res) => {
       setDebts(await res.json());
@@ -75,7 +78,12 @@ const Debtors = ({ salesmanName }) => {
   };
 
   const handleSubmitPayMode = (payMode) => {
-    console.log(payMode);
+    console.log("Deudor: " + debtor._id);
+    console.log("Modo de pago: " + payMode);
+    console.log("Deuda: " + debt._id);
+    payment(debt._id, payMode, debtor._id).then(async () => {
+      console.log("Deuda pagada");
+    });
   };
 
   const getDebtors = () => {
@@ -94,7 +102,7 @@ const Debtors = ({ salesmanName }) => {
         modal={
           <PayModeModal
             handleSubmitPayment={handleSubmitPayMode}
-            handleBackOrderOptions={setIsOpenPayModeModal}
+            handleBackOrderOptions={openPayModeModal}
           />
         }
         isOpen={isOpenPayModeModal}
@@ -127,6 +135,7 @@ const Debtors = ({ salesmanName }) => {
             handleCloseModal={handleIsOpenClosePendingPaymentsModal}
             debts={debts}
             openProductsModal={showBillProducts}
+            openPayModeModal={openPayModeModal}
           />
         }
         isOpen={isOpenPendingPaymentsModal}

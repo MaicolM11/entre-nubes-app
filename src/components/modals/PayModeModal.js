@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { getPaymentMethods } from "../../services/bill";
+
 import styled from "styled-components";
 import { colors } from "../styles/colors";
 import { ModalTitle, SelectContainer } from "../styles/style-components";
@@ -27,15 +29,20 @@ const HeaderModal = styled.div`
   align-items: center;
 `;
 
-const payModes = [
-  { mode: "Efectivo" },
-  { mode: "Daviplata" },
-  { mode: "Nequi" },
-];
-
 const PayModeModal = ({ handleSubmitPayment, handleBackOrderOptions }) => {
   const defaultPayMode = "Modo de Pago";
   const [payMode, setPayMode] = useState(defaultPayMode);
+  const [paymentMethods, setPaymentMethods] = useState([]);
+
+  const getAllPaymentMethods = () => {
+    getPaymentMethods().then(async (res) => {
+      setPaymentMethods(await res.json());
+    });
+  };
+
+  useEffect(() => {
+    getAllPaymentMethods();
+  }, []);
 
   return (
     <PayModeModalContainer>
@@ -48,7 +55,7 @@ const PayModeModal = ({ handleSubmitPayment, handleBackOrderOptions }) => {
           <PayModeSelect
             icon={<Payment width={25} height={25} />}
             dropdownTitle="Modo de Pagos"
-            options={payModes}
+            options={paymentMethods}
             selectedOption={payMode}
             setSelectedOption={setPayMode}
           />

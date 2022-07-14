@@ -25,6 +25,7 @@ const PendingPaymentsModal = ({
   handleCloseModal,
   debts,
   openProductsModal,
+  openPayModeModal,
 }) => {
   return (
     <PendingPaymentsModalContainer>
@@ -32,7 +33,11 @@ const PendingPaymentsModal = ({
         <ModalTitle>Pagos Pendientes</ModalTitle>
         <CloseButton onClick={handleCloseModal} />
       </HeaderModalContainer>
-      <DebtsContainer debts={debts} openProductsModal={openProductsModal} />
+      <DebtsContainer
+        debts={debts}
+        openProductsModal={openProductsModal}
+        openPayModeModal={openPayModeModal}
+      />
     </PendingPaymentsModalContainer>
   );
 };

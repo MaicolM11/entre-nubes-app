@@ -11,7 +11,7 @@ const CardsContainer = styled.div`
   overflow-y: auto;
 `;
 
-const DebtsContainer = ({ debts, openProductsModal }) => {
+const DebtsContainer = ({ debts, openProductsModal, openPayModeModal }) => {
   return (
     <CardsContainer>
       {Object.values(debts).map((debt, i) => (
@@ -20,6 +20,7 @@ const DebtsContainer = ({ debts, openProductsModal }) => {
           debtNumber={i + 1}
           debt={debt}
           openProductsModal={() => openProductsModal(debt)}
+          openPayModeModal={() => openPayModeModal(debt)}
         />
       ))}
     </CardsContainer>

@@ -42,6 +42,14 @@ export const getBillById = (id) => {
   return fetch(BASE_URL + `/${id}/sales`, requestOptions);
 };
 
+export const getPaymentMethods = () => {
+  const requestOptions = {
+    method: "GET",
+    headers: { "Content-Type": "application/json", authorization: getToken() },
+  };
+  return fetch(BASE_URL + `/payment-methods`, requestOptions);
+};
+
 export const assignBill = (id, debtorId) => {
   const requestOptions = {
     method: "PUT",
@@ -51,4 +59,16 @@ export const assignBill = (id, debtorId) => {
     }),
   };
   return fetch(BASE_URL + `/${id}/due`, requestOptions);
+};
+
+export const payment = (id, paymentMethod, debtorId) => {
+  const requestOptions = {
+    method: "PUT",
+    headers: { "Content-Type": "application/json", authorization: getToken() },
+    body: JSON.stringify({
+      payment_method: paymentMethod,
+      debtor_id: debtorId,
+    }),
+  };
+  return fetch(BASE_URL + `/${id}/due/payment`, requestOptions);
 };
