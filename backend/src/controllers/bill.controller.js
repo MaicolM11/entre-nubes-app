@@ -103,15 +103,15 @@ export const assingBillToDebtor = (req, res) => {
 
 export const payDueBill = (req, res) => {
   const { id: bill_id } = req.params;
-  const { debtor_id } = req.body;
+  const { debtor_id, payment_method } = req.body;
 
   Debtor.findById(debtor_id).populate('debts.item')
       .then(debtor => debtor.debts.find(x => x.item._id == bill_id))
       .then(bill => {
           let newBill = bill.item;
-          newBill.status = BILL_STATES.PAID
-          payment_method = req.body.payment_method.toUpperCase()
-          return newBill.save()
+          newBill.status = BILL_STATES.PAID;
+          newBill.payment_method = payment_method.toUpperCase();
+          return newBill.save();
       })
       .then(() => res.sendStatus(200))
       .catch(error => res.status(400).json({ message: error.message }));
