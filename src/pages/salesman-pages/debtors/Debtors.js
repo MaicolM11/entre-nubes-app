@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getAllDebtors, getClientDebts } from "../../../services/debtor";
-import { getBillById, payment } from "../../../services/bill";
+import { getBillById, debtorPayment } from "../../../services/bill";
 
 import "./Debtors.css";
 import { colors } from "../../../components/styles/colors";
@@ -46,6 +46,15 @@ const Debtors = ({ salesmanName }) => {
     handleIsOpenClosePendingPaymentsModal();
   };
 
+  const updateBillProducts = () => {
+    setDebts([]);
+    getClientDebts(debtor._id).then(async (res) => {
+      setDebts(await res.json());
+    });
+    openClosePayModeModal();
+    handleIsOpenClosePendingPaymentsModal();
+  };
+
   const openOrderProductListModal = () => {
     setIsOpenProductsBillModal((isOpen) => !isOpen);
   };
@@ -58,10 +67,14 @@ const Debtors = ({ salesmanName }) => {
     setIsOpenSuccessfulModal((isOpen) => !isOpen);
   };
 
+  const openClosePayModeModal = () => {
+    setIsOpenPayModeModal((isOpen) => !isOpen);
+  };
+
   const openPayModeModal = (debt) => {
     setDebt(debt);
     handleIsOpenClosePendingPaymentsModal();
-    setIsOpenPayModeModal((isOpen) => !isOpen);
+    openClosePayModeModal();
   };
 
   const openPendingPaymentsModal = (debtor) => {
@@ -77,12 +90,10 @@ const Debtors = ({ salesmanName }) => {
     setIsOpenPendingPaymentsModal((isOpen) => !isOpen);
   };
 
-  const handleSubmitPayMode = (payMode) => {
-    console.log("Deudor: " + debtor._id);
-    console.log("Modo de pago: " + payMode);
-    console.log("Deuda: " + debt._id);
-    payment(debt._id, payMode, debtor._id).then(async () => {
-      console.log("Deuda pagada");
+  const handleSubmitDebtPayment = (payMode) => {
+    debtorPayment(debt._id, payMode, debtor._id).then(async () => {
+      updateBillProducts();
+      console.log("Deudor a pagado una deuda.");
     });
   };
 
@@ -101,7 +112,7 @@ const Debtors = ({ salesmanName }) => {
       <AnimatedModalContainer
         modal={
           <PayModeModal
-            handleSubmitPayment={handleSubmitPayMode}
+            handleSubmitPayment={handleSubmitDebtPayment}
             handleBackOrderOptions={openPayModeModal}
           />
         }

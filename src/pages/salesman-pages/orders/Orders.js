@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { getAllProducts, filterProducts} from "../../../services/product";
+import { getAllProducts, filterProducts } from "../../../services/product";
 import { getAllCategories } from "../../../services/category";
 import {
   getAllSalesToDay,
   getBillById,
   assignBill,
+  payment,
 } from "../../../services/bill";
 import { getAllDebtors } from "../../../services/debtor";
 
@@ -30,7 +31,7 @@ const Orders = ({ salesmanName }) => {
   const [getBills, setBills] = useState([]);
   const [bill, setBill] = useState();
   const [productsSale, setProductsSale] = useState([]);
-  const [selected, setSelected] = useState({name:"Categoría",id:""});
+  const [selected, setSelected] = useState({ name: "Categoría", id: "" });
   const [isOpenCreateOrderModal, setIsOpenCreateOrderModal] = useState(false);
   const [isOpenProductListModal, setIsOpenProductListModal] = useState(false);
   const [isOpenPayOptionsModal, setIsOpenPayOptionsModal] = useState(false);
@@ -97,8 +98,12 @@ const Orders = ({ salesmanName }) => {
     }
   };
 
-  const handleSubmitPayMode = (payMode) => {
-    console.log(payMode);
+  const handleSubmitPayment = (payMode) => {
+    payment(bill._id, payMode).then(async () => {
+      updateBills();
+      setIsOpenPayModeModal((isOpen) => !isOpen);
+      console.log("Deuda pagada.");
+    });
   };
 
   const getCategories = () => {
@@ -134,11 +139,11 @@ const Orders = ({ salesmanName }) => {
     });
   };
 
-  const getFilterProducts = (idCategory, brand) =>{
-    filterProducts(idCategory,brand).then(async (res) =>{
-      setProducts(await res.json())
-    })
-  }
+  const getFilterProducts = (idCategory, brand) => {
+    filterProducts(idCategory, brand).then(async (res) => {
+      setProducts(await res.json());
+    });
+  };
 
   useEffect(() => {
     getCategories();
@@ -159,7 +164,7 @@ const Orders = ({ salesmanName }) => {
             setSelected={setSelected}
             handleCloseModal={openCreateOrderModal}
             updateBills={updateBills}
-            updateListProductByFilter = {getFilterProducts}
+            updateListProductByFilter={getFilterProducts}
           />
         }
         isOpen={isOpenCreateOrderModal}
@@ -202,7 +207,7 @@ const Orders = ({ salesmanName }) => {
       <AnimatedModalContainer
         modal={
           <PayModeModal
-            handleSubmitPayment={handleSubmitPayMode}
+            handleSubmitPayment={handleSubmitPayment}
             handleBackOrderOptions={handleBackOrderOptionsTwo}
           />
         }
