@@ -127,10 +127,10 @@ const CreateOrderModal = ({
   setSelected,
   handleCloseModal,
   updateBills,
-  updateListProductByFilter
+  updateListProductByFilter,
 }) => {
   const [orderedProducts, setOrderedProducts] = useState([]);
-  const [searchInputValue, setSearchInputValue] = useState("")
+  const [searchInputValue, setSearchInputValue] = useState("");
   let productsOnSale = [];
 
   const handleSubmitOrder = () => {
@@ -138,16 +138,20 @@ const CreateOrderModal = ({
       const productOnSale = { product: product.id, quantity: product.quantity };
       productsOnSale.push(productOnSale);
     });
-    postBill(placeValue.place, productsOnSale).then(async (res) => {
-      const data = await res.json();
-      if (res.ok) {
-        clearInputs();
-        handleCloseModal();
-        updateBills();
-      } else {
-        alert(data.message);
-      }
-    });
+    if (productsOnSale.length === 0) {
+      console.log("¡Aún no se han agregado productos!");
+    } else {
+      postBill(placeValue.place, productsOnSale).then(async (res) => {
+        const data = await res.json();
+        if (res.ok) {
+          clearInputs();
+          handleCloseModal();
+          updateBills();
+        } else {
+          alert(data.message);
+        }
+      });
+    }
   };
 
   const {
@@ -174,10 +178,9 @@ const CreateOrderModal = ({
   };
 
   const handleSearchChange = (e) => {
-    const { name, value } = e.target;
-    console.log(`${name}: ${value}`);
-    setSearchInputValue(value)
-    updateListProductByFilter(selected.id,value)
+    const { value } = e.target;
+    setSearchInputValue(value);
+    updateListProductByFilter(selected.id, value);
   };
 
   const deleteProductToTable = (id) => {
@@ -225,7 +228,7 @@ const CreateOrderModal = ({
                     options={categories}
                     selectedOption={selected.name}
                     setSelectedOption={setSelected}
-                    searchInput= {searchInputValue}
+                    searchInput={searchInputValue}
                     isFilter={true}
                     setIsFilter={setProducts}
                   />
