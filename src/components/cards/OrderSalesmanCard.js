@@ -37,12 +37,14 @@ const OrderSalesmanCard = ({
             text="Productos"
             onClick={handleOpenProductList}
           />
-          <Button
-            size="mediumSmallButton"
-            theme="edit"
-            text="Pagar"
-            onClick={handlePayOptions}
-          />
+          {status !== "PAGO" && (
+            <Button
+              size="mediumSmallButton"
+              theme="edit"
+              text="Pagar"
+              onClick={handlePayOptions}
+            />
+          )}
         </OrderCardButtonsContainer>
       </OrderCardDataContainer>
     </OrderCardContainer>

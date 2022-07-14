@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
   OrderCardContainer,
   OrderCardDataContainer,
@@ -13,7 +13,6 @@ import State from "../states/State";
 import Button from "../buttons/Button";
 import styled from "styled-components";
 import { colors } from "../styles/colors";
-import { getUserById } from "../../services/user";
 
 const DataInfoContainer = styled.label`
   display: flex;
@@ -37,8 +36,6 @@ const OrderAdminCard = ({
   gain,
   handleOpenProductList,
 }) => {
-
-
   return (
     <OrderCardContainer>
       <OrderCardDataContainer>
@@ -52,7 +49,7 @@ const OrderAdminCard = ({
         <DataInfoContainer>
           Ganancia: <DataSpan>${gain}</DataSpan>
         </DataInfoContainer>
-        <State state={status=="PENDIENTE"?"Pendiente":"Pagado"} />
+        <State state={status} />
         <OrderCardButtonsContainer>
           <Button
             size="mediumSmallButton"
