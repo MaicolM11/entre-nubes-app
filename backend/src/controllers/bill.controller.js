@@ -125,7 +125,9 @@ export const deskClosing = (req, res) => {
 }
 
 export const getPaymentMethods = (req, res) => {
-  res.status(200).json(Object.values(PAYMENT_METHODS))
+  let data = [];
+  Object.values(PAYMENT_METHODS).forEach(x => data.push({mode: x}))
+  res.status(200).json(data)
 }
 
 export const emitLastBills = (socket = global.sockets) => {

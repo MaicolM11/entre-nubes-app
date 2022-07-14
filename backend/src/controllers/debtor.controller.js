@@ -1,4 +1,5 @@
 import Debtor from '../models/Debtor';
+import { BILL_STATES } from '../models/Enums';
 
 export const create = (req, res) => {
     
@@ -20,10 +21,10 @@ export const getDebtsOfDebtor = (req, res) => {
     Debtor.findById(id, 'debts').populate({
             path: 'debts.item',
             select: { 'sales': 0 },
-            // match: { status: "PENDIENTE" },
+            match: { status: BILL_STATES.CREDIT },
         })
         .then(data => {
-            let debts = data.debts.map(x => x.item);
+            let debts = data.debts.map(x => x.item).filter(x => x);
             res.status(200).json(debts)
         })
         .catch(error => res.status(400).json({ message: error.message }));
