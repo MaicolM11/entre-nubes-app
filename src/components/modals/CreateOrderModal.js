@@ -122,6 +122,7 @@ const InputContainer = styled.div`
 const CreateOrderModal = ({
   categories,
   products,
+  updateProducts,
   setProducts,
   selected,
   setSelected,
@@ -147,6 +148,7 @@ const CreateOrderModal = ({
           clearInputs();
           handleCloseModal();
           updateBills();
+          updateProducts();
         } else {
           alert(data.message);
         }

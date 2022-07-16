@@ -159,6 +159,7 @@ const Orders = ({ salesmanName }) => {
           <CreateOrderModal
             categories={categories}
             products={products}
+            updateProducts={getProductos}
             setProducts={setProducts}
             selected={selected}
             setSelected={setSelected}
