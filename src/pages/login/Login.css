@@ -48,8 +48,16 @@
   color: var(--text-color);
 }
 
+.user-not-found-span-container {
+  font-size: 12px;
+  font-weight: bold;
+  font-family: var(--roboto);
+  color: var(--delete-color);
+  min-height: 15px;
+}
+
 .forgotten-password-span-container {
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 500;
   font-family: var(--roboto);
   color: var(--text-color);

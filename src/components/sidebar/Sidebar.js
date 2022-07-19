@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { colors } from "../styles/colors";
 import EntreNubesLogo from "../../assets/images/entre-nubes-logo-250w-140h.png";
+import { NavLink } from "react-router-dom";
 import NavLinkButton from "./sidebar-buttons/navlink-button/NavLinkButton";
 import ExitLinkButton from "./sidebar-buttons/exit-link-button/ExitLinkButton";
 import { ReactComponent as Exit } from "../../assets/icons/exit.svg";
@@ -30,6 +31,7 @@ const SideBarLogoContainer = styled.div`
   width: 250px;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 `;
 
 const SideBarSeparator = styled.div`
@@ -60,13 +62,15 @@ const SideBarExitContainer = styled.div`
   justify-content: center;
 `;
 
-const Sidebar = ({ links }) => {
+const Sidebar = ({ mainLink, links }) => {
   return (
     <SideBarContainer>
       <SideBarCenterContainer>
-        <SideBarLogoContainer>
-          <img src={EntreNubesLogo} alt="entre-nubes-logo" />
-        </SideBarLogoContainer>
+        <NavLink to={mainLink.path}>
+          <SideBarLogoContainer>
+            <img src={EntreNubesLogo} alt="entre-nubes-logo" />
+          </SideBarLogoContainer>
+        </NavLink>
         <SideBarSeparator />
         <SideBarButtonsContainer>
           <SideBarOptionsContainer>

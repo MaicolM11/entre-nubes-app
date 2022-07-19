@@ -1,30 +1,31 @@
 import React from "react";
-import "./AdminHomepage.css";
 import { Routes, Route } from "react-router-dom";
-import { AdminLinks } from "../../../routes/Links";
+import { AdminMainLink, AdminLinks } from "../../../routes/Links";
 
-//Components
+import "./AdminHomepage.css";
 import Sidebar from "../../../components/sidebar/Sidebar";
 
-//Pages
+import Welcome from "../../welcome/Welcome";
 import Orders from "../orders/Orders";
-import Reports from "../reports/Reports";
 import Products from "../products/Products";
-import Salesmans from "../salesmans/Salesmans";
 import Boliranas from "../boliranas/Boliranas";
+import Reports from "../reports/Reports";
+import Salesmans from "../salesmans/Salesmans";
+import MenuStatus from "../../menu-status/MenuStatus";
 
 const AdminHomepage = () => {
   return (
     <div className="admin-homepage-container">
-      <Sidebar links={AdminLinks} />
+      <Sidebar mainLink={AdminMainLink} links={AdminLinks} />
       <div className="admin-pages-container">
         <Routes>
-          <Route index element={<Orders />} />
+          <Route index element={<Welcome />} />
           <Route path="orders" element={<Orders />} />
-          <Route path="reports" element={<Reports />} />
           <Route path="products" element={<Products />} />
-          <Route path="salesmans" element={<Salesmans />} />
           <Route path="boliranas" element={<Boliranas />} />
+          <Route path="reports" element={<Reports />} />
+          <Route path="salesmans" element={<Salesmans />} />
+          <Route path="*" element={<MenuStatus />} />
         </Routes>
       </div>
     </div>

@@ -1,55 +1,53 @@
 import React, { useState } from "react";
-import "./Login.css";
-import { isFocusable } from "@testing-library/user-event/dist/utils";
 import { reqLogin } from "../../services/auth";
 import { Link, useNavigate } from "react-router-dom";
-import { colors } from "../../components/styles/colors";
+import useLoginForm from "../../validate-forms/useLoginForm";
+
+import "./Login.css";
 import Logo from "../../assets/images/entre-nubes-logo-399w-226h.png";
 import DataInput from "../../components/inputs/DataInput";
 import PasswordInput from "../../components/inputs/PasswordInput";
 import Button from "../../components/buttons/Button";
 import { ReactComponent as LockIcon } from "../../assets/icons/lock.svg";
 import { ReactComponent as UserIcon } from "../../assets/icons/user.svg";
+import {
+  ErrorMessageContainer,
+  ErrorMessage,
+  ErrorMessageSpace,
+} from "../../components/styles/style-components";
 
 const Login = () => {
   const navigate = useNavigate();
-
-  const [dataIconColor, setDataIconColor] = useState(false);
-  const [passwordIconColor, setPasswordIconColor] = useState(false);
-
-  const userIconColor = dataIconColor ? colors.highlighted : colors.brand;
-  const lockIconColor = passwordIconColor ? colors.highlighted : colors.brand;
-
-  const [user, setUser] = useState({
-    email: "",
-    password: "",
-  });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setUser((values) => {
-      return {
-        ...values,
-        [name]: value,
-      };
-    });
-  };
+  const [userNotFound, setUserNotFound] = useState("");
 
   const redirectByRol = (rol) => {
     if (rol === "ADMIN") navigate("/admin");
     else if (rol === "SALESMAN") navigate("/salesman");
   };
 
-  const submitUser = () => {
-    reqLogin(user.email, user.password).then(async (res) => {
+  const handleSubmitUserLogin = () => {
+    userLogin();
+  };
+
+  const {
+    loginValues,
+    handleChangeLogin,
+    handleSubmitLogin,
+    clearLoginValues,
+    errors,
+  } = useLoginForm(handleSubmitUserLogin);
+
+  const userLogin = () => {
+    reqLogin(loginValues.username, loginValues.password).then(async (res) => {
       let data = await res.json();
       if (res.ok) {
         Object.entries(data).forEach(([key, value]) => {
           localStorage.setItem(key, value);
         });
         redirectByRol(data.rol);
+        clearLoginValues();
       } else {
-        alert(data.message);
+        setUserNotFound("¡Usuario no encontrado!");
       }
     });
   };
@@ -63,29 +61,46 @@ const Login = () => {
         <div className="login-data-container">
           <label className="login-title">Inicio de Sesión</label>
           <div className="login-options-container">
-            <DataInput
-              size="normalInput"
-              name="email"
-              icon={<UserIcon />}
-              isStroke={true}
-              isFill={false}
-              placeholder="Usuario"
-              type="text"
-              onChange={handleChange}
-            />
-            <PasswordInput
-              size="normalInput"
-              name="password"
-              icon={<LockIcon fill="black" />}
-              placeholder="Contraseña"
-              onChange={handleChange}
-            />
+            <ErrorMessageContainer>
+              <DataInput
+                size="normalInput"
+                icon={<UserIcon />}
+                isStroke={true}
+                isFill={false}
+                type="text"
+                name="username"
+                placeholder="Usuario"
+                onChange={handleChangeLogin}
+              />
+              {errors.username ? (
+                <ErrorMessage>{errors.username}</ErrorMessage>
+              ) : (
+                <ErrorMessageSpace />
+              )}
+            </ErrorMessageContainer>
+            <ErrorMessageContainer>
+              <PasswordInput
+                size="normalInput"
+                icon={<LockIcon />}
+                name="password"
+                placeholder="Contraseña"
+                onChange={handleChangeLogin}
+              />
+              {errors.password ? (
+                <ErrorMessage>{errors.password}</ErrorMessage>
+              ) : (
+                <ErrorMessageSpace />
+              )}
+            </ErrorMessageContainer>
             <Button
               size="normalButton"
               theme="highlighted"
               text="Iniciar Sesión"
-              onClick={submitUser}
+              onClick={handleSubmitLogin}
             />
+            <span className="user-not-found-span-container">
+              {userNotFound}
+            </span>
             <Link to="/recover-password" style={{ textDecoration: "none" }}>
               <span className="forgotten-password-span-container">
                 ¿Olvido su contraseña?

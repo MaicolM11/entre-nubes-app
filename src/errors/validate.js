@@ -11,6 +11,56 @@ export const categoryValidation = (values) => {
   return errors;
 };
 
+export const debtorValidation = (values) => {
+  const errors = {};
+
+  if (!values.fullName) {
+    errors.fullName = "Nombre requerido";
+  }
+
+  if (!values.cc) {
+    errors.cc = " Documento de identidad requerido";
+  } else if (!numberRegex.test(values.cc)) {
+    errors.cc = "El documento de identidad no puede contener letras";
+  }
+
+  if (!values.phone) {
+    errors.phone = "El número de teléfono es requerido";
+  } else if (!numberRegex.test(values.phone)) {
+    errors.phone = "El número de teléfono no puede contener letras";
+  } else if (!(values.phone.split("").length == 10)) {
+    errors.phone = "Un número telefónico consta de 10 numeros";
+  }
+
+  return errors;
+};
+
+export const increaseStockValidation = (values) => {
+  const errors = {};
+
+  if (!numberRegex.test(values.stock)) {
+    errors.stock = "Solo dede ingresar números";
+  } else if (values.stock <= 0) {
+    errors.stock = "El valor ingresado debe ser mayor a 0";
+  }
+
+  return errors;
+};
+
+export const loginValidation = (values) => {
+  const errors = {};
+
+  if (!values.username) {
+    errors.username = "Usuario requerido";
+  }
+
+  if (!values.password) {
+    errors.password = "Contraseña requerida";
+  }
+
+  return errors;
+};
+
 export const placeValidation = (values) => {
   const errors = {};
 
@@ -96,42 +146,6 @@ export const salesmanValidation = (values) => {
     errors.repeatPassWord = "Se debe confirmar contraseña";
   } else if (!(values.password == values.repeatPassWord)) {
     errors.repeatPassWord = "Las contraseñas no coinciden";
-  }
-
-  return errors;
-};
-
-export const debtorValidation = (values) => {
-  const errors = {};
-
-  if (!values.fullName) {
-    errors.fullName = "Nombre requerido";
-  }
-
-  if (!values.cc) {
-    errors.cc = " Documento de identidad requerido";
-  } else if (!numberRegex.test(values.cc)) {
-    errors.cc = "El documento de identidad no puede contener letras";
-  }
-
-  if (!values.phone) {
-    errors.phone = "El número de teléfono es requerido";
-  } else if (!numberRegex.test(values.phone)) {
-    errors.phone = "El número de teléfono no puede contener letras";
-  } else if (!(values.phone.split("").length == 10)) {
-    errors.phone = "Un número telefónico consta de 10 numeros";
-  }
-
-  return errors;
-};
-
-export const increaseStockValidation = (values) => {
-  const errors = {};
-
-  if (!numberRegex.test(values.stock)) {
-    errors.stock = "Solo dede ingresar números";
-  } else if (values.stock <= 0) {
-    errors.stock = "El valor ingresado debe ser mayor a 0";
   }
 
   return errors;

@@ -12,10 +12,12 @@ import ProductListContainer from "../cards-container/ProductListContainer";
 const OrderProductListContainer = styled.div`
   display: flex;
   flex-direction: column;
-  height: 598px;
+  min-width: 1000px;
+  min-height: 600px;
   background-color: ${colors.secondary};
   border-radius: 16px;
 `;
+
 const HeaderProductListContainer = styled.div`
   display: flex;
   align-items: center;

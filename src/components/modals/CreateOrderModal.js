@@ -70,8 +70,8 @@ const ProductsFilterContainer = styled.div`
 const ProductsCardContainer = styled.div`
   display: flex;
   width: 100%;
-  min-height: 535px;
-  height: 535px;
+  min-height: 575px;
+  max-height: 575px;
 `;
 
 const OrdersContainer = styled.div`

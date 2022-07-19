@@ -5,6 +5,8 @@ import { ReactComponent as Users } from "../assets/icons/users.svg";
 import { ReactComponent as Frog } from "../assets/icons/frog.svg";
 import { ReactComponent as MoneyBillWave } from "../assets/icons/money-bill-wave.svg";
 
+export const AdminMainLink = { path: "/admin" };
+
 export const AdminLinks = [
   {
     path: "/admin/orders",
@@ -12,26 +14,28 @@ export const AdminLinks = [
     text: "Pedidos",
   },
   {
-    path: "/admin/reports",
-    icon: <BarChart />,
-    text: "Reportes",
-  },
-  {
     path: "/admin/products",
     icon: <WineBottle />,
     text: "Productos",
-  },
-  {
-    path: "/admin/salesmans",
-    icon: <Users />,
-    text: "Vendedores",
   },
   {
     path: "/admin/boliranas",
     icon: <Frog />,
     text: "Boliranas",
   },
+  {
+    path: "/admin/reports",
+    icon: <BarChart />,
+    text: "Reportes",
+  },
+  {
+    path: "/admin/salesmans",
+    icon: <Users />,
+    text: "Vendedores",
+  },
 ];
+
+export const SalesmanMainLink = { path: "/salesman" };
 
 export const SalesmanLinks = [
   {
@@ -40,13 +44,13 @@ export const SalesmanLinks = [
     text: "Pedidos",
   },
   {
-    path: "/salesman/debtors",
-    icon: <MoneyBillWave />,
-    text: "Deudores",
-  },
-  {
     path: "/salesman/boliranas",
     icon: <Frog />,
     text: "Boliranas",
+  },
+  {
+    path: "/salesman/debtors",
+    icon: <MoneyBillWave />,
+    text: "Deudores",
   },
 ];

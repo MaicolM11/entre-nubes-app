@@ -17,12 +17,10 @@ const DataInput = ({
   defaultValue,
   onChange,
 }) => {
-
   return (
     <InputContainer size={size} isStroke={isStroke} isFill={isFill}>
       <InputCenterContainer>
-     
-      <IconContainer>{icon}</IconContainer>
+        <IconContainer>{icon}</IconContainer>
         <InputValueContainer
           type={type}
           name={name}
