@@ -1,6 +1,7 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import { AdminMainLink, AdminLinks } from "../../../routes/Links";
+import { WelcomeAdminPageMessage } from "../../../messages/PageMessages";
 
 import "./AdminHomepage.css";
 import Sidebar from "../../../components/sidebar/Sidebar";
@@ -19,7 +20,17 @@ const AdminHomepage = () => {
       <Sidebar mainLink={AdminMainLink} links={AdminLinks} />
       <div className="admin-pages-container">
         <Routes>
-          <Route index element={<Welcome />} />
+          <Route
+            index
+            element={
+              <Welcome
+                img={WelcomeAdminPageMessage.img}
+                title={WelcomeAdminPageMessage.title}
+                subTitle={WelcomeAdminPageMessage.subTitle}
+                description={WelcomeAdminPageMessage.description}
+              />
+            }
+          />
           <Route path="orders" element={<Orders />} />
           <Route path="products" element={<Products />} />
           <Route path="boliranas" element={<Boliranas />} />
