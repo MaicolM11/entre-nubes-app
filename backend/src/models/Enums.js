@@ -8,3 +8,5 @@ export const PAYMENT_METHODS = {
     DAVIPLATA: 'DAVIPLATA',
     BANCOLOMBIA: 'BANCOLOMBIA'
 };
+
+export const BOLIRANAS_STATES = { BUSY: 'Ocupada', AVAILABLE: 'Libre' }

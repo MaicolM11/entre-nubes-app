@@ -1,5 +1,7 @@
 import Product from "../models/Product";
 import { productFilter } from "../utils/filter.util";
+import Category from '../models/Category';
+import { createNotification } from './notification.controller';
 
 export const getAll = (req, res) => {
     Product.find().populate('category')
@@ -59,10 +61,43 @@ export const searchProduct = (req, res) => {
 }
 
 export const updateStockToProduct = (id, value) => {
-    return Product.findByIdAndUpdate(id, { $inc: { 'stock': value } }, 
-            { new: true, runValidators: true  })
+    return Product.findByIdAndUpdate(id, 
+                { $inc: { 'stock': value } }, 
+                { new: true, runValidators: true  }
+            ).then(product => {
+                checkQuantity(product);
+                return product;
+            })
 }
 
 export const getAllByIds = async (ids) => {
     return await Product.find({'_id': { $in: ids }});
+}
+
+const checkQuantity = async (product) => {
+    
+    const category = await Category.findById(product.category);
+    
+    if(!category.minimum_quantities) return;
+
+    if(product.isNotify) {
+        if(category.minimum_quantities < product.stock) {
+            product.isNotify = false;
+            product.save()
+        }
+        return;
+    }
+
+    const notify = category.minimum_quantities >= product.stock;
+    
+    if(notify) {
+        const data = {
+            type: 'Inventario',
+            message: `${product.brand} ${product.presentatio}: Producto con pocas unidades.`
+        }
+        product.isNotify = true;
+        product.save()
+        createNotification(data)       
+    }   
+
 }
