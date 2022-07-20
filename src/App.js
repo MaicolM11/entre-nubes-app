@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { PageNotFoundMessage } from "./messages/PageMessages";
 
 import "./App.css";
 import Login from "./pages/login/Login";
@@ -46,7 +47,16 @@ const App = () => {
             </SalesmanProtectedRoute>
           }
         />
-        <Route path="/*" element={<Status />} />
+        <Route
+          path="/*"
+          element={
+            <Status
+              img={PageNotFoundMessage.img}
+              title={PageNotFoundMessage.title}
+              description={PageNotFoundMessage.description}
+            />
+          }
+        />
       </Routes>
     </BrowserRouter>
   );

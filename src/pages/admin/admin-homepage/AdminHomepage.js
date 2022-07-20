@@ -1,7 +1,10 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import { AdminMainLink, AdminLinks } from "../../../routes/Links";
-import { WelcomeAdminPageMessage } from "../../../messages/PageMessages";
+import {
+  WelcomeAdminPageMessage,
+  PageNotFoundMessage,
+} from "../../../messages/PageMessages";
 
 import "./AdminHomepage.css";
 import Sidebar from "../../../components/sidebar/Sidebar";
@@ -36,7 +39,16 @@ const AdminHomepage = () => {
           <Route path="boliranas" element={<Boliranas />} />
           <Route path="reports" element={<Reports />} />
           <Route path="salesmans" element={<Salesmans />} />
-          <Route path="*" element={<MenuStatus />} />
+          <Route
+            path="*"
+            element={
+              <MenuStatus
+                img={PageNotFoundMessage.img}
+                title={PageNotFoundMessage.title}
+                description={PageNotFoundMessage.description}
+              />
+            }
+          />
         </Routes>
       </div>
     </div>

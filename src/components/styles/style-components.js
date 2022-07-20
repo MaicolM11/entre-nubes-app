@@ -7,6 +7,11 @@ const size = {
     height: "45px",
     fontSize: "16px",
   },
+  normalMediumButton: {
+    width: "250px",
+    height: "45px",
+    fontSize: "16px",
+  },
   mediumButton: {
     width: "187px",
     height: "45px",
