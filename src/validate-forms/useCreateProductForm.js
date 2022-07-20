@@ -24,7 +24,7 @@ const useCreateProductForm = (selectedCategory, categories, callback) => {
   const handleSubmitCreateProduct = (e) => {
     e.preventDefault();
     categories.map((category) => {
-      if (category.name === selectedCategory) {
+      if (category.name === selectedCategory.name) {
         productValues.category = category._id;
       }
     });

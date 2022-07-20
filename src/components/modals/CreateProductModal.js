@@ -73,7 +73,7 @@ const CreateProductModal = ({
   isOpen,
   setIsOpen,
 }) => {
-  const defaultCategory = "Categoría";
+  const defaultCategory = {name:"Categoría", id:""};
   const [selectedCategory, setSelectedCategory] = useState(defaultCategory);
   const [categories, setCategories] = useState({});
 
@@ -194,7 +194,7 @@ const CreateProductModal = ({
                           icon={<Category width={25} height={25} />}
                           dropdownTitle="Categorías"
                           options={categories}
-                          selectedOption={selectedCategory}
+                          selectedOption={selectedCategory.name}
                           setSelectedOption={setSelectedCategory}
                           isFilter={false}
                         />
