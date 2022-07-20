@@ -5,8 +5,10 @@ import { colors } from "../../components/styles/colors";
 
 const WelcomeContainer = styled.div`
   display: flex;
-  width: 790px;
-  height: 619px;
+  min-width: 700px;
+  width: 925px;
+  min-height: 600px;
+  height: 625px;
   background-color: ${colors.secondary};
   border-radius: 25px;
   border: 1px solid ${colors.border};
@@ -24,31 +26,22 @@ const WelcomeCenterContainer = styled.div`
 
 const WelcomeImgContainer = styled.div`
   display: flex;
-  width: 375px;
-  height: 375px;
-  background-color: darkgoldenrod;
 `;
 
 const WelcomeTextContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 590px;
-  height: 119px;
   align-items: center;
   justify-content: center;
   gap: 15px;
-  background-color: darkkhaki;
 `;
 
 const WelcomeBoldTextContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 432px;
-  height: 61px;
   align-items: center;
   justify-content: center;
   gap: 5px;
-  background-color: darkcyan;
 `;
 
 const WelcomeSystemTitleLabel = styled.label`
