@@ -8,6 +8,7 @@ const HeaderContainer = styled.div`
   width: 100%;
   height: 85px;
   border-bottom: solid 1px ${colors.border};
+  background-color: ${colors.secondary};
 `;
 
 const HeaderCenterContainer = styled.div`

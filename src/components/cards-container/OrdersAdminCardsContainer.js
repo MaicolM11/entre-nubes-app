@@ -1,6 +1,7 @@
 import React from "react";
 import OrderAdminCard from "../cards/OrderAdminCard";
 import styled from "styled-components";
+import { colors } from "../styles/colors";
 
 const CardsContainer = styled.div`
   display: grid;
@@ -10,6 +11,7 @@ const CardsContainer = styled.div`
   padding: 25px;
   overflow-x: hidden;
   overflow-y: auto;
+  background-color: ${colors.cardsBackground};
 `;
 
 const OrdersAdminCardsContainer = ({ bills, handleOpenProductList }) => {

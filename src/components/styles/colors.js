@@ -13,5 +13,6 @@ export const colors = {
   delete: "#ff4343",
   deleteHover: "#ff6565",
   dark: "#000000",
-  darkHover : "#535353",
+  darkHover: "#535353",
+  cardsBackground: "#efefef",
 };

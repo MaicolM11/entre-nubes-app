@@ -404,6 +404,7 @@ export const OrderCardContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 194px;
+  background-color: ${colors.secondary};
   gap: 25px;
   border: 1px solid ${colors.border};
   border-radius: 8px;
