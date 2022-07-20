@@ -4,10 +4,15 @@ import { updateStockToProduct, getAllByIds } from './product.controller';
 export const findProductsAndUpdate = async (sales) => {
 
     const products = await getAllByIds(sales.map(sale => sale.product));
+    
+    if(products.length !== sales.length) {
+        throw new Error("Any product doesn't exist")
+    }
 
     for await (let prod of products) {
-        if(prod.stock < sales.find(x => x.product == prod._id).quantity) {
-            throw new Error("stock not available")
+        let productOfBill = sales.find(x => x.product == prod._id);
+        if(prod.stock < productOfBill.quantity) {
+            throw new Error("Stock not available")
         }
     }
 

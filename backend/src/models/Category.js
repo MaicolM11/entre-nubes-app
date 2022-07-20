@@ -5,7 +5,8 @@ const categorySchema = mongoose.Schema(
         name: {
             type: String,
             unique: true,
-        }
+        },
+        minimum_quantities: Number
     },
     {
         timestamps: false,

@@ -21,7 +21,11 @@ const productSchema = mongoose.Schema(
             type: Number,
             default: 0
         },
-        img_url: String
+        img_url: String,
+        isNotify: {
+            type: Boolean,
+            default: false
+        }
     },
     {
         timestamps: false,

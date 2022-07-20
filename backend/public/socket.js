@@ -2,12 +2,14 @@
 
 (function() {
     
-    let token = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYzQ5OWEwYTQzZTU0ZmM4NTIyNmQ4MCIsImlhdCI6MTY1NzExOTIwNywiZXhwIjoxNjU3MTU1MjA3fQ.pcXOXPWGPTsiu4P8gZWTNxVN7IA3AEfhjq-s0XLaGBY";
+    let token = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyZDE4YjljMTc5YTc0NzQ4NDgxYjQzMiIsImlhdCI6MTY1ODI0NjIwMCwiZXhwIjoxNjU4MjgyMjAwfQ.SDRKxd--UffDFH5Gd2lS6BYNumnOSiIfXWSEifaSW70";
     const socket = io('ws://localhost:8000', {
         query: { token }
     });
   
   socket.on('sales', (data) => console.log(data))
+
+  socket.on('notifications', (data) => console.log('noti', data))
 
   socket.on("connect", () => {
     console.log(`connect ${socket.id}`);
