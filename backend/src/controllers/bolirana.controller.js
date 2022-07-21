@@ -42,3 +42,17 @@ export const resetBolirana = (req, res) => {
         })
         .catch(error => res.status(400).json({ message: error.message }))
 }
+
+export const getAll = (req, res) => {
+    Bolirana.find()
+        .sort('name')
+        .then(data => res.status(200).json(data))
+        .catch(error => res.status(400).json({ message: error.message }));
+}
+
+export const deleteById = (req, res) => {
+    const { id } = req.params;
+    Bolirana.findByIdAndDelete(id)
+        .then(doc => res.sendStatus(doc ? 200 : 404))
+        .catch(error => res.status(400).json({ message: error.message }));
+}

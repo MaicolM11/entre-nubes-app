@@ -17,7 +17,7 @@ export const createUser = async (req, res) => {
 export const deleteOne = (req, res) => {
     const { id } = req.params;
     User.findByIdAndDelete(id)
-        .then(doc => res.sendStatus(200))
+        .then(doc => res.sendStatus(doc ? 200 : 404))
         .catch(error => res.status(400).json({ message: error.message }));
 }
 

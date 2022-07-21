@@ -30,6 +30,6 @@ export const edit = async (req, res) => {
 export const deleteOne = async (req, res) => {
     const { id } = req.params;
     Category.findByIdAndDelete(id)
-        .then(doc => res.sendStatus(200))
+        .then(doc => res.sendStatus(doc ? 200 : 404))
         .catch(error => res.status(400).json({ message: error.message }));
 }

@@ -1,6 +1,9 @@
 const router = require("express").Router();
 const controller = require('../controllers/bolirana.controller')
 
+import { hasAnyRol } from '../middlewares/checkRole'
+import { verifyToken } from './../middlewares/jwt'
+
 /**
  * @swagger
  * /api/bolirana:
@@ -24,7 +27,7 @@ const controller = require('../controllers/bolirana.controller')
  *      security:
  *	        - jwt: []
  */
-router.post('/', [], controller.create);
+router.post('/', [verifyToken, hasAnyRol], controller.create);
 
 /**
  * @swagger
@@ -58,7 +61,7 @@ router.post('/', [], controller.create);
  *      security:
  *	        - jwt: []
  */
-router.put('/:id/start', [], controller.startBolirana);
+router.put('/:id/start', [verifyToken, hasAnyRol], controller.startBolirana);
 
 /**
  * @swagger
@@ -83,6 +86,49 @@ router.put('/:id/start', [], controller.startBolirana);
  *      security:
  *	        - jwt: []
  */
-router.put('/:id/reset', [], controller.resetBolirana);
+router.put('/:id/reset', [verifyToken, hasAnyRol], controller.resetBolirana);
+
+/**
+ * @swagger
+ * /api/bolirana:
+ *  get:
+ *      sumary : get all boliranas
+ *      tags : [Bolirana]   
+ *      responses:
+ *          200:
+ *              description : all boliranas!
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          type : array
+ *                          items:
+ *                              $ref: '#/components/schemas/Bolirana'
+ *      security:
+ *	        - jwt: []
+ */
+router.get('/', [verifyToken, hasAnyRol], controller.getAll);
+
+/**
+ * @swagger
+ * /api/bolirana/{id}:
+ *  delete:
+ *      sumary : delete bolirana
+ *      tags : [Bolirana]
+ *      parameters:
+ *          - in : path
+ *            name: id
+ *            schema:
+ *              type: string
+ *            required: true
+ *            description : bolirana id
+ *      responses:
+ *          200:
+ *              description : bolirana eliminated
+ *          404:
+ *              description:  bolirana not found
+ *      security:
+ *	        - jwt: []
+ */
+router.delete('/:id', [verifyToken, hasAnyRol], controller.deleteById);
 
 module.exports = router;

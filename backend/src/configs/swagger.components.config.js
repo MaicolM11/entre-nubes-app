@@ -111,6 +111,15 @@ module.exports = {
                     buy_price: { type: "integer" },
                     sale_price: { type: "integer" }
                 }
+            },
+            Bolirana: {
+                type: "object",
+                properties: {
+                    name: { type: "string" },
+                    state: { type: "string" },
+                    init_time: { type: "integer" },
+                    time: { type: "integer" }
+                }
             }
         },
         securitySchemes: {
