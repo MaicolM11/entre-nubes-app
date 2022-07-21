@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { getAllCategories, deleteCategory } from "../../../services/category";
-import { getAllProducts, deleteProduct,filterProducts } from "../../../services/product";
+import {
+  getAllProducts,
+  deleteProduct,
+  filterProducts,
+} from "../../../services/product";
 
 import "./Products.css";
 import AnimatedModalContainer from "../../../components/modals/animation/AnimatedModalContainer";
@@ -19,14 +23,21 @@ import CategorySelect from "../../../components/select/CategorySelect";
 import { ReactComponent as Add } from "../../../assets/icons/add.svg";
 import { ReactComponent as Category } from "../../../assets/icons/category.svg";
 import { ReactComponent as Search } from "../../../assets/icons/search.svg";
-import { MediumContainer } from "../../../components/styles/style-components";
+import {
+  MediumContainer,
+  PageOptionsCenterContainer,
+  PageOptionsContainer,
+} from "../../../components/styles/style-components";
 
 const Products = () => {
   const [product, setProduct] = useState({});
   const [products, setProducts] = useState([]);
   const [category, setCategory] = useState({});
   const [categories, setCategories] = useState({});
-  const [selectedCategory, setSelectedCategory] = useState({name: 'Categoría', id : ""});
+  const [selectedCategory, setSelectedCategory] = useState({
+    name: "Categoría",
+    id: "",
+  });
   const [isOpenAddProductModal, setIsOpenAddProductModal] = useState(false);
   const [isOpenEditProductModal, setIsOpenEditProductModal] = useState(false);
   const [isOpenDeleteProductModal, setIsOpenDeleteProductModal] =
@@ -38,7 +49,7 @@ const Products = () => {
   const [isOpenEditCategoryModal, setIsOpenEditCategoryModal] = useState(false);
   const [isOpenDeleteCategoryModal, setIsOpenDeleteCategoryModal] =
     useState(false);
-  const [searchInputValue, setSearchInputValue] = useState("")
+  const [searchInputValue, setSearchInputValue] = useState("");
 
   const openAddProductModal = () => {
     setIsOpenAddProductModal((isOpen) => !isOpen);
@@ -74,7 +85,10 @@ const Products = () => {
 
   const openEditProductModal = (product) => {
     setProduct(product);
-    setSelectedCategory({name: product.category.name , id: product.category._id});
+    setSelectedCategory({
+      name: product.category.name,
+      id: product.category._id,
+    });
     setIsOpenEditProductModal((isOpen) => !isOpen);
   };
 
@@ -89,13 +103,13 @@ const Products = () => {
   };
 
   const handleSearch = (e) => {
-    const { name, value } = e.target;
-    console.log(`${name}: ${value}`);
-    console.log(selectedCategory.id)
-    setSearchInputValue(value)
-    filterProducts(selectedCategory.id?selectedCategory.id:"",value).then(async (res) =>{
-      setProducts(await res.json())
-    })
+    const { value } = e.target;
+    setSearchInputValue(value);
+    filterProducts(selectedCategory.id ? selectedCategory.id : "", value).then(
+      async (res) => {
+        setProducts(await res.json());
+      }
+    );
   };
 
   const deleteCurrentProduct = () => {
@@ -231,49 +245,52 @@ const Products = () => {
         description="Información de los productos registrados"
         component={<NotificationButton />}
       />
-      <div className="admin-products-options-container">
-        <div className="admin-products-options-center-container">
-          <div className="admin-product-option-buttons-container">
-            <Button
-              size="mediumButton"
-              theme="ok"
-              icon={<Add fill="white" />}
-              text="Agregar Producto"
-              onClick={openAddProductModal}
-            />
-            <Button
-              size="mediumButton"
-              theme="highlighted"
-              icon={<Category fill="white" />}
-              text="Categorías"
-              onClick={openCategoriesModal}
-            />
-          </div>
-          <div className="admin-product-option-filter-container">
-            <DataInput
-              name="search"
-              size="mediumInput"
-              icon={<Search />}
-              isStroke={true}
-              placeholder="Buscar"
-              type="text"
-              onChange={handleSearch}
-            />
-            <MediumContainer>
-              <CategorySelect
-                icon={<Category width={25} height={25} />}
-                dropdownTitle="Categorías"
-                options={categories}
-                selectedOption={selectedCategory.name}
-                setSelectedOption={setSelectedCategory}
-                searchInput = {searchInputValue}
-                isFilter={true}
-                setIsFilter={setProducts}
+
+      <PageOptionsContainer>
+        <PageOptionsCenterContainer>
+          <div className="products-options-center-container">
+            <div className="products-options-container">
+              <Button
+                size="mediumButton"
+                theme="ok"
+                icon={<Add fill="white" />}
+                text="Agregar Producto"
+                onClick={openAddProductModal}
               />
-            </MediumContainer>
+              <Button
+                size="mediumButton"
+                theme="highlighted"
+                icon={<Category fill="white" />}
+                text="Categorías"
+                onClick={openCategoriesModal}
+              />
+            </div>
+            <div className="products-options-container">
+              <DataInput
+                name="search"
+                size="mediumInput"
+                icon={<Search />}
+                isStroke={true}
+                placeholder="Buscar"
+                type="text"
+                onChange={handleSearch}
+              />
+              <MediumContainer>
+                <CategorySelect
+                  icon={<Category width={25} height={25} />}
+                  dropdownTitle="Categorías"
+                  options={categories}
+                  selectedOption={selectedCategory.name}
+                  setSelectedOption={setSelectedCategory}
+                  searchInput={searchInputValue}
+                  isFilter={true}
+                  setIsFilter={setProducts}
+                />
+              </MediumContainer>
+            </div>
           </div>
-        </div>
-      </div>
+        </PageOptionsCenterContainer>
+      </PageOptionsContainer>
       <ProductCardsContainer
         products={products}
         openAddStock={openAddStock}

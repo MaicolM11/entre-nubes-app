@@ -479,6 +479,19 @@ export const OrderCardButtonsContainer = styled.div`
   gap: 10px;
 `;
 
+export const PageOptionsContainer = styled.div`
+  display: flex;
+  width: 100%;
+  min-height: 75px;
+  background-color: ${colors.secondary};
+  border-bottom: solid 1px ${colors.border};
+`;
+
+export const PageOptionsCenterContainer = styled.div`
+  display: flex;
+  padding: 15px 25px;
+`;
+
 export const SelectContainer = styled.div`
   display: flex;
   width: 405px;

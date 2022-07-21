@@ -23,7 +23,7 @@ const CategorySelect = ({
   isFilter,
   setIsFilter,
 }) => {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const btnRef = useRef();
 
   const filterProductsByCategory = (id) => {
@@ -72,7 +72,7 @@ const CategorySelect = ({
             <SelectOption
               key={"all"}
               onClick={() => {
-                setSelectedOption({name:"Todos los Productos",id:""});
+                setSelectedOption({ name: "Todos los Productos", id: "" });
                 filterProductsByCategory("all");
                 setIsOpen(false);
               }}
@@ -87,7 +87,7 @@ const CategorySelect = ({
                 {
                   isFilter && filterProductsByCategory(option._id);
                 }
-                setSelectedOption({name:option.name, id : option._id});
+                setSelectedOption({ name: option.name, id: option._id });
                 setIsOpen(false);
               }}
             >
