@@ -6,7 +6,8 @@ import styled from "styled-components";
 import Button from "../../../components/buttons/Button";
 import AnimatedModalContainer from "../../../components/modals/animation/AnimatedModalContainer";
 import CreateBoliranaModal from "../../../components/modals/CreateBoliranaModal";
-
+import { getAllBoliranas } from "../../../services/bolirana";
+import BoliranasContainer from "../../../components/cards-container/BoliranasContainer";
 
 const AddBoliranaContainer = styled.div`
   display: flex;
@@ -18,17 +19,29 @@ const AddBoliranaContainer = styled.div`
 
 const Boliranas = () => {
 
+  const [boliranas, setBoliranas] = useState([])
   const [isOpenAddModal, setIsOpenAddModal] = useState(false)
 
   const openAddSalesmanModal = () =>{
     setIsOpenAddModal((open)=> !open)
   }
 
+  const getBoliranas = () =>{
+    getAllBoliranas().then(async (res) =>{
+      setBoliranas(await res.json())
+    })
+  }
+
+  useEffect(()=>{
+    getBoliranas()
+  },[])
+
   return (
     <div className="admin-boliranas-container">
       <AnimatedModalContainer
         modal={<CreateBoliranaModal 
           setIsOpenAddBolirana= {setIsOpenAddModal}
+          getBoliranasList = {getBoliranas}
         />}
         isOpen={isOpenAddModal}
         setIsOpen={setIsOpenAddModal}
@@ -48,6 +61,9 @@ const Boliranas = () => {
           onClick={openAddSalesmanModal}
         />
     </AddBoliranaContainer>
+    <BoliranasContainer
+      boliranasList={boliranas}
+    />
     </div>
 
   );

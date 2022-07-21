@@ -38,7 +38,10 @@ const ModalInfoContainer = styled.div`
   gap: 25px;
 `;
 
-const CreateBoliranaModal = ({ setIsOpenAddBolirana }) => {
+const CreateBoliranaModal = ({ 
+  setIsOpenAddBolirana, 
+  getBoliranasList }) => 
+  {
   const handleSetIsOpen = () => {
     setIsOpenAddBolirana((isOpen) => !isOpen);
     clearIncreaseNumberBoliranaValue();
@@ -46,6 +49,7 @@ const CreateBoliranaModal = ({ setIsOpenAddBolirana }) => {
 
   const handleSubmitBolirana = () => {
     createBolirana(`Bolirana ${numberValue.number}`).then(async () => {
+      getBoliranasList()
       handleSetIsOpen();
     });
   };
