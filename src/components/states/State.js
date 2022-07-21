@@ -49,6 +49,12 @@ const State = ({ state }) => {
       {state === "PAGO" && (
         <StateColorContainer colorState={"PAGO"}>{state}</StateColorContainer>
       )}
+      {state === "LIBRE" && (
+        <StateColorContainer colorState={"PAGO"}>{state}</StateColorContainer>
+      )}
+      {state === "OCUPADO" && (
+        <StateColorContainer colorState={"PENDIENTE"}>{state}</StateColorContainer>
+      )}
     </StateContainer>
   );
 };

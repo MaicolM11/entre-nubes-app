@@ -392,6 +392,24 @@ export const ModalTitle = styled.label`
   white-space: nowrap;
 `;
 
+export const ModalMediumTitle = styled.label`
+  width: 100%;
+  color: ${colors.text};
+  font-size: 22px;
+  font-weight: bold;
+  font-family: var(--roboto);
+  white-space: nowrap;
+`;
+
+export const TitleTimer = styled.label`
+  width: 100%;
+  color: ${colors.text};
+  font-size: 45px;
+  font-weight: bold;
+  font-family: var(--roboto);
+  white-space: nowrap;
+`;
+
 export const ModalSubtitle = styled.label`
   width: 100%;
   color: ${colors.text};
