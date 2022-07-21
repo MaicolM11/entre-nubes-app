@@ -5,7 +5,7 @@ export const categoryValidation = (values) => {
   const errors = {};
 
   if (!values.name) {
-    errors.name = "Nombre de la categoría requerido";
+    errors.name = "Nombre de la categoría requerida";
   }
 
   return errors;
@@ -78,7 +78,7 @@ export const productValidation = (values, selectedCategory) => {
     errors.brand = "Nombre del producto requerido";
   }
 
-  if (selectedCategory === "Categoría") {
+  if (selectedCategory.name === "Categoría") {
     errors.category = "Categoría requerida";
   }
 

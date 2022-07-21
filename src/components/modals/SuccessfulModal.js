@@ -13,9 +13,8 @@ const SuccessfulModalContainer = styled.div`
 const CenterModalContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;
   align-items: center;
-  padding: 35px 55px;
+  padding: 35px 85px;
   gap: 20px;
 `;
 

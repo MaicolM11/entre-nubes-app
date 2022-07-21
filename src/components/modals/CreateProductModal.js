@@ -19,6 +19,7 @@ import CloseButton from "../buttons/CloseButton";
 import DataInput from "../inputs/DataInput";
 import CategorySelect from "../select/CategorySelect";
 import Button from "../buttons/Button";
+import { ReactComponent as EmptyProductImg } from "../../assets/images/empty-img-create-new-product.svg";
 import { ReactComponent as WineBottle } from "../../assets/icons/wine-bottle.svg";
 import { ReactComponent as Category } from "../../assets/icons/category.svg";
 import { ReactComponent as AttachMoney } from "../../assets/icons/attach-money.svg";
@@ -60,8 +61,8 @@ const ProductModalFormCenterContainer = styled.div`
 
 const ProductModalImageContainer = styled.div`
   display: flex;
-  width: 285px;
-  height: 395px;
+  min-width: 285px;
+  min-height: 465px;
   border-radius: 25px;
   border: 1px solid ${colors.border};
 `;
@@ -72,8 +73,9 @@ const CreateProductModal = ({
   updateProducts,
   isOpen,
   setIsOpen,
+  openSuccessfulModal,
 }) => {
-  const defaultCategory = {name:"Categoría", id:""};
+  const defaultCategory = { name: "Categoría", id: "" };
   const [selectedCategory, setSelectedCategory] = useState(defaultCategory);
   const [categories, setCategories] = useState({});
 
@@ -113,6 +115,7 @@ const CreateProductModal = ({
       if (res.ok) {
         handleSetIsOpen();
         updateProducts();
+        openSuccessfulModal();
       } else {
         alert(data.message);
       }
@@ -129,6 +132,7 @@ const CreateProductModal = ({
 
   const closeModal = (e) => {
     if (ref.current === e.target) {
+      clearModalInputs();
       setIsOpen(false);
     }
   };
@@ -170,7 +174,9 @@ const CreateProductModal = ({
               </ModalTitleContainer>
               <ProductModalFormContainer>
                 <ProductModalFormCenterContainer>
-                  <ProductModalImageContainer />
+                  <ProductModalImageContainer>
+                    <EmptyProductImg />
+                  </ProductModalImageContainer>
                   <ModalFormOptionContainer>
                     <ErrorMessageContainer>
                       <DataInput
@@ -199,7 +205,7 @@ const CreateProductModal = ({
                           isFilter={false}
                         />
                       </SelectContainer>
-                      {selectedCategory === defaultCategory ? (
+                      {selectedCategory.name === defaultCategory.name ? (
                         <ErrorMessage>{errors.category}</ErrorMessage>
                       ) : (
                         <ErrorMessageSpace />

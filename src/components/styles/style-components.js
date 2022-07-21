@@ -339,6 +339,7 @@ export const MessageDeleteContainer = styled.div`
   gap: 15px;
 `;
 export const MessageInfoContainer = styled.label`
+  width: 253px;
   font-size: 20px;
   font-weight: bold;
   font-family: var(--roboto);

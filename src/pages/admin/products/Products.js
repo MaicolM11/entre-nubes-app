@@ -16,6 +16,7 @@ import AddStockModal from "../../../components/modals/AddStockModal";
 import EditProductModal from "../../../components/modals/EditProductModal";
 import DeleteModal from "../../../components/modals/DeleteModal";
 import CategoryModal from "../../../components/modals/CategoryModal";
+import SuccessfulModal from "../../../components/modals/SuccessfulModal";
 import ProductCardsContainer from "../../../components/cards-container/ProductCardsContainer";
 import Button from "../../../components/buttons/Button";
 import DataInput from "../../../components/inputs/DataInput";
@@ -49,6 +50,7 @@ const Products = () => {
   const [isOpenEditCategoryModal, setIsOpenEditCategoryModal] = useState(false);
   const [isOpenDeleteCategoryModal, setIsOpenDeleteCategoryModal] =
     useState(false);
+  const [isOpenSuccessfulModal, setIsOpenSuccessfulModal] = useState(false);
   const [searchInputValue, setSearchInputValue] = useState("");
 
   const openAddProductModal = () => {
@@ -102,6 +104,10 @@ const Products = () => {
     setIsOpenDeleteCategoryModal((isOpen) => !isOpen);
   };
 
+  const openSuccessfulModal = () => {
+    setIsOpenSuccessfulModal((isOpen) => !isOpen);
+  };
+
   const handleSearch = (e) => {
     const { value } = e.target;
     setSearchInputValue(value);
@@ -124,6 +130,10 @@ const Products = () => {
       closeDeleteCategoryModal();
       getCategories();
     });
+  };
+
+  const handleSubmitOk = () => {
+    openSuccessfulModal();
   };
 
   const getCategories = () => {
@@ -151,6 +161,7 @@ const Products = () => {
         updateProducts={getProductos}
         isOpen={isOpenAddProductModal}
         setIsOpen={setIsOpenAddProductModal}
+        openSuccessfulModal={openSuccessfulModal}
       />
       <AnimatedModalContainer
         modal={
@@ -240,12 +251,21 @@ const Products = () => {
         isOpen={isOpenDeleteCategoryModal}
         setIsOpen={setIsOpenDeleteCategoryModal}
       />
+      <AnimatedModalContainer
+        modal={
+          <SuccessfulModal
+            message="¡Producto agregado correctamente!"
+            handleSubmitOk={handleSubmitOk}
+          />
+        }
+        isOpen={isOpenSuccessfulModal}
+        setIsOpen={setIsOpenSuccessfulModal}
+      />
       <Header
         title="Productos"
         description="Información de los productos registrados"
         component={<NotificationButton />}
       />
-
       <PageOptionsContainer>
         <PageOptionsCenterContainer>
           <div className="products-options-center-container">
