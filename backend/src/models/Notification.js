@@ -7,6 +7,10 @@ const notificationSchema = mongoose.Schema(
         date: {
             type: Number,
             default: new Date().getTime()
+        }, 
+        new: {
+            type: Boolean,
+            default: true
         }
     },
     {
