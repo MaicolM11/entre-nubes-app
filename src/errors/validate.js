@@ -1,4 +1,5 @@
 const numberRegex = /^[0-9]*$/;
+const negativeNumberRegex = /^-\d+$/;
 const emailRegex = /^[^@]+@[^@]+\.[a-zA-Z]{2,}$/;
 
 export const categoryValidation = (values) => {
@@ -38,10 +39,10 @@ export const debtorValidation = (values) => {
 export const increaseStockValidation = (values) => {
   const errors = {};
 
-  if (!numberRegex.test(values.stock)) {
-    errors.stock = "Solo dede ingresar números";
-  } else if (values.stock <= 0) {
+  if (negativeNumberRegex.test(values.stock) || values.stock <= 0) {
     errors.stock = "El valor ingresado debe ser mayor a 0";
+  } else if (!numberRegex.test(values.stock)) {
+    errors.stock = "Solo dede ingresar números";
   }
 
   return errors;

@@ -45,7 +45,7 @@ const ModalInfoContainer = styled.div`
   gap: 25px;
 `;
 
-const AddStockModal = ({ product, updateProducts, setIsOpenAddStock }) => {
+const AddStockModal = ({ product, updateProducts, setIsOpenAddStock, openSuccessfulModal }) => {
   const handleSubmitUpdateStock = () => {
     updateCurrentUnits();
   };
@@ -55,7 +55,7 @@ const AddStockModal = ({ product, updateProducts, setIsOpenAddStock }) => {
     handleChangeIncreaseStock,
     handleSubmitIncreaseStock,
     errors,
-    clearIncreaseStockValue,
+    clearIncreaseStockValue
   } = useIncreaseStockForm(handleSubmitUpdateStock);
 
   const handleSetIsOpen = () => {
@@ -67,6 +67,7 @@ const AddStockModal = ({ product, updateProducts, setIsOpenAddStock }) => {
     updateUnits(product._id, stockValue).then(async () => {
       handleSetIsOpen();
       updateProducts();
+      openSuccessfulModal();
     });
   };
 
