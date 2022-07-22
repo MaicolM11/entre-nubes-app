@@ -512,6 +512,14 @@ export const PageOptionsCenterContainer = styled.div`
   padding: 15px 25px;
 `;
 
+export const ProductModalImageContainer = styled.div`
+  display: flex;
+  min-width: 285px;
+  min-height: 465px;
+  border-radius: 25px;
+  border: 1px solid ${colors.border};
+`;
+
 export const SelectContainer = styled.div`
   display: flex;
   width: 405px;

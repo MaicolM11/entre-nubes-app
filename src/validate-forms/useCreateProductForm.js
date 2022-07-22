@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { productValidation } from "../errors/validate";
+import { createProductValidation } from "../errors/validate";
 
 const useCreateProductForm = (selectedCategory, categories, callback) => {
   const [productValues, setProductValues] = useState({
@@ -28,8 +28,8 @@ const useCreateProductForm = (selectedCategory, categories, callback) => {
         productValues.category = category._id;
       }
     });
-    setErros(productValidation(productValues, selectedCategory));
-    if (!(Object.keys(productValidation(productValues,selectedCategory)).length > 0)) {
+    setErros(createProductValidation(productValues, selectedCategory));
+    if (!(Object.keys(createProductValidation(productValues,selectedCategory)).length > 0)) {
       callback();
     }
   };

@@ -56,6 +56,10 @@ const Products = () => {
   ] = useState(false);
   const [isOpenSuccessfulAddStockModal, setIsOpenSuccessfulAddStockModal] =
     useState(false);
+  const [
+    isOpenSuccessfulEditProductModal,
+    setIsOpenSuccessfulEditProductModal,
+  ] = useState(false);
   const [searchInputValue, setSearchInputValue] = useState("");
 
   const openAddProductModal = () => {
@@ -75,14 +79,6 @@ const Products = () => {
     setCategory(category);
     setIsOpenCategoriesModal((isOpen) => !isOpen);
     setIsOpenEditCategoryModal((isOpen) => !isOpen);
-  };
-
-  const closeDeleteProductModal = () => {
-    setIsOpenDeleteProductModal((isOpen) => !isOpen);
-  };
-
-  const closeDeleteCategoryModal = () => {
-    setIsOpenDeleteCategoryModal((isOpen) => !isOpen);
   };
 
   const openAddStock = (product) => {
@@ -109,12 +105,24 @@ const Products = () => {
     setIsOpenDeleteCategoryModal((isOpen) => !isOpen);
   };
 
+  const closeDeleteProductModal = () => {
+    setIsOpenDeleteProductModal((isOpen) => !isOpen);
+  };
+
+  const closeDeleteCategoryModal = () => {
+    setIsOpenDeleteCategoryModal((isOpen) => !isOpen);
+  };
+
   const openSuccessfulCreateProductModal = () => {
     setIsOpenSuccessfulCreateProductModal((isOpen) => !isOpen);
   };
 
   const openSuccessfulAddStockModal = () => {
     setIsOpenSuccessfulAddStockModal((isOpen) => !isOpen);
+  };
+
+  const openSuccessfulEditProductModal = () => {
+    setIsOpenSuccessfulEditProductModal((isOpen) => !isOpen);
   };
 
   const handleSearch = (e) => {
@@ -139,14 +147,6 @@ const Products = () => {
       closeDeleteCategoryModal();
       getCategories();
     });
-  };
-
-  const handleSubmitCreateProductOk = () => {
-    openSuccessfulCreateProductModal();
-  };
-
-  const handleSubmitAddStockOk = () => {
-    openSuccessfulAddStockModal();
   };
 
   const getCategories = () => {
@@ -209,7 +209,8 @@ const Products = () => {
             product={product}
             updateProducts={getProductos}
             setIsOpen={setIsOpenEditProductModal}
-            category={selectedCategory.name}
+            category={selectedCategory}
+            openSuccessfulModal={openSuccessfulEditProductModal}
           />
         }
         isOpen={isOpenEditProductModal}
@@ -269,7 +270,7 @@ const Products = () => {
         modal={
           <SuccessfulModal
             message="¡Producto agregado correctamente!"
-            handleSubmitOk={handleSubmitCreateProductOk}
+            handleSubmitOk={openSuccessfulCreateProductModal}
           />
         }
         isOpen={isOpenSuccessfulCreateProductModal}
@@ -279,11 +280,21 @@ const Products = () => {
         modal={
           <SuccessfulModal
             message="¡Unidades agregadas correctamente!"
-            handleSubmitOk={handleSubmitAddStockOk}
+            handleSubmitOk={openSuccessfulAddStockModal}
           />
         }
         isOpen={isOpenSuccessfulAddStockModal}
         setIsOpen={setIsOpenSuccessfulAddStockModal}
+      />
+      <AnimatedModalContainer
+        modal={
+          <SuccessfulModal
+            message="¡Producto editado correctamente!"
+            handleSubmitOk={openSuccessfulEditProductModal}
+          />
+        }
+        isOpen={isOpenSuccessfulEditProductModal}
+        setIsOpen={setIsOpenSuccessfulEditProductModal}
       />
       <Header
         title="Productos"

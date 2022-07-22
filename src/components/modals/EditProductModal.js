@@ -10,12 +10,14 @@ import {
   ErrorMessage,
   ErrorMessageContainer,
   ErrorMessageSpace,
+  ProductModalImageContainer,
   SelectContainer,
 } from "../styles/style-components";
 import CloseButton from "../buttons/CloseButton";
 import DataInput from "../inputs/DataInput";
 import CategorySelect from "../select/CategorySelect";
 import Button from "../buttons/Button";
+import { ReactComponent as EmptyProductImg } from "../../assets/images/empty-img-create-new-product.svg";
 import { ReactComponent as WineBottle } from "../../assets/icons/wine-bottle.svg";
 import { ReactComponent as Category } from "../../assets/icons/category.svg";
 import { ReactComponent as AttachMoney } from "../../assets/icons/attach-money.svg";
@@ -55,14 +57,6 @@ const ProductModalFormCenterContainer = styled.div`
   gap: 35px;
 `;
 
-const ProductModalImageContainer = styled.div`
-  display: flex;
-  width: 285px;
-  height: 395px;
-  border-radius: 25px;
-  border: 1px solid ${colors.border};
-`;
-
 const ProductModalFormOptionContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -76,6 +70,7 @@ const EditProductModal = ({
   updateProducts,
   setIsOpen,
   category,
+  openSuccessfulModal,
 }) => {
   const [selectedCategory, setSelectedCategory] = useState(category);
   const [categories, setCategories] = useState({});
@@ -86,13 +81,12 @@ const EditProductModal = ({
 
   const {
     handleChangeEditProduct,
-    values,
+    productValues,
     handleSubmitEditProduct,
     errors,
     clearEditProductValues,
   } = useEditProductForm(
     product,
-    category,
     selectedCategory,
     categories,
     handleSubmitProduct
@@ -111,18 +105,19 @@ const EditProductModal = ({
   const editCurrentProduct = () => {
     editProduct(
       product._id,
-      values.brand,
-      values.category,
-      values.unitPrice,
-      values.salePrice,
-      values.presentation,
-      values.stock,
-      values.img_url
+      productValues.brand,
+      productValues.category,
+      productValues.unitPrice,
+      productValues.salePrice,
+      productValues.presentation,
+      productValues.stock,
+      productValues.img_url
     ).then(async (res) => {
       const data = await res.json();
       if (res.ok) {
         handleSetIsOpen();
         updateProducts();
+        openSuccessfulModal();
       } else {
         alert(data.message);
       }
@@ -149,7 +144,9 @@ const EditProductModal = ({
       </ModalTitleContainer>
       <ProductModalFormContainer>
         <ProductModalFormCenterContainer>
-          <ProductModalImageContainer />
+          <ProductModalImageContainer>
+            <EmptyProductImg />
+          </ProductModalImageContainer>
           <ProductModalFormOptionContainer>
             <ErrorMessageContainer>
               <DataInput
@@ -174,11 +171,16 @@ const EditProductModal = ({
                   icon={<Category width={25} height={25} />}
                   dropdownTitle="Categorías"
                   options={categories}
-                  selectedOption={selectedCategory}
+                  selectedOption={selectedCategory.name}
                   setSelectedOption={setSelectedCategory}
                   isFilter={false}
                 />
               </SelectContainer>
+              {errors.category ? (
+                <ErrorMessage>{errors.category}</ErrorMessage>
+              ) : (
+                <ErrorMessageSpace />
+              )}
               <ErrorMessageSpace />
             </ErrorMessageContainer>
             <ErrorMessageContainer>

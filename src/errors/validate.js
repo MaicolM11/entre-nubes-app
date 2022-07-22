@@ -72,7 +72,7 @@ export const placeValidation = (values) => {
   return errors;
 };
 
-export const productValidation = (values, selectedCategory) => {
+export const createProductValidation = (values, selectedCategory) => {
   const errors = {};
 
   if (!values.brand) {
@@ -80,6 +80,42 @@ export const productValidation = (values, selectedCategory) => {
   }
 
   if (selectedCategory.name === "Categoría") {
+    errors.category = "Categoría requerida";
+  }
+
+  if (!values.unitPrice) {
+    errors.unitPrice = "Precio unitario requerido";
+  } else if (!numberRegex.test(values.unitPrice)) {
+    errors.unitPrice = "El precio por unidad sólo es de números";
+  }
+
+  if (!values.salePrice) {
+    errors.salePrice = "Precio de venta requerido";
+  } else if (!numberRegex.test(values.salePrice)) {
+    errors.salePrice = "El precio de venta sólo es de números";
+  }
+
+  if (!values.presentation) {
+    errors.presentation = "Presentación requerida";
+  }
+
+  if (!values.stock) {
+    errors.stock = "Unidades de stock requeridas";
+  } else if (!numberRegex.test(values.stock)) {
+    errors.stock = "El stock sólo es de números";
+  }
+
+  return errors;
+};
+
+export const editProductValidation = (values) => {
+  const errors = {};
+
+  if (!values.brand) {
+    errors.brand = "Nombre del producto requerido";
+  }
+
+  if (!values.category) {
     errors.category = "Categoría requerida";
   }
 
