@@ -12,6 +12,7 @@ import {
   ErrorMessageContainer,
   ErrorMessage,
   ErrorMessageSpace,
+  ProductModalImageContainer,
   SelectContainer,
 } from "../styles/style-components";
 import { useSpring, animated } from "react-spring";
@@ -57,14 +58,6 @@ const ProductModalFormCenterContainer = styled.div`
   width: 100%;
   margin: 0 35px 35px 35px;
   gap: 35px;
-`;
-
-const ProductModalImageContainer = styled.div`
-  display: flex;
-  min-width: 285px;
-  min-height: 465px;
-  border-radius: 25px;
-  border: 1px solid ${colors.border};
 `;
 
 const CreateProductModal = ({

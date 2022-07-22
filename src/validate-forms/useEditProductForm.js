@@ -1,20 +1,19 @@
 import { useState } from "react";
-import { productValidation } from "../errors/validate";
+import { editProductValidation } from "../errors/validate";
 
 const useEditProductForm = (
   product,
-  category,
   selectedCategory,
   categories,
   callback
 ) => {
   const [productValues, setProductValues] = useState({
-    brand:  product.brand,
-    category: category.name,
-    unitPrice:  product.buy_price ,
-    salePrice:  product.sale_price ,
-    presentation:  product.presentation ,
-    stock: product.stock 
+    brand: product.brand,
+    category: product.category.name,
+    unitPrice: product.buy_price,
+    salePrice: product.sale_price,
+    presentation: product.presentation,
+    stock: product.stock,
   });
 
   const handleChangeEditProduct = (e) => {
@@ -30,12 +29,12 @@ const useEditProductForm = (
   const handleSubmitEditProduct = (e) => {
     e.preventDefault();
     categories.map((category) => {
-      if (category.name === selectedCategory) {
+      if (category.name === selectedCategory.name) {
         productValues.category = category._id;
       }
     });
-    setErros(productValidation(productValues));
-    if (!(Object.keys(productValidation(productValues,selectedCategory)).length > 0)) {
+    setErros(editProductValidation(productValues));
+    if (!(Object.keys(editProductValidation(productValues)).length > 0)) {
       callback();
     }
   };
@@ -54,7 +53,7 @@ const useEditProductForm = (
 
   return {
     handleChangeEditProduct,
-    values: productValues,
+    productValues: productValues,
     handleSubmitEditProduct,
     errors,
     clearEditProductValues,
