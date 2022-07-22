@@ -508,6 +508,7 @@ export const PageOptionsContainer = styled.div`
 
 export const PageOptionsCenterContainer = styled.div`
   display: flex;
+  width: 100%;
   padding: 15px 25px;
 `;
 

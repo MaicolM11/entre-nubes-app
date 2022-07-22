@@ -269,7 +269,7 @@ const Products = () => {
       <PageOptionsContainer>
         <PageOptionsCenterContainer>
           <div className="products-options-center-container">
-            <div className="products-options-container">
+            <div className="products-buttons-options-container">
               <Button
                 size="mediumButton"
                 theme="ok"
@@ -285,7 +285,7 @@ const Products = () => {
                 onClick={openCategoriesModal}
               />
             </div>
-            <div className="products-options-container">
+            <div className="products-filters-options-container">
               <DataInput
                 name="search"
                 size="mediumInput"

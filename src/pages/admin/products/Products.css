@@ -11,9 +11,16 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 25px;
+  width: 100%;
 }
 
-.products-options-container {
+.products-buttons-options-container {
   display: flex;
+  gap: 15px;
+}
+
+.products-filters-options-container {
+  display: flex;
+  justify-content: end;
   gap: 15px;
 }
