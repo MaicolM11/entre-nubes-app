@@ -8,7 +8,7 @@ let debtor = {
     phone: "3225032190"
 }
 
-describe('debtor api', () => {
+describe.skip('debtor api', () => {
     
     it('create debtor', async () => {
         const response = await API.post(DEBTOR_URL)

@@ -9,4 +9,4 @@ export const PAYMENT_METHODS = {
     BANCOLOMBIA: 'BANCOLOMBIA'
 };
 
-export const BOLIRANAS_STATES = { BUSY: 'Ocupada', AVAILABLE: 'Libre' }
+export const BOLIRANAS_STATES = { BUSY: 'OCUPADA', AVAILABLE: 'LIBRE' }

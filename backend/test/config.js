@@ -38,4 +38,5 @@ export const PRODUCT_URL = '/api/product/';
 export const CATEGORY_URL = '/api/category/';
 export const BILL_URL = '/api/bill/';
 export const USER_URL = '/api/user/';
-export const DEBTOR_URL = '/api/debtor/'
+export const DEBTOR_URL = '/api/debtor/';
+export const BOLIRANA_URL = '/api/bolirana/';

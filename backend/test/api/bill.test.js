@@ -1,5 +1,5 @@
 import { admin_token, salesman_token, API, 
-    login, BILL_URL, CATEGORY_URL, PRODUCT_URL } from '../config'
+    BILL_URL, CATEGORY_URL, PRODUCT_URL, DEBTOR_URL } from '../config'
 
 let product1 = {
     brand: "AGUILA",
@@ -17,12 +17,23 @@ let product2 = {
     stock: 100
 }
 
+let debtor = {
+    fullname: "Pedro Picapiedra",
+    cc: "100392122",
+    phone: "3225032190"
+}
+
 let category = {
     name : "CERVEZA"
 }
 
 let bill = {
-    description : "new bill of salesman",
+    location : "Mesa 4",
+    sales: []
+}
+
+let bill2 = {
+    location : "Mesa 3",
     sales: []
 }
 
@@ -132,6 +143,39 @@ describe('Bill api', () => {
                             .set('authorization', salesman_token)
                             .send({ payment_method: "BAD" });
         expect(response.statusCode).toBe(400)
+    })
+
+    //sprint 4
+
+    it('assing bill to debtor', async () => {
+        // create debtor
+        const debtorRes = await API.post(DEBTOR_URL)
+                    .set('authorization', admin_token)
+                    .send(debtor);
+            
+        debtor.id = debtorRes.body._id;
+
+        // create bill
+        bill2.sales = bill.sales;
+        const billRes = await API.post(BILL_URL)
+                    .set('authorization', salesman_token)
+                    .send(bill2);
+
+        bill2.id = billRes.body._id;
+
+        // assing bill to debtor
+        const due = await API.put(BILL_URL + bill2.id + '/due')
+                    .set('authorization', admin_token)
+                    .send({ debtor_id: debtor.id});
+        expect(due.statusCode).toBe(200)
+    })
+
+    it('pay due bill', async () => {
+        let body = { payment_method: "EFECTIVO", debtor_id: debtor.id }
+        const response = await API.put(BILL_URL + bill2.id +'/due/payment' )
+                            .set('authorization', salesman_token)
+                            .send(body);
+        expect(response.statusCode).toBe(200)
     })
 
 })

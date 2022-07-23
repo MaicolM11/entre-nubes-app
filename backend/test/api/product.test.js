@@ -21,7 +21,7 @@ let category = {
     name : "CERVEZA"
 }
 
-describe('Product api', () => {
+describe.skip('Product api', () => {
 
     it('GET all without token', async () => {
         const response = await API.get(PRODUCT_URL).send();
