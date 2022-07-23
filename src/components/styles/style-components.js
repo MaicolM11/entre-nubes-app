@@ -668,6 +668,24 @@ export const SidebarButtonIconContainer = styled.div`
   height: 30px;
 `;
 
+export const StockLimitIconButtonContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.2s;
+  cursor: pointer;
+  &:hover {
+    path {
+      stroke: ${(props) => (props.isStroke ? colors.editHover : "none")};
+      fill: ${(props) => (props.isFill ? colors.editHover : "none")};
+    }
+  }
+  path {
+    stroke: ${(props) => (props.isStroke ? colors.edit : "none")};
+    fill: ${(props) => (props.isFill ? colors.edit : "none")};
+  }
+`;
+
 export const TotalPaymentContainer = styled.label`
   display: flex;
   width: 100%;

@@ -8,20 +8,32 @@ import CategoriesContainer from "../cards-container/CategoriesContainer";
 
 const CategoriesModalContainer = styled.div`
   display: flex;
-  background-color: ${colors.secondary};
+  flex-direction: column;
+  background-color: ${colors.cardsBackground};
   border-radius: 16px;
+`;
+
+const HeaderContainer = styled.div`
+  display: flex;
+  padding: 25px;
+  align-items: center;
+  background-color: ${colors.secondary};
+  border-bottom: solid 1px ${colors.border};
+  border-radius: 16px 16px 0 0;
 `;
 
 const CenterModalContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding: 35px;
+  padding-bottom: 25px;
   gap: 25px;
+  border-radius: 0 0 16px 16px;
 `;
 
-const HeaderContainer = styled.div`
+const ButtonAddCategoryContainer = styled.div`
   display: flex;
+  padding: 0 25px;
 `;
 
 const CategoriesModal = ({
@@ -37,22 +49,24 @@ const CategoriesModal = ({
 
   return (
     <CategoriesModalContainer>
+      <HeaderContainer>
+        <ModalTitle>Categorías</ModalTitle>
+        <CloseButton onClick={handleCloseModal} />
+      </HeaderContainer>
       <CenterModalContainer>
-        <HeaderContainer>
-          <ModalTitle>Categorías</ModalTitle>
-          <CloseButton onClick={handleCloseModal} />
-        </HeaderContainer>
         <CategoriesContainer
           categories={categories}
           handleSubmitEditCategory={handleSubmitEditCategory}
           handleSubmitDeleteCategory={handleSubmitDeleteCategory}
         ></CategoriesContainer>
-        <Button
-          size="normalButton"
-          theme="ok"
-          text="Agregar Categoría"
-          onClick={handleSubmitCreateCategory}
-        />
+        <ButtonAddCategoryContainer>
+          <Button
+            size="normalButton"
+            theme="ok"
+            text="Agregar Categoría"
+            onClick={handleSubmitCreateCategory}
+          />
+        </ButtonAddCategoryContainer>
       </CenterModalContainer>
     </CategoriesModalContainer>
   );

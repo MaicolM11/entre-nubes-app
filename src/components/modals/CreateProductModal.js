@@ -26,7 +26,7 @@ import { ReactComponent as Category } from "../../assets/icons/category.svg";
 import { ReactComponent as AttachMoney } from "../../assets/icons/attach-money.svg";
 import { ReactComponent as SackDollar } from "../../assets/icons/sack-dollar.svg";
 import { ReactComponent as Box } from "../../assets/icons/box.svg";
-import { ReactComponent as Circle } from "../../assets/icons/circle.svg";
+import { ReactComponent as CubesStacked } from "../../assets/icons/cubes-stacked.svg";
 
 const ProductModalContainer = styled.div`
   display: flex;
@@ -255,7 +255,7 @@ const CreateProductModal = ({
                     <ErrorMessageContainer>
                       <DataInput
                         size="normalInput"
-                        icon={<Circle />}
+                        icon={<CubesStacked />}
                         isFill={true}
                         type="text"
                         name="stock"
