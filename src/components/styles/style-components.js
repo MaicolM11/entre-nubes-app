@@ -139,6 +139,11 @@ export const DataSpan = styled.span`
   font-weight: 500;
 `;
 
+export const DataSpaceSpan = styled.span`
+  font-weight: 500;
+  padding-left: 5px;
+`;
+
 export const DebtorBoldData = styled.label`
   color: ${colors.text};
   font-size: 20px;
@@ -321,6 +326,17 @@ export const InputValueContainer = styled.input`
       color: red;
     }
   }
+`;
+
+export const Label16BoldFontContainer = styled.label`
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  color: ${colors.text};
+  font-size: 16px;
+  font-weight: bold;
+  font-family: var(--roboto);
 `;
 
 export const MediumContainer = styled.div`

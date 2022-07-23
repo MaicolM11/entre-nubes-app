@@ -29,6 +29,7 @@ import {
   PageOptionsCenterContainer,
   PageOptionsContainer,
 } from "../../../components/styles/style-components";
+import StockLimitModal from "../../../components/modals/StockLimitModal";
 
 const Products = () => {
   const [product, setProduct] = useState({});
@@ -68,6 +69,10 @@ const Products = () => {
     isOpenSuccessEditedCategoryModal,
     setIsOpenSuccessEditedCategoryModal,
   ] = useState(false);
+  const [isOpenStockLimitCategoryModal, setIsOpenStockLimitCategoryModal] =
+    useState(false);
+  const [isOpenSuccessStockLimitModal, setIsOpenSuccessStockLimitModal] =
+    useState(false);
 
   const openAddProductModal = () => {
     setIsOpenAddProductModal((isOpen) => !isOpen);
@@ -78,14 +83,25 @@ const Products = () => {
   };
 
   const openCreateCategoryModal = () => {
-    setIsOpenCategoriesModal((isOpen) => !isOpen);
+    openCategoriesModal();
     setIsOpenCreateCategoryModal((isOpen) => !isOpen);
+  };
+
+  const openStockLimitCategoryModal = (category) => {
+    setCategory(category);
+    openCategoriesModal();
+    setIsOpenStockLimitCategoryModal((isOpen) => !isOpen);
   };
 
   const openEditCategoryModal = (category) => {
     setCategory(category);
-    setIsOpenCategoriesModal((isOpen) => !isOpen);
+    openCategoriesModal();
     setIsOpenEditCategoryModal((isOpen) => !isOpen);
+  };
+
+  const openDeleteCategoryModal = (category) => {
+    setCategory(category);
+    setIsOpenDeleteCategoryModal((isOpen) => !isOpen);
   };
 
   const openAddStock = (product) => {
@@ -105,11 +121,6 @@ const Products = () => {
   const openDeleteProductModal = (product) => {
     setProduct(product);
     setIsOpenDeleteProductModal((isOpen) => !isOpen);
-  };
-
-  const openDeleteCategoryModal = (category) => {
-    setCategory(category);
-    setIsOpenDeleteCategoryModal((isOpen) => !isOpen);
   };
 
   const closeDeleteProductModal = () => {
@@ -140,6 +151,10 @@ const Products = () => {
     setIsOpenSuccessEditedCategoryModal((isOpen) => !isOpen);
   };
 
+  const openSuccessStockLimitCategories = () => {
+    setIsOpenSuccessStockLimitModal((isOpen) => !isOpen);
+  };
+
   const openAddedCategories = () => {
     openSuccessAddedCategoryModal();
     openCategoriesModal();
@@ -147,6 +162,11 @@ const Products = () => {
 
   const openEditedCategories = () => {
     openSuccessEditedCategoryModal();
+    openCategoriesModal();
+  };
+
+  const openCurrentStockLimitCategories = () => {
+    openSuccessStockLimitCategories();
     openCategoriesModal();
   };
 
@@ -206,9 +226,10 @@ const Products = () => {
           <CategoriesModal
             categories={categories}
             handleSubmitCreateCategory={openCreateCategoryModal}
+            handleSubmitStockLimitCategory={openStockLimitCategoryModal}
             handleSubmitEditCategory={openEditCategoryModal}
             handleSubmitDeleteCategory={openDeleteCategoryModal}
-            setIsOpen={setIsOpenCategoriesModal}
+            setIsOpen={openCategoriesModal}
           />
         }
         isOpen={isOpenCategoriesModal}
@@ -255,10 +276,23 @@ const Products = () => {
       />
       <AnimatedModalContainer
         modal={
+          <StockLimitModal
+            category={category}
+            setIsOpen={setIsOpenStockLimitCategoryModal}
+            openCategoriesModal={openCategoriesModal}
+            updateCategories={getCategories}
+            openSuccessStockLimitCategoryModal={openSuccessStockLimitCategories}
+          />
+        }
+        isOpen={isOpenStockLimitCategoryModal}
+        setIsOpen={setIsOpenStockLimitCategoryModal}
+      />
+      <AnimatedModalContainer
+        modal={
           <CategoryModal
             isTheme={true}
             setIsOpen={setIsOpenCreateCategoryModal}
-            openCategoriesModal={setIsOpenCategoriesModal}
+            openCategoriesModal={openCategoriesModal}
             updateCategories={getCategories}
             openSuccessAddedCategoryModal={openSuccessAddedCategoryModal}
           />
@@ -272,7 +306,7 @@ const Products = () => {
             isTheme={false}
             category={category}
             setIsOpen={setIsOpenEditCategoryModal}
-            openCategoriesModal={setIsOpenCategoriesModal}
+            openCategoriesModal={openCategoriesModal}
             updateCategories={getCategories}
             updateProducts={getProductos}
             openSuccessEditedCategoryModal={openSuccessEditedCategoryModal}
@@ -342,6 +376,16 @@ const Products = () => {
         }
         isOpen={isOpenSuccessEditedCategoryModal}
         setIsOpen={setIsOpenSuccessEditedCategoryModal}
+      />
+      <AnimatedModalContainer
+        modal={
+          <SuccessfulModal
+            message="¡El límite de unidades se asignó correctamente!"
+            handleSubmitOk={openCurrentStockLimitCategories}
+          />
+        }
+        isOpen={isOpenSuccessStockLimitModal}
+        setIsOpen={setIsOpenSuccessStockLimitModal}
       />
       <Header
         title="Productos"

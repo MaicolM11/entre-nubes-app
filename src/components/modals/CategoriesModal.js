@@ -33,12 +33,15 @@ const CenterModalContainer = styled.div`
 
 const ButtonAddCategoryContainer = styled.div`
   display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 0 25px;
 `;
 
 const CategoriesModal = ({
   categories,
   handleSubmitCreateCategory,
+  handleSubmitStockLimitCategory,
   handleSubmitEditCategory,
   handleSubmitDeleteCategory,
   setIsOpen,
@@ -56,6 +59,7 @@ const CategoriesModal = ({
       <CenterModalContainer>
         <CategoriesContainer
           categories={categories}
+          handleSubmitStockLimitCategory={handleSubmitStockLimitCategory}
           handleSubmitEditCategory={handleSubmitEditCategory}
           handleSubmitDeleteCategory={handleSubmitDeleteCategory}
         ></CategoriesContainer>

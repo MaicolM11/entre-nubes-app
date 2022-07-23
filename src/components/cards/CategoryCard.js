@@ -4,6 +4,8 @@ import {
   DeleteIconButtonContainer,
   EditIconButtonContainer,
   StockLimitIconButtonContainer,
+  Label16BoldFontContainer,
+  DataSpaceSpan,
 } from "../styles/style-components";
 import { colors } from "../styles/colors";
 import { ReactComponent as Box } from "../../assets/icons/box.svg";
@@ -25,6 +27,7 @@ const CategoryCardCenterContainer = styled.div`
   width: 100%;
   align-items: center;
   padding: 15px 25px;
+  gap: 25px;
 `;
 
 const CategoryNameContainer = styled.label`
@@ -54,6 +57,9 @@ const CategoryCard = ({
       <CategoryCardCenterContainer>
         <CategoryNameContainer>{category.name}</CategoryNameContainer>
         <ButtonsContainer>
+          <Label16BoldFontContainer>
+            Limite: <DataSpaceSpan>000</DataSpaceSpan>
+          </Label16BoldFontContainer>
           <StockLimitIconButtonContainer
             isStroke={true}
             onClick={clickOnStockLimit}

@@ -45,7 +45,12 @@ const ModalInfoContainer = styled.div`
   gap: 25px;
 `;
 
-const AddStockModal = ({ product, updateProducts, setIsOpenAddStock, openSuccessfulModal }) => {
+const AddStockModal = ({
+  product,
+  updateProducts,
+  setIsOpenAddStock,
+  openSuccessfulModal,
+}) => {
   const handleSubmitUpdateStock = () => {
     updateCurrentUnits();
   };
@@ -55,7 +60,7 @@ const AddStockModal = ({ product, updateProducts, setIsOpenAddStock, openSuccess
     handleChangeIncreaseStock,
     handleSubmitIncreaseStock,
     errors,
-    clearIncreaseStockValue
+    clearIncreaseStockValue,
   } = useIncreaseStockForm(handleSubmitUpdateStock);
 
   const handleSetIsOpen = () => {
