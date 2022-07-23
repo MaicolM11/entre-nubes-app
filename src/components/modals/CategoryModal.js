@@ -11,9 +11,10 @@ import {
   ModalFormOptionContainer,
   ModalTitle,
 } from "../styles/style-components";
-import CloseButton from "../buttons/CloseButton";
+import BackButton from "../buttons/ArrowButton";
 import DataInput from "../inputs/DataInput";
 import Button from "../buttons/Button";
+import { ReactComponent as BackArrowIcon } from "../../assets/icons/arrow-back.svg";
 import { ReactComponent as CategoriesIcon } from "../../assets/icons/category.svg";
 
 const CategoryModalContainer = styled.div`
@@ -34,6 +35,7 @@ const HeaderModal = styled.div`
   display: flex;
   width: 100%;
   align-items: center;
+  gap: 15px;
 `;
 
 const CategoryModal = ({
@@ -43,6 +45,8 @@ const CategoryModal = ({
   openCategoriesModal,
   updateCategories,
   updateProducts,
+  openSuccessAddedCategoryModal,
+  openSuccessEditedCategoryModal,
 }) => {
   const handleSubmitCreateCurrentCategory = () => {
     createCurrentCategory();
@@ -71,6 +75,11 @@ const CategoryModal = ({
   const handleSetIsOpen = () => {
     clearModalInputs();
     setIsOpen((isOpen) => !isOpen);
+  };
+
+  const handleBackToCategories = () => {
+    clearModalInputs();
+    setIsOpen((isOpen) => !isOpen);
     openCategoriesModal((isOpen) => !isOpen);
   };
 
@@ -84,6 +93,7 @@ const CategoryModal = ({
       if (res.ok) {
         handleSetIsOpen();
         updateCategories();
+        openSuccessAddedCategoryModal();
       } else {
         alert(data.message);
       }
@@ -97,6 +107,7 @@ const CategoryModal = ({
         handleSetIsOpen();
         updateCategories();
         updateProducts();
+        openSuccessEditedCategoryModal();
       } else {
         alert(data.message);
       }
@@ -107,10 +118,17 @@ const CategoryModal = ({
     <CategoryModalContainer>
       <CategoryModalCenterContainer>
         <HeaderModal>
+          <BackButton
+            icon={
+              <BackArrowIcon
+                fill={colors.brand}
+                onClick={handleBackToCategories}
+              />
+            }
+          />
           <ModalTitle>
             {isTheme ? "Agregar Categoría" : "Editar Categoría"}
           </ModalTitle>
-          <CloseButton onClick={handleSetIsOpen} />
         </HeaderModal>
         <ModalFormOptionContainer>
           <ErrorMessageContainer>

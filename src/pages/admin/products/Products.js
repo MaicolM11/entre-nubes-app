@@ -39,6 +39,8 @@ const Products = () => {
     name: "Categoría",
     id: "",
   });
+  const [searchInputValue, setSearchInputValue] = useState("");
+
   const [isOpenAddProductModal, setIsOpenAddProductModal] = useState(false);
   const [isOpenEditProductModal, setIsOpenEditProductModal] = useState(false);
   const [isOpenDeleteProductModal, setIsOpenDeleteProductModal] =
@@ -60,7 +62,12 @@ const Products = () => {
     isOpenSuccessfulEditProductModal,
     setIsOpenSuccessfulEditProductModal,
   ] = useState(false);
-  const [searchInputValue, setSearchInputValue] = useState("");
+  const [isOpenSuccessAddedCategoryModal, setIsOpenSuccessAddedCategoryModal] =
+    useState(false);
+  const [
+    isOpenSuccessEditedCategoryModal,
+    setIsOpenSuccessEditedCategoryModal,
+  ] = useState(false);
 
   const openAddProductModal = () => {
     setIsOpenAddProductModal((isOpen) => !isOpen);
@@ -123,6 +130,24 @@ const Products = () => {
 
   const openSuccessfulEditProductModal = () => {
     setIsOpenSuccessfulEditProductModal((isOpen) => !isOpen);
+  };
+
+  const openSuccessAddedCategoryModal = () => {
+    setIsOpenSuccessAddedCategoryModal((isOpen) => !isOpen);
+  };
+
+  const openSuccessEditedCategoryModal = () => {
+    setIsOpenSuccessEditedCategoryModal((isOpen) => !isOpen);
+  };
+
+  const openAddedCategories = () => {
+    openSuccessAddedCategoryModal();
+    openCategoriesModal();
+  };
+
+  const openEditedCategories = () => {
+    openSuccessEditedCategoryModal();
+    openCategoriesModal();
   };
 
   const handleSearch = (e) => {
@@ -235,6 +260,7 @@ const Products = () => {
             setIsOpen={setIsOpenCreateCategoryModal}
             openCategoriesModal={setIsOpenCategoriesModal}
             updateCategories={getCategories}
+            openSuccessAddedCategoryModal={openSuccessAddedCategoryModal}
           />
         }
         isOpen={isOpenCreateCategoryModal}
@@ -249,6 +275,7 @@ const Products = () => {
             openCategoriesModal={setIsOpenCategoriesModal}
             updateCategories={getCategories}
             updateProducts={getProductos}
+            openSuccessEditedCategoryModal={openSuccessEditedCategoryModal}
           />
         }
         isOpen={isOpenEditCategoryModal}
@@ -295,6 +322,26 @@ const Products = () => {
         }
         isOpen={isOpenSuccessfulEditProductModal}
         setIsOpen={setIsOpenSuccessfulEditProductModal}
+      />
+      <AnimatedModalContainer
+        modal={
+          <SuccessfulModal
+            message="¡Categoría agregada correctamente!"
+            handleSubmitOk={openAddedCategories}
+          />
+        }
+        isOpen={isOpenSuccessAddedCategoryModal}
+        setIsOpen={setIsOpenSuccessAddedCategoryModal}
+      />
+      <AnimatedModalContainer
+        modal={
+          <SuccessfulModal
+            message="¡Categoría editada correctamente!"
+            handleSubmitOk={openEditedCategories}
+          />
+        }
+        isOpen={isOpenSuccessEditedCategoryModal}
+        setIsOpen={setIsOpenSuccessEditedCategoryModal}
       />
       <Header
         title="Productos"
