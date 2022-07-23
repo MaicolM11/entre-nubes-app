@@ -65,7 +65,8 @@ const Salesmans = () => {
         isOpen={isOpenAddSalesmanModal}
         setIsOpen={setIsOpenAddSalesmanModal}
       />
-      <SalesmanModal
+      <> {(salesman&&isOpenEditSalesmanModal) &&(
+        <SalesmanModal
         isTheme={false}
         info="Editar Vendedor"
         buttonTheme="highlighted"
@@ -74,6 +75,8 @@ const Salesmans = () => {
         isOpen={isOpenEditSalesmanModal}
         setIsOpen={setIsOpenEditSalesmanModal}
       />
+       )}
+      </>
       <AnimatedModalContainer
         modal={
           <DeleteModal

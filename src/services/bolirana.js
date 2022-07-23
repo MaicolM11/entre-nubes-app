@@ -39,3 +39,11 @@ export const resetBolirana = (id) =>{
     }
     return fetch(BASE_URL+`/${id}/reset`, requestOptions)
 }
+
+export const deleteBolirana = (id) =>{
+    const requestOptions = {
+        method: 'DELETE',
+        headers: { "Content-Type": "application/json", authorization: getToken() },
+    }
+    return fetch(BASE_URL+`/${id}`,requestOptions)
+}

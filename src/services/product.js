@@ -5,7 +5,7 @@ const BASE_URL = "/api/product";
 export const getAllProducts = () => {
   const requestOptions = {
     method: "GET",
-    headers: { "Content-Type": "application/json", authorization: getToken() },
+    headers: { "Content-Type": "application/json", authorization: getToken()},
   };
   return fetch(BASE_URL, requestOptions);
 };
