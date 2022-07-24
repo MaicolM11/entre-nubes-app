@@ -6,7 +6,7 @@ const CardsContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 25px;
-  padding: 0 25px 25px 25px;
+  padding: 25px;
   overflow-x: hidden;
   overflow-y: auto;
 `;
@@ -23,6 +23,7 @@ const SalesmanCardsContainer = ({
           key={i}
           id={salesman._id}
           fullname={salesman.fullname}
+          cc={salesman.cc}
           email={salesman.email}
           phone={salesman.phone}
           address={salesman.address}

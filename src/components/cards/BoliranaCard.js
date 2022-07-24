@@ -25,18 +25,18 @@ const BoliranaContainer = styled.div`
 const PanelCenter = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 95.79px 56px;
+  padding: 75px 45px;
   gap: 50px;
-  text-align: center;
   align-items: center;
   justify-content: center;
+  text-align: center;
 `;
 
 const InfoContainer = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   text-align: center;
   gap: 35px;
 `;

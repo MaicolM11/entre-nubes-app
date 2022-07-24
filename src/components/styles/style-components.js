@@ -355,7 +355,18 @@ export const MessageDeleteContainer = styled.div`
   gap: 15px;
 `;
 export const MessageInfoContainer = styled.label`
-  width: 253px;
+  min-width: 255px;
+  width: 255px;
+  font-size: 20px;
+  font-weight: bold;
+  font-family: var(--roboto);
+  color: ${colors.text};
+  text-align: center;
+`;
+
+export const MessageEditedSalesmanInfoContainer = styled.label`
+  min-width: 355px;
+  width: 355px;
   font-size: 20px;
   font-weight: bold;
   font-family: var(--roboto);

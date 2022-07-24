@@ -68,6 +68,8 @@ const SalesmanModal = ({
   updateSalesman,
   isOpen,
   setIsOpen,
+  openSuccessfulCreatedSalesmanModal,
+  openSuccessfulEditedSalesmanModal,
 }) => {
   const handleSubmitCreateCurrentSalesman = () => {
     createSalesman();
@@ -107,6 +109,7 @@ const SalesmanModal = ({
       if (res.ok) {
         handleSetIsOpen();
         updateSalesman();
+        openSuccessfulCreatedSalesmanModal();
       } else {
         alert(data.message);
       }
@@ -128,6 +131,7 @@ const SalesmanModal = ({
       if (res.ok) {
         handleSetIsOpen();
         updateSalesman();
+        openSuccessfulEditedSalesmanModal();
       } else {
         alert(data.message);
       }
@@ -141,6 +145,7 @@ const SalesmanModal = ({
 
   const closeModal = (e) => {
     if (ref.current === e.target) {
+      isTheme ? clearCreateSalesmanValues() : clearEditSalesmanValues();
       setIsOpen(false);
     }
   };
@@ -219,7 +224,7 @@ const SalesmanModal = ({
                         isFill={true}
                         type="text"
                         name="phone"
-                        placeholder="Telefono"
+                        placeholder="Teléfono"
                         defaultValue={salesman ? salesman.phone : ""}
                         onChange={
                           isTheme
@@ -240,7 +245,7 @@ const SalesmanModal = ({
                         isFill={true}
                         type="text"
                         name="email"
-                        placeholder="Correo electronico"
+                        placeholder="Correo electrónico"
                         defaultValue={salesman ? salesman.email : ""}
                         onChange={
                           isTheme
@@ -261,7 +266,7 @@ const SalesmanModal = ({
                         isFill={true}
                         type="text"
                         name="address"
-                        placeholder="Direccion"
+                        placeholder="Dirección"
                         defaultValue={salesman ? salesman.address : ""}
                         onChange={
                           isTheme

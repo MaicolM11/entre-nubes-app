@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { getAllUsers } from "../../../services/user";
+import { getAllUsers, deleteUser } from "../../../services/user";
 
 import "./Salesmans.css";
-import styled from "styled-components";
 import AnimatedModalContainer from "../../../components/modals/animation/AnimatedModalContainer";
 import Header from "../../../components/header/Header";
 import NotificationButton from "../../../components/header/NotificationButton";
@@ -10,25 +9,40 @@ import Button from "../../../components/buttons/Button";
 import DeleteModal from "../../../components/modals/DeleteModal";
 import SalesmanModal from "../../../components/modals/SalesmanModal";
 import SalesmanCardsContainer from "../../../components/cards-container/SalesmanCardsContainer";
+import SuccessfulSalesmanModal from "../../../components/modals/SuccessfulSalesmanModal";
+import SuccessfulEditedSalesmanModal from "../../../components/modals/SuccessfulEditedSalesmanModal";
 import { ReactComponent as AddPerson } from "../../../assets/icons/add-person.svg";
-
-const AddSalesmanContainer = styled.div`
-  display: flex;
-  width: 100%;
-  min-height: 95px;
-  align-items: center;
-  padding-left: 25px;
-`;
+import {
+  PageOptionsCenterContainer,
+  PageOptionsContainer,
+} from "../../../components/styles/style-components";
 
 const Salesmans = () => {
   const [salesmans, setSalesmans] = useState([]);
   const [salesman, setSalesman] = useState({});
+
   const [isOpenAddSalesmanModal, setIsOpenAddSalesmanModal] = useState(false);
   const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
   const [isOpenEditSalesmanModal, setIsOpenEditSalesmanModal] = useState(false);
+  const [
+    isOpenSuccessCreatedSalesmanModal,
+    setIsOpenSuccessCreatedSalesmanModal,
+  ] = useState(false);
+  const [
+    isOpenSuccessEditedSalesmanModal,
+    setIsOpenSuccessEditedSalesmanModal,
+  ] = useState(false);
 
   const openAddSalesmanModal = () => {
     setIsOpenAddSalesmanModal((isOpen) => !isOpen);
+  };
+
+  const openCreatedSalesmanModal = () => {
+    setIsOpenSuccessCreatedSalesmanModal((open) => !open);
+  };
+
+  const openEditedSalesmanModal = () => {
+    setIsOpenSuccessEditedSalesmanModal((open) => !open);
   };
 
   const openDeleteSalesmanModal = (salesman) => {
@@ -43,6 +57,13 @@ const Salesmans = () => {
 
   const closeDeleteSalesmanModal = () => {
     setIsOpenDeleteModal((isOpen) => !isOpen);
+  };
+
+  const handleSubmitDeleteUser = () => {
+    deleteUser(salesman._id).then(async () => {
+      openDeleteSalesmanModal();
+      getSalesmans();
+    });
   };
 
   useEffect(() => {
@@ -64,47 +85,68 @@ const Salesmans = () => {
         updateSalesman={getSalesmans}
         isOpen={isOpenAddSalesmanModal}
         setIsOpen={setIsOpenAddSalesmanModal}
+        openSuccessfulCreatedSalesmanModal={openCreatedSalesmanModal}
       />
-      <> {(salesman&&isOpenEditSalesmanModal) &&(
+      {salesman && isOpenEditSalesmanModal && (
         <SalesmanModal
-        isTheme={false}
-        info="Editar Vendedor"
-        buttonTheme="highlighted"
-        salesman={salesman}
-        updateSalesman={getSalesmans}
-        isOpen={isOpenEditSalesmanModal}
-        setIsOpen={setIsOpenEditSalesmanModal}
-      />
-       )}
-      </>
+          isTheme={false}
+          info="Editar Vendedor"
+          buttonTheme="highlighted"
+          salesman={salesman}
+          updateSalesman={getSalesmans}
+          isOpen={isOpenEditSalesmanModal}
+          setIsOpen={setIsOpenEditSalesmanModal}
+          openSuccessfulEditedSalesmanModal={openEditedSalesmanModal}
+        />
+      )}
       <AnimatedModalContainer
         modal={
           <DeleteModal
-            isProduct={false}
             message="¿Desea eliminar el contrato del vendedor?"
-            buttonMessage="Eliminar Vendedor"
-            data={salesman}
-            update={getSalesmans}
+            buttonMessage="Eliminar Contrato"
             handleCloseModal={closeDeleteSalesmanModal}
+            handleSubmitDelete={handleSubmitDeleteUser}
           />
         }
         isOpen={isOpenDeleteModal}
         setIsOpen={setIsOpenDeleteModal}
+      />
+      <AnimatedModalContainer
+        modal={
+          <SuccessfulSalesmanModal
+            message="¡Vendedor agregado correctamente!"
+            handleSubmitOk={openCreatedSalesmanModal}
+          />
+        }
+        isOpen={isOpenSuccessCreatedSalesmanModal}
+        setIsOpen={setIsOpenSuccessCreatedSalesmanModal}
+      />
+      <AnimatedModalContainer
+        modal={
+          <SuccessfulEditedSalesmanModal
+            message="¡La información del vendedor se actualizó correctamente!"
+            handleSubmitOk={openEditedSalesmanModal}
+          />
+        }
+        isOpen={isOpenSuccessEditedSalesmanModal}
+        setIsOpen={setIsOpenSuccessEditedSalesmanModal}
       />
       <Header
         title="Vendedores"
         description="Información de los vendedores contratados"
         component={<NotificationButton />}
       />
-      <AddSalesmanContainer>
-        <Button
-          size="mediumButton"
-          theme="ok"
-          icon={<AddPerson fill="white" />}
-          text="Crear vendedor"
-          onClick={openAddSalesmanModal}
-        />
-      </AddSalesmanContainer>
+      <PageOptionsContainer>
+        <PageOptionsCenterContainer>
+          <Button
+            size="mediumButton"
+            theme="ok"
+            icon={<AddPerson fill="white" />}
+            text="Agregar Vendedor"
+            onClick={openAddSalesmanModal}
+          />
+        </PageOptionsCenterContainer>
+      </PageOptionsContainer>
       <SalesmanCardsContainer
         salesmans={salesmans}
         openEditSalemanModal={openEditSalesmanModal}

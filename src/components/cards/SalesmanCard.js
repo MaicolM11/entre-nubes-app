@@ -23,6 +23,7 @@ const SalesmanCardContainer = styled.div`
   &:hover {
     border-color: ${colors.highlighted};
   }
+  background-color: ${colors.secondary};
 `;
 
 const SalesmanCardDataContainer = styled.div`
@@ -47,11 +48,13 @@ const PhotoSalesmanContainer = styled.div`
 `;
 
 const SalesmanNameContainer = styled.label`
+  min-width: 175px;
+  width: 100%;
+  white-space: nowrap;
   font-size: 20px;
   font-weight: bold;
   font-family: var(--roboto);
   color: ${colors.text};
-  text-align: center;
 `;
 
 const DataContainer = styled.div`
@@ -67,6 +70,7 @@ const DataTextContainer = styled.label`
   font-family: var(--roboto);
   color: ${colors.text};
   text-align: center;
+  white-space: nowrap;
 `;
 
 const ButtonsContainer = styled.div`
@@ -95,31 +99,31 @@ const SalesmanCard = ({
           </PhotoSalesmanContainer>
           <SalesmanNameContainer>{fullname}</SalesmanNameContainer>
         </InfoSalesmanContainer>
-        <DataContainer>
-          <IconContainer>
-            <IdCard fill={colors.brand} />
-          </IconContainer>
-          <DataTextContainer>{cc}</DataTextContainer>
-        </DataContainer>
-        <DataContainer>
-          <IconContainer>
-            <Phone fill={colors.brand} />
-          </IconContainer>
-          <DataTextContainer>{formatPhoneNumber(phone)}</DataTextContainer>
-        </DataContainer>
-        <DataContainer>
-          <IconContainer>
-            <Email fill={colors.brand} />
-          </IconContainer>
-          <DataTextContainer>{email}</DataTextContainer>
-        </DataContainer>
-        <DataContainer>
-          <IconContainer>
-            <Location fill={colors.brand} />
-          </IconContainer>
-          <DataTextContainer>{address}</DataTextContainer>
-        </DataContainer>
         <ButtonsContainer>
+          <DataContainer>
+            <IconContainer>
+              <IdCard fill={colors.brand} />
+            </IconContainer>
+            <DataTextContainer>{cc}</DataTextContainer>
+          </DataContainer>
+          <DataContainer>
+            <IconContainer>
+              <Phone fill={colors.brand} />
+            </IconContainer>
+            <DataTextContainer>{formatPhoneNumber(phone)}</DataTextContainer>
+          </DataContainer>
+          <DataContainer>
+            <IconContainer>
+              <Email fill={colors.brand} />
+            </IconContainer>
+            <DataTextContainer>{email}</DataTextContainer>
+          </DataContainer>
+          <DataContainer>
+            <IconContainer>
+              <Location fill={colors.brand} />
+            </IconContainer>
+            <DataTextContainer>{address}</DataTextContainer>
+          </DataContainer>
           <EditIconButtonContainer isStroke={true} onClick={clickOnEdit}>
             <Edit width={24} height={24} />
           </EditIconButtonContainer>
