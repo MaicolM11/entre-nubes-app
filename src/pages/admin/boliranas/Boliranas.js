@@ -1,71 +1,125 @@
-import React,{ useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import { getAllBoliranas, deleteBolirana } from "../../../services/bolirana";
+
 import "./Boliranas.css";
 import Header from "../../../components/header/Header";
 import NotificationButton from "../../../components/header/NotificationButton";
-import styled from "styled-components";
 import Button from "../../../components/buttons/Button";
 import AnimatedModalContainer from "../../../components/modals/animation/AnimatedModalContainer";
-import CreateBoliranaModal from "../../../components/modals/CreateBoliranaModal";
-import { getAllBoliranas } from "../../../services/bolirana";
+import AddBoliranaModal from "../../../components/modals/AddBoliranaModal";
+import {
+  PageOptionsCenterContainer,
+  PageOptionsContainer,
+} from "../../../components/styles/style-components";
 import BoliranasContainer from "../../../components/cards-container/BoliranasContainer";
-
-const AddBoliranaContainer = styled.div`
-  display: flex;
-  width: 100%;
-  min-height: 95px;
-  align-items: center;
-  padding-left: 25px;
-`;
+import SuccessfulModal from "../../../components/modals/SuccessfulModal";
+import DeleteModal from "../../../components/modals/DeleteModal";
+import { ReactComponent as Add } from "../../../assets/icons/add.svg";
 
 const Boliranas = () => {
+  const [boliranas, setBoliranas] = useState([]);
+  const [bolirana, setBolirana] = useState();
 
-  const [boliranas, setBoliranas] = useState([])
-  const [isOpenAddModal, setIsOpenAddModal] = useState(false)
+  const [isOpenAddBoliranaModal, setIsOpenAddBoliranaModal] = useState(false);
+  const [
+    isOpenSuccessCreatedBoliranaModal,
+    setIsOpenSuccessCreatedBoliranaModal,
+  ] = useState(false);
+  const [isOpenDeleteBoliranaModal, setIsOpenDeleteBoliranaModal] =
+    useState(false);
 
-  const openAddSalesmanModal = () =>{
-    setIsOpenAddModal((open)=> !open)
-  }
+  const openAddBoliranaModal = () => {
+    setIsOpenAddBoliranaModal((open) => !open);
+  };
 
-  const getBoliranas = () =>{
-    getAllBoliranas().then(async (res) =>{
-      setBoliranas(await res.json())
-    })
-  }
+  const openCreatedBoliranaModal = () => {
+    setIsOpenSuccessCreatedBoliranaModal((open) => !open);
+  };
 
-  useEffect(()=>{
-    getBoliranas()
-  },[])
+  const openDeleteBoliranaModal = () => {
+    setIsOpenDeleteBoliranaModal((open) => !open);
+  };
+
+  const handleDeleteBolirana = (bolirana) => {
+    setBolirana(bolirana);
+    openDeleteBoliranaModal();
+  };
+
+  const deleteCurrentBolirana = () => {
+    deleteBolirana(bolirana._id).then(async () => {
+      openDeleteBoliranaModal();
+      getBoliranas();
+    });
+  };
+
+  const getBoliranas = () => {
+    getAllBoliranas().then(async (res) => {
+      setBoliranas(await res.json());
+    });
+  };
+
+  useEffect(() => {
+    getBoliranas();
+  }, []);
 
   return (
     <div className="admin-boliranas-container">
       <AnimatedModalContainer
-        modal={<CreateBoliranaModal 
-          setIsOpenAddBolirana= {setIsOpenAddModal}
-          getBoliranasList = {getBoliranas}
-        />}
-        isOpen={isOpenAddModal}
-        setIsOpen={setIsOpenAddModal}
+        modal={
+          <AddBoliranaModal
+            setIsOpenAddBolirana={setIsOpenAddBoliranaModal}
+            getBoliranasList={getBoliranas}
+            openSuccessfulModal={openCreatedBoliranaModal}
+          />
+        }
+        isOpen={isOpenAddBoliranaModal}
+        setIsOpen={setIsOpenAddBoliranaModal}
       />
-     
+      <AnimatedModalContainer
+        modal={
+          <SuccessfulModal
+            message="¡Bolirana agregada correctamente!"
+            handleSubmitOk={openCreatedBoliranaModal}
+          />
+        }
+        isOpen={isOpenSuccessCreatedBoliranaModal}
+        setIsOpen={setIsOpenSuccessCreatedBoliranaModal}
+      />
+      <AnimatedModalContainer
+        modal={
+          <DeleteModal
+            message={
+              bolirana && `¿Esta seguro que desea eliminar la ${bolirana.name}?`
+            }
+            buttonMessage="Eliminar Bolirana"
+            handleCloseModal={openDeleteBoliranaModal}
+            handleSubmitDelete={deleteCurrentBolirana}
+          />
+        }
+        isOpen={isOpenDeleteBoliranaModal}
+        setIsOpen={setIsOpenDeleteBoliranaModal}
+      />
       <Header
         title="Boliranas"
         description="Información de las Boliranas"
         component={<NotificationButton />}
       />
-    <AddBoliranaContainer>
-    <Button
-          size="mediumButton"
-          theme="ok"
-          // icon={<AddPerson fill="white" />}
-          text="Crear bolirana"
-          onClick={openAddSalesmanModal}
-        />
-    </AddBoliranaContainer>
-    <BoliranasContainer
-      boliranasList={boliranas}
-    />
+      <PageOptionsContainer>
+        <PageOptionsCenterContainer>
+          <Button
+            size="mediumButton"
+            theme="ok"
+            icon={<Add fill="white" />}
+            text="Agregar Bolirana"
+            onClick={openAddBoliranaModal}
+          />
+        </PageOptionsCenterContainer>
+      </PageOptionsContainer>
+      <BoliranasContainer
+        boliranasList={boliranas}
+        handleDeleteBolirana={handleDeleteBolirana}
+      />
     </div>
-
   );
 };
 

@@ -3,13 +3,10 @@ import styled from "styled-components";
 import { colors } from "../styles/colors";
 
 const colorState = {
-  PENDIENTE: {
-    color: `${colors.delete}`,
-  },
-  A_CREDITO: {
+  OCUPADO: {
     color: `${colors.edit}`,
   },
-  PAGO: {
+  LIBRE: {
     color: `${colors.ok}`,
   },
 };
@@ -33,24 +30,19 @@ const StateColorContainer = styled.label`
   white-space: nowrap;
 `;
 
-const State = ({ state }) => {
+const BoliranaState = ({ state }) => {
   return (
     <StateContainer>
-      {state === "PENDIENTE" && (
-        <StateColorContainer colorState={"PENDIENTE"}>
+      {state === "LIBRE" && (
+        <StateColorContainer colorState={"LIBRE"}>{state}</StateColorContainer>
+      )}
+      {state === "OCUPADO" && (
+        <StateColorContainer colorState={"OCUPADO"}>
           {state}
         </StateColorContainer>
-      )}
-      {state === "A CREDITO" && (
-        <StateColorContainer colorState={"A_CREDITO"}>
-          {state}
-        </StateColorContainer>
-      )}
-      {state === "PAGO" && (
-        <StateColorContainer colorState={"PAGO"}>{state}</StateColorContainer>
       )}
     </StateContainer>
   );
 };
 
-export default State;
+export default BoliranaState;

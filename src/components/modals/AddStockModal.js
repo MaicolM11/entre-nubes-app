@@ -69,7 +69,7 @@ const AddStockModal = ({
   };
 
   const updateCurrentUnits = () => {
-    updateUnits(product._id, stockValue).then(async () => {
+    updateUnits(product._id, stockValue.numberValue).then(async () => {
       handleSetIsOpen();
       updateProducts();
       openSuccessfulModal();
@@ -95,12 +95,12 @@ const AddStockModal = ({
               icon={<Box stroke={colors.brand} />}
               isStroke={true}
               type="text"
-              name="stock"
+              name="numberValue"
               placeholder="Unidades para stock"
               onChange={handleChangeIncreaseStock}
             />
-            {errors.stock ? (
-              <ErrorMessage>{errors.stock}</ErrorMessage>
+            {errors.numberValue ? (
+              <ErrorMessage>{errors.numberValue}</ErrorMessage>
             ) : (
               <ErrorMessageSpace />
             )}

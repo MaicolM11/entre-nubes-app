@@ -1,15 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 import { colors } from "../styles/colors";
-import State from "../states/State";
-import { ReactComponent as Cronometer } from "../../assets/icons/eye.svg";
-import { ReactComponent as Edit } from "../../assets/icons/edit.svg";
+import BoliranaState from "../states/BoliranaState";
+import { ReactComponent as Timer } from "../../assets/icons/timer.svg";
 import { ReactComponent as Delete } from "../../assets/icons/delete.svg";
 import {
-    EditIconButtonContainer,
-    DeleteIconButtonContainer,
-    ModalMediumTitle,
-    TitleTimer
+  DeleteIconButtonContainer,
+  ModalMediumTitle,
+  TitleTimer,
 } from "../styles/style-components";
 
 const BoliranaContainer = styled.div`
@@ -23,7 +21,7 @@ const BoliranaContainer = styled.div`
   &:hover {
     border-color: ${colors.highlighted};
   }
-`
+`;
 const PanelCenter = styled.div`
   display: flex;
   flex-direction: column;
@@ -32,55 +30,43 @@ const PanelCenter = styled.div`
   text-align: center;
   align-items: center;
   justify-content: center;
-`
+`;
 
-const TimeCronometer = styled.label`
-
-`
 const InfoContainer = styled.div`
-display: flex;
-flex-direction: column;
-width: 155px;
-height: 217px;
-justify-content: center;
-align-items: center;
-text-align: center;
-gap: 35px;
-`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 35px;
+`;
 
 const ButtonPanel = styled.div`
-display: flex;
-gap: 25px;
-`
+  display: flex;
+  gap: 25px;
+`;
 
+const BoliranaCard = ({ bolirana, handleDeleteBolirana }) => {
+  return (
+    <BoliranaContainer>
+      <PanelCenter>
+        <TitleTimer>00:00:00</TitleTimer>
+        <InfoContainer>
+          <ModalMediumTitle>{bolirana.name}</ModalMediumTitle>
+          <BoliranaState state={"LIBRE"} />
+          <Timer fill={colors.ok} width={25} height={25} />
+          <ButtonPanel>
+            <DeleteIconButtonContainer
+              isFill={true}
+              onClick={() => handleDeleteBolirana(bolirana)}
+            >
+              <Delete width={40} height={40} />
+            </DeleteIconButtonContainer>
+          </ButtonPanel>
+        </InfoContainer>
+      </PanelCenter>
+    </BoliranaContainer>
+  );
+};
 
-const BoliranaCard = ({ bolirana }) => {
-    return (
-        <BoliranaContainer>
-            <PanelCenter>
-                <TimeCronometer>
-                    <TitleTimer>
-                        00:00:00
-                    </TitleTimer>
-                </TimeCronometer>
-                <InfoContainer>
-                    <ModalMediumTitle>
-                        {bolirana.name}
-                    </ModalMediumTitle>
-                    <State state={'LIBRE'} />
-                    <Cronometer fill={colors.ok} width={25} height={25} />
-                    <ButtonPanel>
-                        <EditIconButtonContainer isStroke={true}>
-                            <Edit width={24} height={24} />
-                        </EditIconButtonContainer>
-                        <DeleteIconButtonContainer isFill={true}>
-                            <Delete width={24} height={24} />
-                        </DeleteIconButtonContainer>
-                    </ButtonPanel>
-                </InfoContainer>
-            </PanelCenter>
-        </BoliranaContainer>
-    )
-}
-
-export default BoliranaCard
+export default BoliranaCard;

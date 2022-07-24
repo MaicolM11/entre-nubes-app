@@ -7,7 +7,12 @@ import { colors } from "../styles/colors";
 import DataInput from "../inputs/DataInput";
 import Button from "../buttons/Button";
 import CloseButton from "../buttons/CloseButton";
-import { ModalTitle } from "../styles/style-components";
+import {
+  ErrorMessageContainer,
+  ErrorMessage,
+  ErrorMessageSpace,
+  ModalTitle,
+} from "../styles/style-components";
 import { ReactComponent as Frog } from "../../assets/icons/frog.svg";
 
 const AddBoliranaModalContainer = styled.div`
@@ -38,47 +43,67 @@ const ModalInfoContainer = styled.div`
   gap: 25px;
 `;
 
-const CreateBoliranaModal = ({ 
-  setIsOpenAddBolirana, 
-  getBoliranasList }) => 
-  {
-  const handleSetIsOpen = () => {
-    setIsOpenAddBolirana((isOpen) => !isOpen);
-    clearIncreaseNumberBoliranaValue();
-  };
-
-  const handleSubmitBolirana = () => {
-    createBolirana(`Bolirana ${numberValue.number}`).then(async () => {
-      getBoliranasList()
-      handleSetIsOpen();
-    });
+const AddBoliranaModal = ({
+  setIsOpenAddBolirana,
+  getBoliranasList,
+  openSuccessfulModal,
+}) => {
+  const handleSubmitAddBolirana = () => {
+    handleSubmitBolirana();
   };
 
   const {
-    numberValue,
+    numberBoliranaValue,
     handleChangeNumberBolirana,
     handleSubmitNumberBolirana,
     errors,
-    clearIncreaseNumberBoliranaValue,
-  } = useAddBolirana(handleSubmitBolirana);
+    clearNumberBoliranaValue,
+  } = useAddBolirana(handleSubmitAddBolirana);
+
+  const handleSetIsOpen = () => {
+    setIsOpenAddBolirana((isOpen) => !isOpen);
+    clearNumberBoliranaValue();
+  };
+
+  const handleSubmitBolirana = () => {
+    createBolirana(`Bolirana ${numberBoliranaValue.numberValue}`).then(
+      async (res) => {
+        const data = await res.json();
+        if (res.ok) {
+          getBoliranasList();
+          handleSetIsOpen();
+          openSuccessfulModal();
+        } else {
+          alert(data.message);
+        }
+      }
+    );
+  };
 
   return (
     <AddBoliranaModalContainer>
       <HeaderModalContainer>
-        <ModalTitle>Crear Bolirana</ModalTitle>
+        <ModalTitle>Agregar Bolirana</ModalTitle>
         <CloseButton onClick={handleSetIsOpen} />
       </HeaderModalContainer>
       <ModalContainer>
         <ModalInfoContainer>
-          <DataInput
-            size="normalInput"
-            icon={<Frog />}
-            isFill={true}
-            type="text"
-            name="number"
-            placeholder="Número de la bolirana"
-            onChange={handleChangeNumberBolirana}
-          />
+          <ErrorMessageContainer>
+            <DataInput
+              size="normalInput"
+              icon={<Frog />}
+              isFill={true}
+              type="text"
+              name="numberValue"
+              placeholder="Número de bolirana"
+              onChange={handleChangeNumberBolirana}
+            />
+            {errors.numberValue ? (
+              <ErrorMessage>{errors.numberValue}</ErrorMessage>
+            ) : (
+              <ErrorMessageSpace />
+            )}
+          </ErrorMessageContainer>
           <Button
             size="normalButton"
             theme="ok"
@@ -91,4 +116,4 @@ const CreateBoliranaModal = ({
   );
 };
 
-export default CreateBoliranaModal;
+export default AddBoliranaModal;

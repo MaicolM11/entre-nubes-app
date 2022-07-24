@@ -106,13 +106,13 @@ const StockLimitModal = ({
               icon={<CubesStacked />}
               isFill={true}
               type="text"
-              name="stock"
+              name="numberValue"
               placeholder="Límite de unidades"
               // defaultValue={category ? category.name : ""}
               onChange={handleChangeStockLimit}
             />
-            {errors.stock ? (
-              <ErrorMessage>{errors.stock}</ErrorMessage>
+            {errors.numberValue ? (
+              <ErrorMessage>{errors.numberValue}</ErrorMessage>
             ) : (
               <ErrorMessageSpace />
             )}

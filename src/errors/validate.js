@@ -36,13 +36,13 @@ export const debtorValidation = (values) => {
   return errors;
 };
 
-export const increaseStockValidation = (values) => {
+export const increaseStockValidation = (value) => {
   const errors = {};
 
-  if (negativeNumberRegex.test(values.stock) || values.stock <= 0) {
-    errors.stock = "El valor ingresado debe ser mayor a 0";
-  } else if (!numberRegex.test(values.stock)) {
-    errors.stock = "Solo dede ingresar números";
+  if (negativeNumberRegex.test(value.numberValue) || value.numberValue <= 0) {
+    errors.numberValue = "El valor ingresado debe ser mayor a 0";
+  } else if (!numberRegex.test(value.numberValue)) {
+    errors.numberValue = "Solo dede ingresar números";
   }
 
   return errors;
