@@ -24,7 +24,7 @@ const OrdersAdminCardsContainer = ({ bills, handleOpenProductList }) => {
           place={bill.location}
           status={bill.status}
           totalPayment={bill.total}
-          salesman={bill.salesman.fullname}
+          salesman={bill.salesman && bill.salesman.fullname}
           gain={bill.total - bill.subtotal}
           handleOpenProductList={() => handleOpenProductList(bill)}
         />
