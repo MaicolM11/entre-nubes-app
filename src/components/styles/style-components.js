@@ -37,6 +37,11 @@ const size = {
     height: "35px",
     fontSize: "14px",
   },
+  boliranaButton: {
+    width: "200px",
+    height: "45px",
+    fontSize: "16px",
+  },
   mediumBorderButton: {
     width: "185px",
     height: "45px",
