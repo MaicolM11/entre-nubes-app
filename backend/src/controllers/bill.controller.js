@@ -117,13 +117,6 @@ export const payDueBill = (req, res) => {
       .catch(error => res.status(400).json({ message: error.message }));
 }
 
-export const deskClosing = (req, res) => {
-  res.sendStatus(200)
-  // pasar de last_bills -> bills, 
-  // cambiar la coleccion en deudores.
-  // eliminar last_bills
-}
-
 export const getPaymentMethods = (req, res) => {
   let data = [];
   Object.values(PAYMENT_METHODS).forEach(x => data.push({mode: x}))

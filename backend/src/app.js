@@ -39,6 +39,8 @@ app.use('/api/bill', require('./routes/bill.routes'))
 app.use('/api/debtor', require('./routes/debtor.routes'))
 app.use('/api/bolirana', require('./routes/bolirana.routes'))
 app.use('/api/notification', require('./routes/notification.routes'))
+app.use('/api/desk', require('./routes/desk.routes'))
+app.use('/api/report', require('./routes/report.routes'))
 
 app.use('/api-doc', SWAGGER_SERVE, SWAGGER_SETUP);
 

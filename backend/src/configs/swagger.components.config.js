@@ -120,6 +120,15 @@ module.exports = {
                     init_time: { type: "integer" },
                     time: { type: "integer" }
                 }
+            },
+            Report: {
+                type: "object",
+                properties: {
+                    total: { type: "integer" },
+                    subtotal: { type: "integer" },
+                    start_date: { type: "string" },
+                    end_date: { type: "string" }
+                }
             }
         },
         securitySchemes: {
