@@ -4,7 +4,11 @@ import { getBillById, debtorPayment } from "../../../services/bill";
 
 import "./Debtors.css";
 import { colors } from "../../../components/styles/colors";
-import { AddButtonTopContainer } from "../../../components/styles/style-components";
+import {
+  AddButtonTopContainer,
+  PageOptionsContainer,
+  PageOptionsCenterContainer,
+} from "../../../components/styles/style-components";
 import { ReactComponent as Add } from "../../../assets/icons/add.svg";
 import Header from "../../../components/header/Header";
 import SalesmanData from "../../../components/header/SalesmanData";
@@ -168,15 +172,17 @@ const Debtors = ({ salesmanName }) => {
         description="Información de los clientes deudores"
         component={<SalesmanData salesmanName={salesmanName} />}
       />
-      <AddButtonTopContainer>
-        <Button
-          size="mediumButton"
-          theme="ok"
-          icon={<Add fill={colors.secondary} />}
-          text="Agregar Deudor"
-          onClick={openCreateDebtorModal}
-        />
-      </AddButtonTopContainer>
+      <PageOptionsContainer>
+        <PageOptionsCenterContainer>
+          <Button
+            size="mediumButton"
+            theme="ok"
+            icon={<Add fill={colors.secondary} />}
+            text="Agregar Deudor"
+            onClick={openCreateDebtorModal}
+          />
+        </PageOptionsCenterContainer>
+      </PageOptionsContainer>
       <DebtorCardsContainer
         debtors={debtors}
         handleSubmitPendingPayments={openPendingPaymentsModal}

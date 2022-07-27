@@ -20,7 +20,11 @@ import OrderProductListModal from "../../../components/modals/OrderProductListMo
 import PayOptionsModal from "../../../components/modals/PayOptionsModal";
 import PayModeModal from "../../../components/modals/PayModeModal";
 import DebtorAssignModal from "../../../components/modals/DebtorAssignModal";
-import { AddButtonTopContainer } from "../../../components/styles/style-components";
+import {
+  AddButtonTopContainer,
+  PageOptionsContainer,
+  PageOptionsCenterContainer,
+} from "../../../components/styles/style-components";
 import { ReactComponent as Add } from "../../../assets/icons/add.svg";
 import { colors } from "../../../components/styles/colors";
 
@@ -217,18 +221,20 @@ const Orders = ({ salesmanName }) => {
       />
       <Header
         title="Pedidos"
-        description="Información de los pedidos realizados por mesa"
+        description="Información de los pedidos realizados en el bar"
         component={<SalesmanData salesmanName={salesmanName} />}
       />
-      <AddButtonTopContainer>
-        <Button
-          size="mediumButton"
-          theme="ok"
-          icon={<Add fill={colors.secondary} />}
-          text="Agregar Pedido"
-          onClick={openCreateOrderModal}
-        />
-      </AddButtonTopContainer>
+      <PageOptionsContainer>
+        <PageOptionsCenterContainer>
+          <Button
+            size="mediumButton"
+            theme="ok"
+            icon={<Add fill={colors.secondary} />}
+            text="Agregar Pedido"
+            onClick={openCreateOrderModal}
+          />
+        </PageOptionsCenterContainer>
+      </PageOptionsContainer>
       <OrdersSalesmanCardsContainer
         bills={getBills}
         handleOpenProductList={showBill}

@@ -12,7 +12,9 @@ export const colors = {
   editHover: "#ffb45c",
   delete: "#ff4343",
   deleteHover: "#ff6565",
-  dark: "#000000",
-  darkHover: "#535353",
   cardsBackground: "#efefef",
+  disableBoliranaRestartTime: "#FF93AB",
+  enableBoliranaRestartTime: "#FF1247",
+  resumeBoliranaTime: "#0099FF",
+  resumeHoverBoliranaTime: "#48B6FF",
 };

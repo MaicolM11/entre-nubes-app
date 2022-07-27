@@ -1,14 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import { colors } from "../styles/colors";
-import BoliranaState from "../states/BoliranaState";
+import { ReactComponent as Stop } from "../../assets/icons/stop.svg";
 import { ReactComponent as Timer } from "../../assets/icons/timer.svg";
-import { ReactComponent as Delete } from "../../assets/icons/delete.svg";
-import {
-  DeleteIconButtonContainer,
-  ModalMediumTitle,
-  TitleTimer,
-} from "../styles/style-components";
+import { ModalMediumTitle, TitleTimer } from "../styles/style-components";
+import BoliranaState from "../states/BoliranaState";
 import Button from "../buttons/Button";
 
 const BoliranaContainer = styled.div`
@@ -63,15 +59,15 @@ const BoliranaTimeControlCard = ({
           <ButtonPanel>
             <Button
               size="boliranaButton"
-              theme="ok"
-              // icon={<Add fill="white" />}
+              theme="disableRestartTime"
+              icon={<Stop fill="white" />}
               text="Reiniciar Tiempo"
               onClick={handleResetTime}
             />
             <Button
               size="boliranaButton"
               theme="ok"
-              // icon={<Add fill="white" />}
+              icon={<Timer fill="white" />}
               text="Iniciar Tiempo"
               onClick={handleStartTime}
             />

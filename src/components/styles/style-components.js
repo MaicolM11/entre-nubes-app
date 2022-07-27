@@ -75,9 +75,16 @@ const theme = {
     default: colors.delete,
     hover: colors.deleteHover,
   },
-  dark: {
-    default: colors.dark,
-    hover: colors.darkHover,
+  disableRestartTime: {
+    default: colors.disableBoliranaRestartTime,
+  },
+  enableRestartTime: {
+    default: colors.enableBoliranaRestartTime,
+    hover: colors.disableBoliranaRestartTime,
+  },
+  resumeTime: {
+    default: colors.resumeBoliranaTime,
+    hover: colors.resumeHoverBoliranaTime,
   },
 };
 
@@ -136,7 +143,7 @@ export const CardsContainer = styled.div`
   grid-row-gap: 25px;
   grid-column-gap: 50px;
   grid-template-columns: repeat(auto-fill, minmax(194px, 1fr));
-  padding: 0 25px 25px 25px;
+  padding: 25px;
   overflow-y: auto;
 `;
 
