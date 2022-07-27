@@ -1,10 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 import DebtCard from "../cards/DebtCard";
+import { colors } from "../styles/colors";
 
 const CardsContainer = styled.div`
   display: flex;
   flex-direction: column;
+  background-color: ${colors.cardsBackground};
   gap: 25px;
   padding: 25px;
   overflow-x: hidden;

@@ -5,7 +5,6 @@ import { getBillById, debtorPayment } from "../../../services/bill";
 import "./Debtors.css";
 import { colors } from "../../../components/styles/colors";
 import {
-  AddButtonTopContainer,
   PageOptionsContainer,
   PageOptionsCenterContainer,
 } from "../../../components/styles/style-components";

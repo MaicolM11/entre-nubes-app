@@ -8,6 +8,11 @@ import NotificationButton from "../../../components/header/NotificationButton";
 import OrdersAdminCardsContainer from "../../../components/cards-container/OrdersAdminCardsContainer";
 import AnimatedModalContainer from "../../../components/modals/animation/AnimatedModalContainer";
 import OrderProductListModal from "../../../components/modals/OrderProductListModal";
+import {
+  PageOptionsContainer,
+  PageOptionsCenterContainer,
+} from "../../../components/styles/style-components";
+import CloseBarButton from "../../../components/buttons/CloseBarButton";
 
 const Orders = () => {
   const [bill, setBill] = useState();
@@ -17,6 +22,10 @@ const Orders = () => {
 
   const isOpenProductList = () => {
     setIsOpenProductListModal(false);
+  };
+
+  const handleCloseBarModal = () => {
+    console.log("Cerrar caja...");
   };
 
   const showBill = (bill) => {
@@ -52,6 +61,16 @@ const Orders = () => {
         description="Información de los pedidos realizados por los clientes"
         component={<NotificationButton />}
       />
+      <PageOptionsContainer>
+        <PageOptionsCenterContainer>
+          <CloseBarButton
+            size="boliranaButton"
+            theme="ok"
+            text="Cerrar Caja"
+            onClick={handleCloseBarModal}
+          />
+        </PageOptionsCenterContainer>
+      </PageOptionsContainer>
       <OrdersAdminCardsContainer
         bills={bills}
         handleOpenProductList={showBill}

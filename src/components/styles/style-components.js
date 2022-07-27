@@ -88,12 +88,6 @@ const theme = {
   },
 };
 
-export const AddButtonTopContainer = styled.div`
-  display: flex;
-  width: 100%;
-  padding: 25px;
-`;
-
 export const BorderButtonContainer = styled.button`
   display: flex;
   width: ${(props) => size[props.size].width};

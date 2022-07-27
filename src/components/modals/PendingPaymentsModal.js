@@ -10,14 +10,17 @@ const PendingPaymentsModalContainer = styled.div`
   flex-direction: column;
   min-width: 857px;
   min-height: 573px;
-  background-color: ${colors.secondary};
+  background-color: ${colors.cardsBackground};
   border-radius: 16px;
 `;
 
 const HeaderModalContainer = styled.div`
   display: flex;
   align-items: center;
+  background-color: ${colors.secondary};
   padding: 35px;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
   border-bottom: 1px solid ${colors.border};
 `;
 
