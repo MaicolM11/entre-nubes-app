@@ -1,13 +1,16 @@
 import React from "react";
 import styled from "styled-components";
 import OrderProductCard from "../cards/OrderProductCard";
+import { colors } from "../styles/colors";
 
 const CardsContainer = styled.div`
   display: grid;
   grid-row-gap: 25px;
-  grid-column-gap: 60px;
-  grid-template-columns: repeat(2, minmax(255px, 1fr));
-  padding: 5px;
+  grid-column-gap: 83px;
+  grid-template-columns: repeat(auto-fill, minmax(255px, 1fr));
+  background-color: ${colors.cardsBackground};
+  padding: 25px;
+  border-bottom-left-radius: 16px;
   overflow-x: hidden;
   overflow-y: auto;
 `;

@@ -104,7 +104,7 @@ TablePaginationActions.propTypes = {
 const ProductsTable = ({ data, onDelete }) => {
   const [rows, setRows] = React.useState([]);
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(6);
+  const [rowsPerPage, setRowsPerPage] = React.useState(4);
   const [totalPayment, setTotalPayment] = React.useState(0);
   let totalOrderPayment = 0;
 
@@ -116,7 +116,7 @@ const ProductsTable = ({ data, onDelete }) => {
   };
 
   const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 6));
+    setRowsPerPage(parseInt(event.target.value, 4));
     setPage(0);
   };
 
@@ -189,17 +189,17 @@ const ProductsTable = ({ data, onDelete }) => {
               );
             })}
             {emptyRows > 0 && (
-              <TableRow style={{ height: 58.19 * emptyRows }}>
-                <TableCell colSpan={6} />
+              <TableRow style={{ height: 58 * emptyRows }}>
+                <TableCell colSpan={5} />
               </TableRow>
             )}
           </TableBody>
         ) : (
           <TableBody>
-            {[...Array(6)].map((data, i) => {
+            {[...Array(4)].map((data, i) => {
               return (
-                <TableRow key={i} style={{ height: 58.19 }}>
-                  <TableCell colSpan={6} />
+                <TableRow key={i} style={{ height: 58 }}>
+                  <TableCell colSpan={5} />
                 </TableRow>
               );
             })}

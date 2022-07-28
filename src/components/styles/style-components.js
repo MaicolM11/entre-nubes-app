@@ -534,7 +534,7 @@ export const OrderCardButtonsContainer = styled.div`
 export const PageOptionsContainer = styled.div`
   display: flex;
   width: 100%;
-  min-height: 75px;
+  max-height: 75px;
   background-color: ${colors.secondary};
   border-bottom: solid 1px ${colors.border};
 `;
@@ -542,6 +542,7 @@ export const PageOptionsContainer = styled.div`
 export const PageOptionsCenterContainer = styled.div`
   display: flex;
   width: 100%;
+  align-items: center;
   padding: 15px 25px;
 `;
 
@@ -668,7 +669,7 @@ export const SelectOption = styled.div`
 
 export const SelectOrderContainer = styled.div`
   display: flex;
-  width: 250px;
+  min-width: 185px;
   max-width: 250px;
   height: 45px;
 `;

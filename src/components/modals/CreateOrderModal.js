@@ -4,7 +4,12 @@ import usePlaceForm from "../../validate-forms/usePlaceForm";
 
 import styled from "styled-components";
 import { colors } from "../styles/colors";
-import { ModalTitle, SelectOrderContainer } from "../styles/style-components";
+import {
+  ModalTitle,
+  PageOptionsCenterContainer,
+  PageOptionsContainer,
+  SelectOrderContainer,
+} from "../styles/style-components";
 import { ReactComponent as Search } from "../../assets/icons/search.svg";
 import { ReactComponent as HomeTable } from "../../assets/icons/home-table.svg";
 import { ReactComponent as Category } from "../../assets/icons/category.svg";
@@ -25,15 +30,19 @@ import {
 const CreateOrderModalContainer = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: ${colors.secondary};
+  background-color: ${colors.cardsBackground};
   border-radius: 16px;
 `;
 
 const CreateOrderModalTitleContainer = styled.div`
   display: flex;
+  background-color: ${colors.secondary};
   align-items: center;
   padding: 25px;
+  gap: 25px;
   border-bottom: solid 1px ${colors.border};
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
 `;
 
 const ButtonsContainer = styled.div`
@@ -44,62 +53,12 @@ const ButtonsContainer = styled.div`
 const OrderOptionsContainer = styled.div`
   display: flex;
   width: 100%;
-`;
-
-const ProductsContainer = styled.div`
-  display: flex;
-`;
-
-const ProductsCenterContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  margin: 25px 25px 2px 25px;
-  gap: 25px;
-`;
-
-const ProductsFilterContainer = styled.div`
-  display: flex;
-  width: 100%;
-  align-items: center;
-  gap: 25px;
-  padding-bottom: 25px;
-  border-bottom: solid 1px ${colors.border};
-`;
-
-const ProductsCardContainer = styled.div`
-  display: flex;
-  width: 100%;
-  min-height: 575px;
-  max-height: 575px;
-`;
-
-const OrdersContainer = styled.div`
-  display: flex;
-  border-left: solid 1px ${colors.border};
-`;
-
-const OrdersCenterContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  margin: 25px;
-  gap: 25px;
-`;
-
-const OrderPlaceContainer = styled.div`
-  display: flex;
-  align-items: center;
-  padding-bottom: 10px;
-  border-bottom: solid 1px ${colors.border};
+  height: 540px;
 `;
 
 const OrderTableContainer = styled.div`
   display: flex;
-  flex-direction: column;
-  width: 100%;
-  min-height: 535px;
-  height: 535px;
+  padding: 25px;
 `;
 
 const TitleInfo = styled.label`
@@ -110,13 +69,34 @@ const TitleInfo = styled.label`
   font-family: var(--roboto);
   white-space: nowrap;
 `;
-const FilterContainer = styled.div`
+
+const AreaComponentsContainer = styled.div`
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 25px;
+`;
+
+const RightAreaContainer = styled.div`
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+`;
+
+const PlaceInputContainer = styled.div`
+  display: flex;
+  height: 45px;
+`;
+const ProductsFilterContainer = styled.div`
   display: flex;
   gap: 15px;
 `;
 
-const InputContainer = styled.div`
+const LeftAreaContainer = styled.div`
   display: flex;
+  flex-direction: column;
+  width: 100%;
+  border-right: solid 1px ${colors.border};
 `;
 
 const CreateOrderModal = ({
@@ -209,73 +189,79 @@ const CreateOrderModal = ({
         </ButtonsContainer>
       </CreateOrderModalTitleContainer>
       <OrderOptionsContainer>
-        <ProductsContainer>
-          <ProductsCenterContainer>
-            <ProductsFilterContainer>
-              <TitleInfo>Productos</TitleInfo>
-              <FilterContainer>
-                <SearchInput
-                  name="search"
-                  size="smallInput"
-                  icon={<Search />}
-                  isStroke={true}
-                  placeholder="Buscar"
-                  type="text"
-                  onChange={handleSearchChange}
-                />
-                <SelectOrderContainer>
-                  <CategorySelect
-                    icon={<Category width={25} height={25} />}
-                    dropdownTitle="Categorías"
-                    options={categories}
-                    selectedOption={selected.name}
-                    setSelectedOption={setSelected}
-                    searchInput={searchInputValue}
-                    isFilter={true}
-                    setIsFilter={setProducts}
-                  />
-                </SelectOrderContainer>
-              </FilterContainer>
-            </ProductsFilterContainer>
-            <ProductsCardContainer>
-              <OrderProductCardsContainer
-                products={products}
-                addProductOrder={handleAddProductOrder}
-              />
-            </ProductsCardContainer>
-          </ProductsCenterContainer>
-        </ProductsContainer>
-        <OrdersContainer>
-          <OrdersCenterContainer>
-            <OrderPlaceContainer>
-              <TitleInfo>Pedidos</TitleInfo>
-              <ErrorMessageContainer>
-                <InputContainer>
-                  <PlaceInput
-                    name="place"
-                    size="normalInput"
-                    isStroke={true}
-                    icon={<HomeTable stroke={colors.brand} />}
-                    placeholder="Lugar"
-                    type="text"
-                    onChange={handleChangePlace}
-                  />
-                </InputContainer>
-                {errors.place ? (
-                  <ErrorMessage>{errors.place}</ErrorMessage>
-                ) : (
-                  <ErrorMessageSpace />
-                )}
-              </ErrorMessageContainer>
-            </OrderPlaceContainer>
-            <OrderTableContainer>
-              <ProductsTable
-                data={orderedProducts}
-                onDelete={deleteProductToTable}
-              />
-            </OrderTableContainer>
-          </OrdersCenterContainer>
-        </OrdersContainer>
+        <LeftAreaContainer>
+          <PageOptionsContainer>
+            <PageOptionsCenterContainer>
+              <AreaComponentsContainer>
+                <TitleInfo>Productos</TitleInfo>
+                <ProductsFilterContainer>
+                  <SelectOrderContainer>
+                    <SearchInput
+                      name="search"
+                      size="smallInput"
+                      icon={<Search />}
+                      isStroke={true}
+                      placeholder="Buscar"
+                      type="text"
+                      onChange={handleSearchChange}
+                    />
+                  </SelectOrderContainer>
+                  <SelectOrderContainer>
+                    <CategorySelect
+                      icon={<Category width={25} height={25} />}
+                      dropdownTitle="Categorías"
+                      options={categories}
+                      selectedOption={selected.name}
+                      setSelectedOption={setSelected}
+                      searchInput={searchInputValue}
+                      isFilter={true}
+                      setIsFilter={setProducts}
+                    />
+                  </SelectOrderContainer>
+                </ProductsFilterContainer>
+              </AreaComponentsContainer>
+            </PageOptionsCenterContainer>
+          </PageOptionsContainer>
+          <OrderProductCardsContainer
+            products={products}
+            addProductOrder={handleAddProductOrder}
+          />
+        </LeftAreaContainer>
+        <RightAreaContainer>
+          <PageOptionsContainer>
+            <PageOptionsCenterContainer>
+              <AreaComponentsContainer>
+                <TitleInfo>Pedidos</TitleInfo>
+                <PlaceInputContainer>
+                  <ErrorMessageContainer>
+                    <SelectOrderContainer>
+                      <PlaceInput
+                        name="place"
+                        size="normalInput"
+                        isStroke={true}
+                        icon={<HomeTable stroke={colors.brand} />}
+                        placeholder="Lugar"
+                        type="text"
+                        onChange={handleChangePlace}
+                      />
+                    </SelectOrderContainer>
+                    {errors.place ? (
+                      <ErrorMessage>{errors.place}</ErrorMessage>
+                    ) : (
+                      <ErrorMessageSpace />
+                    )}
+                  </ErrorMessageContainer>
+                </PlaceInputContainer>
+              </AreaComponentsContainer>
+            </PageOptionsCenterContainer>
+          </PageOptionsContainer>
+          <OrderTableContainer>
+            <ProductsTable
+              data={orderedProducts}
+              onDelete={deleteProductToTable}
+            />
+          </OrderTableContainer>
+        </RightAreaContainer>
       </OrderOptionsContainer>
     </CreateOrderModalContainer>
   );
