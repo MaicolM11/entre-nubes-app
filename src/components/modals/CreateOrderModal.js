@@ -54,8 +54,8 @@ const AreaComponentsContainer = styled.div`
 
 const RightAreaContainer = styled.div`
   display: flex;
-  width: 100%;
   flex-direction: column;
+  width: 100%;
 `;
 
 const PlaceInputContainer = styled.div`

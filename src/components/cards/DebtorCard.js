@@ -10,7 +10,7 @@ import { ReactComponent as PhoneIcon } from "../../assets/icons/phone.svg";
 const DebtorCardContainer = styled.div`
   display: flex;
   flex-direction: column;
-  height: 245px;
+  height: 200px;
   align-items: center;
   justify-content: center;
   background-color: ${colors.secondary};

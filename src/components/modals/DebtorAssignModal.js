@@ -12,15 +12,19 @@ import DebtorProductsContainer from "../cards-container/DebtorProductsContainer"
 const DebtorAssignModalContainer = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: ${colors.secondary};
+  background-color: ${colors.cardsBackground};
   border-radius: 16px;
 `;
 
 const ModalTitleContainer = styled.div`
   display: flex;
+  background-color: ${colors.secondary};
   align-items: center;
   padding: 25px;
+  gap: 25px;
   border-bottom: solid 1px ${colors.border};
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
 `;
 
 const ButtonsContainer = styled.div`
@@ -30,6 +34,8 @@ const ButtonsContainer = styled.div`
 
 const CenterModalContainer = styled.div`
   display: flex;
+  width: 100%;
+  height: 560px;
 `;
 
 const RightModalContainer = styled.div`
@@ -38,29 +44,19 @@ const RightModalContainer = styled.div`
   width: 100%;
   padding: 25px;
   gap: 25px;
-  border-left: solid 1px ${colors.border};
 `;
 
 const RightTopContainer = styled.div`
   display: flex;
   width: 100%;
+  justify-content: center;
   gap: 25px;
-`;
-
-const ProductsContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  gap: 15px;
-  min-height: 365px;
-  height: 365px;
 `;
 
 const LeftModalContainer = styled.div`
   display: flex;
   width: 100%;
-  min-height: 615px;
-  height: 615px;
+  border-right: solid 1px ${colors.border};
 `;
 
 const DebtorAssignModal = ({
@@ -71,8 +67,8 @@ const DebtorAssignModal = ({
   handleSubmitDebtorAssign,
 }) => {
   const [currentDebtor, setCurrentDebtor] = useState({
-    fullname: "En espera...",
-    cc: "En espera...",
+    fullname: "Sin Asignar",
+    cc: "Sin Asignar",
   });
 
   const handleSubmitAssignDebt = (debtor) => {
@@ -109,10 +105,8 @@ const DebtorAssignModal = ({
             <DebtorInfoCard debtor={currentDebtor} />
             <TotalDebtCard totalDebt={bill.total} />
           </RightTopContainer>
-          <ProductsContainer>
-            <DebtorBoldData>Productos</DebtorBoldData>
-            <DebtorProductsContainer productList={productsSale} />
-          </ProductsContainer>
+          <DebtorBoldData>Productos</DebtorBoldData>
+          <DebtorProductsContainer productList={productsSale} />
         </RightModalContainer>
       </CenterModalContainer>
     </DebtorAssignModalContainer>

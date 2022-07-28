@@ -11,7 +11,7 @@ const DebtorCardContainer = styled.div`
   align-items: center;
   justify-content: center;
   background-color: ${colors.secondary};
-  border: 1px solid ${colors.border};
+  border: 1px solid ${colors.highlighted};
   border-radius: 25px;
 `;
 
@@ -33,9 +33,10 @@ const DebtorInfoCardContainer = styled.div`
 
 const DebtorInfoContainer = styled.div`
   display: flex;
-  min-width: 175px;
+  min-width: 215px;
   width: 175px;
   gap: 10px;
+  justify-content: center;
 `;
 
 const DebtorInfoCard = ({ debtor }) => {

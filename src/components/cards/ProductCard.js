@@ -8,7 +8,6 @@ import { DataSpan } from "../styles/style-components";
 const ProductCardContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 300px;
   align-items: center;
   justify-content: center;
   background-color: ${colors.secondary};

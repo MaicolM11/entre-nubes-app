@@ -1,24 +1,25 @@
 import React from "react";
 import styled from "styled-components";
 import DebtorCard from "../cards/DebtorCard";
+import { colors } from "../styles/colors";
 
 const CardsContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(2, minmax(283px, 1fr));
-  padding: 25px;
   gap: 25px;
+  grid-template-columns: repeat(2, minmax(200px, 1fr));
+  background-color: ${colors.cardsBackground};
+  padding: 25px;
+  border-bottom-left-radius: 16px;
   overflow-x: hidden;
   overflow-y: auto;
 
-  @media (min-width: 1800px) {
-    grid-template-columns: repeat(auto-fill, minmax(283px, 1fr));
-    padding: 25px 200px;
+  @media (max-width: 1250px) {
+    grid-template-columns: repeat(1, minmax(250px, 1fr));
   }
 
-  @media (max-width: 985px) {
+  @media (max-width: 950px) {
     display: flex;
     flex-direction: column;
-    align-items: center;
   }
 `;
 

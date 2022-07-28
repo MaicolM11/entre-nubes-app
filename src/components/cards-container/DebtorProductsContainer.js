@@ -1,12 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 import DebtorProductCard from "../../components/cards/DebtorProductCard";
+import { colors } from "../styles/colors";
 
 const CardsContainer = styled.div`
   display: flex;
   flex-direction: column;
+  background-color: ${colors.cardsBackground};
   gap: 10px;
-  padding-right: 5px;
+  padding-right: 3px;
   overflow-x: hidden;
   overflow-y: auto;
 `;

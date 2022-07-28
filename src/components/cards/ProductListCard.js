@@ -6,9 +6,9 @@ import { DataSpan } from "../styles/style-components";
 
 const ProductContainer = styled.div`
   display: flex;
+  width: 100%;
   align-items: center;
   justify-content: center;
-  width: 100%;
 `;
 
 const ProductListCardContainer = styled.div`
@@ -20,6 +20,9 @@ const ProductListCardContainer = styled.div`
   padding: 25px;
   border-radius: 25px;
   border: 1px solid ${colors.border};
+  &:hover {
+    border-color: ${colors.highlighted};
+  }
 `;
 
 const DataContainer = styled.div`

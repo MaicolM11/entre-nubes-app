@@ -15,18 +15,14 @@ const CardsContainer = styled.div`
   overflow-y: auto;
 
   @media (max-width: 1280px) {
-    grid-column-gap: 68px;
-  }
-
-  @media (max-width: 1240px) {
-    grid-column-gap: 65px;
+    grid-column-gap: 25px;
+    padding: 25px 45px;
   }
 
   @media (max-width: 950px) {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
   }
 `;
 

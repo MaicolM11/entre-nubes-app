@@ -6,7 +6,7 @@ import { DataSpan, DebtorBoldData } from "../styles/style-components";
 const TotalDebtCardContainer = styled.div`
   display: flex;
   background-color: ${colors.secondary};
-  border: 1px solid ${colors.border};
+  border: 1px solid ${colors.edit};
   border-radius: 16px;
 `;
 

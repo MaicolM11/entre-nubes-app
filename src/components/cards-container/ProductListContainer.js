@@ -7,7 +7,7 @@ const CardsContainer = styled.div`
   display: flex;
   flex-direction: column;
   min-width: 1025px;
-  min-height: 475px;
+  height: 475px;
   gap: 25px;
   padding: 25px;
   background-color: ${colors.cardsBackground};
