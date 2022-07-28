@@ -45,31 +45,6 @@ const CreateOrderModalTitleContainer = styled.div`
   border-top-right-radius: 16px;
 `;
 
-const ButtonsContainer = styled.div`
-  display: flex;
-  gap: 25px;
-`;
-
-const OrderOptionsContainer = styled.div`
-  display: flex;
-  width: 100%;
-  height: 540px;
-`;
-
-const OrderTableContainer = styled.div`
-  display: flex;
-  padding: 25px;
-`;
-
-const TitleInfo = styled.label`
-  width: 100%;
-  color: ${colors.text};
-  font-size: 24px;
-  font-weight: bold;
-  font-family: var(--roboto);
-  white-space: nowrap;
-`;
-
 const AreaComponentsContainer = styled.div`
   display: flex;
   width: 100%;
@@ -97,6 +72,38 @@ const LeftAreaContainer = styled.div`
   flex-direction: column;
   width: 100%;
   border-right: solid 1px ${colors.border};
+`;
+
+const SelectFilterCategoryContainer = styled.div`
+  display: flex;
+  width: 250px;
+  max-width: 250px;
+  height: 45px;
+`;
+
+const ButtonsContainer = styled.div`
+  display: flex;
+  gap: 25px;
+`;
+
+const OrderOptionsContainer = styled.div`
+  display: flex;
+  width: 100%;
+  height: 540px;
+`;
+
+const OrderTableContainer = styled.div`
+  display: flex;
+  padding: 25px;
+`;
+
+const TitleInfo = styled.label`
+  width: 100%;
+  color: ${colors.text};
+  font-size: 24px;
+  font-weight: bold;
+  font-family: var(--roboto);
+  white-space: nowrap;
 `;
 
 const CreateOrderModal = ({
@@ -206,7 +213,7 @@ const CreateOrderModal = ({
                       onChange={handleSearchChange}
                     />
                   </SelectOrderContainer>
-                  <SelectOrderContainer>
+                  <SelectFilterCategoryContainer>
                     <CategorySelect
                       icon={<Category width={25} height={25} />}
                       dropdownTitle="Categorías"
@@ -217,7 +224,7 @@ const CreateOrderModal = ({
                       isFilter={true}
                       setIsFilter={setProducts}
                     />
-                  </SelectOrderContainer>
+                  </SelectFilterCategoryContainer>
                 </ProductsFilterContainer>
               </AreaComponentsContainer>
             </PageOptionsCenterContainer>
