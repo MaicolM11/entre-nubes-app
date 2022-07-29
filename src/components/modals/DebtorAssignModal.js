@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { colors } from "../styles/colors";
-import { DebtorBoldData, ModalTitle } from "../styles/style-components";
+import { ModalTitle, TitleInfo } from "../styles/style-components";
 import ExistingDebtorsContainer from "../cards-container/ExistingDebtorsContainer";
 import BorderButton from "../buttons/BorderButton";
 import Button from "../buttons/Button";
@@ -34,8 +34,14 @@ const ButtonsContainer = styled.div`
 
 const CenterModalContainer = styled.div`
   display: flex;
-  width: 100%;
-  height: 560px;
+  height: 565px;
+
+  @media (max-width: 985px) {
+    padding: 25px;
+    flex-direction: column-reverse;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
 `;
 
 const RightModalContainer = styled.div`
@@ -44,6 +50,10 @@ const RightModalContainer = styled.div`
   width: 100%;
   padding: 25px;
   gap: 25px;
+
+  @media (max-width: 985px) {
+    padding: 0;
+  }
 `;
 
 const RightTopContainer = styled.div`
@@ -51,12 +61,39 @@ const RightTopContainer = styled.div`
   width: 100%;
   justify-content: center;
   gap: 25px;
+
+  @media (max-width: 985px) {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(200px, 1fr));
+  }
 `;
 
 const LeftModalContainer = styled.div`
   display: flex;
+  flex-direction: column;
   width: 100%;
   border-right: solid 1px ${colors.border};
+
+  @media (max-width: 985px) {
+    border-right: none;
+  }
+`;
+
+const HeaderDebtorsContainer = styled.div`
+  display: flex;
+  height: 75px;
+  border-bottom: solid 1px ${colors.border};
+`;
+
+const HeaderDebtorsCenterContainer = styled.div`
+  display: flex;
+  width: 100%;
+  align-items: center;
+  padding: 15px 25px;
+
+  @media (max-width: 985px) {
+    padding: 0;
+  }
 `;
 
 const DebtorAssignModal = ({
@@ -95,6 +132,11 @@ const DebtorAssignModal = ({
       </ModalTitleContainer>
       <CenterModalContainer>
         <LeftModalContainer>
+          <HeaderDebtorsContainer>
+            <HeaderDebtorsCenterContainer>
+              <TitleInfo>Deudores</TitleInfo>
+            </HeaderDebtorsCenterContainer>
+          </HeaderDebtorsContainer>
           <ExistingDebtorsContainer
             debtors={debtors}
             handleSubmitAssignDebt={handleSubmitAssignDebt}
@@ -105,7 +147,7 @@ const DebtorAssignModal = ({
             <DebtorInfoCard debtor={currentDebtor} />
             <TotalDebtCard totalDebt={bill.total} />
           </RightTopContainer>
-          <DebtorBoldData>Productos</DebtorBoldData>
+          <TitleInfo>Productos</TitleInfo>
           <DebtorProductsContainer productList={productsSale} />
         </RightModalContainer>
       </CenterModalContainer>

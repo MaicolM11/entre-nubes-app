@@ -11,6 +11,13 @@ const CardsContainer = styled.div`
   padding-right: 3px;
   overflow-x: hidden;
   overflow-y: auto;
+
+  @media (max-width: 985px) {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(150px, 1fr));
+    gap: 25px;
+    padding-right: 0;
+  }
 `;
 
 const DebtorProductsContainer = ({ productList }) => {

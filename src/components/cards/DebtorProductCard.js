@@ -23,6 +23,11 @@ const ProductListCardContainer = styled.div`
   &:hover {
     border-color: ${colors.highlighted};
   }
+
+  @media (max-width: 985px) {
+    flex-direction: column;
+    text-align: center;
+  }
 `;
 
 const DataContainer = styled.div`
@@ -30,6 +35,10 @@ const DataContainer = styled.div`
   width: 100%;
   align-items: center;
   gap: 5px;
+
+  @media (max-width: 985px) {
+    flex-direction: column;
+  }
 `;
 
 const ProductDataContainer = styled.div`

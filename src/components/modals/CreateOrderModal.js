@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { colors } from "../styles/colors";
 import {
   ModalTitle,
+  TitleInfo,
   PageOptionsCenterContainer,
   PageOptionsContainer,
   SelectOrderContainer,
@@ -32,7 +33,6 @@ const OrderOptionsContainer = styled.div`
   width: 100%;
 
   @media (max-width: 1200px) {
-    display: flex;
     flex-direction: column-reverse;
     height: 515px;
     overflow-x: hidden;
@@ -102,15 +102,6 @@ const ButtonsContainer = styled.div`
 const OrderTableContainer = styled.div`
   display: flex;
   padding: 25px;
-`;
-
-const TitleInfo = styled.label`
-  width: 100%;
-  color: ${colors.text};
-  font-size: 24px;
-  font-weight: bold;
-  font-family: var(--roboto);
-  white-space: nowrap;
 `;
 
 const CreateOrderModal = ({

@@ -724,6 +724,15 @@ export const StockLimitIconButtonContainer = styled.div`
   }
 `;
 
+export const TitleInfo = styled.label`
+  width: 100%;
+  color: ${colors.text};
+  font-size: 22px;
+  font-weight: bold;
+  font-family: var(--roboto);
+  white-space: nowrap;
+`;
+
 export const TotalPaymentContainer = styled.label`
   display: flex;
   width: 100%;
