@@ -8,8 +8,14 @@ import {
   payment,
 } from "../../../services/bill";
 import { getAllDebtors } from "../../../services/debtor";
+import { useWarningOpenModal } from "../../../hooks/useOpenModal";
 
 import "./Orders.css";
+import {
+  PageOptionsContainer,
+  PageOptionsCenterContainer,
+} from "../../../components/styles/style-components";
+import { colors } from "../../../components/styles/colors";
 import AnimatedModalContainer from "../../../components/modals/animation/AnimatedModalContainer";
 import Header from "../../../components/header/Header";
 import SalesmanData from "../../../components/header/SalesmanData";
@@ -20,13 +26,8 @@ import OrderProductListModal from "../../../components/modals/OrderProductListMo
 import PayOptionsModal from "../../../components/modals/PayOptionsModal";
 import PayModeModal from "../../../components/modals/PayModeModal";
 import DebtorAssignModal from "../../../components/modals/DebtorAssignModal";
-import {
-  AddButtonTopContainer,
-  PageOptionsContainer,
-  PageOptionsCenterContainer,
-} from "../../../components/styles/style-components";
+import WarningModal from "../../../components/modals/WarningModal";
 import { ReactComponent as Add } from "../../../assets/icons/add.svg";
-import { colors } from "../../../components/styles/colors";
 
 const Orders = ({ salesmanName }) => {
   const [products, setProducts] = useState([]);
@@ -41,6 +42,12 @@ const Orders = ({ salesmanName }) => {
   const [isOpenPayOptionsModal, setIsOpenPayOptionsModal] = useState(false);
   const [isOpenPayModeModal, setIsOpenPayModeModal] = useState(false);
   const [isOpenDebtorAssignModal, setIsOpenDebtorAssignModal] = useState(false);
+  const {
+    isOpenProductsWarningModal,
+    isProductsWarningModalState,
+    isOpenPlaceWarningModal,
+    isPlaceWarningModalState,
+  } = useWarningOpenModal();
 
   const closeDebtorAssignModal = () => {
     setIsOpenDebtorAssignModal((isOpen) => !isOpen);
@@ -170,6 +177,8 @@ const Orders = ({ salesmanName }) => {
             handleCloseModal={openCreateOrderModal}
             updateBills={updateBills}
             updateListProductByFilter={getFilterProducts}
+            isPlaceModalState={isPlaceWarningModalState}
+            isProductsModalState={isProductsWarningModalState}
           />
         }
         isOpen={isOpenCreateOrderModal}
@@ -218,6 +227,26 @@ const Orders = ({ salesmanName }) => {
         }
         isOpen={isOpenPayModeModal}
         setIsOpen={setIsOpenPayModeModal}
+      />
+      <AnimatedModalContainer
+        modal={
+          <WarningModal
+            message="¡Aún no se ha agregado el lugar del pedido!"
+            handleSubmitWarning={isPlaceWarningModalState}
+          />
+        }
+        isOpen={isOpenPlaceWarningModal}
+        setIsOpen={isPlaceWarningModalState}
+      />
+      <AnimatedModalContainer
+        modal={
+          <WarningModal
+            message="¡Aún no se han agregado productos al pedido!"
+            handleSubmitWarning={isProductsWarningModalState}
+          />
+        }
+        isOpen={isOpenProductsWarningModal}
+        setIsOpen={isProductsWarningModalState}
       />
       <Header
         title="Pedidos"

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { postBill } from "../../services/bill";
-import usePlaceForm from "../../validate-forms/usePlaceForm";
 
 import styled from "styled-components";
 import { colors } from "../styles/colors";
@@ -10,10 +9,6 @@ import {
   PageOptionsContainer,
   SelectOrderContainer,
 } from "../styles/style-components";
-import { ReactComponent as Search } from "../../assets/icons/search.svg";
-import { ReactComponent as HomeTable } from "../../assets/icons/home-table.svg";
-import { ReactComponent as Category } from "../../assets/icons/category.svg";
-
 import Button from "../buttons/Button";
 import BorderButton from "../buttons/BorderButton";
 import OrderProductCardsContainer from "../cards-container/OrderProductCardsContainer";
@@ -21,17 +16,28 @@ import SearchInput from "../inputs/DataInput";
 import CategorySelect from "../select/CategorySelect";
 import PlaceInput from "../inputs/DataInput";
 import ProductsTable from "../tables/ProductsTable";
-import {
-  ErrorMessageContainer,
-  ErrorMessage,
-  ErrorMessageSpace,
-} from "../styles/style-components";
+import { ReactComponent as Search } from "../../assets/icons/search.svg";
+import { ReactComponent as HomeTable } from "../../assets/icons/home-table.svg";
+import { ReactComponent as Category } from "../../assets/icons/category.svg";
 
 const CreateOrderModalContainer = styled.div`
   display: flex;
   flex-direction: column;
   background-color: ${colors.cardsBackground};
   border-radius: 16px;
+`;
+
+const OrderOptionsContainer = styled.div`
+  display: flex;
+  width: 100%;
+
+  @media (max-width: 1200px) {
+    display: flex;
+    flex-direction: column-reverse;
+    height: 515px;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
 `;
 
 const CreateOrderModalTitleContainer = styled.div`
@@ -71,7 +77,14 @@ const LeftAreaContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+  height: 540px;
   border-right: solid 1px ${colors.border};
+
+  @media (max-width: 1200px) {
+    border-right: none;
+    align-items: center;
+    padding: 0 15px;
+  }
 `;
 
 const SelectFilterCategoryContainer = styled.div`
@@ -84,12 +97,6 @@ const SelectFilterCategoryContainer = styled.div`
 const ButtonsContainer = styled.div`
   display: flex;
   gap: 25px;
-`;
-
-const OrderOptionsContainer = styled.div`
-  display: flex;
-  width: 100%;
-  height: 540px;
 `;
 
 const OrderTableContainer = styled.div`
@@ -116,9 +123,12 @@ const CreateOrderModal = ({
   handleCloseModal,
   updateBills,
   updateListProductByFilter,
+  isPlaceModalState,
+  isProductsModalState,
 }) => {
   const [orderedProducts, setOrderedProducts] = useState([]);
   const [searchInputValue, setSearchInputValue] = useState("");
+  const [placeValue, setPlaceValue] = useState({ place: "" });
   let productsOnSale = [];
 
   const handleSubmitOrder = () => {
@@ -126,13 +136,14 @@ const CreateOrderModal = ({
       const productOnSale = { product: product.id, quantity: product.quantity };
       productsOnSale.push(productOnSale);
     });
-    if (productsOnSale.length === 0) {
-      console.log("¡Aún no se han agregado productos!");
+    if (!placeValue.place) {
+      isPlaceModalState();
+    } else if (productsOnSale.length === 0) {
+      isProductsModalState();
     } else {
       postBill(placeValue.place, productsOnSale).then(async (res) => {
         const data = await res.json();
         if (res.ok) {
-          clearInputs();
           handleCloseModal();
           updateBills();
           updateProducts();
@@ -141,18 +152,6 @@ const CreateOrderModal = ({
         }
       });
     }
-  };
-
-  const {
-    placeValue,
-    handleChangePlace,
-    handleSubmitPlace,
-    errors,
-    clearPlaceValue,
-  } = usePlaceForm(handleSubmitOrder);
-
-  const clearInputs = () => {
-    clearPlaceValue();
   };
 
   const handleAddProductOrder = (product) => {
@@ -166,15 +165,25 @@ const CreateOrderModal = ({
     showProductsOnTable(orderedProducts, setOrderedProducts, orderedProduct);
   };
 
+  const deleteProductToTable = (id) => {
+    const currentProducts = orderedProducts.filter((item) => item.id !== id);
+    setOrderedProducts(currentProducts);
+  };
+
+  const handleChangePlace = (e) => {
+    const { name, value } = e.target;
+    setPlaceValue((values) => {
+      return {
+        ...values,
+        [name]: value,
+      };
+    });
+  };
+
   const handleSearchChange = (e) => {
     const { value } = e.target;
     setSearchInputValue(value);
     updateListProductByFilter(selected.id, value);
-  };
-
-  const deleteProductToTable = (id) => {
-    const currentProducts = orderedProducts.filter((item) => item.id !== id);
-    setOrderedProducts(currentProducts);
   };
 
   return (
@@ -191,7 +200,7 @@ const CreateOrderModal = ({
             size="mediumModalButton"
             theme="ok"
             text="Agregar Pedido"
-            onClick={handleSubmitPlace}
+            onClick={handleSubmitOrder}
           />
         </ButtonsContainer>
       </CreateOrderModalTitleContainer>
@@ -240,24 +249,17 @@ const CreateOrderModal = ({
               <AreaComponentsContainer>
                 <TitleInfo>Pedidos</TitleInfo>
                 <PlaceInputContainer>
-                  <ErrorMessageContainer>
-                    <SelectOrderContainer>
-                      <PlaceInput
-                        name="place"
-                        size="normalInput"
-                        isStroke={true}
-                        icon={<HomeTable stroke={colors.brand} />}
-                        placeholder="Lugar"
-                        type="text"
-                        onChange={handleChangePlace}
-                      />
-                    </SelectOrderContainer>
-                    {errors.place ? (
-                      <ErrorMessage>{errors.place}</ErrorMessage>
-                    ) : (
-                      <ErrorMessageSpace />
-                    )}
-                  </ErrorMessageContainer>
+                  <SelectOrderContainer>
+                    <PlaceInput
+                      name="place"
+                      size="normalInput"
+                      isStroke={true}
+                      icon={<HomeTable stroke={colors.brand} />}
+                      placeholder="Lugar"
+                      type="text"
+                      onChange={handleChangePlace}
+                    />
+                  </SelectOrderContainer>
                 </PlaceInputContainer>
               </AreaComponentsContainer>
             </PageOptionsCenterContainer>

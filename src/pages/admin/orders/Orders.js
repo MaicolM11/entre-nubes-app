@@ -3,15 +3,15 @@ import { getSocket } from "../../../services/socket";
 import { getBillById } from "../../../services/bill";
 
 import "./Orders.css";
+import {
+  PageOptionsContainer,
+  PageOptionsCenterContainer,
+} from "../../../components/styles/style-components";
 import Header from "../../../components/header/Header";
 import NotificationButton from "../../../components/header/NotificationButton";
 import OrdersAdminCardsContainer from "../../../components/cards-container/OrdersAdminCardsContainer";
 import AnimatedModalContainer from "../../../components/modals/animation/AnimatedModalContainer";
 import OrderProductListModal from "../../../components/modals/OrderProductListModal";
-import {
-  PageOptionsContainer,
-  PageOptionsCenterContainer,
-} from "../../../components/styles/style-components";
 import CloseBarButton from "../../../components/buttons/CloseBarButton";
 
 const Orders = () => {

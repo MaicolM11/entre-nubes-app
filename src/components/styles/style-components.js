@@ -86,6 +86,10 @@ const theme = {
     default: colors.resumeBoliranaTime,
     hover: colors.resumeHoverBoliranaTime,
   },
+  warning: {
+    default: colors.warning,
+    hover: colors.warningHover,
+  },
 };
 
 export const BorderButtonContainer = styled.button`

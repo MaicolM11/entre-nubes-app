@@ -17,4 +17,6 @@ export const colors = {
   enableBoliranaRestartTime: "#FF1247",
   resumeBoliranaTime: "#0099FF",
   resumeHoverBoliranaTime: "#48B6FF",
+  warning: "#FFD600",
+  warningHover: "#FFE456",
 };

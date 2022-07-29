@@ -19,6 +19,14 @@ const CardsContainer = styled.div`
     padding: 25px 45px;
   }
 
+  @media (max-width: 1250px) {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(200px, 1fr));
+    padding: 0 75px;
+    margin: 25px;
+    border-radius: none;
+  }
+
   @media (max-width: 950px) {
     display: flex;
     flex-direction: column;
