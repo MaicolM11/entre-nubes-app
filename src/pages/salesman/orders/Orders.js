@@ -8,7 +8,10 @@ import {
   payment,
 } from "../../../services/bill";
 import { getAllDebtors } from "../../../services/debtor";
-import { useWarningOpenModal } from "../../../hooks/useOpenModal";
+import {
+  useSuccessfulOpenModal,
+  useWarningOpenModal,
+} from "../../../hooks/useOpenModal";
 
 import "./Orders.css";
 import {
@@ -26,12 +29,14 @@ import OrderProductListModal from "../../../components/modals/OrderProductListMo
 import PayOptionsModal from "../../../components/modals/PayOptionsModal";
 import PayModeModal from "../../../components/modals/PayModeModal";
 import DebtorAssignModal from "../../../components/modals/DebtorAssignModal";
+import SuccessfulDebtorModal from "../../../components/modals/SuccessfulDebtorModal";
 import WarningModal from "../../../components/modals/WarningModal";
 import { ReactComponent as Add } from "../../../assets/icons/add.svg";
 
 const Orders = ({ salesmanName }) => {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState({});
+  const [debtor, setDebtor] = useState({});
   const [debtors, setDebtors] = useState({});
   const [getBills, setBills] = useState([]);
   const [bill, setBill] = useState();
@@ -47,7 +52,11 @@ const Orders = ({ salesmanName }) => {
     isProductsWarningModalState,
     isOpenPlaceWarningModal,
     isPlaceWarningModalState,
+    isOpenNoDebtorModal,
+    isNoDebtorModalState,
   } = useWarningOpenModal();
+  const { isOpenSuccessfulDebtorModal, isSuccessfulDebtorModalState } =
+    useSuccessfulOpenModal();
 
   const closeDebtorAssignModal = () => {
     setIsOpenDebtorAssignModal((isOpen) => !isOpen);
@@ -95,13 +104,12 @@ const Orders = ({ salesmanName }) => {
 
   const handleSubmitDebtorAssign = (currentDebtor, bill) => {
     if (!currentDebtor._id) {
-      console.log("Falta asignar el deudor.");
+      isNoDebtorModalState();
     } else {
       assignBill(bill._id, currentDebtor._id).then(async (res) => {
         if (res.ok) {
-          console.log(
-            "¡Deuda asignada al cliente " + currentDebtor.fullname + "!"
-          );
+          setDebtor(currentDebtor);
+          isSuccessfulDebtorModalState();
           updateBills();
           closeDebtorAssignModal();
         }
@@ -247,6 +255,26 @@ const Orders = ({ salesmanName }) => {
         }
         isOpen={isOpenProductsWarningModal}
         setIsOpen={isProductsWarningModalState}
+      />
+      <AnimatedModalContainer
+        modal={
+          <WarningModal
+            message="¡Aún no se ha asignado el deudor!"
+            handleSubmitWarning={isNoDebtorModalState}
+          />
+        }
+        isOpen={isOpenNoDebtorModal}
+        setIsOpen={isNoDebtorModalState}
+      />
+      <AnimatedModalContainer
+        modal={
+          <SuccessfulDebtorModal
+            debtorFullname={debtor.fullname}
+            handleSubmitOk={isSuccessfulDebtorModalState}
+          />
+        }
+        isOpen={isOpenSuccessfulDebtorModal}
+        setIsOpen={isSuccessfulDebtorModalState}
       />
       <Header
         title="Pedidos"

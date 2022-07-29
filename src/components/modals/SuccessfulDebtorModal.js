@@ -26,14 +26,14 @@ const DataModalContainer = styled.div`
   gap: 15px;
 `;
 
-const SuccessfulDebtorModal = ({ guarantorName, handleSubmitOk }) => {
+const SuccessfulDebtorModal = ({ debtorFullname, handleSubmitOk }) => {
   return (
     <SuccessfulModalContainer>
       <CenterModalContainer>
         <DataModalContainer>
           <Check width={25} height={25} fill={colors.ok} />
           <MessageInfoContainer>
-            ¡Deuda asignada al fiador {guarantorName}!
+            ¡Deuda asignada al cliente {debtorFullname}!
           </MessageInfoContainer>
         </DataModalContainer>
         <Button
