@@ -3,9 +3,14 @@ import { getPaymentMethods } from "../../services/bill";
 
 import styled from "styled-components";
 import { colors } from "../styles/colors";
-import { ModalTitle, SelectContainer } from "../styles/style-components";
+import {
+  HeaderModal,
+  ModalTitle,
+  SelectContainer,
+} from "../styles/style-components";
+import { ReactComponent as BackArrowIcon } from "../../assets/icons/arrow-back.svg";
 import { ReactComponent as Payment } from "../../assets/icons/payment.svg";
-import CloseButton from "../buttons/CloseButton";
+import BackButton from "../buttons/ArrowButton";
 import Button from "../buttons/Button";
 import PayModeSelect from "../select/PayModeSelect";
 
@@ -21,12 +26,6 @@ const PayModeModalDataContainer = styled.div`
   width: 100%;
   gap: 25px;
   padding: 35px;
-`;
-
-const HeaderModal = styled.div`
-  display: flex;
-  width: 100%;
-  align-items: center;
 `;
 
 const PayModeModal = ({ handleSubmitPayment, handleBackOrderOptions }) => {
@@ -48,8 +47,15 @@ const PayModeModal = ({ handleSubmitPayment, handleBackOrderOptions }) => {
     <PayModeModalContainer>
       <PayModeModalDataContainer>
         <HeaderModal>
+          <BackButton
+            icon={
+              <BackArrowIcon
+                fill={colors.brand}
+                onClick={handleBackOrderOptions}
+              />
+            }
+          />
           <ModalTitle>Modo de Pago</ModalTitle>
-          <CloseButton onClick={handleBackOrderOptions} />
         </HeaderModal>
         <SelectContainer>
           <PayModeSelect

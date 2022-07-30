@@ -8,6 +8,7 @@ import {
   ErrorMessageContainer,
   ErrorMessage,
   ErrorMessageSpace,
+  HeaderModal,
   ModalFormOptionContainer,
   ModalTitle,
 } from "../styles/style-components";
@@ -29,13 +30,6 @@ const CategoryModalCenterContainer = styled.div`
   width: 100%;
   padding: 35px;
   gap: 25px;
-`;
-
-const HeaderModal = styled.div`
-  display: flex;
-  width: 100%;
-  align-items: center;
-  gap: 15px;
 `;
 
 const CategoryModal = ({

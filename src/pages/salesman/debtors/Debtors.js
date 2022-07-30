@@ -158,6 +158,7 @@ const Debtors = ({ salesmanName }) => {
       <AnimatedModalContainer
         modal={
           <OrderProductListModal
+            isDebtor={true}
             bill={bill}
             productsSale={products}
             handleCloseModal={handleIsOpenProductsModal}

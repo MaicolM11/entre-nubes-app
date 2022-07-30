@@ -241,6 +241,12 @@ export const ErrorMessageSpace = styled.label`
   height: 10px;
 `;
 
+export const HeaderModal = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 15px;
+`;
+
 export const HeaderSeparator = styled.div`
   width: 1px;
   height: 25px;
@@ -505,6 +511,7 @@ export const OrderPlaceTitle = styled.label`
 export const OrderPlaceDescription = styled.label`
   display: flex;
   width: 100%;
+  text-align: center;
   align-items: center;
   justify-content: center;
   color: ${colors.text};

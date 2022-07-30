@@ -30,8 +30,15 @@ export function useSuccessfulOpenModal() {
   const isSuccessfulDebtorModalState = () =>
     setIsOpenSuccessfulDebtorModal(!isOpenSuccessfulDebtorModal);
 
+  const [isOpenSuccessfulPayModal, setIsOpenSuccessfulPayModal] =
+    useState(false);
+  const isSuccessfulPayModalState = () =>
+    setIsOpenSuccessfulPayModal(!isOpenSuccessfulPayModal);
+
   return {
     isOpenSuccessfulDebtorModal,
     isSuccessfulDebtorModalState,
+    isOpenSuccessfulPayModal,
+    isSuccessfulPayModalState,
   };
 }

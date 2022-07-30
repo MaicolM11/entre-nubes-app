@@ -29,6 +29,7 @@ import OrderProductListModal from "../../../components/modals/OrderProductListMo
 import PayOptionsModal from "../../../components/modals/PayOptionsModal";
 import PayModeModal from "../../../components/modals/PayModeModal";
 import DebtorAssignModal from "../../../components/modals/DebtorAssignModal";
+import SuccessfulModal from "../../../components/modals/SuccessfulModal";
 import SuccessfulDebtorModal from "../../../components/modals/SuccessfulDebtorModal";
 import WarningModal from "../../../components/modals/WarningModal";
 import { ReactComponent as Add } from "../../../assets/icons/add.svg";
@@ -42,6 +43,7 @@ const Orders = ({ salesmanName }) => {
   const [bill, setBill] = useState();
   const [productsSale, setProductsSale] = useState([]);
   const [selected, setSelected] = useState({ name: "Categoría", id: "" });
+
   const [isOpenCreateOrderModal, setIsOpenCreateOrderModal] = useState(false);
   const [isOpenProductListModal, setIsOpenProductListModal] = useState(false);
   const [isOpenPayOptionsModal, setIsOpenPayOptionsModal] = useState(false);
@@ -55,8 +57,12 @@ const Orders = ({ salesmanName }) => {
     isOpenNoDebtorModal,
     isNoDebtorModalState,
   } = useWarningOpenModal();
-  const { isOpenSuccessfulDebtorModal, isSuccessfulDebtorModalState } =
-    useSuccessfulOpenModal();
+  const {
+    isOpenSuccessfulDebtorModal,
+    isSuccessfulDebtorModalState,
+    isOpenSuccessfulPayModal,
+    isSuccessfulPayModalState,
+  } = useSuccessfulOpenModal();
 
   const closeDebtorAssignModal = () => {
     setIsOpenDebtorAssignModal((isOpen) => !isOpen);
@@ -121,7 +127,7 @@ const Orders = ({ salesmanName }) => {
     payment(bill._id, payMode).then(async () => {
       updateBills();
       setIsOpenPayModeModal((isOpen) => !isOpen);
-      console.log("Deuda pagada.");
+      isSuccessfulPayModalState();
     });
   };
 
@@ -275,6 +281,16 @@ const Orders = ({ salesmanName }) => {
         }
         isOpen={isOpenSuccessfulDebtorModal}
         setIsOpen={isSuccessfulDebtorModalState}
+      />
+      <AnimatedModalContainer
+        modal={
+          <SuccessfulModal
+            message="¡El pago se realizo correctamente!"
+            handleSubmitOk={isSuccessfulPayModalState}
+          />
+        }
+        isOpen={isOpenSuccessfulPayModal}
+        setIsOpen={isSuccessfulPayModalState}
       />
       <Header
         title="Pedidos"

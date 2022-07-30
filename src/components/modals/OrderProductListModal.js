@@ -5,9 +5,12 @@ import {
   HeaderTitle,
   HeaderSeparator,
   DataSpan,
+  HeaderModal,
 } from "../styles/style-components";
+import BackButton from "../buttons/ArrowButton";
 import CloseButton from "../buttons/CloseButton";
 import ProductListContainer from "../cards-container/ProductListContainer";
+import { ReactComponent as BackArrowIcon } from "../../assets/icons/arrow-back.svg";
 
 const OrderProductListContainer = styled.div`
   display: flex;
@@ -34,16 +37,30 @@ const TotalPaymentContainer = styled.label`
   white-space: nowrap;
 `;
 
-const OrderProductListModal = ({ bill, productsSale, handleCloseModal }) => {
+const OrderProductListModal = ({
+  isDebtor,
+  bill,
+  productsSale,
+  handleCloseModal,
+}) => {
   return (
     <OrderProductListContainer>
       <HeaderProductListContainer>
-        <HeaderTitle>Productos</HeaderTitle>
+        <HeaderModal>
+          {isDebtor && (
+            <BackButton
+              icon={
+                <BackArrowIcon fill={colors.brand} onClick={handleCloseModal} />
+              }
+            />
+          )}
+          <HeaderTitle>Productos</HeaderTitle>
+        </HeaderModal>
         <HeaderSeparator />
         <TotalPaymentContainer>
           Total Pago: <DataSpan>${bill.total}</DataSpan>
         </TotalPaymentContainer>
-        <CloseButton onClick={handleCloseModal} />
+        {!isDebtor && <CloseButton onClick={handleCloseModal} />}
       </HeaderProductListContainer>
       <ProductListContainer productList={productsSale} />
     </OrderProductListContainer>
