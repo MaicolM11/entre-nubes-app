@@ -7,17 +7,12 @@ const CardsContainer = styled.div`
   display: grid;
   grid-row-gap: 25px;
   grid-column-gap: 112px;
-  grid-template-columns: repeat(auto-fill, minmax(255px, 1fr));
+  grid-template-columns: repeat(2, minmax(255px, 1fr));
   background-color: ${colors.cardsBackground};
   padding: 25px;
   border-bottom-left-radius: 16px;
   overflow-x: hidden;
   overflow-y: auto;
-
-  @media (max-width: 1280px) {
-    grid-column-gap: 25px;
-    padding: 25px 45px;
-  }
 
   @media (max-width: 1250px) {
     display: grid;

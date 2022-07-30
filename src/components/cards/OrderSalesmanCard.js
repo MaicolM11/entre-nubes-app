@@ -37,7 +37,7 @@ const OrderSalesmanCard = ({
             text="Productos"
             onClick={handleOpenProductList}
           />
-          {status !== "PAGO" && (
+          {status !== "PAGO" && status !== "A CREDITO" && (
             <Button
               size="mediumSmallButton"
               theme="edit"

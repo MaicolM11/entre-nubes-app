@@ -87,6 +87,7 @@ const ProductOptionButtons = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
+  min-height: 45px;
 `;
 
 const OrderProductCard = ({
@@ -117,7 +118,7 @@ const OrderProductCard = ({
             Unidades disponibles: <DataSpan>{stock}</DataSpan>
           </ProductData>
           <ProductOptionButtons>
-            <CirclePlusButton onClick={onClickAddProductOrder} />
+            {stock > 0 && <CirclePlusButton onClick={onClickAddProductOrder} />}
           </ProductOptionButtons>
         </ProductInfoContainer>
       </ProductCardCenterContainer>
