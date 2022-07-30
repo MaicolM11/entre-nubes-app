@@ -8,33 +8,19 @@ import {
 import Button from "../../../components/buttons/Button";
 import Header from "../../../components/header/Header";
 import NotificationButton from "../../../components/header/NotificationButton";
+import ReportsTable from "../../../components/tables/ReportsTable";
+import { ReactComponent as Calendar } from "../../../assets/icons/calendar-check.svg";
 import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import { ReactComponent as Calendar } from "../../../assets/icons/calendar-check.svg";
+import { es } from "date-fns/locale";
 
 const ReportsContainer = styled.div`
   display: flex;
   width: 100%;
   height: 100vh;
-`;
-
-const ReportsCenterContainer = styled.div`
-  display: flex;
-  width: 100%;
-  padding: 25px 55px;
-  align-items: center;
-  justify-content: center;
-`;
-
-const ReportsTableContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 870px;
-  height: 585px;
-  gap: 25px;
 `;
 
 const FilterContainer = styled.div`
@@ -47,21 +33,13 @@ const FilterContainer = styled.div`
 const TableContainer = styled.div`
   display: flex;
   width: 100%;
-  height: 450px;
-  background-color: darkslateblue;
-`;
-
-const DateInputContainer = styled.input`
-  display: flex;
-  width: 250px;
-  height: 35px;
-  max-height: 45px;
-  background-color: greenyellow;
+  padding: 25px 55px;
 `;
 
 const Reports = () => {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
+  const [reports, setReports] = useState([]);
 
   const handleDateFilter = () => {
     console.log("Fecha de inicio: " + startDate);
@@ -78,7 +56,10 @@ const Reports = () => {
       <PageOptionsContainer>
         <PageOptionsCenterContainer>
           <FilterContainer>
-            <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <LocalizationProvider
+              adapterLocale={es}
+              dateAdapter={AdapterDateFns}
+            >
               <Stack direction="row" spacing={3}>
                 <DatePicker
                   label="Desde"
@@ -111,12 +92,9 @@ const Reports = () => {
         </PageOptionsCenterContainer>
       </PageOptionsContainer>
       <ReportsContainer>
-        {/* <ReportsCenterContainer>
-          <ReportsTableContainer>
-           
-            <TableContainer></TableContainer>
-          </ReportsTableContainer>
-        </ReportsCenterContainer> */}
+        <TableContainer>
+          <ReportsTable data={reports} />
+        </TableContainer>
       </ReportsContainer>
     </div>
   );

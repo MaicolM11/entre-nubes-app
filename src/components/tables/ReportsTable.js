@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { colors } from "../styles/colors";
-import { DataSpan, TotalPaymentContainer } from "../styles/style-components";
-import { DeleteIconTableButtonContainer } from "../styles/style-components";
-import { ReactComponent as Delete } from "../../assets/icons/delete.svg";
 
 import PropTypes from "prop-types";
 import { useTheme } from "@mui/material/styles";
@@ -25,11 +22,10 @@ import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import LastPageIcon from "@mui/icons-material/LastPage";
 
 const headerCells = [
-  { name: "Nombre del Producto" },
-  { name: "Precio de Venta" },
-  { name: "Unidades" },
-  { name: "Precio por Cantidad" },
-  { name: "Quitar Producto" },
+  { name: "Rango de Fechas" },
+  { name: "Valor Inventario" },
+  { name: "Valor Venta" },
+  { name: "Ganancia" },
 ];
 
 function TablePaginationActions(props) {
@@ -101,13 +97,11 @@ TablePaginationActions.propTypes = {
   rowsPerPage: PropTypes.number.isRequired,
 };
 
-const ProductsTable = ({ data, onDelete }) => {
-  const totalEmptyRows = 4;
+const ReportsTable = ({ data }) => {
+  const totalEmptyRows = 7;
   const [rows, setRows] = useState([]);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(totalEmptyRows);
-  const [totalPayment, setTotalPayment] = useState(0);
-  let totalOrderPayment = 0;
 
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
@@ -134,16 +128,8 @@ const ProductsTable = ({ data, onDelete }) => {
     },
   }));
 
-  const getTotalPayment = () => {
-    rows.map((product) => {
-      totalOrderPayment = +totalOrderPayment + product.pricePerQuantity;
-    });
-    setTotalPayment(totalOrderPayment);
-  };
-
   useEffect(() => {
     setRows(data);
-    getTotalPayment();
   });
 
   return (
@@ -177,20 +163,12 @@ const ProductsTable = ({ data, onDelete }) => {
                   <TableCell align="center">
                     ${product.pricePerQuantity}
                   </TableCell>
-                  <TableCell align="center">
-                    <DeleteIconTableButtonContainer
-                      isFill={true}
-                      onClick={() => onDelete(product.id)}
-                    >
-                      <Delete width={24} height={25} />
-                    </DeleteIconTableButtonContainer>
-                  </TableCell>
                 </TableRow>
               );
             })}
             {emptyRows > 0 && (
               <TableRow style={{ height: 58 * emptyRows }}>
-                <TableCell colSpan={5} />
+                <TableCell colSpan={4} />
               </TableRow>
             )}
           </TableBody>
@@ -199,7 +177,7 @@ const ProductsTable = ({ data, onDelete }) => {
             {[...Array(totalEmptyRows)].map((data, i) => {
               return (
                 <TableRow key={i} style={{ height: 58 }}>
-                  <TableCell colSpan={5} />
+                  <TableCell colSpan={4} />
                 </TableRow>
               );
             })}
@@ -209,7 +187,7 @@ const ProductsTable = ({ data, onDelete }) => {
           <TableRow>
             <TablePagination
               labelDisplayedRows={({ from, to }) =>
-                `Mostrando los productos del ${from} al ${to}`
+                `Mostrando los reportes del ${from} al ${to}`
               }
               rowsPerPageOptions={[]}
               count={rows.length}
@@ -222,11 +200,8 @@ const ProductsTable = ({ data, onDelete }) => {
           </TableRow>
         </TableFooter>
       </Table>
-      <TotalPaymentContainer>
-        Total a Pagar: <DataSpan>${totalPayment}</DataSpan>
-      </TotalPaymentContainer>
     </TableContainer>
   );
 };
 
-export default ProductsTable;
+export default ReportsTable;
