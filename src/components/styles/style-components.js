@@ -6,46 +6,61 @@ const size = {
     width: "405px",
     height: "45px",
     fontSize: "16px",
+    gap: "5px",
   },
   normalMediumButton: {
     width: "250px",
     height: "45px",
     fontSize: "16px",
+    gap: "5px",
   },
   mediumButton: {
     width: "187px",
     height: "45px",
     fontSize: "16px",
+    gap: "5px",
   },
   mediumModalButton: {
     width: "185px",
     height: "45px",
     fontSize: "16px",
+    gap: "5px",
   },
   mediumCardButton: {
     width: "145px",
     height: "35px",
     fontSize: "16px",
+    gap: "5px",
   },
   mediumSmallButton: {
     width: "152px",
     height: "45px",
     fontSize: "16px",
+    gap: "5px",
   },
   smallButton: {
     width: "80px",
     height: "35px",
     fontSize: "14px",
+    gap: "5px",
   },
   boliranaButton: {
     width: "200px",
     height: "45px",
     fontSize: "16px",
+    gap: "5px",
+  },
+  optionButton: {
+    width: "200px",
+    height: "45px",
+    fontSize: "16px",
+    gap: "15px",
   },
   mediumBorderButton: {
     width: "185px",
     height: "45px",
     fontSize: "16px",
+    gap: "5px",
   },
   normalInput: {
     width: "403px",
@@ -120,7 +135,7 @@ export const ButtonContainer = styled.button`
   height: ${(props) => size[props.size].height};
   align-items: center;
   justify-content: center;
-  gap: 5px;
+  gap: ${(props) => size[props.size].gap};
   background-color: ${(props) => theme[props.theme].default};
   color: white;
   font-size: ${(props) => size[props.size].fontSize};

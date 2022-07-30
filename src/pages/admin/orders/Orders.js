@@ -12,7 +12,8 @@ import NotificationButton from "../../../components/header/NotificationButton";
 import OrdersAdminCardsContainer from "../../../components/cards-container/OrdersAdminCardsContainer";
 import AnimatedModalContainer from "../../../components/modals/animation/AnimatedModalContainer";
 import OrderProductListModal from "../../../components/modals/OrderProductListModal";
-import CloseBarButton from "../../../components/buttons/CloseBarButton";
+import Button from "../../../components/buttons/Button";
+import { ReactComponent as CashRegister } from "../../../assets/icons/cash-register.svg";
 
 const Orders = () => {
   const [bill, setBill] = useState();
@@ -63,9 +64,10 @@ const Orders = () => {
       />
       <PageOptionsContainer>
         <PageOptionsCenterContainer>
-          <CloseBarButton
-            size="boliranaButton"
+          <Button
+            size="optionButton"
             theme="ok"
+            icon={<CashRegister fill="white" />}
             text="Cerrar Caja"
             onClick={handleCloseBarModal}
           />
