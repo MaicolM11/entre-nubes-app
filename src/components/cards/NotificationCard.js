@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { colors } from "../styles/colors";
 import { BoldSpan } from "../styles/style-components";
@@ -22,17 +22,38 @@ const NotificationText = styled.label`
 const Separator = styled.div`
   width: 150px;
   height: 1px;
-  background-color: ${colors.border};
+  background-color: ${(props) => props.color};
 `;
 
-const NotificationCard = ({ stock, product }) => {
+const NotificationCard = ({
+  stock,
+  product,
+  lastIndex,
+  notificationLength,
+}) => {
+  const [isLast, setIsLast] = useState(false);
+
+  const lastNotification = () => {
+    if (lastIndex === notificationLength) {
+      setIsLast(true);
+    }
+  };
+
+  useEffect(() => {
+    lastNotification();
+  }, []);
+
   return (
     <NotificationCardContainer>
       <NotificationText>
         Unidades actuales <BoldSpan>{stock}</BoldSpan> del producto{" "}
         <BoldSpan>{product}</BoldSpan>.
       </NotificationText>
-      <Separator />
+      {!isLast ? (
+        <Separator color={colors.border} />
+      ) : (
+        <Separator color={colors.secondary} />
+      )}
     </NotificationCardContainer>
   );
 };
