@@ -23,8 +23,8 @@ const CategorySelect = ({
   isFilter,
   setIsFilter,
 }) => {
-  const [isOpen, setIsOpen] = useState(false);
   const btnRef = useRef();
+  const [isOpen, setIsOpen] = useState(false);
 
   const filterProductsByCategory = (id) => {
     if (isFilter) {
@@ -42,7 +42,7 @@ const CategorySelect = ({
 
   useEffect(() => {
     const closeDropdown = (e) => {
-      if (e.path[0] !== btnRef.current) {
+      if (e.composedPath()[0] !== btnRef.current) {
         setIsOpen(false);
       }
     };

@@ -19,12 +19,12 @@ const PayModeSelect = ({
   selectedOption,
   setSelectedOption,
 }) => {
-  const [isOpen, setIsOpen] = useState(true);
   const btnRef = useRef();
+  const [isOpen, setIsOpen] = useState(true);
 
   useEffect(() => {
     const closeDropdown = (e) => {
-      if (e.path[0] !== btnRef.current) {
+      if (e.composedPath()[0] !== btnRef.current) {
         setIsOpen(false);
       }
     };

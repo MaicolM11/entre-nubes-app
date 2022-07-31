@@ -10,6 +10,29 @@ const CardsContainer = styled.div`
   padding: 25px;
   overflow-x: hidden;
   overflow-y: auto;
+
+  @media (max-width: 1115px) {
+    width: max-content;
+    grid-template-columns: repeat(3, minmax(min-content, max-content));
+    grid-column-gap: 75px;
+  }
+
+  @media (max-width: 1055px) {
+    width: max-content;
+    grid-template-columns: repeat(2, minmax(min-content, max-content));
+    grid-column-gap: 75px;
+  }
+
+  @media (max-width: 815px) {
+    width: max-content;
+    grid-template-columns: repeat(2, minmax(min-content, max-content));
+  }
+
+  @media (max-width: 770px) {
+    display: flex;
+    flex-direction: column;
+    width: max-content;
+  }
 `;
 
 const ProductCardsContainer = ({

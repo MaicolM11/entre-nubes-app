@@ -81,6 +81,12 @@ const ProductOptionButtons = styled.div`
   display: flex;
   width: 100%;
   gap: 15px;
+
+  @media (max-width: 1125px) {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
 const ProductCard = ({

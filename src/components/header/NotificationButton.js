@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { ReactComponent as Notification } from "../../assets/icons/notification.svg";
 import { colors } from "../styles/colors";
@@ -48,15 +48,26 @@ const NotificationDropdownCenterContainer = styled.div`
 `;
 
 const NotificationButton = () => {
+  const btnRef = useRef();
   const [isOpenNotifications, setIsOpenNotifications] = useState(false);
 
   const showNotifications = () => {
     setIsOpenNotifications(!isOpenNotifications);
   };
 
+  useEffect(() => {
+    const closeDropdown = (e) => {
+      if (e.composedPath()[2] !== btnRef.current) {
+        setIsOpenNotifications(false);
+      }
+    };
+    document.body.addEventListener("click", closeDropdown);
+    return () => document.body.removeEventListener("click", closeDropdown);
+  }, []);
+
   return (
     <NotificationContainer>
-      <NotificationButtonContainer onClick={showNotifications}>
+      <NotificationButtonContainer ref={btnRef} onClick={showNotifications}>
         <Notification />
       </NotificationButtonContainer>
       {isOpenNotifications && (
