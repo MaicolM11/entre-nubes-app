@@ -7,7 +7,8 @@ import Header from "../../../components/header/Header";
 import NotificationButton from "../../../components/header/NotificationButton";
 import Button from "../../../components/buttons/Button";
 import DeleteModal from "../../../components/modals/DeleteModal";
-import SalesmanModal from "../../../components/modals/SalesmanModal";
+import CreateSalesmanModal from "../../../components/modals/CreateSalesmanModal";
+import EditSalesmanModal from "../../../components/modals/EditSalesmanModal";
 import SalesmanCardsContainer from "../../../components/cards-container/SalesmanCardsContainer";
 import SuccessfulSalesmanModal from "../../../components/modals/SuccessfulSalesmanModal";
 import SuccessfulEditedSalesmanModal from "../../../components/modals/SuccessfulEditedSalesmanModal";
@@ -78,25 +79,26 @@ const Salesmans = () => {
 
   return (
     <div className="admin-salesmans-container">
-      <SalesmanModal
-        isTheme={true}
+      <CreateSalesmanModal
         info="Agregar Vendedor"
-        buttonTheme="ok"
-        updateSalesman={getSalesmans}
         isOpen={isOpenAddSalesmanModal}
         setIsOpen={setIsOpenAddSalesmanModal}
         openSuccessfulCreatedSalesmanModal={openCreatedSalesmanModal}
+        updateSalesmans={getSalesmans}
       />
-      {salesman && isOpenEditSalesmanModal && (
-        <SalesmanModal
-          isTheme={false}
-          info="Editar Vendedor"
-          buttonTheme="highlighted"
-          salesman={salesman}
-          updateSalesman={getSalesmans}
+      {salesman && (
+        <AnimatedModalContainer
+          modal={
+            <EditSalesmanModal
+              info="Editar Vendedor"
+              salesman={salesman}
+              updateSalesmans={getSalesmans}
+              setIsOpen={setIsOpenEditSalesmanModal}
+              openSuccessfulEditedSalesmanModal={openEditedSalesmanModal}
+            />
+          }
           isOpen={isOpenEditSalesmanModal}
           setIsOpen={setIsOpenEditSalesmanModal}
-          openSuccessfulEditedSalesmanModal={openEditedSalesmanModal}
         />
       )}
       <AnimatedModalContainer

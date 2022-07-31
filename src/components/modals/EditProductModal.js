@@ -80,8 +80,8 @@ const EditProductModal = ({
   };
 
   const {
-    handleChangeEditProduct,
     productValues,
+    handleChangeEditProduct,
     handleSubmitEditProduct,
     errors,
     clearEditProductValues,

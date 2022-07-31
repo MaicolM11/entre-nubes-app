@@ -52,8 +52,8 @@ const useEditProductForm = (
   };
 
   return {
-    handleChangeEditProduct,
     productValues: productValues,
+    handleChangeEditProduct,
     handleSubmitEditProduct,
     errors,
     clearEditProductValues,

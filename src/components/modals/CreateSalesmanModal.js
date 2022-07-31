@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
-import { createUser, editUser } from "../../services/user";
-import useSalesmanForm from "../../validate-forms/useSalesmanForm";
+import { createUser } from "../../services/user";
+import useCreateSalesmanForm from "../../validate-forms/useCreateSalesmanForm";
 
 import styled from "styled-components";
 import { colors } from "../styles/colors";
@@ -11,6 +11,10 @@ import {
   ErrorMessageContainer,
   ErrorMessageSpace,
 } from "../styles/style-components";
+import DataInput from "../inputs/DataInput";
+import PasswordInput from "../inputs/PasswordInput";
+import Button from "../buttons/Button";
+import CloseButton from "../buttons/CloseButton";
 import { useSpring, animated } from "react-spring";
 import { ReactComponent as UserIcon } from "../../assets/icons/user.svg";
 import { ReactComponent as PhoneIcon } from "../../assets/icons/phone.svg";
@@ -18,10 +22,6 @@ import { ReactComponent as EmailIcon } from "../../assets/icons/email.svg";
 import { ReactComponent as LocationIcon } from "../../assets/icons/location.svg";
 import { ReactComponent as LockIcon } from "../../assets/icons/lock.svg";
 import { ReactComponent as IdCardIcon } from "../../assets/icons/id-card.svg";
-import DataInput from "../inputs/DataInput";
-import PasswordInput from "../inputs/PasswordInput";
-import Button from "../buttons/Button";
-import CloseButton from "../buttons/CloseButton";
 
 const ProductModalContainer = styled.div`
   display: flex;
@@ -60,23 +60,15 @@ const ProductModalFormOptionContainer = styled.div`
   gap: 10px;
 `;
 
-const SalesmanModal = ({
-  isTheme,
+const CreateSalesmanModal = ({
   info,
-  buttonTheme,
-  salesman,
-  updateSalesman,
   isOpen,
   setIsOpen,
   openSuccessfulCreatedSalesmanModal,
-  openSuccessfulEditedSalesmanModal,
+  updateSalesmans,
 }) => {
   const handleSubmitCreateCurrentSalesman = () => {
     createSalesman();
-  };
-
-  const handleSubmitEditCurrentSalesman = () => {
-    editSalesman();
   };
 
   const {
@@ -85,15 +77,7 @@ const SalesmanModal = ({
     handleSubmitCreateSalesman,
     errors,
     clearCreateSalesmanValues,
-    editSalesmanValues,
-    handleChangeEditSalesman,
-    handleSubmitEditSalesman,
-    clearEditSalesmanValues,
-  } = useSalesmanForm(
-    salesman,
-    handleSubmitCreateCurrentSalesman,
-    handleSubmitEditCurrentSalesman
-  );
+  } = useCreateSalesmanForm(handleSubmitCreateCurrentSalesman);
 
   const createSalesman = () => {
     createUser(
@@ -108,7 +92,7 @@ const SalesmanModal = ({
       let data = await res.json();
       if (res.ok) {
         handleSetIsOpen();
-        updateSalesman();
+        updateSalesmans();
         openSuccessfulCreatedSalesmanModal();
       } else {
         alert(data.message);
@@ -116,36 +100,14 @@ const SalesmanModal = ({
     });
   };
 
-  const editSalesman = () => {
-    editUser(
-      salesman._id,
-      editSalesmanValues.fullname,
-      editSalesmanValues.email,
-      editSalesmanValues.password,
-      editSalesmanValues.cc,
-      editSalesmanValues.address,
-      editSalesmanValues.phone,
-      "SALESMAN"
-    ).then(async (res) => {
-      let data = await res.json();
-      if (res.ok) {
-        handleSetIsOpen();
-        updateSalesman();
-        openSuccessfulEditedSalesmanModal();
-      } else {
-        alert(data.message);
-      }
-    });
-  };
-
   const handleSetIsOpen = () => {
-    isTheme ? clearCreateSalesmanValues() : clearEditSalesmanValues();
+    clearCreateSalesmanValues();
     setIsOpen((isOpen) => !isOpen);
   };
 
   const closeModal = (e) => {
     if (ref.current === e.target) {
-      isTheme ? clearCreateSalesmanValues() : clearEditSalesmanValues();
+      clearCreateSalesmanValues();
       setIsOpen(false);
     }
   };
@@ -183,12 +145,7 @@ const SalesmanModal = ({
                         type="text"
                         name="fullname"
                         placeholder="Usuario"
-                        defaultValue={salesman ? salesman.fullname : ""}
-                        onChange={
-                          isTheme
-                            ? handleChangeCreateSalesman
-                            : handleChangeEditSalesman
-                        }
+                        onChange={handleChangeCreateSalesman}
                       />
                       {errors.fullname ? (
                         <ErrorMessage>{errors.fullname}</ErrorMessage>
@@ -204,12 +161,7 @@ const SalesmanModal = ({
                         type="text"
                         name="cc"
                         placeholder="Documento de identidad"
-                        defaultValue={salesman ? salesman.cc : ""}
-                        onChange={
-                          isTheme
-                            ? handleChangeCreateSalesman
-                            : handleChangeEditSalesman
-                        }
+                        onChange={handleChangeCreateSalesman}
                       />
                       {errors.cc ? (
                         <ErrorMessage>{errors.cc}</ErrorMessage>
@@ -225,12 +177,7 @@ const SalesmanModal = ({
                         type="text"
                         name="phone"
                         placeholder="Teléfono"
-                        defaultValue={salesman ? salesman.phone : ""}
-                        onChange={
-                          isTheme
-                            ? handleChangeCreateSalesman
-                            : handleChangeEditSalesman
-                        }
+                        onChange={handleChangeCreateSalesman}
                       />
                       {errors.phone ? (
                         <ErrorMessage>{errors.phone}</ErrorMessage>
@@ -246,12 +193,7 @@ const SalesmanModal = ({
                         type="text"
                         name="email"
                         placeholder="Correo electrónico"
-                        defaultValue={salesman ? salesman.email : ""}
-                        onChange={
-                          isTheme
-                            ? handleChangeCreateSalesman
-                            : handleChangeEditSalesman
-                        }
+                        onChange={handleChangeCreateSalesman}
                       />
                       {errors.email ? (
                         <ErrorMessage>{errors.email}</ErrorMessage>
@@ -267,12 +209,7 @@ const SalesmanModal = ({
                         type="text"
                         name="address"
                         placeholder="Dirección"
-                        defaultValue={salesman ? salesman.address : ""}
-                        onChange={
-                          isTheme
-                            ? handleChangeCreateSalesman
-                            : handleChangeEditSalesman
-                        }
+                        onChange={handleChangeCreateSalesman}
                       />
                       {errors.address ? (
                         <ErrorMessage>{errors.address}</ErrorMessage>
@@ -286,12 +223,7 @@ const SalesmanModal = ({
                         size="normalInput"
                         icon={<LockIcon stroke={colors.brand} />}
                         placeholder="Contraseña"
-                        defaultValue={salesman ? salesman.password : ""}
-                        onChange={
-                          isTheme
-                            ? handleChangeCreateSalesman
-                            : handleChangeEditSalesman
-                        }
+                        onChange={handleChangeCreateSalesman}
                       />
                       {errors.password ? (
                         <ErrorMessage>{errors.password}</ErrorMessage>
@@ -305,12 +237,7 @@ const SalesmanModal = ({
                         size="normalInput"
                         icon={<LockIcon stroke={colors.brand} />}
                         placeholder="Confirmar contraseña"
-                        defaultValue={salesman ? salesman.password : ""}
-                        onChange={
-                          isTheme
-                            ? handleChangeCreateSalesman
-                            : handleChangeEditSalesman
-                        }
+                        onChange={handleChangeCreateSalesman}
                       />
                       {errors.repeatPassWord ? (
                         <ErrorMessage>{errors.repeatPassWord}</ErrorMessage>
@@ -320,13 +247,9 @@ const SalesmanModal = ({
                     </ErrorMessageContainer>
                     <Button
                       size="normalButton"
-                      theme={buttonTheme}
+                      theme="ok"
                       text={info}
-                      onClick={
-                        isTheme
-                          ? handleSubmitCreateSalesman
-                          : handleSubmitEditSalesman
-                      }
+                      onClick={handleSubmitCreateSalesman}
                     />
                   </ProductModalFormOptionContainer>
                 </ProductModalFormCenterContainer>
@@ -339,4 +262,4 @@ const SalesmanModal = ({
   );
 };
 
-export default SalesmanModal;
+export default CreateSalesmanModal;
