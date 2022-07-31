@@ -31,12 +31,23 @@ const SalesmanCardDataContainer = styled.div`
   width: 100%;
   padding: 25px;
   gap: 15px;
+
+  @media (max-width: 1280px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 const InfoSalesmanContainer = styled.div`
   display: flex;
   align-items: center;
   gap: 15px;
+
+  @media (max-width: 1280px) {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
 `;
 
 const PhotoSalesmanContainer = styled.div`
@@ -79,6 +90,13 @@ const ButtonsContainer = styled.div`
   align-items: center;
   justify-content: flex-end;
   gap: 25px;
+
+  @media (max-width: 1055px) {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 175px;
+  }
 `;
 
 const SalesmanCard = ({
