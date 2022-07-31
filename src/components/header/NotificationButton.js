@@ -1,12 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import { ReactComponent as Notification } from "../../assets/icons/notification.svg";
 import { colors } from "../styles/colors";
+import NotificationCard from "../cards/NotificationCard";
+import { ReactComponent as Notification } from "../../assets/icons/notification.svg";
 
 const NotificationContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 30px;
 `;
 
 const NotificationButtonContainer = styled.div`
@@ -30,7 +30,6 @@ const NotificationButtonContainer = styled.div`
 
 const NotificationDropdownContainer = styled.div`
   display: flex;
-  width: 190px;
   position: absolute;
   top: 65px;
   transform: translateX(-85%);
@@ -45,7 +44,14 @@ const NotificationDropdownCenterContainer = styled.div`
   flex-direction: column;
   width: 100%;
   padding: 20px;
+  gap: 15px;
 `;
+
+const notificationsData = [
+  { stock: 1, product: "Pera" },
+  { stock: 3, product: "Manzana" },
+  { stock: 3, product: "Piña Colada del Valhala" },
+];
 
 const NotificationButton = () => {
   const btnRef = useRef();
@@ -68,12 +74,18 @@ const NotificationButton = () => {
   return (
     <NotificationContainer>
       <NotificationButtonContainer ref={btnRef} onClick={showNotifications}>
-        <Notification />
+        <Notification width={32} height={32} />
       </NotificationButtonContainer>
       {isOpenNotifications && (
         <NotificationDropdownContainer>
           <NotificationDropdownCenterContainer>
-            <label>item 1</label> <label>item 2</label>
+            {Object.values(notificationsData).map((notification, i) => (
+              <NotificationCard
+                key={i}
+                stock={notification.stock}
+                product={notification.product}
+              />
+            ))}
           </NotificationDropdownCenterContainer>
         </NotificationDropdownContainer>
       )}

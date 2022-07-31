@@ -107,6 +107,11 @@ const theme = {
   },
 };
 
+export const BoldSpan = styled.span`
+  font-weight: bold;
+  padding-left: 1px;
+`;
+
 export const BorderButtonContainer = styled.button`
   display: flex;
   width: ${(props) => size[props.size].width};
