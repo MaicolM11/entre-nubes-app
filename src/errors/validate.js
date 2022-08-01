@@ -177,3 +177,15 @@ export const salesmanValidation = (values) => {
 
   return errors;
 };
+
+export const timeValidation = (value) => {
+  const errors = {};
+
+  if (negativeNumberRegex.test(value.minutesTime) || value.minutesTime <= 0) {
+    errors.minutesTime = "Ingresar minutos mayor a 0";
+  } else if (!numberRegex.test(value.minutesTime)) {
+    errors.minutesTime = "Ingresar minutos en números";
+  }
+
+  return errors;
+};

@@ -26,7 +26,7 @@ const BoliranasTimeControlContainer = ({
           key={i}
           bolirana={bolirana}
           handleResetTime={handleResetTime}
-          handleStartTime={handleStartTime}
+          handleStartTime={() => handleStartTime(bolirana)}
         />
       ))}
     </CardsContainer>

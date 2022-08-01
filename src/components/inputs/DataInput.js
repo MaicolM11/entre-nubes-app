@@ -22,6 +22,7 @@ const DataInput = ({
       <InputCenterContainer>
         <IconContainer>{icon}</IconContainer>
         <InputValueContainer
+          size={size}
           type={type}
           name={name}
           placeholder={placeholder}
