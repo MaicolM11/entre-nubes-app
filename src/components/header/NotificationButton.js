@@ -9,13 +9,21 @@ const NotificationContainer = styled.div`
   flex-direction: column;
 `;
 
+const ButtonContainer = styled.div`
+  display: flex;
+  min-width: 35px;
+  min-height: 35px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  user-select: none;
+`;
+
 const NotificationButtonContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
   transition: 0.2s;
-  cursor: pointer;
-  user-select: none;
 
   path {
     fill: ${colors.highlighted};
@@ -86,21 +94,27 @@ const NotificationButton = () => {
     setIsOpenNotifications(!isOpenNotifications);
   };
 
-  useEffect(() => {
+  const closeOutsideComponent = (position) => {
     const closeDropdown = (e) => {
-      if (e.composedPath()[2] !== btnRef.current) {
+      if (e.composedPath()[position] !== btnRef.current) {
         setIsOpenNotifications(false);
       }
     };
     document.body.addEventListener("click", closeDropdown);
     return () => document.body.removeEventListener("click", closeDropdown);
+  };
+
+  useEffect(() => {
+    closeOutsideComponent(3);
   }, []);
 
   return (
     <NotificationContainer>
-      <NotificationButtonContainer ref={btnRef} onClick={showNotifications}>
-        <Notification width={32} height={32} />
-      </NotificationButtonContainer>
+      <ButtonContainer ref={btnRef} onClick={showNotifications}>
+        <NotificationButtonContainer>
+          <Notification width={32} height={32} />
+        </NotificationButtonContainer>
+      </ButtonContainer>
       {isCircleNotifications && (
         <CircleNotification>
           <CircleNotificationNumber>
