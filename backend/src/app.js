@@ -7,6 +7,7 @@ import { Server } from "socket.io";
 import express from 'express';
 import morgan from 'morgan';
 import cors from 'cors'
+import { notify } from './controllers/notification.controller';
 
 const app = express()
 const http = createServer(app);
@@ -29,7 +30,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
 app.use(cors());
 
-io.use(verifyTokenToSocket).on('connection', emitLastBills);
+io.use(verifyTokenToSocket).on('connection', (socket) => {
+    emitLastBills(socket);
+    notify(socket);
+});
 
 app.use('/auth', require('./routes/auth.routes'))
 app.use('/api/product', require('./routes/product.routes'))

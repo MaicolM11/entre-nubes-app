@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Reports.css";
 import styled from "styled-components";
 import {
@@ -16,6 +16,8 @@ import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { es } from "date-fns/locale";
+
+import { getAllReports } from "../../../services/report";
 
 const ReportsContainer = styled.div`
   display: flex;
@@ -45,6 +47,16 @@ const Reports = () => {
     console.log("Fecha de inicio: " + startDate);
     console.log("Fecha de fin: " + endDate);
   };
+
+  const loadReports = ()=> {  
+    getAllReports().then(async (res) => {
+      //setReports(await res.json());
+    });
+  }
+  
+  useEffect(() => {
+    loadReports();
+  }, []);
 
   return (
     <div className="admin-reports-container">

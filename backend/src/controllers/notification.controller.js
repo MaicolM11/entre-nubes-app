@@ -5,9 +5,10 @@ export const createNotification = async (data) => {
     notify()
 }
 
-export const notify = () => {
+export const notify = (socket = global.sockets) => {
     Notification.find()
-        .then(data => global.sockets.emit("notifications", data))
+        .sort({date: -1})
+        .then(data => socket.emit("notifications", data))
 }
 
 export const deleteById = (req, res) => {

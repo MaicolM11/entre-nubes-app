@@ -2,7 +2,7 @@
 
 (function() {
     
-    let token = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyZDE4YjljMTc5YTc0NzQ4NDgxYjQzMiIsImlhdCI6MTY1ODI0NjIwMCwiZXhwIjoxNjU4MjgyMjAwfQ.SDRKxd--UffDFH5Gd2lS6BYNumnOSiIfXWSEifaSW70";
+    let token = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyZDE4YjljMTc5YTc0NzQ4NDgxYjQzMiIsImlhdCI6MTY1OTM2ODY2MiwiZXhwIjoxNjU5NDA0NjYyfQ.TdFncvQ74kO1ab7mfbNFhvNDolGuNvV3_2u6400QURA";
     const socket = io('ws://localhost:8000', {
         query: { token }
     });

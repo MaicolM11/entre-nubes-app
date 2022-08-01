@@ -13,7 +13,8 @@ module.exports = {
             Category: {
                 type: "object",
                 properties: {
-                    name: { type: "string" }
+                    name: { type: "string" },
+                    minimum_quantities: { type: "integer" }
                 },
                 example: { name: "Bebidas" }
             },
@@ -127,7 +128,8 @@ module.exports = {
                     total: { type: "integer" },
                     subtotal: { type: "integer" },
                     start_date: { type: "string" },
-                    end_date: { type: "string" }
+                    end_date: { type: "string" },
+                    profit: {type: "integer" }
                 }
             }
         },
