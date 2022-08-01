@@ -1,5 +1,6 @@
 import Bill from "../models/Bill";
 import Debtor from "../models/Debtor";
+import { BILL_STATES } from "../models/Enums";
 
 import { createNotification } from "./notification.controller";
 import { generateReport } from './report.controller';
@@ -12,7 +13,17 @@ export const deskClosing = (req, res) => {
         message: ""
     }
 
-    Bill.aggregate([{ $match: {} }, { $out: "bills" }])
+    Bill.find({ status: BILL_STATES.DUE })
+        .then(data => {
+            if(data.length > 0){
+                notification.message = "No se puede cerrar caja con ventas pendientes.";
+                throw new Error();      
+            }
+            return true;
+        })
+        .then(() => 
+            Bill.aggregate([{ $match: {} }, { $out: "bills" }])
+        )
         .then(() => {
             return Debtor.updateMany({}, {
                 $set: {
@@ -32,7 +43,8 @@ export const deskClosing = (req, res) => {
             createNotification(notification);
         })
         .catch(err => {
-            notification.message = "El cierre de caja ha fallado!"
+            if(!notification.message || notification.message.length == 0)
+                notification.message = "El cierre de caja ha fallado!"
             createNotification(notification);
         });
 }

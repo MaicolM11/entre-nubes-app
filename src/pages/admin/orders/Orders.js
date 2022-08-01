@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getSocket } from "../../../services/socket";
 import { getBillById } from "../../../services/bill";
+import { closeDesk } from "../../../services/desk";
 
 import "./Orders.css";
 import {
@@ -20,13 +21,13 @@ const Orders = () => {
   const [bills, setBills] = useState([]);
   const [productsSale, setProductsSale] = useState([]);
   const [isOpenProductListModal, setIsOpenProductListModal] = useState(false);
-
+  
   const isOpenProductList = () => {
     setIsOpenProductListModal(false);
   };
 
   const handleCloseBarModal = () => {
-    console.log("Cerrar caja...");
+    closeDesk()
   };
 
   const showBill = (bill) => {
@@ -37,10 +38,10 @@ const Orders = () => {
     setBill(bill);
     setIsOpenProductListModal((isOpen) => !isOpen);
   };
-
+  
   useEffect(() => {
-    let socket = getSocket();
-    socket.on("sales", (data) => setBills(data));
+    const socket = getSocket();
+    socket.on("sales", setBills);
     return () => socket.disconnect();
   }, []);
 
