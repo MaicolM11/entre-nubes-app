@@ -62,7 +62,7 @@ const SideBarExitContainer = styled.div`
   justify-content: center;
 `;
 
-const Sidebar = ({ mainLink, links }) => {
+const Sidebar = ({ mainLink, links, handleClearLocalStorage }) => {
   return (
     <SideBarContainer>
       <SideBarCenterContainer>
@@ -80,7 +80,12 @@ const Sidebar = ({ mainLink, links }) => {
           </SideBarOptionsContainer>
           <SideBarSeparator />
           <SideBarExitContainer>
-            <ExitLinkButton path="/" icon={<Exit />} text="Salir" />
+            <ExitLinkButton
+              path="/"
+              icon={<Exit />}
+              text="Salir"
+              handleClearLocalStorage={handleClearLocalStorage}
+            />
           </SideBarExitContainer>
         </SideBarButtonsContainer>
       </SideBarCenterContainer>

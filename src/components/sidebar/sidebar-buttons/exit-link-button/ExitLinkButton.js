@@ -6,9 +6,13 @@ import {
   SidebarButtonIconContainer,
 } from "../../../styles/style-components";
 
-const ExitLinkButton = ({ path, icon, text }) => {
+const ExitLinkButton = ({ path, icon, text, handleClearLocalStorage }) => {
   return (
-    <Link to={path} className="default-exit-link">
+    <Link
+      to={path}
+      className="default-exit-link"
+      onClick={handleClearLocalStorage}
+    >
       <SidebarButtonContainer>
         <SidebarButtonIconContainer>{icon}</SidebarButtonIconContainer>
         <div>{text}</div>

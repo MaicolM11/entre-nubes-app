@@ -5,6 +5,7 @@ import {
   WelcomeAdminPageMessage,
   PageNotFoundMessage,
 } from "../../../messages/PageMessages";
+import { clearLocalStorage } from "../../../services/storage";
 
 import "./AdminHomepage.css";
 import Sidebar from "../../../components/sidebar/Sidebar";
@@ -20,7 +21,11 @@ import MenuStatus from "../../menu-status/MenuStatus";
 const AdminHomepage = () => {
   return (
     <div className="admin-homepage-container">
-      <Sidebar mainLink={AdminMainLink} links={AdminLinks} />
+      <Sidebar
+        mainLink={AdminMainLink}
+        links={AdminLinks}
+        handleClearLocalStorage={clearLocalStorage}
+      />
       <div className="admin-pages-container">
         <Routes>
           <Route

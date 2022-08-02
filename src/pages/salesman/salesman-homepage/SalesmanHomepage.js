@@ -6,6 +6,7 @@ import {
   WelcomeSalesmanPageMessage,
   PageNotFoundMessage,
 } from "../../../messages/PageMessages";
+import { clearLocalStorage } from "../../../services/storage";
 
 import "./SalesmanHomepage.css";
 import Sidebar from "../../../components/sidebar/Sidebar";
@@ -19,7 +20,11 @@ import MenuStatus from "../../menu-status/MenuStatus";
 const SalesmanHomepage = () => {
   return (
     <div className="salesman-homepage-container">
-      <Sidebar mainLink={SalesmanMainLink} links={SalesmanLinks} />
+      <Sidebar
+        mainLink={SalesmanMainLink}
+        links={SalesmanLinks}
+        handleClearLocalStorage={clearLocalStorage}
+      />
       <div className="salesman-pages-container">
         <Routes>
           <Route
