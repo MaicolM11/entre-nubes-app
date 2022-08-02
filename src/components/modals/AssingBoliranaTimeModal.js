@@ -63,7 +63,7 @@ const AssingBoliranaTimeModal = ({ bolirana, setIsOpenAssingBoliranaTime }) => {
     handleSubmitBoliranaTime,
     errors,
     clearInputBoliranaTime,
-  } = useAssingBoliranaTime(handleSubmitAssingCurrentBoliranaTime);
+  } = useAssingBoliranaTime(hour, handleSubmitAssingCurrentBoliranaTime);
 
   const handleSetIsOpen = () => {
     setIsOpenAssingBoliranaTime();

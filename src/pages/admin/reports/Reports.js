@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { getAllReports } from "../../../services/report";
+
 import "./Reports.css";
 import styled from "styled-components";
 import {
@@ -16,8 +18,6 @@ import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { es } from "date-fns/locale";
-
-import { getAllReports } from "../../../services/report";
 
 const ReportsContainer = styled.div`
   display: flex;
@@ -41,19 +41,19 @@ const TableContainer = styled.div`
 const Reports = () => {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
-  const [reports, setReports] = useState([]);
+  const [currentReports, setCurrentReports] = useState([]);
 
   const handleDateFilter = () => {
-    console.log("Fecha de inicio: " + startDate);
-    console.log("Fecha de fin: " + endDate);
+    console.log("Fecha de inicio: " + startDate.toLocaleDateString("es-MX"));
+    console.log("Fecha de fin: " + endDate.toLocaleDateString("es-MX"));
   };
 
-  const loadReports = ()=> {  
+  const loadReports = () => {
     getAllReports().then(async (res) => {
-      //setReports(await res.json());
+      setCurrentReports(await res.json());
     });
-  }
-  
+  };
+
   useEffect(() => {
     loadReports();
   }, []);
@@ -105,7 +105,7 @@ const Reports = () => {
       </PageOptionsContainer>
       <ReportsContainer>
         <TableContainer>
-          <ReportsTable data={reports} />
+          <ReportsTable data={currentReports} />
         </TableContainer>
       </ReportsContainer>
     </div>

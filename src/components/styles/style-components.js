@@ -70,23 +70,15 @@ const size = {
   },
   normalInput: {
     width: "403px",
-    height: "43px",
-    innerHeight: "41px",
   },
   mediumInput: {
     width: "248px",
-    height: "43px",
-    innerHeight: "41px",
   },
   smallInput: {
     width: "185px",
-    height: "43px",
-    innerHeight: "41px",
   },
   timeInput: {
     width: "175px",
-    height: "43px",
-    innerHeight: "41px",
   },
 };
 
@@ -302,7 +294,7 @@ export const InputContainer = styled.div`
   display: flex;
   gap: 5px;
   width: ${(props) => size[props.size].width};
-  height: ${(props) => size[props.size].height};
+  height: 43px;
   background-color: ${colors.secondary};
   border: 1px solid ${colors.border};
   border-radius: 25px;
@@ -364,7 +356,7 @@ export const InputPasswordContainer = styled.div`
 
 export const InputValueContainer = styled.input`
   width: 100%;
-  height: ${(props) => size[props.size].innerHeight};
+  height: 41px;
   border: none;
   outline: none;
   font-size: 16px;

@@ -185,6 +185,8 @@ export const timeValidation = (value) => {
     errors.minutesTime = "Ingresar minutos mayor a 0";
   } else if (!numberRegex.test(value.minutesTime)) {
     errors.minutesTime = "Ingresar minutos en números";
+  } else if (value.minutesTime > 59) {
+    errors.minutesTime = "Ingresar minutos menor a 60";
   }
 
   return errors;

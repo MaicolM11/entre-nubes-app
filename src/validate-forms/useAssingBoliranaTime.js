@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { timeValidation } from "../errors/validate";
 
-const useAssingBoliranaTime = (callback) => {
-  const [boliranaTime, setBoliranaTime] = useState(0);
+const useAssingBoliranaTime = (currentHour, callback) => {
+  const [boliranaTime, setBoliranaTime] = useState({ minutesTime: 0 });
 
   const handleChangeBoliranaTime = (e) => {
     const { name, value } = e.target;
@@ -17,7 +17,10 @@ const useAssingBoliranaTime = (callback) => {
   const handleSubmitBoliranaTime = (e) => {
     e.preventDefault();
     setErros(timeValidation(boliranaTime));
-    if (!(Object.keys(timeValidation(boliranaTime)).length > 0)) {
+    if (
+      currentHour >= 1 ||
+      !(Object.keys(timeValidation(boliranaTime)).length > 0)
+    ) {
       callback();
     }
   };

@@ -151,18 +151,19 @@ const ReportsTable = ({ data }) => {
             {(rowsPerPage > 0
               ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               : rows
-            ).map((product) => {
+            ).map((report) => {
               return (
                 <TableRow
-                  key={product.id}
+                  key={report._id}
                   sx={{ "&last-child td, &:last-child th": { border: 0 } }}
                 >
-                  <TableCell align="center">{product.brand}</TableCell>
-                  <TableCell align="center">${product.sale_price}</TableCell>
-                  <TableCell align="center">{product.quantity}</TableCell>
                   <TableCell align="center">
-                    ${product.pricePerQuantity}
+                    {new Date(report.start_date).toLocaleDateString("es-MX")} -{" "}
+                    {new Date(report.end_date).toLocaleDateString("es-MX")}
                   </TableCell>
+                  <TableCell align="center">${report.subtotal}</TableCell>
+                  <TableCell align="center">${report.total}</TableCell>
+                  <TableCell align="center">${report.profit}</TableCell>
                 </TableRow>
               );
             })}
