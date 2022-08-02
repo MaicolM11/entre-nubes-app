@@ -3,7 +3,7 @@ const controller = require('../controllers/auth.controller')
 
 /**
  * @swagger
- * /auth/login:
+ * /api/auth/login:
  *  post:
  *      sumary : Login app
  *      tags : [Auth]   

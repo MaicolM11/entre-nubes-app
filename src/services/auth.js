@@ -7,5 +7,5 @@ export const reqLogin = (username, password) => {
       password: password,
     }),
   };
-  return fetch("/auth/login", requestOptions);
+  return fetch("/api/auth/login", requestOptions);
 };
