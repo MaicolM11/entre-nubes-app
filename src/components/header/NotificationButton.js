@@ -50,6 +50,7 @@ const NotificationDropdownContainer = styled.div`
   background-color: ${colors.secondary};
   border: solid 1px ${colors.border};
   border-radius: 16px;
+  z-index: 99;
 `;
 
 const NotificationDropdownCenterContainer = styled.div`
