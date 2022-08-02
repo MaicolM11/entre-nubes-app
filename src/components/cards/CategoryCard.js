@@ -32,6 +32,8 @@ const CategoryCardCenterContainer = styled.div`
 
 const CategoryNameContainer = styled.label`
   width: 100%;
+  min-width: 175px;
+  width: 175px;
   color: ${colors.text};
   font-size: 22px;
   font-weight: bold;
@@ -58,7 +60,7 @@ const CategoryCard = ({
         <CategoryNameContainer>{category.name}</CategoryNameContainer>
         <ButtonsContainer>
           <Label16BoldFontContainer>
-            Limite: <DataSpaceSpan>000</DataSpaceSpan>
+            Limite: <DataSpaceSpan>{category.minimum_quantities}</DataSpaceSpan>
           </Label16BoldFontContainer>
           <StockLimitIconButtonContainer
             isStroke={true}

@@ -375,9 +375,9 @@ export const InputValueContainer = styled.input`
 
 export const Label16BoldFontContainer = styled.label`
   display: flex;
-  width: 100%;
+  min-width: 85px;
+  width: 85px;
   align-items: center;
-  justify-content: center;
   color: ${colors.text};
   font-size: 16px;
   font-weight: bold;

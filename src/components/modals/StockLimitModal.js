@@ -1,5 +1,6 @@
 import React from "react";
 import useStockLimitForm from "../../validate-forms/useStockLimitForm";
+import { addMinimunQuantitiesToCategory } from "../../services/category";
 
 import styled from "styled-components";
 import { colors } from "../styles/colors";
@@ -68,21 +69,18 @@ const StockLimitModal = ({
   };
 
   const updateCurrentStockLimit = () => {
-    console.log(category);
-    console.log(stockValue);
-    handleSetIsOpen();
-    updateCategories();
-    openSuccessStockLimitCategoryModal();
-    // createCategory(createCategoryValues.name).then(async (res) => {
-    //   const data = await res.json();
-    //   if (res.ok) {
-    //     handleSetIsOpen();
-    //     updateCategories();
-    //     openSuccessAddedCategoryModal();
-    //   } else {
-    //     alert(data.message);
-    //   }
-    // });
+    addMinimunQuantitiesToCategory(category._id, stockValue.numberValue).then(
+      async (res) => {
+        const data = await res.json();
+        if (res.ok) {
+          handleSetIsOpen();
+          updateCategories();
+          openSuccessStockLimitCategoryModal();
+        } else {
+          alert(data.message);
+        }
+      }
+    );
   };
 
   return (
@@ -108,7 +106,7 @@ const StockLimitModal = ({
               type="text"
               name="numberValue"
               placeholder="Límite de unidades"
-              // defaultValue={category ? category.name : ""}
+              defaultValue={category ? category.minimum_quantities : ""}
               onChange={handleChangeStockLimit}
             />
             {errors.numberValue ? (
