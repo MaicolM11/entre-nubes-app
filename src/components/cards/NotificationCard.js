@@ -17,6 +17,11 @@ const NotificationText = styled.label`
   color: ${colors.text};
   font-size: 14px;
   font-family: var(--roboto);
+
+  &:hover {
+    cursor: pointer;
+    color: ${colors.highlighted};
+  }
 `;
 
 const Separator = styled.div`
@@ -25,12 +30,7 @@ const Separator = styled.div`
   background-color: ${(props) => props.color};
 `;
 
-const NotificationCard = ({
-  stock,
-  product,
-  lastIndex,
-  notificationLength,
-}) => {
+const NotificationCard = ({ type, message, lastIndex, notificationLength }) => {
   const [isLast, setIsLast] = useState(false);
 
   const lastNotification = () => {
@@ -46,8 +46,8 @@ const NotificationCard = ({
   return (
     <NotificationCardContainer>
       <NotificationText>
-        Unidades actuales <BoldSpan>{stock}</BoldSpan> del producto{" "}
-        <BoldSpan>{product}</BoldSpan>.
+        <BoldSpan>{type}: </BoldSpan>
+        {message}
       </NotificationText>
       {!isLast ? (
         <Separator color={colors.border} />

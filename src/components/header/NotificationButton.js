@@ -1,9 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
+import { getSocket } from "../../services/socket";
+
 import styled from "styled-components";
 import { colors } from "../styles/colors";
 import NotificationCard from "../cards/NotificationCard";
 import { ReactComponent as Notification } from "../../assets/icons/notification.svg";
-import { getSocket } from "../../services/socket";
 
 const NotificationContainer = styled.div`
   display: flex;
@@ -78,17 +79,9 @@ const CircleNotificationNumber = styled.label`
   font-family: var(--roboto);
 `;
 
-const notificationData = [
-  { stock: 1, product: "Pera" },
-  { stock: 3, product: "Manzana" },
-  { stock: 3, product: "Piña Colada del Valhala" },
-  { stock: 2, product: "Galletas Michelin" },
-  { stock: 5, product: "Don Wiskey" },
-];
-
 const NotificationButton = () => {
   const btnRef = useRef();
-  const [isCircleNotifications, setIsCircleNotifications] = useState(true);
+  const [totalNotifications, setTotalNotifications] = useState(true);
   const [isOpenNotifications, setIsOpenNotifications] = useState(false);
   const [notifications, setNotifications] = useState([]);
 
@@ -109,11 +102,10 @@ const NotificationButton = () => {
   useEffect(() => {
     closeOutsideComponent(3);
     const socket = getSocket();
-    socket.on("notifications", data => {
-      setNotifications(data)
-      console.log(data);
+    socket.on("notifications", (data) => {
+      setNotifications(data);
+      setTotalNotifications(data.length);
     });
-    console.log("header");
     return () => socket.disconnect();
   }, []);
 
@@ -124,23 +116,23 @@ const NotificationButton = () => {
           <Notification width={32} height={32} />
         </NotificationButtonContainer>
       </ButtonContainer>
-      {isCircleNotifications && (
+      {totalNotifications > 0 && (
         <CircleNotification>
           <CircleNotificationNumber>
-            {notificationData.length}
+            {totalNotifications}
           </CircleNotificationNumber>
         </CircleNotification>
       )}
       {isOpenNotifications && (
         <NotificationDropdownContainer>
           <NotificationDropdownCenterContainer>
-            {Object.values(notificationData).map((notification, i) => (
+            {Object.values(notifications).map((notification, i) => (
               <NotificationCard
                 key={i}
-                stock={notification.stock}
-                product={notification.product}
+                type={notification.type}
+                message={notification.message}
                 lastIndex={i + 1}
-                notificationLength={notificationData.length}
+                notificationLength={totalNotifications}
               />
             ))}
           </NotificationDropdownCenterContainer>
