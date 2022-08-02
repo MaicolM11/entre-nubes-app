@@ -28,6 +28,15 @@ export const editCategory = (id, name) => {
   return fetch(BASE_URL + `/${id}`, requestOptions);
 };
 
+export const addMinimunQuantitiesToCategory = (id, quantities) => {
+  const requestOptions = {
+    method: "PUT",
+    headers: { "Content-Type": "application/json", authorization: getToken() },
+    body: JSON.stringify({ minimum_quantities: quantities }),
+  };
+  return fetch(BASE_URL + `/${id}`, requestOptions);
+};
+
 export const deleteCategory = (id) => {
   const requestOptions = {
     method: "DELETE",

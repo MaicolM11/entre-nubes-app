@@ -6,7 +6,10 @@ const categorySchema = mongoose.Schema(
             type: String,
             unique: true,
         },
-        minimum_quantities: Number
+        minimum_quantities: {
+            type: Number,
+            default: 0
+        }
     },
     {
         timestamps: false,
