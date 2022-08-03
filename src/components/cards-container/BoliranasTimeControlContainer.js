@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { colors } from "../styles/colors";
 import BoliranaTimeControlCard from "../cards/BoliranaTimeControlCard";
@@ -17,8 +17,10 @@ const CardsContainer = styled.div`
 const BoliranasTimeControlContainer = ({
   boliranas,
   handleResetTime,
-  handleStartTime,
+  handleSetTime,
+  handleStartTime
 }) => {
+
   return (
     <CardsContainer>
       {Object.values(boliranas).map((bolirana, i) => (
@@ -26,9 +28,8 @@ const BoliranasTimeControlContainer = ({
           key={i}
           bolirana={bolirana}
           isDisableButton={bolirana.state === "OCUPADA" && true}
-          // remainingTime={remainingTime}
-          // countdownTimestampMs={countdownTimestampMs}
           handleResetTime={() => handleResetTime(bolirana)}
+          handleSetTime={() => handleSetTime(bolirana)}
           handleStartTime={() => handleStartTime(bolirana)}
         />
       ))}

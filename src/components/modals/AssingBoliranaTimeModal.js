@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { startBolirana } from "../../services/bolirana";
+// import { startBolirana } from "../../services/bolirana";
 import useAssingBoliranaTime from "../../validate-forms/useAssingBoliranaTime";
 
 import styled from "styled-components";
@@ -55,13 +55,15 @@ const AssingBoliranaTimeModal = ({
   bolirana,
   updateBoliranas,
   setIsOpenAssingBoliranaTime,
+  convertTimeToMs,
+  startTemp,
+  startBoliranaTime
 }) => {
-  const defaultRemainingTime = { second: "00", minutes: "00", hours: "00" };
-  const [remainingTime, setRemainingTime] = useState(defaultRemainingTime);
-  const [hour, setHour] = useState(0);
+  const [currentHours, setCurrentHours] = useState(0);
 
   const handleSubmitAssingCurrentBoliranaTime = () => {
-    startBoliranaTime();
+    startBoliranaTime(currentHours, boliranaTime.minutesTime);
+    handleSetIsOpen();
   };
 
   const {
@@ -70,31 +72,32 @@ const AssingBoliranaTimeModal = ({
     handleSubmitBoliranaTime,
     errors,
     clearInputBoliranaTime,
-  } = useAssingBoliranaTime(hour, handleSubmitAssingCurrentBoliranaTime);
+  } = useAssingBoliranaTime(
+    currentHours,
+    handleSubmitAssingCurrentBoliranaTime
+  );
 
   const handleSetIsOpen = () => {
     setIsOpenAssingBoliranaTime();
     clearInputBoliranaTime();
   };
 
-  const startBoliranaTime = () => {
-    // console.log("Bolirana: " + bolirana.name);
-    // console.log("Horas: " + hour);
-    // console.log("Minutos: " + boliranaTime.minutesTime);
-
-    startBolirana(bolirana._id, 10000).then(async (res) => {
-      const data = res.json();
-      if (res.ok) {
-        handleSetIsOpen();
-        updateBoliranas();
-      } else {
-        alert(data.message);
-      }
-    });
-  };
+  // const startBoliranaTime = () => {
+  //   const totalMs = convertTimeToMs(currentHours, boliranaTime.minutesTime);
+  //   startBolirana(bolirana._id, totalMs).then(async (res) => {
+  //     const data = res.json();
+  //     if (res.ok) {
+  //       handleSetIsOpen();
+  //       updateBoliranas();
+  //       startTemp(bolirana);
+  //     } else {
+  //       alert(data.message);
+  //     }
+  //   });
+  // };
 
   const handleChange = (event) => {
-    setHour(event.target.value);
+    setCurrentHours(event.target.value);
   };
 
   return (
@@ -108,7 +111,7 @@ const AssingBoliranaTimeModal = ({
           <InputsContainer>
             <FormControl sx={{ minWidth: 175, textAlign: "center" }}>
               <Select
-                value={hour}
+                value={currentHours}
                 onChange={handleChange}
                 displayEmpty
                 inputProps={{ "aria-label": "Without label" }}

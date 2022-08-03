@@ -45,32 +45,25 @@ const ButtonPanel = styled.div`
   gap: 35px;
 `;
 
-const defaultRemainingTime = { second: "00", minutes: "00", hours: "00" };
-
 const BoliranaTimeControlCard = ({
   bolirana,
   isDisableButton,
+  // remainingTime,
+  // countdownTimestampMs,
   handleResetTime,
-  handleStartTime,
+  handleSetTime,
+  handleStartTime
 }) => {
+  const defaultRemainingTime = { hours: "00", minutes: "00", second: "00" };
   const [remainingTime, setRemainingTime] = useState(defaultRemainingTime);
 
-  const updateRemainingTime = (countdown) => {
-    // console.log(countdown);
-    // const intervalId = setInterval(()=>{
-    //   updateRemainingTime(countdown);
-    // }, 1000);
-    // return () => clearInterval(intervalId);
-  };
+  // const setStartTime = (count) =>{
+  //   setRemainingTime(count);
+  // }
 
   // useEffect(()=>{
-  //   const intervalId = setInterval(()=>{
-  //     updateRemainingTime(countdownTimestampMs);
-  //   }, 1000);
-  //   return () => clearInterval(intervalId);
-  // }, [countdownTimestampMs]);
-
-  useEffect;
+  //   setStartTime(countdownTimestampMs);
+  // }, [countdownTimestampMs])
 
   return (
     <BoliranaContainer>
@@ -110,6 +103,9 @@ const BoliranaTimeControlCard = ({
               onClick={handleStartTime}
               isDisable={isDisableButton}
             />
+            {/* <button onClick={handleResetTime}>Reset Time</button>
+            <button onClick={handleSetTime}>Set Time</button>
+            <button onClick={handleStartTime}>Start Time</button> */}
           </ButtonPanel>
         </InfoContainer>
       </PanelCenter>
