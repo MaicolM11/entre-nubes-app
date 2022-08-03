@@ -100,11 +100,14 @@ const theme = {
     hover: colors.deleteHover,
   },
   disableRestartTime: {
-    default: colors.disableBoliranaRestartTime,
+    default: colors.disableResetButtonTime,
+  },
+  disableStartTime: {
+    default: colors.disableStartButtonTime,
   },
   enableRestartTime: {
     default: colors.enableBoliranaRestartTime,
-    hover: colors.disableBoliranaRestartTime,
+    hover: colors.enableHoverBoliranaRestartTime,
   },
   resumeTime: {
     default: colors.resumeBoliranaTime,
@@ -160,6 +163,9 @@ export const ButtonContainer = styled.button`
   border: none;
   transition: 0.2s;
   cursor: pointer;
+  user-select: none;
+  pointer-events: ${(props) => (props.isDisable ? "none" : "all")};
+  pointer-events: ${(props) => (props.isDisable ? "none" : "all")};
   &:hover {
     background-color: ${(props) => theme[props.theme].hover};
   }

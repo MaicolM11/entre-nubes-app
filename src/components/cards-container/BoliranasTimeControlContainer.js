@@ -25,7 +25,10 @@ const BoliranasTimeControlContainer = ({
         <BoliranaTimeControlCard
           key={i}
           bolirana={bolirana}
-          handleResetTime={handleResetTime}
+          isDisableButton={bolirana.state === "OCUPADA" && true}
+          // remainingTime={remainingTime}
+          // countdownTimestampMs={countdownTimestampMs}
+          handleResetTime={() => handleResetTime(bolirana)}
           handleStartTime={() => handleStartTime(bolirana)}
         />
       ))}

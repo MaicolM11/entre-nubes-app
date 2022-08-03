@@ -53,7 +53,7 @@ const BoliranaCard = ({ bolirana, handleDeleteBolirana }) => {
         <TitleTimer>00:00:00</TitleTimer>
         <InfoContainer>
           <ModalMediumTitle>{bolirana.name}</ModalMediumTitle>
-          <BoliranaState state={"LIBRE"} />
+          <BoliranaState state={bolirana.state} />
           <Timer fill={colors.ok} width={25} height={25} />
           <ButtonPanel>
             <DeleteIconButtonContainer

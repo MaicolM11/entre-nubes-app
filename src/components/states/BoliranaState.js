@@ -3,13 +3,16 @@ import styled from "styled-components";
 import { colors } from "../styles/colors";
 
 const colorState = {
-  OCUPADO: {
+  OCUPADA: {
     color: `${colors.edit}`,
   },
   LIBRE: {
     color: `${colors.ok}`,
   },
 };
+
+const FREE = "LIBRE";
+const BUSY = "OCUPADA";
 
 const StateContainer = styled.div`
   display: flex;
@@ -33,13 +36,11 @@ const StateColorContainer = styled.label`
 const BoliranaState = ({ state }) => {
   return (
     <StateContainer>
-      {state === "LIBRE" && (
-        <StateColorContainer colorState={"LIBRE"}>{state}</StateColorContainer>
+      {state === FREE && (
+        <StateColorContainer colorState={FREE}>{state}</StateColorContainer>
       )}
-      {state === "OCUPADO" && (
-        <StateColorContainer colorState={"OCUPADO"}>
-          {state}
-        </StateColorContainer>
+      {state === BUSY && (
+        <StateColorContainer colorState={BUSY}>{state}</StateColorContainer>
       )}
     </StateContainer>
   );
