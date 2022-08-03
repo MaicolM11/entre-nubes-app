@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { colors } from "../styles/colors";
 import NotificationCard from "../cards/NotificationCard";
 import { ReactComponent as Notification } from "../../assets/icons/notification.svg";
+import { readAllNotifications } from "../../services/notifications";
 
 const NotificationContainer = styled.div`
   display: flex;
@@ -87,6 +88,11 @@ const NotificationButton = () => {
   const [notifications, setNotifications] = useState([]);
 
   const showNotifications = () => {
+    if(!isOpenNotifications) {
+      readAllNotifications().then(async (res) => {
+        
+      });
+    }
     setIsOpenNotifications(!isOpenNotifications);
   };
 
@@ -104,8 +110,8 @@ const NotificationButton = () => {
     closeOutsideComponent(3);
     const socket = getSocket();
     socket.on("notifications", (data) => {
-      setNotifications(data);
-      setTotalNotifications(data.length);
+      setNotifications(data.data);
+      setTotalNotifications(data.news);
     });
     return () => socket.disconnect();
   }, []);

@@ -14,21 +14,23 @@ const http = createServer(app);
 const io = new Server(http, { cors: { origin: '*' }});
 
 const fs = require('fs')
+const path = require('path');
+
 global.sockets = io.sockets;
 
 // middlewares
 app.use(morgan(':method\t:url\t:referrer\t:body\t:status\t:response-time ms', {
-            stream: fs.createWriteStream('./info.log', {flags: 'a'}),
-            skip: (req, res) => req.method === "GET"
-        }));
+    stream: fs.createWriteStream('./info.log', {flags: 'a'}),
+    //skip: (req, res) => req.method === "GET"
+}));
 
 morgan.token('body', (req, res) => JSON.stringify(req.body));
 
-
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, '../build')))
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
 app.use(cors());
+
 
 io.use(verifyTokenToSocket).on('connection', (socket) => {
     emitLastBills(socket);
@@ -47,5 +49,9 @@ app.use('/api/desk', require('./routes/desk.routes'))
 app.use('/api/report', require('./routes/report.routes'))
 
 app.use('/api-doc', SWAGGER_SERVE, SWAGGER_SETUP);
+
+app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '../build', 'index.html'))
+});
 
 export default http;
