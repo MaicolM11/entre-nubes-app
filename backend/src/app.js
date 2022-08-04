@@ -21,7 +21,7 @@ global.sockets = io.sockets;
 // middlewares
 app.use(morgan(':method\t:url\t:referrer\t:body\t:status\t:response-time ms', {
     stream: fs.createWriteStream('./info.log', {flags: 'a'}),
-    //skip: (req, res) => req.method === "GET"
+    skip: (req, res) => req.method === "GET"
 }));
 
 morgan.token('body', (req, res) => JSON.stringify(req.body));

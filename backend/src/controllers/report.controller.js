@@ -1,4 +1,5 @@
 import Report from "../models/Report"
+import { reportFilter } from "../utils/filter.util";
 
 // pageable
 export const getAll = (req, res) => {
@@ -22,13 +23,8 @@ export const generateReport = (bills) => {
 }
 
 export const getByFilter = (req, res) => {
-    const { start_date, end_date } = req.params;
-    const sd = new Date(start_date);
-    const ed = new Date(end_date);
-    Report.find({ and:[
-           { start_date: { $gte: sd, $lt: ed }},
-           { end_date: { $gte: sd, $lt: ed }}
-        ]})
+    const filter = reportFilter(req.query);
+    Report.find(filter)
         .then(data => res.status(200).json(data))
         .catch(error => res.status(400).json({ message: error.message }));
 }

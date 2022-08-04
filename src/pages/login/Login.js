@@ -15,6 +15,7 @@ import {
   ErrorMessage,
   ErrorMessageSpace,
 } from "../../components/styles/style-components";
+import { saveData } from "../../services/storage";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -41,9 +42,7 @@ const Login = () => {
     reqLogin(loginValues.username, loginValues.password).then(async (res) => {
       let data = await res.json();
       if (res.ok) {
-        Object.entries(data).forEach(([key, value]) => {
-          localStorage.setItem(key, value);
-        });
+        saveData(data);
         redirectByRol(data.rol);
         clearLoginValues();
       } else {
