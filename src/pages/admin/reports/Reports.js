@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { getAllReports } from "../../../services/report";
+import { getAllReports, filterReports } from "../../../services/report";
 
 import "./Reports.css";
 import styled from "styled-components";
@@ -44,8 +44,11 @@ const Reports = () => {
   const [currentReports, setCurrentReports] = useState([]);
 
   const handleDateFilter = () => {
-    console.log("Fecha de inicio: " + startDate.toLocaleDateString("es-MX"));
-    console.log("Fecha de fin: " + endDate.toLocaleDateString("es-MX"));
+    const start = startDate.toLocaleDateString("es-MX").split("").reverse().join("");
+    const end = endDate.toLocaleDateString("es-MX").split("").reverse().join("");
+    filterReports(start, end).then(async (res) =>{
+      setCurrentReports(await res.json())
+    })
   };
 
   const loadReports = () => {
