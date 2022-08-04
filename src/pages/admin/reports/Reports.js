@@ -44,9 +44,9 @@ const Reports = () => {
   const [currentReports, setCurrentReports] = useState([]);
 
   const handleDateFilter = () => {
-    const start = startDate.toLocaleDateString("es-MX").split("").reverse().join("");
-    const end = endDate.toLocaleDateString("es-MX").split("").reverse().join("");
-    filterReports(start, end).then(async (res) =>{
+    const start = startDate.toLocaleDateString("es-MX").replace("/","-").split("").reverse().join("");
+    const end = endDate.toLocaleDateString("es-MX").replace("/","-").split("").reverse().join("");
+    filterReports(start.replace("/","-"), end.replace("/","-")).then(async (res) =>{
       setCurrentReports(await res.json())
     })
   };

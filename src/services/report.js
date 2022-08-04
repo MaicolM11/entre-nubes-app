@@ -11,6 +11,7 @@ export const getAllReports = () => {
 };
 
 export const filterReports = (start_date, end_date) => {
+  console.log(start_date)
   const requestOptions = {
     method: "GET",
     headers: { "Content-Type": "application/json", authorization: getToken() },
