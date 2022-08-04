@@ -24,9 +24,5 @@ export const convertTimeToMs = (hours, minutes) => {
 };
 
 const addZero = (number) => {
-  let format = "" + number;
-  if(format.length != 2) {
-    format = "0" + number;
-  }
-  return format;
+  return ("0" + date_nz.getSeconds()).slice(-2);
 }
