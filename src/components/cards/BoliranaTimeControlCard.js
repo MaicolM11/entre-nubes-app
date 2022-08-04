@@ -7,6 +7,7 @@ import { ReactComponent as TimerOff } from "../../assets/icons/timer-off.svg";
 import { ModalMediumTitle, TitleTimer } from "../styles/style-components";
 import BoliranaState from "../states/BoliranaState";
 import Button from "../buttons/Button";
+import { convertTimeToTemp } from "../../utils/BoliranaTimer";
 
 const BoliranaContainer = styled.div`
   display: flex;
@@ -57,14 +58,25 @@ const BoliranaTimeControlCard = ({
   const defaultRemainingTime = { hours: "00", minutes: "00", second: "00" };
   const [remainingTime, setRemainingTime] = useState(defaultRemainingTime);
 
-  // const setStartTime = (count) =>{
-  //   setRemainingTime(count);
-  // }
+  useEffect(()=> {
+    let interval = setInterval(()=> {
+      checkBolirana();
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [bolirana.state])
 
-  // useEffect(()=>{
-  //   setStartTime(countdownTimestampMs);
-  // }, [countdownTimestampMs])
-
+  const checkBolirana = () => {
+    if(bolirana.state == "OCUPADA") {
+      let newTime = convertTimeToTemp(bolirana.init_time, bolirana.time);
+      if(!newTime) {
+        //ya acabo
+        setRemainingTime(defaultRemainingTime);
+      } else {
+        setRemainingTime(newTime);
+      }
+    }
+  }
+  
   return (
     <BoliranaContainer>
       <PanelCenter>

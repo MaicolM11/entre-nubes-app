@@ -20,3 +20,15 @@ export const generateReport = (bills) => {
     const newReport = new Report(report);
     newReport.save();
 }
+
+export const getByFilter = (req, res) => {
+    const { start_date, end_date } = req.params;
+    const sd = new Date(start_date);
+    const ed = new Date(end_date);
+    Report.find({ and:[
+           { start_date: { $gte: sd, $lt: ed }},
+           { end_date: { $gte: sd, $lt: ed }}
+        ]})
+        .then(data => res.status(200).json(data))
+        .catch(error => res.status(400).json({ message: error.message }));
+}
