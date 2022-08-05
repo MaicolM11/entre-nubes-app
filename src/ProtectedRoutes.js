@@ -20,11 +20,21 @@ export const SalesmanProtectedRoute = ({ children }) => {
 };
 
 export const AdminProtectedRoute = ({ children }) => {
-    let user = true;
+    let user = getRole();
+
     if (!user) {
         return <Navigate to="/" replace />;
     }
-    return children;
+
+    if (user === "SALESMAN") {
+        return <Navigate to="/salesman" replace />;;
+    }
+
+    if (user === "ADMIN") {
+        return children;
+    }
+
+    return <Navigate to="/" replace />;
 };
 
 export const LoginProtectedRoute = ({children}) => {
