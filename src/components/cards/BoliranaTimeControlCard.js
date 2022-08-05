@@ -91,12 +91,12 @@ const BoliranaTimeControlCard = ({
   const checkBolirana = (state) => {
     if (state === "OCUPADA") {
       let newTime = convertTimeToTemp(bolirana.init_time, bolirana.time);
-      if (!newTime) {
-        setRemainingTime(defaultRemainingTime);
-      } else {
+      if (newTime) {
         setRemainingTime(newTime);
+        return;
       }
     }
+    setRemainingTime(defaultRemainingTime);
   };
 
   useEffect(() => {

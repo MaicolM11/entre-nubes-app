@@ -1,15 +1,17 @@
 import Bill from "../models/Bill";
 import Debtor from "../models/Debtor";
 import { BILL_STATES } from "../models/Enums";
+import { getDateWithFormat } from "../utils/format";
 
 import { createNotification } from "./notification.controller";
 import { generateReport } from './report.controller';
 
 export const deskClosing = (req, res) => {
     res.sendStatus(200);
-
+    
+    const now = getDateWithFormat(new Date())
     const notification = {
-        type: 'Cierre de caja',
+        type: "Cierre de caja a las " + now.time + " del " + now.date,
         message: ""
     }
 
@@ -39,7 +41,7 @@ export const deskClosing = (req, res) => {
             return Bill.deleteMany()
         })
         .then(() => {
-            notification.message = "Cierre de caja exitoso!"
+            notification.message = "Cierre de caja exitoso!"; 
             createNotification(notification);
         })
         .catch(err => {
