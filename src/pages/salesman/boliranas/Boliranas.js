@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { getAllBoliranas, resetBolirana, startBolirana } from "../../../services/bolirana";
+import {
+  getAllBoliranas,
+  resetBolirana,
+  startBolirana,
+} from "../../../services/bolirana";
 
 import "./Boliranas.css";
 import AnimatedModalContainer from "../../../components/modals/animation/AnimatedModalContainer";
@@ -9,10 +13,9 @@ import BoliranasTimeControlContainer from "../../../components/cards-container/B
 import AssingBoliranaTimeModal from "../../../components/modals/AssingBoliranaTimeModal";
 import ResetTimeModal from "../../../components/modals/ResetTimeModal";
 
-import {convertTimeToMs} from "../../../utils/BoliranaTimer";
+import { convertTimeToMs } from "../../../utils/BoliranaTimer";
 
 const Boliranas = ({ salesmanName }) => {
-
   const [currentBolirana, setCurrentBolirana] = useState({});
   const [boliranas, setBoliranas] = useState([]);
 
@@ -37,18 +40,6 @@ const Boliranas = ({ salesmanName }) => {
     openAssingTimeModal();
   };
 
-  const startBoliranaTime = (currentHours, minutesTime) => {
-    const totalMs = convertTimeToMs(currentHours, minutesTime);
-    startBolirana(currentBolirana._id, totalMs).then(async (res) => {
-      const data = res.json();
-      if (res.ok) {
-        getBoliranas();
-      } else {
-        alert(data.message);
-      }
-    });
-  };
-
   const resetCurrentBoliranaTime = () => {
     resetBolirana(currentBolirana._id).then(async (res) => {
       const data = res.json();
@@ -61,6 +52,17 @@ const Boliranas = ({ salesmanName }) => {
     });
   };
 
+  const startBoliranaTime = (currentHours, minutesTime) => {
+    const totalMs = convertTimeToMs(currentHours, minutesTime);
+    startBolirana(currentBolirana._id, totalMs).then(async (res) => {
+      const data = res.json();
+      if (res.ok) {
+        getBoliranas();
+      } else {
+        alert(data.message);
+      }
+    });
+  };
 
   const getBoliranas = () => {
     getAllBoliranas().then(async (res) => {
@@ -77,10 +79,7 @@ const Boliranas = ({ salesmanName }) => {
       <AnimatedModalContainer
         modal={
           <AssingBoliranaTimeModal
-            bolirana={currentBolirana}
-            updateBoliranas={getBoliranas}
             setIsOpenAssingBoliranaTime={openAssingTimeModal}
-            convertTimeToMs={convertTimeToMs}
             startBoliranaTime={startBoliranaTime}
           />
         }
@@ -106,7 +105,6 @@ const Boliranas = ({ salesmanName }) => {
         boliranas={boliranas}
         handleResetTime={handleResetTime}
         handleStartTime={handleStartTime}
-        // handleSetTime={handleSetTime}
       />
     </div>
   );

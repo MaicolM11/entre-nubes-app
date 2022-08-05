@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { convertTimeToTemp } from "../../utils/BoliranaTimer";
+
 import styled from "styled-components";
 import { colors } from "../styles/colors";
 import BoliranaState from "../states/BoliranaState";
 import { ReactComponent as Timer } from "../../assets/icons/timer.svg";
+import { ReactComponent as TimerOff } from "../../assets/icons/timer-off.svg";
 import { ReactComponent as Delete } from "../../assets/icons/delete.svg";
 import {
   DeleteIconButtonContainer,
@@ -47,21 +50,67 @@ const ButtonPanel = styled.div`
 `;
 
 const BoliranaCard = ({ bolirana, handleDeleteBolirana }) => {
+  const defaultRemainingTime = { hours: "00", minutes: "00", second: "00" };
+  const hireTime = { hours: "00", minutes: "00" };
+  const [remainingTime, setRemainingTime] = useState(defaultRemainingTime);
+  const [currentHireTime, setCurrentHireTime] = useState(hireTime);
+
+  const getHireBoliranaTime = () => {
+    let newTime = convertTimeToTemp(bolirana.init_time, bolirana.time);
+    const time = { hours: newTime.hours, minutes: newTime.minutes };
+    if (!newTime) {
+      setCurrentHireTime(hireTime);
+    } else {
+      setCurrentHireTime(time);
+    }
+  };
+
+  const checkBolirana = (state) => {
+    if (state === "OCUPADA") {
+      let newTime = convertTimeToTemp(bolirana.init_time, bolirana.time);
+      if (!newTime) {
+        setRemainingTime(defaultRemainingTime);
+      } else {
+        setRemainingTime(newTime);
+      }
+    }
+  };
+
+  useEffect(() => {
+    getHireBoliranaTime();
+    let interval = setInterval(() => {
+      checkBolirana(bolirana.state);
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [bolirana.state]);
+
   return (
     <BoliranaContainer>
       <PanelCenter>
-        <TitleTimer>00:00:00</TitleTimer>
+        <TitleTimer>
+          {remainingTime.hours +
+            ":" +
+            remainingTime.minutes +
+            ":" +
+            remainingTime.second}
+        </TitleTimer>
         <InfoContainer>
           <ModalMediumTitle>{bolirana.name}</ModalMediumTitle>
           <BoliranaState state={bolirana.state} />
-          <Timer fill={colors.ok} width={25} height={25} />
+          {bolirana.state === "LIBRE" ? (
+            <Timer fill={colors.ok} width={25} height={25} />
+          ) : (
+            <TimerOff fill={colors.edit} width={25} height={25} />
+          )}
           <ButtonPanel>
-            <DeleteIconButtonContainer
-              isFill={true}
-              onClick={() => handleDeleteBolirana(bolirana)}
-            >
-              <Delete width={40} height={40} />
-            </DeleteIconButtonContainer>
+            {bolirana.state === "LIBRE" && (
+              <DeleteIconButtonContainer
+                isFill={true}
+                onClick={() => handleDeleteBolirana(bolirana)}
+              >
+                <Delete width={40} height={40} />
+              </DeleteIconButtonContainer>
+            )}
           </ButtonPanel>
         </InfoContainer>
       </PanelCenter>

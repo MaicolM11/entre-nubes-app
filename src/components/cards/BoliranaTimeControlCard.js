@@ -1,13 +1,19 @@
 import React, { useEffect, useState } from "react";
+import { convertTimeToTemp } from "../../utils/BoliranaTimer";
+
 import styled from "styled-components";
 import { colors } from "../styles/colors";
 import { ReactComponent as Stop } from "../../assets/icons/stop.svg";
 import { ReactComponent as Timer } from "../../assets/icons/timer.svg";
 import { ReactComponent as TimerOff } from "../../assets/icons/timer-off.svg";
-import { ModalMediumTitle, TitleTimer } from "../styles/style-components";
+import {
+  DataSpan,
+  ModalMediumTitle,
+  ModalSubtitle,
+  TitleTimer,
+} from "../styles/style-components";
 import BoliranaState from "../states/BoliranaState";
 import Button from "../buttons/Button";
-import { convertTimeToTemp } from "../../utils/BoliranaTimer";
 
 const BoliranaContainer = styled.div`
   display: flex;
@@ -46,40 +52,75 @@ const ButtonPanel = styled.div`
   gap: 35px;
 `;
 
+const HireTimeContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`;
+
+const FinalTime = styled.label`
+  width: 100%;
+  color: ${colors.delete};
+  font-size: 22px;
+  font-weight: bold;
+  font-family: var(--roboto);
+  white-space: nowrap;
+`;
+
 const BoliranaTimeControlCard = ({
   bolirana,
   isDisableButton,
-  // remainingTime,
-  // countdownTimestampMs,
   handleResetTime,
-  handleSetTime,
-  handleStartTime
+  handleStartTime,
 }) => {
   const defaultRemainingTime = { hours: "00", minutes: "00", second: "00" };
+  const hireTime = { hours: "00", minutes: "00" };
   const [remainingTime, setRemainingTime] = useState(defaultRemainingTime);
+  const [currentHireTime, setCurrentHireTime] = useState(hireTime);
 
-  useEffect(()=> {
-    let interval = setInterval(()=> {
-      checkBolirana();
-    }, 1000);
-    return () => clearInterval(interval);
-  }, [bolirana.state])
+  const getHireBoliranaTime = () => {
+    let newTime = convertTimeToTemp(bolirana.init_time, bolirana.time);
+    const time = { hours: newTime.hours, minutes: newTime.minutes };
+    if (!newTime) {
+      setCurrentHireTime(hireTime);
+    } else {
+      setCurrentHireTime(time);
+    }
+  };
 
-  const checkBolirana = () => {
-    if(bolirana.state == "OCUPADA") {
+  const checkBolirana = (state) => {
+    if (state === "OCUPADA") {
       let newTime = convertTimeToTemp(bolirana.init_time, bolirana.time);
-      if(!newTime) {
-        //ya acabo
+      if (!newTime) {
         setRemainingTime(defaultRemainingTime);
       } else {
         setRemainingTime(newTime);
       }
     }
-  }
-  
+  };
+
+  useEffect(() => {
+    getHireBoliranaTime();
+    let interval = setInterval(() => {
+      checkBolirana(bolirana.state);
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [bolirana.state]);
+
   return (
     <BoliranaContainer>
       <PanelCenter>
+        <HireTimeContainer>
+          {remainingTime === defaultRemainingTime &&
+            bolirana.state === "OCUPADA" && (
+              <FinalTime>Tiempo Terminado</FinalTime>
+            )}
+          <ModalSubtitle>Tiempo Solicitado</ModalSubtitle>
+          <ModalMediumTitle>
+            Horas: <DataSpan>{currentHireTime.hours}</DataSpan> : Minutos:{" "}
+            <DataSpan>{currentHireTime.minutes}</DataSpan>
+          </ModalMediumTitle>
+        </HireTimeContainer>
         <TitleTimer>
           {remainingTime.hours +
             ":" +
@@ -115,9 +156,6 @@ const BoliranaTimeControlCard = ({
               onClick={handleStartTime}
               isDisable={isDisableButton}
             />
-            {/* <button onClick={handleResetTime}>Reset Time</button>
-            <button onClick={handleSetTime}>Set Time</button>
-            <button onClick={handleStartTime}>Start Time</button> */}
           </ButtonPanel>
         </InfoContainer>
       </PanelCenter>

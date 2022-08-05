@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-// import { startBolirana } from "../../services/bolirana";
 import useAssingBoliranaTime from "../../validate-forms/useAssingBoliranaTime";
 
 import styled from "styled-components";
@@ -52,12 +51,8 @@ const InputsContainer = styled.div`
 `;
 
 const AssingBoliranaTimeModal = ({
-  bolirana,
-  updateBoliranas,
   setIsOpenAssingBoliranaTime,
-  convertTimeToMs,
-  startTemp,
-  startBoliranaTime
+  startBoliranaTime,
 }) => {
   const [currentHours, setCurrentHours] = useState(0);
 
@@ -81,20 +76,6 @@ const AssingBoliranaTimeModal = ({
     setIsOpenAssingBoliranaTime();
     clearInputBoliranaTime();
   };
-
-  // const startBoliranaTime = () => {
-  //   const totalMs = convertTimeToMs(currentHours, boliranaTime.minutesTime);
-  //   startBolirana(bolirana._id, totalMs).then(async (res) => {
-  //     const data = res.json();
-  //     if (res.ok) {
-  //       handleSetIsOpen();
-  //       updateBoliranas();
-  //       startTemp(bolirana);
-  //     } else {
-  //       alert(data.message);
-  //     }
-  //   });
-  // };
 
   const handleChange = (event) => {
     setCurrentHours(event.target.value);
