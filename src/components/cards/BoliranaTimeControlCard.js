@@ -77,12 +77,15 @@ const BoliranaTimeControlCard = ({
   const hireTime = { hours: "00", minutes: "00" };
   const [remainingTime, setRemainingTime] = useState(defaultRemainingTime);
   const [currentHireTime, setCurrentHireTime] = useState(hireTime);
+  const [isFinished, setIsFinished] = useState(false);
 
   const getHireBoliranaTime = () => {
     let newTime = convertTimeToTemp(bolirana.init_time, bolirana.time);
     const time = { hours: newTime.hours, minutes: newTime.minutes };
     if (!newTime) {
       setCurrentHireTime(hireTime);
+      setRemainingTime(defaultRemainingTime);
+      setIsFinished(false);
     } else {
       setCurrentHireTime(time);
     }
@@ -92,6 +95,7 @@ const BoliranaTimeControlCard = ({
     if (state === "OCUPADA") {
       let newTime = convertTimeToTemp(bolirana.init_time, bolirana.time);
       if (!newTime) {
+        setIsFinished(true);
         setRemainingTime(defaultRemainingTime);
       } else {
         setRemainingTime(newTime);
@@ -111,10 +115,7 @@ const BoliranaTimeControlCard = ({
     <BoliranaContainer>
       <PanelCenter>
         <HireTimeContainer>
-          {remainingTime === defaultRemainingTime &&
-            bolirana.state === "OCUPADA" && (
-              <FinalTime>Tiempo Terminado</FinalTime>
-            )}
+          {isFinished && <FinalTime>Tiempo Terminado</FinalTime>}
           <ModalSubtitle>Tiempo Solicitado</ModalSubtitle>
           <ModalMediumTitle>
             Horas: <DataSpan>{currentHireTime.hours}</DataSpan> : Minutos:{" "}
