@@ -99,8 +99,10 @@ const BoliranaTimeControlCard = ({
         setRemainingTime(defaultRemainingTime);
       } else {
         setRemainingTime(newTime);
+        return;
       }
     }
+    setRemainingTime(defaultRemainingTime);
   };
 
   useEffect(() => {

@@ -11,6 +11,10 @@ export const salesman = { fullname: 'salesman',email: 'salesman@gmail.com', pass
 export let admin_token = "";
 export let salesman_token = "";
 
+jest.useFakeTimers('legacy')
+jest.setTimeout(15000)
+jest.useRealTimers();
+
 export const createUser = async (data) => {
     let user = {...data}
     user.password = await User.encryptPass(data.password);
@@ -31,7 +35,7 @@ afterAll(async () => await dropCollections());
 export const API = request(app);
 
 export const login = async (credentials) => {
-    return await API.post('/auth/login').send(credentials);
+    return await API.post('/api/auth/login').send(credentials);
 }
 
 export const PRODUCT_URL = '/api/product/';
