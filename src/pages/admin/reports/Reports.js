@@ -43,10 +43,15 @@ const Reports = () => {
   const [endDate, setEndDate] = useState(new Date());
   const [currentReports, setCurrentReports] = useState([]);
 
+  const convertDate = (date) =>{
+    let array = date.split("/")
+    return `${array[2]}-${array[1]}-${array[0]}`
+  }
+
   const handleDateFilter = () => {
-    const start = startDate.toLocaleDateString("es-MX").replace(new RegExp("/","g"),"-").split("").reverse().join("");
-    const end = endDate.toLocaleDateString("es-MX").replace(new RegExp("/","g"),"-").split("").reverse().join("");
-    filterReports(start, end).then(async (res) =>{
+    const start = startDate.toLocaleDateString("es-MX");
+    const end = endDate.toLocaleDateString("es-MX");
+    filterReports(convertDate(start), convertDate(end)).then(async (res) =>{
       setCurrentReports(await res.json())
     })
   };
