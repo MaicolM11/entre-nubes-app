@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { reqLogin } from "../../services/auth";
 import { Link, useNavigate } from "react-router-dom";
 import useLoginForm from "../../validate-forms/useLoginForm";
@@ -33,6 +33,7 @@ const Login = () => {
   const {
     loginValues,
     handleChangeLogin,
+    handleEnterSubmitLogin,
     handleSubmitLogin,
     clearLoginValues,
     errors,
@@ -50,6 +51,12 @@ const Login = () => {
       }
     });
   };
+
+  useEffect(() => {
+    document.addEventListener("keydown", handleEnterSubmitLogin);
+    return () =>
+      document.removeEventListener("keydown", handleEnterSubmitLogin);
+  }, [handleEnterSubmitLogin]);
 
   return (
     <div className="login-container">

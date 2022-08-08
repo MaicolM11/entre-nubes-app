@@ -17,6 +17,16 @@ const useLoginForm = (loginCallback) => {
     });
   };
 
+  const handleEnterSubmitLogin = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      setErros(loginValidation(loginValues));
+      if (!(Object.keys(loginValidation(loginValues)).length > 0)) {
+        loginCallback();
+      }
+    }
+  };
+
   const handleSubmitLogin = (e) => {
     e.preventDefault();
     setErros(loginValidation(loginValues));
@@ -34,8 +44,9 @@ const useLoginForm = (loginCallback) => {
   };
 
   return {
-    loginValues: loginValues,
+    loginValues,
     handleChangeLogin,
+    handleEnterSubmitLogin,
     handleSubmitLogin,
     clearLoginValues,
     errors,
