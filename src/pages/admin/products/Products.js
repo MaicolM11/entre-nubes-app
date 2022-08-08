@@ -449,7 +449,7 @@ const Products = () => {
         />
       ) : (
         <EmptyMessage
-          img={<EmptyProducts />}
+          img={<EmptyProducts width={350} height={350} />}
           title="Sin Productos"
           description="Aún no se han registrado los productos permitidos para la venta en el Bar."
         />

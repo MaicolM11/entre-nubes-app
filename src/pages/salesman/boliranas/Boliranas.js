@@ -110,7 +110,7 @@ const Boliranas = ({ salesmanName }) => {
         />
       ) : (
         <EmptyMessage
-          img={<EmptyTime />}
+          img={<EmptyTime width={350} height={350} />}
           title="Sin Boliranas"
           description="Aún no se han comprado las Boliranas para el Bar."
         />

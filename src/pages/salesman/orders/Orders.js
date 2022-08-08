@@ -323,7 +323,7 @@ const Orders = ({ salesmanName }) => {
         />
       ) : (
         <EmptyMessage
-          img={<EmptyOrders />}
+          img={<EmptyOrders width={350} height={350} />}
           title="Sin Pedidos"
           description="Aún no existen pedidos por realizar."
         />

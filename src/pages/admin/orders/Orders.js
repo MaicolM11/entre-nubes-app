@@ -34,7 +34,7 @@ const Orders = () => {
   const handleCloseBarModal = () => {
     setIsClosingBarModal(true);
     closeDesk();
-    setBills([])
+    setBills([]);
     let closingBar = setInterval(() => {
       setIsClosingBarModal(false);
       clearInterval(closingBar);
@@ -97,7 +97,7 @@ const Orders = () => {
         />
       ) : (
         <EmptyMessage
-          img={<EmptyOrders />}
+          img={<EmptyOrders width={350} height={350} />}
           title="Sin Pedidos"
           description="Aún los colaboradores no tiene pedidos por realizar."
         />

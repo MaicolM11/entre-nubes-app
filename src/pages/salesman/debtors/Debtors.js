@@ -206,7 +206,7 @@ const Debtors = ({ salesmanName }) => {
         />
       ) : (
         <EmptyMessage
-          img={<EmptyDeptors />}
+          img={<EmptyDeptors width={350} height={350} />}
           title="Sin Deudores"
           description="Aún no se han registrado deudores en el Bar."
         />
