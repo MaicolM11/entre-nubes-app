@@ -2,7 +2,7 @@ import Bill from "../models/Bill";
 import Debtor from "../models/Debtor";
 import { BILL_STATES } from "../models/Enums";
 import { getDateWithFormat } from "../utils/format";
-
+import {emitLastBills} from "./bill.controller"
 import { createNotification } from "./notification.controller";
 import { generateReport } from './report.controller';
 
@@ -43,6 +43,7 @@ export const deskClosing = (req, res) => {
         })
         .then(() => {
             notification.message = "Cierre de caja exitoso!"; 
+            emitLastBills()
             createNotification(notification);
         })
         .catch(err => {
