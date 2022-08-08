@@ -57,11 +57,11 @@ const Debtors = ({ salesmanName }) => {
 
   const updateBillProducts = () => {
     setDebts([]);
+    openClosePayModeModal();
+    handleIsOpenClosePendingPaymentsModal();
     getClientDebts(debtor._id).then(async (res) => {
       setDebts(await res.json());
     });
-    openClosePayModeModal();
-    handleIsOpenClosePendingPaymentsModal();
   };
 
   const openOrderProductListModal = () => {
@@ -89,10 +89,10 @@ const Debtors = ({ salesmanName }) => {
   const openPendingPaymentsModal = (debtor) => {
     setDebtor(debtor);
     setDebts([]);
+    handleIsOpenClosePendingPaymentsModal();
     getClientDebts(debtor._id).then(async (res) => {
       setDebts(await res.json());
     });
-    handleIsOpenClosePendingPaymentsModal();
   };
 
   const handleIsOpenClosePendingPaymentsModal = () => {
@@ -100,9 +100,14 @@ const Debtors = ({ salesmanName }) => {
   };
 
   const handleSubmitDebtPayment = (payMode) => {
-    debtorPayment(debt._id, payMode, debtor._id).then(async () => {
-      updateBillProducts();
-      isSuccessfulPayModalState();
+    debtorPayment(debt._id, payMode, debtor._id).then(async (res) => {
+      const data = res.json();
+      if (res.ok) {
+        updateBillProducts();
+        isSuccessfulPayModalState();
+      } else {
+        alert(data.message);
+      }
     });
   };
 

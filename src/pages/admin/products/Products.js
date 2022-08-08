@@ -21,15 +21,17 @@ import ProductCardsContainer from "../../../components/cards-container/ProductCa
 import Button from "../../../components/buttons/Button";
 import DataInput from "../../../components/inputs/DataInput";
 import CategorySelect from "../../../components/select/CategorySelect";
-import { ReactComponent as Add } from "../../../assets/icons/add.svg";
-import { ReactComponent as Category } from "../../../assets/icons/category.svg";
-import { ReactComponent as Search } from "../../../assets/icons/search.svg";
+import StockLimitModal from "../../../components/modals/StockLimitModal";
 import {
   MediumContainer,
   PageOptionsCenterContainer,
   PageOptionsContainer,
 } from "../../../components/styles/style-components";
-import StockLimitModal from "../../../components/modals/StockLimitModal";
+import { ReactComponent as Add } from "../../../assets/icons/add.svg";
+import { ReactComponent as Category } from "../../../assets/icons/category.svg";
+import { ReactComponent as Search } from "../../../assets/icons/search.svg";
+import { ReactComponent as EmptyProducts } from "../../../assets/images/empty-products.svg";
+import EmptyMessage from "../../../components/empty-message/EmptyMessage";
 
 const Products = () => {
   const [product, setProduct] = useState({});
@@ -437,13 +439,21 @@ const Products = () => {
           </div>
         </PageOptionsCenterContainer>
       </PageOptionsContainer>
-      <ProductCardsContainer
-        products={products}
-        openAddStock={openAddStock}
-        openEditProductModal={openEditProductModal}
-        openDeleteProductModal={openDeleteProductModal}
-        updateProductList={getProductos}
-      />
+      {products.length > 0 ? (
+        <ProductCardsContainer
+          products={products}
+          openAddStock={openAddStock}
+          openEditProductModal={openEditProductModal}
+          openDeleteProductModal={openDeleteProductModal}
+          updateProductList={getProductos}
+        />
+      ) : (
+        <EmptyMessage
+          img={<EmptyProducts />}
+          title="Sin Productos"
+          description="Aún no se han registrado los productos permitidos para la venta en el Bar."
+        />
+      )}
     </div>
   );
 };

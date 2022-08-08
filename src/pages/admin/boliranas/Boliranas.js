@@ -15,6 +15,8 @@ import BoliranasContainer from "../../../components/cards-container/BoliranasCon
 import SuccessfulModal from "../../../components/modals/SuccessfulModal";
 import DeleteModal from "../../../components/modals/DeleteModal";
 import { ReactComponent as Add } from "../../../assets/icons/add.svg";
+import { ReactComponent as EmptyTime } from "../../../assets/images/empty-time.svg";
+import EmptyMessage from "../../../components/empty-message/EmptyMessage";
 
 const Boliranas = () => {
   const [boliranas, setBoliranas] = useState([]);
@@ -115,10 +117,18 @@ const Boliranas = () => {
           />
         </PageOptionsCenterContainer>
       </PageOptionsContainer>
-      <BoliranasContainer
-        boliranasList={boliranas}
-        handleDeleteBolirana={handleDeleteBolirana}
-      />
+      {boliranas.length > 0 ? (
+        <BoliranasContainer
+          boliranasList={boliranas}
+          handleDeleteBolirana={handleDeleteBolirana}
+        />
+      ) : (
+        <EmptyMessage
+          img={<EmptyTime />}
+          title="Sin Boliranas"
+          description="Aún no se han comprado las Boliranas para el Bar."
+        />
+      )}
     </div>
   );
 };

@@ -34,7 +34,7 @@ import SuccessfulDebtorModal from "../../../components/modals/SuccessfulDebtorMo
 import WarningModal from "../../../components/modals/WarningModal";
 import EmptyMessage from "../../../components/empty-message/EmptyMessage";
 import { ReactComponent as Add } from "../../../assets/icons/add.svg";
-import { ReactComponent as EmptyOrders } from "../../../assets/images/empty-products.svg";
+import { ReactComponent as EmptyOrders } from "../../../assets/images/empty-delivery.svg";
 
 const Orders = ({ salesmanName }) => {
   const [products, setProducts] = useState([]);

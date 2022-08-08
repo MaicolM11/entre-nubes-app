@@ -14,9 +14,11 @@ import OrdersAdminCardsContainer from "../../../components/cards-container/Order
 import AnimatedModalContainer from "../../../components/modals/animation/AnimatedModalContainer";
 import OrderProductListModal from "../../../components/modals/OrderProductListModal";
 import Button from "../../../components/buttons/Button";
-import { ReactComponent as CashRegister } from "../../../assets/icons/cash-register.svg";
 import ClosingBarModal from "../../../components/modals/ClosingBarModal";
 import AnimatedBlockOutsideModalContainer from "../../../components/modals/animation/AnimatedBlockOutsideModalContainer";
+import EmptyMessage from "../../../components/empty-message/EmptyMessage";
+import { ReactComponent as CashRegister } from "../../../assets/icons/cash-register.svg";
+import { ReactComponent as EmptyOrders } from "../../../assets/images/empty-delivery.svg";
 
 const Orders = () => {
   const [bill, setBill] = useState();
@@ -87,10 +89,18 @@ const Orders = () => {
           />
         </PageOptionsCenterContainer>
       </PageOptionsContainer>
-      <OrdersAdminCardsContainer
-        bills={bills}
-        handleOpenProductList={showBill}
-      />
+      {bills.length > 0 ? (
+        <OrdersAdminCardsContainer
+          bills={bills}
+          handleOpenProductList={showBill}
+        />
+      ) : (
+        <EmptyMessage
+          img={<EmptyOrders />}
+          title="Sin Pedidos"
+          description="Aún los colaboradores no tiene pedidos por realizar."
+        />
+      )}
     </div>
   );
 };
