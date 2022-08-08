@@ -100,14 +100,9 @@ const Debtors = ({ salesmanName }) => {
   };
 
   const handleSubmitDebtPayment = (payMode) => {
-    debtorPayment(debt._id, payMode, debtor._id).then(async (res) => {
-      const data = res.json();
-      if (res.ok) {
-        updateBillProducts();
-        isSuccessfulPayModalState();
-      } else {
-        alert(data.message);
-      }
+    debtorPayment(debt._id, payMode, debtor._id).then(async () => {
+      updateBillProducts();
+      isSuccessfulPayModalState();
     });
   };
 

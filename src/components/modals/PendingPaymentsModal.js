@@ -4,12 +4,14 @@ import { colors } from "../styles/colors";
 import { ModalTitle } from "../styles/style-components";
 import CloseButton from "../buttons/CloseButton";
 import DebtsContainer from "../cards-container/DebtsContainer";
+import EmptyMessage from "../empty-message/EmptyMessage";
+import { ReactComponent as EmptyDeptors } from "../../assets/images/empty-money.svg";
 
 const PendingPaymentsModalContainer = styled.div`
   display: flex;
   flex-direction: column;
   min-width: 857px;
-  min-height: 573px;
+  height: 573px;
   background-color: ${colors.cardsBackground};
   border-radius: 16px;
 `;
@@ -36,11 +38,19 @@ const PendingPaymentsModal = ({
         <ModalTitle>Pagos Pendientes</ModalTitle>
         <CloseButton onClick={handleCloseModal} />
       </HeaderModalContainer>
-      <DebtsContainer
-        debts={debts}
-        openProductsModal={openProductsModal}
-        openPayModeModal={openPayModeModal}
-      />
+      {debts.length > 0 ? (
+        <DebtsContainer
+          debts={debts}
+          openProductsModal={openProductsModal}
+          openPayModeModal={openPayModeModal}
+        />
+      ) : (
+        <EmptyMessage
+          img={<EmptyDeptors width={250} height={250}/>}
+          title="Sin Deudas"
+          description="El cliente a realizado todos sus pagos exitosamente."
+        />
+      )}
     </PendingPaymentsModalContainer>
   );
 };

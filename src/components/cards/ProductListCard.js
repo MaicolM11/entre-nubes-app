@@ -42,7 +42,7 @@ const ProductDataContainer = styled.div`
 `;
 
 const ProductNameDataContainer = styled.div`
-  min-width: 225px;
+  min-width: 275px;
   color: ${colors.text};
   font-size: 20px;
   font-weight: bold;

@@ -34,8 +34,8 @@ const MessageCenterContainer = styled.div`
 
 const MessageImgContainer = styled.div`
   display: flex;
-  width: 350px;
-  height: 350px;
+  align-items: center;
+  justify-content: center;
 `;
 
 const MessageTextContainer = styled.div`

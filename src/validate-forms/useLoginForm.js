@@ -17,22 +17,22 @@ const useLoginForm = (loginCallback) => {
     });
   };
 
-  const handleEnterSubmitLogin = (e) => {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      setErros(loginValidation(loginValues));
-      if (!(Object.keys(loginValidation(loginValues)).length > 0)) {
-        loginCallback();
-      }
-    }
-  };
-
-  const handleSubmitLogin = (e) => {
+  const validateCurrentLogin = (e) => {
     e.preventDefault();
     setErros(loginValidation(loginValues));
     if (!(Object.keys(loginValidation(loginValues)).length > 0)) {
       loginCallback();
     }
+  };
+
+  const handleEnterSubmitLogin = (e) => {
+    if (e.key === "Enter") {
+      validateCurrentLogin(e);
+    }
+  };
+
+  const handleSubmitLogin = (e) => {
+    validateCurrentLogin(e);
   };
 
   const [errors, setErros] = useState({});
