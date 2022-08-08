@@ -1,13 +1,14 @@
 import Notification from "../models/Notification";
 
 export const createNotification = async (data) => {
+    data.date = new Date().getTime();
     await Notification.create(data);
     notify()
 }
 
 export const notify = (socket = global.sockets) => {
     Notification.find()
-        .sort({date: -1})
+        .sort({ date: -1 })
         .then(data => {
             let news = data.filter(x => x.new).length;
             socket.emit("notifications", { news: news, data: data})

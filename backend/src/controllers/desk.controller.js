@@ -12,7 +12,8 @@ export const deskClosing = (req, res) => {
     const now = getDateWithFormat(new Date())
     const notification = {
         type: "Cierre de caja a las " + now.time + " del " + now.date,
-        message: ""
+        message: "", 
+        
     }
 
     Bill.find({ status: BILL_STATES.DUE })

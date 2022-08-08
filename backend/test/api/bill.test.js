@@ -40,7 +40,6 @@ let bill2 = {
 describe('Bill api', () => {
 
     it('Create some products', async ()=> {
-        console.log(admin_token);
         const res = await API.post(CATEGORY_URL)
                 .set('authorization', admin_token)
                 .send(category);
