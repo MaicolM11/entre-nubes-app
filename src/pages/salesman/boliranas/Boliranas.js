@@ -4,6 +4,7 @@ import {
   resetBolirana,
   startBolirana,
 } from "../../../services/bolirana";
+import { convertTimeToMs } from "../../../utils/BoliranaTimer";
 
 import "./Boliranas.css";
 import AnimatedModalContainer from "../../../components/modals/animation/AnimatedModalContainer";
@@ -12,8 +13,8 @@ import SalesmanData from "../../../components/header/SalesmanData";
 import BoliranasTimeControlContainer from "../../../components/cards-container/BoliranasTimeControlContainer";
 import AssingBoliranaTimeModal from "../../../components/modals/AssingBoliranaTimeModal";
 import ResetTimeModal from "../../../components/modals/ResetTimeModal";
-
-import { convertTimeToMs } from "../../../utils/BoliranaTimer";
+import EmptyMessage from "../../../components/empty-message/EmptyMessage";
+import { ReactComponent as EmptyTime } from "../../../assets/images/empty-time.svg";
 
 const Boliranas = ({ salesmanName }) => {
   const [currentBolirana, setCurrentBolirana] = useState({});
@@ -101,11 +102,19 @@ const Boliranas = ({ salesmanName }) => {
         description="Información de las Boliranas en juego"
         component={<SalesmanData salesmanName={salesmanName} />}
       />
-      <BoliranasTimeControlContainer
-        boliranas={boliranas}
-        handleResetTime={handleResetTime}
-        handleStartTime={handleStartTime}
-      />
+      {boliranas.length > 0 ? (
+        <BoliranasTimeControlContainer
+          boliranas={boliranas}
+          handleResetTime={handleResetTime}
+          handleStartTime={handleStartTime}
+        />
+      ) : (
+        <EmptyMessage
+          img={<EmptyTime />}
+          title="Sin Boliranas"
+          description="Aún no se han comprado las Boliranas para el Bar."
+        />
+      )}
     </div>
   );
 };

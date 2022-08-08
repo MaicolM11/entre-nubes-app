@@ -30,7 +30,7 @@ export const debtorValidation = (values) => {
   } else if (!numberRegex.test(values.phone)) {
     errors.phone = "El número de teléfono no puede contener letras";
   } else if (!(values.phone.split("").length == 10)) {
-    errors.phone = "Un número telefónico consta de 10 numeros";
+    errors.phone = "Un número telefónico consta de 10 números";
   }
 
   return errors;
@@ -42,7 +42,7 @@ export const increaseStockValidation = (value) => {
   if (negativeNumberRegex.test(value.numberValue) || value.numberValue <= 0) {
     errors.numberValue = "El valor ingresado debe ser mayor a 0";
   } else if (!numberRegex.test(value.numberValue)) {
-    errors.numberValue = "Solo dede ingresar números";
+    errors.numberValue = "Solo debe ingresar números";
   }
 
   return errors;
@@ -152,7 +152,7 @@ export const salesmanValidation = (values) => {
   } else if (!numberRegex.test(values.phone)) {
     errors.phone = "El número de teléfono no puede contener letras";
   } else if (!(values.phone.split("").length == 10)) {
-    errors.phone = "Un número telefónico consta de 10 numeros";
+    errors.phone = "Un número telefónico consta de 10 números";
   }
 
   if (!values.email) {
@@ -162,7 +162,7 @@ export const salesmanValidation = (values) => {
   }
 
   if (!values.address) {
-    errors.address = "La direcion es requerida";
+    errors.address = "La dirección es requerida";
   }
 
   if (!values.password) {

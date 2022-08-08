@@ -15,19 +15,27 @@ import AnimatedModalContainer from "../../../components/modals/animation/Animate
 import OrderProductListModal from "../../../components/modals/OrderProductListModal";
 import Button from "../../../components/buttons/Button";
 import { ReactComponent as CashRegister } from "../../../assets/icons/cash-register.svg";
+import ClosingBarModal from "../../../components/modals/ClosingBarModal";
+import AnimatedBlockOutsideModalContainer from "../../../components/modals/animation/AnimatedBlockOutsideModalContainer";
 
 const Orders = () => {
   const [bill, setBill] = useState();
   const [bills, setBills] = useState([]);
   const [productsSale, setProductsSale] = useState([]);
   const [isOpenProductListModal, setIsOpenProductListModal] = useState(false);
-  
+  const [isClosingBarModal, setIsClosingBarModal] = useState(false);
+
   const isOpenProductList = () => {
     setIsOpenProductListModal(false);
   };
 
   const handleCloseBarModal = () => {
-    closeDesk()
+    setIsClosingBarModal(true);
+    closeDesk();
+    let closingBar = setInterval(() => {
+      setIsClosingBarModal(false);
+      clearInterval(closingBar);
+    }, 5000);
   };
 
   const showBill = (bill) => {
@@ -38,7 +46,7 @@ const Orders = () => {
     setBill(bill);
     setIsOpenProductListModal((isOpen) => !isOpen);
   };
-  
+
   useEffect(() => {
     const socket = getSocket();
     socket.on("sales", setBills);
@@ -47,6 +55,11 @@ const Orders = () => {
 
   return (
     <div className="admin-orders-container">
+      <AnimatedBlockOutsideModalContainer
+        modal={<ClosingBarModal />}
+        isOpen={isClosingBarModal}
+        setIsOpen={setIsClosingBarModal}
+      />
       <AnimatedModalContainer
         modal={
           <OrderProductListModal

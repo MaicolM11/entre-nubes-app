@@ -32,7 +32,9 @@ import DebtorAssignModal from "../../../components/modals/DebtorAssignModal";
 import SuccessfulModal from "../../../components/modals/SuccessfulModal";
 import SuccessfulDebtorModal from "../../../components/modals/SuccessfulDebtorModal";
 import WarningModal from "../../../components/modals/WarningModal";
+import EmptyMessage from "../../../components/empty-message/EmptyMessage";
 import { ReactComponent as Add } from "../../../assets/icons/add.svg";
+import { ReactComponent as EmptyOrders } from "../../../assets/images/empty-products.svg";
 
 const Orders = ({ salesmanName }) => {
   const [products, setProducts] = useState([]);
@@ -80,6 +82,11 @@ const Orders = ({ salesmanName }) => {
 
   const openCreateOrderModal = () => {
     setIsOpenCreateOrderModal((isOpen) => !isOpen);
+  };
+
+  const openOrderModal = () => {
+    getProductos();
+    openCreateOrderModal();
   };
 
   const isOpenProductList = () => {
@@ -304,15 +311,23 @@ const Orders = ({ salesmanName }) => {
             theme="ok"
             icon={<Add fill={colors.secondary} />}
             text="Agregar Pedido"
-            onClick={openCreateOrderModal}
+            onClick={openOrderModal}
           />
         </PageOptionsCenterContainer>
       </PageOptionsContainer>
-      <OrdersSalesmanCardsContainer
-        bills={getBills}
-        handleOpenProductList={showBill}
-        handlePayOptions={handlePayOptions}
-      />
+      {getBills.length > 0 ? (
+        <OrdersSalesmanCardsContainer
+          bills={getBills}
+          handleOpenProductList={showBill}
+          handlePayOptions={handlePayOptions}
+        />
+      ) : (
+        <EmptyMessage
+          img={<EmptyOrders />}
+          title="Sin Pedidos"
+          description="Aún no existen pedidos por realizar."
+        />
+      )}
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getAllDebtors, getClientDebts } from "../../../services/debtor";
 import { getBillById, debtorPayment } from "../../../services/bill";
+import { useSuccessfulOpenModal } from "../../../hooks/useOpenModal";
 
 import "./Debtors.css";
 import { colors } from "../../../components/styles/colors";
@@ -19,6 +20,8 @@ import CreateDebtorModal from "../../../components/modals/CreateDebtorModal";
 import SuccessfulModal from "../../../components/modals/SuccessfulModal";
 import PendingPaymentsModal from "../../../components/modals/PendingPaymentsModal";
 import OrderProductListModal from "../../../components/modals/OrderProductListModal";
+import EmptyMessage from "../../../components/empty-message/EmptyMessage";
+import { ReactComponent as EmptyDeptors } from "../../../assets/images/empty-money.svg";
 
 const Debtors = ({ salesmanName }) => {
   const [debtors, setDebtors] = useState([]);
@@ -33,6 +36,9 @@ const Debtors = ({ salesmanName }) => {
   const [bill, setBill] = useState({});
   const [debt, setDebt] = useState({});
   const [products, setProducts] = useState([]);
+
+  const { isOpenSuccessfulPayModal, isSuccessfulPayModalState } =
+    useSuccessfulOpenModal();
 
   const handleIsOpenProductsModal = () => {
     handleIsOpenClosePendingPaymentsModal();
@@ -96,7 +102,7 @@ const Debtors = ({ salesmanName }) => {
   const handleSubmitDebtPayment = (payMode) => {
     debtorPayment(debt._id, payMode, debtor._id).then(async () => {
       updateBillProducts();
-      console.log("Deudor a pagado una deuda.");
+      isSuccessfulPayModalState();
     });
   };
 
@@ -167,6 +173,16 @@ const Debtors = ({ salesmanName }) => {
         isOpen={isOpenProductsBillModal}
         setIsOpen={setIsOpenProductsBillModal}
       />
+      <AnimatedModalContainer
+        modal={
+          <SuccessfulModal
+            message="¡El pago se realizo correctamente!"
+            handleSubmitOk={isSuccessfulPayModalState}
+          />
+        }
+        isOpen={isOpenSuccessfulPayModal}
+        setIsOpen={isSuccessfulPayModalState}
+      />
       <Header
         title="Deudores"
         description="Información de los clientes deudores"
@@ -183,10 +199,18 @@ const Debtors = ({ salesmanName }) => {
           />
         </PageOptionsCenterContainer>
       </PageOptionsContainer>
-      <DebtorCardsContainer
-        debtors={debtors}
-        handleSubmitPendingPayments={openPendingPaymentsModal}
-      />
+      {debtors.length > 0 ? (
+        <DebtorCardsContainer
+          debtors={debtors}
+          handleSubmitPendingPayments={openPendingPaymentsModal}
+        />
+      ) : (
+        <EmptyMessage
+          img={<EmptyDeptors />}
+          title="Sin Deudores"
+          description="Aún no se han registrado deudores en el Bar."
+        />
+      )}
     </div>
   );
 };

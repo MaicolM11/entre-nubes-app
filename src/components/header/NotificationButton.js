@@ -14,11 +14,8 @@ const NotificationContainer = styled.div`
 
 const ButtonContainer = styled.div`
   display: flex;
-  min-width: 35px;
-  min-height: 35px;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
   user-select: none;
 `;
 
@@ -30,6 +27,7 @@ const NotificationButtonContainer = styled.div`
 
   path {
     fill: ${colors.highlighted};
+    cursor: pointer;
   }
 
   &:hover {
@@ -83,15 +81,14 @@ const CircleNotificationNumber = styled.label`
 
 const NotificationButton = () => {
   const btnRef = useRef();
-  const [totalNotifications, setTotalNotifications] = useState(true);
-  const [isOpenNotifications, setIsOpenNotifications] = useState(false);
   const [notifications, setNotifications] = useState([]);
+  const [totalNotifications, setTotalNotifications] = useState(0);
+  const [newsNotifications, setNewsNotifications] = useState(0);
+  const [isOpenNotifications, setIsOpenNotifications] = useState(false);
 
   const showNotifications = () => {
-    if(!isOpenNotifications) {
-      readAllNotifications().then(async (res) => {
-        
-      });
+    if (!isOpenNotifications) {
+      readAllNotifications().then(async (res) => {});
     }
     setIsOpenNotifications(!isOpenNotifications);
   };
@@ -111,7 +108,8 @@ const NotificationButton = () => {
     const socket = getSocket();
     socket.on("notifications", (data) => {
       setNotifications(data.data);
-      setTotalNotifications(data.news);
+      setTotalNotifications(data.data.length);
+      setNewsNotifications(data.news);
     });
     return () => socket.disconnect();
   }, []);
@@ -120,13 +118,13 @@ const NotificationButton = () => {
     <NotificationContainer>
       <ButtonContainer ref={btnRef} onClick={showNotifications}>
         <NotificationButtonContainer>
-          <Notification width={32} height={32} />
+          <Notification width={35} height={35} />
         </NotificationButtonContainer>
       </ButtonContainer>
-      {totalNotifications > 0 && (
+      {newsNotifications > 0 && (
         <CircleNotification>
           <CircleNotificationNumber>
-            {totalNotifications}
+            {newsNotifications}
           </CircleNotificationNumber>
         </CircleNotification>
       )}
