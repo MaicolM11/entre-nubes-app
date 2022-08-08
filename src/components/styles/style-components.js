@@ -580,7 +580,6 @@ export const OrderCardButtonsContainer = styled.div`
 export const PageOptionsContainer = styled.div`
   display: flex;
   width: 100%;
-  max-height: 75px;
   background-color: ${colors.secondary};
   border-bottom: solid 1px ${colors.border};
 `;

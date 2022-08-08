@@ -15,6 +15,10 @@ const SideBarContainer = styled.div`
   align-items: center;
   border-right: solid 1px ${colors.border};
   background-color: ${colors.secondary};
+
+  @media only screen and (max-width: 800px) {
+    width: 250px;
+  }
 `;
 
 const SideBarCenterContainer = styled.div`
@@ -28,7 +32,6 @@ const SideBarCenterContainer = styled.div`
 
 const SideBarLogoContainer = styled.div`
   display: flex;
-  width: 250px;
   align-items: center;
   justify-content: center;
   cursor: pointer;
@@ -51,7 +54,6 @@ const SideBarButtonsContainer = styled.div`
 const SideBarOptionsContainer = styled.div`
   display: flex;
   flex-direction: column;
-  min-height: 350px;
   align-items: center;
   gap: 25px;
 `;

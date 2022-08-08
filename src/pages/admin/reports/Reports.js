@@ -30,6 +30,10 @@ const FilterContainer = styled.div`
   width: 100%;
   align-items: center;
   gap: 25px;
+
+  @media only screen and (max-width: 915px) {
+ flex-direction: column;
+}
 `;
 
 const TableContainer = styled.div`

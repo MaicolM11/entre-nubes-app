@@ -5,10 +5,7 @@ import { colors } from "../../components/styles/colors";
 
 const WelcomeContainer = styled.div`
   display: flex;
-  min-width: 700px;
-  width: 925px;
-  min-height: 600px;
-  height: 625px;
+  margin: 25px;
   background-color: ${colors.secondary};
   border-radius: 25px;
   border: 1px solid ${colors.border};
@@ -17,11 +14,22 @@ const WelcomeContainer = styled.div`
 const WelcomeCenterContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;
   padding: 50px 100px;
   align-items: center;
   justify-content: center;
   gap: 25px;
+
+  @media only screen and (max-width: 975px) {
+    padding: 25px 50px;
+  }
+
+  @media only screen and (max-width: 875px) {
+    padding: 10px 25px;
+  }
+
+  @media only screen and (max-width: 825px) {
+    padding: 5px 15px;
+  }
 `;
 
 const WelcomeImgContainer = styled.div`
@@ -50,6 +58,11 @@ const WelcomeSystemTitleLabel = styled.label`
   font-weight: bold;
   font-family: var(--roboto);
   white-space: nowrap;
+
+  @media only screen and (max-width: 825px) {
+    text-align: center;
+    white-space: normal;
+  }
 `;
 
 const WelcomeSystemTextLabel = styled.label`

@@ -32,6 +32,13 @@ const HeaderDescription = styled.span`
   font-size: 16px;
   font-weight: 500;
   white-space: nowrap;
+
+  @media only screen and (max-width: 975px) {
+    width: 100%;
+    min-width: 100px;
+    text-align: center;
+    white-space: normal;
+  }
 `;
 
 const HeaderComponent = styled.div`
@@ -39,6 +46,10 @@ const HeaderComponent = styled.div`
   align-items: center;
   justify-content: flex-end;
   width: 100%;
+
+  @media only screen and (max-width: 975px) {
+    width: 10%;
+  }
 `;
 
 const Header = ({ title, description, component }) => {

@@ -50,3 +50,12 @@
     fill: var(--secondary-color);
   }
 }
+
+@media only screen and (max-width: 750px) {
+  .default-navlink {
+    min-width: 200px;
+  }
+  .default-navlink[aria-current] {
+    min-width: 200px;
+  }
+}

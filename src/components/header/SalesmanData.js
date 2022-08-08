@@ -10,6 +10,11 @@ const SalesmanDataContainer = styled.div`
   align-items: center;
   justify-content: flex-end;
   gap: 15px;
+
+  @media only screen and (max-width: 985px) {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 const SalesmanPhotoContainer = styled.div`

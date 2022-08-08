@@ -24,3 +24,30 @@
   justify-content: flex-end;
   gap: 15px;
 }
+
+@media only screen and (max-width: 1275px) {
+  .products-options-center-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .products-options-center-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .products-filters-options-container {
+    justify-content: center;
+  }
+
+  @media only screen and (max-width: 865px) {
+    .products-buttons-options-container {
+      flex-direction: column;
+    }
+
+    .products-filters-options-container {
+      flex-direction: column;
+    }
+  }
+}

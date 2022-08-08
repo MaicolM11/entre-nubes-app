@@ -62,3 +62,21 @@
   font-family: var(--roboto);
   color: var(--text-color);
 }
+
+@media only screen and (max-width: 950px) {
+  .login-container {
+    flex-direction: column;
+  }
+
+  .login-left-container {
+    max-height: 300px;
+  }
+
+  .login-data-container {
+    gap: 25px;
+  }
+
+  .login-options-container {
+    gap: 10px;
+  }
+}

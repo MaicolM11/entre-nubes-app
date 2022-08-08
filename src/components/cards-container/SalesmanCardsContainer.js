@@ -17,15 +17,11 @@ const CardsContainer = styled.div`
   }
 
   @media (max-width: 900px) {
-    width: max-content;
-    display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-column-gap: 55px;
   }
 
   @media (max-width: 835px) {
-    width: max-content;
-    display: grid;
     grid-template-columns: repeat(2, minmax(min-content, 200px));
     grid-column-gap: 25px;
   }
@@ -35,6 +31,10 @@ const CardsContainer = styled.div`
     flex-direction: column;
     align-items: center;
     width: 455px;
+  }
+
+  @media (max-width: 735px) {
+    width: 375px;
   }
 `;
 
