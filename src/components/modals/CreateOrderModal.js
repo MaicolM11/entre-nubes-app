@@ -26,6 +26,11 @@ const CreateOrderModalContainer = styled.div`
   flex-direction: column;
   background-color: ${colors.cardsBackground};
   border-radius: 16px;
+
+  @media only screen and (max-width: 450px) {
+    width: 450px;
+    height: 100vh;
+  }
 `;
 
 const OrderOptionsContainer = styled.div`
@@ -49,6 +54,11 @@ const CreateOrderModalTitleContainer = styled.div`
   border-bottom: solid 1px ${colors.border};
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
+
+  @media only screen and (max-width: 450px) {
+    flex-direction: column;
+    padding: 10px;
+  }
 `;
 
 const AreaComponentsContainer = styled.div`
@@ -56,6 +66,10 @@ const AreaComponentsContainer = styled.div`
   width: 100%;
   align-items: center;
   gap: 25px;
+
+  @media only screen and (max-width: 450px) {
+    flex-direction: column;
+  }
 `;
 
 const RightAreaContainer = styled.div`
@@ -71,6 +85,10 @@ const PlaceInputContainer = styled.div`
 const ProductsFilterContainer = styled.div`
   display: flex;
   gap: 15px;
+
+  @media only screen and (max-width: 450px) {
+    flex-direction: column;
+  }
 `;
 
 const LeftAreaContainer = styled.div`
@@ -97,6 +115,10 @@ const SelectFilterCategoryContainer = styled.div`
 const ButtonsContainer = styled.div`
   display: flex;
   gap: 25px;
+
+  @media only screen and (max-width: 450px) {
+    flex-direction: column;
+  }
 `;
 
 const OrderTableContainer = styled.div`

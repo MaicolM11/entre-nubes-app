@@ -6,7 +6,7 @@ import { colors } from "../styles/colors";
 const CardsContainer = styled.div`
   display: flex;
   flex-direction: column;
-  min-width: 1025px;
+  width: 1025px;
   height: 475px;
   gap: 25px;
   padding: 25px;
@@ -15,6 +15,11 @@ const CardsContainer = styled.div`
   border-bottom-left-radius: 16px;
   overflow-x: hidden;
   overflow-y: auto;
+
+  @media only screen and (max-width: 450px) {
+    width: 400px;
+    align-items: center;
+  }
 `;
 
 const ProductListContainer = ({ productList }) => {

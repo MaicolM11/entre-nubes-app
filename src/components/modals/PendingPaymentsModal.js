@@ -10,10 +10,15 @@ import { ReactComponent as EmptyDeptors } from "../../assets/images/empty-money.
 const PendingPaymentsModalContainer = styled.div`
   display: flex;
   flex-direction: column;
-  min-width: 857px;
+  width: 857px;
   height: 573px;
   background-color: ${colors.cardsBackground};
   border-radius: 16px;
+
+  @media only screen and (max-width: 450px) {
+    width: 450px;
+    height: 100vh;
+  }
 `;
 
 const HeaderModalContainer = styled.div`

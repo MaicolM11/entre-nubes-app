@@ -8,6 +8,8 @@ const TotalDebtCardContainer = styled.div`
   background-color: ${colors.secondary};
   border: 1px solid ${colors.edit};
   border-radius: 16px;
+  align-items: center;
+  justify-content: center;
 `;
 
 const CenterCardContainer = styled.div`

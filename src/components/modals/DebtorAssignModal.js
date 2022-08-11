@@ -14,6 +14,11 @@ const DebtorAssignModalContainer = styled.div`
   flex-direction: column;
   background-color: ${colors.cardsBackground};
   border-radius: 16px;
+
+  @media only screen and (max-width: 450px) {
+    width: 450px;
+    height: 100vh;
+  }
 `;
 
 const ModalTitleContainer = styled.div`
@@ -25,11 +30,20 @@ const ModalTitleContainer = styled.div`
   border-bottom: solid 1px ${colors.border};
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
+
+  @media only screen and (max-width: 450px) {
+    flex-direction: column;
+    padding: 10px;
+  }
 `;
 
 const ButtonsContainer = styled.div`
   display: flex;
   gap: 25px;
+
+  @media only screen and (max-width: 450px) {
+    flex-direction: column;
+  }
 `;
 
 const CenterModalContainer = styled.div`
@@ -65,6 +79,11 @@ const RightTopContainer = styled.div`
   @media (max-width: 985px) {
     display: grid;
     grid-template-columns: repeat(2, minmax(200px, 1fr));
+  }
+
+  @media only screen and (max-width: 450px) {
+    display: flex;
+    flex-direction: column;
   }
 `;
 

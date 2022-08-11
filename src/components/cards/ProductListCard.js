@@ -9,6 +9,10 @@ const ProductContainer = styled.div`
   width: 100%;
   align-items: center;
   justify-content: center;
+
+  @media only screen and (max-width: 450px) {
+    width: 350px;
+  }
 `;
 
 const ProductListCardContainer = styled.div`
@@ -23,12 +27,21 @@ const ProductListCardContainer = styled.div`
   &:hover {
     border-color: ${colors.highlighted};
   }
+
+  @media only screen and (max-width: 450px) {
+    flex-direction: column;
+  }
 `;
 
 const DataContainer = styled.div`
   display: flex;
   width: 100%;
   gap: 5px;
+
+  @media only screen and (max-width: 450px) {
+    flex-direction: column;
+    text-align: center;
+  }
 `;
 
 const ProductDataContainer = styled.div`
@@ -48,6 +61,10 @@ const ProductNameDataContainer = styled.div`
   font-weight: bold;
   font-family: var(--roboto);
   white-space: nowrap;
+
+  @media only screen and (max-width: 450px) {
+    width: 100%;
+  }
 `;
 
 const ProductListCard = ({ productOnList }) => {

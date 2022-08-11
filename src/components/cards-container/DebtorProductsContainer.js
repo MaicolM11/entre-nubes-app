@@ -18,6 +18,11 @@ const CardsContainer = styled.div`
     gap: 25px;
     padding-right: 0;
   }
+
+  @media only screen and (max-width: 450px) {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 const DebtorProductsContainer = ({ productList }) => {

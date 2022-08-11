@@ -15,6 +15,10 @@ import { ReactComponent as BackArrowIcon } from "../../assets/icons/arrow-back.s
 const OrderProductListContainer = styled.div`
   display: flex;
   flex-direction: column;
+
+  @media only screen and (max-width: 450px) {
+    width: 450px;
+  }
 `;
 
 const HeaderProductListContainer = styled.div`
@@ -26,6 +30,10 @@ const HeaderProductListContainer = styled.div`
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
   border-bottom: 1px solid ${colors.border};
+
+  @media only screen and (max-width: 450px) {
+    gap: 15px;
+  }
 `;
 
 const TotalPaymentContainer = styled.label`

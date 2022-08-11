@@ -144,6 +144,10 @@ export const BorderButtonContainer = styled.button`
     border-color: ${colors.highlighted};
     color: ${colors.highlighted};
   }
+
+  @media only screen and (max-width: 450px) {
+    width: 255px;
+  }
 `;
 
 export const ButtonContainer = styled.button`
@@ -182,6 +186,11 @@ export const CardsContainer = styled.div`
   grid-template-columns: repeat(auto-fill, minmax(194px, 1fr));
   padding: 25px;
   overflow-y: auto;
+
+  @media only screen and (max-width: 850px) {
+    grid-template-columns: repeat(1, minmax(285px, 1fr));
+    grid-column-gap: 15px;
+  }
 `;
 
 export const DataSpan = styled.span`
@@ -481,6 +490,10 @@ export const ModalTitle = styled.label`
   font-weight: bold;
   font-family: var(--roboto);
   white-space: nowrap;
+
+  @media only screen and (max-width: 450px) {
+    text-align: center;
+  }
 `;
 
 export const ModalMediumTitle = styled.label`
@@ -520,6 +533,10 @@ export const OrderCardContainer = styled.div`
   border-radius: 8px;
   &:hover {
     border-color: ${colors.highlighted};
+  }
+
+  @media only screen and (max-width: 450px) {
+    width: 285px;
   }
 `;
 
@@ -794,6 +811,10 @@ export const TitleInfo = styled.label`
   font-weight: bold;
   font-family: var(--roboto);
   white-space: nowrap;
+
+  @media only screen and (max-width: 450px) {
+    text-align: center;
+  }
 `;
 
 export const TotalPaymentContainer = styled.label`
