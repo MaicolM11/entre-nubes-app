@@ -169,6 +169,10 @@ export const ButtonContainer = styled.button`
   &:hover {
     background-color: ${(props) => theme[props.theme].hover};
   }
+
+  @media only screen and (max-width: 450px) {
+    width: 255px;
+  }
 `;
 
 export const CardsContainer = styled.div`
@@ -267,7 +271,8 @@ export const ErrorMessage = styled.label`
 export const ErrorMessageContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;
+  align-items: center;
+  justify-content: center;
   gap: 5px;
 `;
 
@@ -316,6 +321,10 @@ export const InputContainer = styled.div`
     stroke: ${(props) => (props.isStroke ? colors.brand : "none")};
     fill: ${(props) => (props.isFill ? colors.brand : "none")};
   }
+
+  @media only screen and (max-width: 450px) {
+    width: 255px;
+  }
 `;
 
 export const InputCenterContainer = styled.div`
@@ -357,6 +366,10 @@ export const InputPasswordContainer = styled.div`
   }
   circle {
     stroke: ${colors.brand};
+  }
+
+  @media only screen and (max-width: 450px) {
+    width: 255px;
   }
 `;
 
@@ -593,16 +606,25 @@ export const PageOptionsCenterContainer = styled.div`
 
 export const ProductModalImageContainer = styled.div`
   display: flex;
-  min-width: 285px;
-  min-height: 465px;
+  width: 285px;
+  height: 465px;
   border-radius: 25px;
   border: 1px solid ${colors.border};
+
+  @media only screen and (max-width: 450px) {
+    width: 200px;
+    height: 200px;
+  }
 `;
 
 export const SelectContainer = styled.div`
   display: flex;
   width: 405px;
   height: 45px;
+
+  @media only screen and (max-width: 450px) {
+    width: 250px;
+  }
 `;
 
 export const SelectComponentContainer = styled.div`

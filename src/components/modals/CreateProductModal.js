@@ -34,6 +34,11 @@ const ProductModalContainer = styled.div`
   flex-direction: column;
   background-color: ${colors.secondary};
   border-radius: 16px;
+
+  @media only screen and (max-width: 450px) {
+    width: 395px;
+    height: 100vh;
+  }
 `;
 
 const ModalTitleContainer = styled.div`
@@ -58,6 +63,13 @@ const ProductModalFormCenterContainer = styled.div`
   width: 100%;
   margin: 0 35px 35px 35px;
   gap: 35px;
+
+  @media only screen and (max-width: 450px) {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 395px;
+  }
 `;
 
 const CreateProductModal = ({
