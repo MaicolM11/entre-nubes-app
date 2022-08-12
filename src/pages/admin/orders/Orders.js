@@ -34,7 +34,6 @@ const Orders = () => {
   const handleCloseBarModal = () => {
     setIsClosingBarModal(true);
     closeDesk();
-    setBills([]);
     let closingBar = setInterval(() => {
       setIsClosingBarModal(false);
       clearInterval(closingBar);
